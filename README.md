@@ -70,6 +70,20 @@ git push -u origin main
 
 For production hosting (e.g. Vercel), set the same `NEXT_PUBLIC_SUPABASE_*` variables in the host’s environment settings.
 
+## Deploy on AWS (Amplify Hosting — free tier)
+
+The simplest **AWS** path for this Next.js app is **[AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/)** (SSR / compute). New accounts often get **[AWS Free Tier](https://aws.amazon.com/free/)** allowances; check current [Amplify pricing](https://aws.amazon.com/amplify/pricing/) for build minutes and hosting limits.
+
+1. Push this repo to GitHub (see above).
+2. Open **[AWS Amplify Console](https://console.aws.amazon.com/amplify/)** → **Host web app** → connect **GitHub** → choose **movie-lust** (or your fork).
+3. Amplify should detect **`amplify.yml`** at the repo root (`npm ci` → `npm run build`, artifact `.next`).
+4. Under **App settings → Environment variables**, add:
+   - `NEXT_PUBLIC_SUPABASE_URL` — your Supabase project URL  
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — Supabase **anon** / **publishable** key  
+5. Save and deploy. After green build, open the **Amplify domain** (you can add a custom domain later).
+
+**Note:** Amplify’s documented Next.js support often trails the newest major version. If the build fails on **Next.js 16**, check the build log; you may need a newer Amplify build image or a supported Node version (**20** is set in `amplify.yml` / `.nvmrc`).
+
 ## Notes
 
 - Poster images allow common CDNs (TMDB, Supabase storage, placeholders). Adjust `next.config.ts` if you use another host.
