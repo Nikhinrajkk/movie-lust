@@ -15,6 +15,7 @@ export type MovieRow = {
   rating: number | null;
   review_text: string | null;
   runtime_minutes: number | null;
+  director: string | null;
   created_at: string;
   updated_at: string;
 };

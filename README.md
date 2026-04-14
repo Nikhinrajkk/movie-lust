@@ -34,7 +34,11 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
 
 3. **Database**
 
-   In the Supabase SQL editor, run the script in `supabase/migrations/0001_init.sql`. It creates the `movies` table, row-level policies suitable for a demo (open read/write for `anon`), and optional seed rows.
+   In the Supabase SQL editor, run migrations in order:
+   - `supabase/migrations/0001_init.sql` — schema, RLS, and starter seed rows.
+   - If you already had an older DB without `director`, run `0003_add_director_column.sql`.
+   - `0004_seed_imdb_chart.sql` — optional bulk seed of IMDb-style chart titles (skips existing titles).
+   - `0002_interstellar.sql` is only needed if you use an old `0001` without Interstellar in the seed.
 
 4. **Run locally**
 

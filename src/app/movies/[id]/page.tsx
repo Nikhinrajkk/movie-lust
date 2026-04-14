@@ -66,6 +66,12 @@ export default async function MovieDetailPage({
                 <h1 className="text-4xl font-bold tracking-tight text-zinc-50">
                   {movie.title}
                 </h1>
+                {movie.director?.trim() ? (
+                  <p className="text-sm text-zinc-400">
+                    Directed by{" "}
+                    <span className="text-zinc-200">{movie.director}</span>
+                  </p>
+                ) : null}
                 {movie.rating != null && (
                   <p className="text-sm text-zinc-400">
                     Your rating:{" "}

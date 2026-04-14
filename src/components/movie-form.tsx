@@ -39,6 +39,16 @@ export function MovieForm({
         </label>
 
         <label className="sm:col-span-2 block space-y-2">
+          <span className="text-xs font-medium text-zinc-400">Director</span>
+          <input
+            name="director"
+            defaultValue={movie?.director ?? ""}
+            placeholder="e.g. Christopher Nolan"
+            className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/25"
+          />
+        </label>
+
+        <label className="sm:col-span-2 block space-y-2">
           <span className="text-xs font-medium text-zinc-400">Poster URL</span>
           <input
             name="poster_url"

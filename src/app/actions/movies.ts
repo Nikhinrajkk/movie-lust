@@ -58,7 +58,7 @@ export async function listMovies(
     if (safe.length > 0) {
       const p = `%${safe}%`;
       query = query.or(
-        `title.ilike.${p},overview.ilike.${p},review_text.ilike.${p}`,
+        `title.ilike.${p},overview.ilike.${p},review_text.ilike.${p},director.ilike.${p}`,
       );
     }
   }
@@ -113,6 +113,7 @@ export type MoviePayload = {
   rating?: number | null;
   review_text?: string;
   runtime_minutes?: number | null;
+  director?: string;
 };
 
 export async function createMovie(payload: MoviePayload): Promise<string> {
@@ -129,6 +130,7 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
       rating: payload.rating ?? null,
       review_text: payload.review_text ?? "",
       runtime_minutes: payload.runtime_minutes ?? null,
+      director: payload.director ?? "",
     })
     .select("id")
     .single();
@@ -152,6 +154,7 @@ export async function updateMovie(id: string, payload: MoviePayload) {
       rating: payload.rating ?? null,
       review_text: payload.review_text ?? "",
       runtime_minutes: payload.runtime_minutes ?? null,
+      director: payload.director ?? "",
       updated_at: new Date().toISOString(),
     })
     .eq("id", id);
@@ -179,6 +182,7 @@ function parseMovieFormData(formData: FormData): MoviePayload {
   const overview = String(formData.get("overview") ?? "");
   const poster_url = String(formData.get("poster_url") ?? "");
   const review_text = String(formData.get("review_text") ?? "");
+  const director = String(formData.get("director") ?? "").trim();
 
   const release_year_raw = String(formData.get("release_year") ?? "").trim();
   const release_year = release_year_raw ? Number(release_year_raw) : null;
@@ -208,6 +212,7 @@ function parseMovieFormData(formData: FormData): MoviePayload {
         ? Math.min(10, Math.max(0, rating))
         : null,
     review_text,
+    director,
     category: categoryRaw as MovieCategory,
     genres,
   };

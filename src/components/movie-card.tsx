@@ -48,6 +48,11 @@ export function MovieCard({ movie }: { movie: MovieRow }) {
         <h3 className="line-clamp-2 text-base font-semibold leading-snug text-zinc-50 group-hover:text-amber-100">
           {movie.title}
         </h3>
+        {movie.director?.trim() ? (
+          <p className="line-clamp-1 text-[11px] text-zinc-500">
+            {movie.director}
+          </p>
+        ) : null}
         <p className="line-clamp-2 text-xs leading-relaxed text-zinc-400">
           {movie.overview || movie.review_text || "No synopsis yet."}
         </p>

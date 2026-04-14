@@ -14,11 +14,17 @@ create table if not exists public.movies (
   rating numeric(3, 1) check (rating is null or (rating >= 0 and rating <= 10)),
   review_text text default '',
   runtime_minutes int,
+  director text not null default '',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
-create index if not exists movies_title_search on public.movies using gin (to_tsvector('english', title || ' ' || coalesce(overview, '')));
+create index if not exists movies_title_search on public.movies using gin (
+  to_tsvector(
+    'english',
+    title || ' ' || coalesce(overview, '') || ' ' || coalesce(review_text, '') || ' ' || coalesce(director, '')
+  )
+);
 create index if not exists movies_genres_gin on public.movies using gin (genres);
 create index if not exists movies_category_idx on public.movies (category);
 create index if not exists movies_release_year_idx on public.movies (release_year desc);
@@ -48,7 +54,7 @@ create policy "Allow public delete on movies"
   using (true);
 
 -- Optional seed (comment out if you prefer an empty library)
-insert into public.movies (title, overview, poster_url, release_year, genres, category, rating, review_text, runtime_minutes)
+insert into public.movies (title, overview, poster_url, release_year, genres, category, rating, review_text, runtime_minutes, director)
 values
   (
     'Inception',
@@ -59,7 +65,8 @@ values
     'trending',
     8.8,
     'Layered, propulsive, and endlessly rewatchable.',
-    148
+    148,
+    'Christopher Nolan'
   ),
   (
     'The Dark Knight',
@@ -70,7 +77,8 @@ values
     'classic',
     9.0,
     'Still the gold standard for superhero cinema.',
-    152
+    152,
+    'Christopher Nolan'
   ),
   (
     'Dune: Part Two',
@@ -81,6 +89,19 @@ values
     'now_showing',
     8.5,
     'Epic scale with intimate character stakes.',
-    166
+    166,
+    'Denis Villeneuve'
+  ),
+  (
+    'Interstellar',
+    'As Earth grows uninhabitable, a group of astronauts crosses a wormhole in search of a new home for humanity—and faces time itself.',
+    'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+    2014,
+    array['sci-fi', 'drama', 'adventure'],
+    'classic',
+    8.7,
+    'Scope and emotion at a scale few films attempt; the docking sequence alone is worth the run time.',
+    169,
+    'Christopher Nolan'
   )
 ;
