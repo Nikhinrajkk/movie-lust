@@ -10,47 +10,13 @@ import {
 } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { listMovies } from "@/app/actions/movies";
+import type { MovieListInitialQuery } from "@/lib/movie-search-params";
 import { useMovieFilters } from "@/stores/movie-filters";
-import type { MovieCategory, MovieListResult } from "@/types/movie";
+import type { MovieListResult } from "@/types/movie";
 import { MovieCard } from "./movie-card";
 import { MovieFilters } from "./movie-filters";
 import { MoviePagination } from "./movie-pagination";
 import { SetupCallout } from "./setup-callout";
-
-type InitialQuery = {
-  search: string;
-  genre: string;
-  category: MovieCategory | "";
-  sort: "newest" | "title_asc" | "rating_desc" | "year_desc";
-  page: number;
-  pageSize: number;
-};
-
-function parseCategory(v: string | null): MovieCategory | "" {
-  if (
-    v === "now_showing" ||
-    v === "coming_soon" ||
-    v === "classic" ||
-    v === "trending"
-  ) {
-    return v;
-  }
-  return "";
-}
-
-function parseSort(
-  v: string | null,
-): "newest" | "title_asc" | "rating_desc" | "year_desc" {
-  if (
-    v === "title_asc" ||
-    v === "rating_desc" ||
-    v === "year_desc" ||
-    v === "newest"
-  ) {
-    return v;
-  }
-  return "newest";
-}
 
 export function MovieDiscover({
   initial,
@@ -58,7 +24,7 @@ export function MovieDiscover({
   supabaseReady,
 }: {
   initial: MovieListResult;
-  initialQuery: InitialQuery;
+  initialQuery: MovieListInitialQuery;
   supabaseReady: boolean;
 }) {
   const router = useRouter();
@@ -187,26 +153,4 @@ export function MovieDiscover({
       </div>
     </div>
   );
-}
-
-export function buildInitialQueryFromSearchParams(
-  sp: URLSearchParams | Record<string, string | string[] | undefined>,
-): InitialQuery {
-  const get = (key: string) => {
-    const raw = sp instanceof URLSearchParams ? sp.get(key) : sp[key];
-    if (Array.isArray(raw)) return raw[0];
-    return raw ?? null;
-  };
-
-  const pageRaw = get("page");
-  const pageSizeRaw = get("pageSize");
-
-  return {
-    search: get("q") ?? "",
-    genre: get("genre") ?? "",
-    category: parseCategory(get("category")),
-    sort: parseSort(get("sort")),
-    page: Math.max(1, Number(pageRaw) || 1),
-    pageSize: Math.min(48, Math.max(1, Number(pageSizeRaw) || 12)),
-  };
 }

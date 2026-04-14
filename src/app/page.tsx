@@ -1,10 +1,8 @@
 import { Suspense } from "react";
 import { listMovies } from "@/app/actions/movies";
-import {
-  buildInitialQueryFromSearchParams,
-  MovieDiscover,
-} from "@/components/movie-discover";
+import { MovieDiscover } from "@/components/movie-discover";
 import { isSupabaseConfigured } from "@/lib/config";
+import { buildInitialQueryFromSearchParams } from "@/lib/movie-search-params";
 
 function DiscoverFallback() {
   return (

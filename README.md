@@ -19,7 +19,18 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
 
 2. **Environment**
 
-   Copy `.env.local.example` to `.env.local` and add your Supabase URL and anon key from **Project Settings → API**.
+   Copy `.env.local.example` to `.env.local`.
+
+   **What you need from Supabase (free account + project):**
+
+   | Item | Where in Supabase | Used as |
+   |------|-------------------|---------|
+   | **Project URL** | Dashboard → **Project Settings** → **API** → *Project URL* | `NEXT_PUBLIC_SUPABASE_URL` |
+   | **anon public key** | Same page → *Project API keys* → **anon** **public** | `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
+
+   - Sign up at [supabase.com](https://supabase.com), create a **new project** (pick a region/password; wait until the DB is ready).
+   - You do **not** need the **service_role** secret for MovieLust as shipped; that key bypasses Row Level Security and must stay server-only if you ever use it.
+   - Personal / CLI tokens (e.g. for the Supabase CLI or dashboard automation) are **not** the same as the anon key—put only the **anon** JWT in `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
 
 3. **Database**
 
@@ -31,7 +42,7 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
    npm run dev
    ```
 
-   Open [http://localhost:3000](http://localhost:3000).
+   Open [http://localhost:4000](http://localhost:4000).
 
 ## Scripts
 
