@@ -56,14 +56,15 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
 
 ## GitHub & CI/CD
 
-This repo includes [GitHub Actions](.github/workflows/ci.yml) that run **lint**, **typecheck**, and **build** on pushes and pull requests to `main` / `master`. Create a new repository on GitHub, then:
+**Remote:** [github.com/Nikhinrajkk/movie-lust](https://github.com/Nikhinrajkk/movie-lust)
+
+This repo includes [GitHub Actions](.github/workflows/ci.yml) that run **lint**, **typecheck**, and **build** on pushes and pull requests to `main` / `master`.
+
+If you cloned without a remote, add it and push:
 
 ```bash
-git init
-git add .
-git commit -m "Initial commit: MovieLust"
+git remote add origin https://github.com/Nikhinrajkk/movie-lust.git
 git branch -M main
-git remote add origin https://github.com/<you>/<repo>.git
 git push -u origin main
 ```
 
