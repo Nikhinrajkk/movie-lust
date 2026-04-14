@@ -2,8 +2,8 @@
 
 import { useActionState } from "react";
 import type { MovieFormState } from "@/app/actions/movies";
-import type { MovieCategory, MovieRow } from "@/types/movie";
-import { GENRE_OPTIONS, MOVIE_CATEGORIES } from "@/types/movie";
+import type { MovieRow } from "@/types/movie";
+import { GENRE_OPTIONS } from "@/types/movie";
 
 type Action = (
   prev: MovieFormState,
@@ -22,6 +22,11 @@ export function MovieForm({
   return (
     <form action={formAction} className="mx-auto max-w-2xl space-y-6">
       {movie?.id ? <input type="hidden" name="id" value={movie.id} /> : null}
+      <input
+        type="hidden"
+        name="category"
+        value={movie?.category ?? "trending"}
+      />
       {state.error && (
         <div className="rounded-xl border border-red-500/35 bg-red-500/10 px-4 py-3 text-sm text-red-100">
           {state.error}
@@ -95,21 +100,6 @@ export function MovieForm({
           />
         </label>
 
-        <label className="block space-y-2">
-          <span className="text-xs font-medium text-zinc-400">Category</span>
-          <select
-            name="category"
-            required
-            defaultValue={(movie?.category as MovieCategory) ?? "trending"}
-            className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/25"
-          >
-            {MOVIE_CATEGORIES.map((c) => (
-              <option key={c.value} value={c.value}>
-                {c.label}
-              </option>
-            ))}
-          </select>
-        </label>
       </div>
 
       <fieldset className="space-y-3 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-4">
