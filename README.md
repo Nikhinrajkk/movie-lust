@@ -60,6 +60,8 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
 
 This repo includes [GitHub Actions](.github/workflows/ci.yml) that run **lint**, **typecheck**, and **build** on pushes and pull requests to `main` / `master`.
 
+For CI builds that need Supabase (optional but closer to production), add **repository secrets** in GitHub: **Settings → Secrets and variables → Actions → New repository secret** — use the same names as in `.env.local`: `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Never commit real keys into `ci.yml`.
+
 If you cloned without a remote, add it and push:
 
 ```bash
