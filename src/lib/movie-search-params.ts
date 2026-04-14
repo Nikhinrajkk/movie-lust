@@ -1,25 +1,10 @@
-import type { MovieCategory } from "@/types/movie";
-
 export type MovieListInitialQuery = {
   search: string;
   genre: string;
-  category: MovieCategory | "";
   sort: "newest" | "title_asc" | "rating_desc" | "year_desc";
   page: number;
   pageSize: number;
 };
-
-function parseCategory(v: string | null): MovieCategory | "" {
-  if (
-    v === "now_showing" ||
-    v === "coming_soon" ||
-    v === "classic" ||
-    v === "trending"
-  ) {
-    return v;
-  }
-  return "";
-}
 
 function parseSort(
   v: string | null,
@@ -50,7 +35,6 @@ export function buildInitialQueryFromSearchParams(
   return {
     search: get("q") ?? "",
     genre: get("genre") ?? "",
-    category: parseCategory(get("category")),
     sort: parseSort(get("sort")),
     page: Math.max(1, Number(pageRaw) || 1),
     pageSize: Math.min(48, Math.max(1, Number(pageSizeRaw) || 12)),

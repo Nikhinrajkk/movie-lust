@@ -34,7 +34,6 @@ export function MovieDiscover({
   const hydrateFromServer = useMovieFilters((s) => s.hydrateFromServer);
   const search = useMovieFilters((s) => s.search);
   const genre = useMovieFilters((s) => s.genre);
-  const category = useMovieFilters((s) => s.category);
   const sort = useMovieFilters((s) => s.sort);
   const page = useMovieFilters((s) => s.page);
   const pageSize = useMovieFilters((s) => s.pageSize);
@@ -47,12 +46,11 @@ export function MovieDiscover({
     () => ({
       search,
       genre,
-      category,
       sort,
       page,
       pageSize,
     }),
-    [search, genre, category, sort, page, pageSize],
+    [search, genre, sort, page, pageSize],
   );
 
   const initialQueryRef = useRef(initialQuery);
@@ -76,7 +74,6 @@ export function MovieDiscover({
     const params = new URLSearchParams();
     if (search.trim()) params.set("q", search.trim());
     if (genre.trim()) params.set("genre", genre.trim());
-    if (category) params.set("category", category);
     if (sort !== "newest") params.set("sort", sort);
     if (page > 1) params.set("page", String(page));
     if (pageSize !== 12) params.set("pageSize", String(pageSize));
@@ -86,17 +83,7 @@ export function MovieDiscover({
     if (next === cur) return;
 
     router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
-  }, [
-    category,
-    genre,
-    page,
-    pageSize,
-    pathname,
-    router,
-    search,
-    sort,
-    urlSearchParams,
-  ]);
+   }, [genre, page, pageSize, pathname, router, search, sort, urlSearchParams]);
 
   return (
     <div className="space-y-8">
@@ -113,8 +100,8 @@ export function MovieDiscover({
                 What are you in the mood for?
               </h1>
               <p className="mt-1 text-sm text-zinc-400">
-                Filter by genre and category, search your library, and paginate
-                like a marquee listing.
+                Search your library, filter by genre, sort, and paginate like a
+                marquee listing.
               </p>
             </div>
             {supabaseReady && (

@@ -1,19 +1,13 @@
 "use client";
 
 import { useMovieFilters } from "@/stores/movie-filters";
-import {
-  GENRE_OPTIONS,
-  MOVIE_CATEGORIES,
-  type MovieCategory,
-} from "@/types/movie";
+import { GENRE_OPTIONS } from "@/types/movie";
 
 export function MovieFilters({ disabled }: { disabled?: boolean }) {
   const search = useMovieFilters((s) => s.search);
   const setSearch = useMovieFilters((s) => s.setSearch);
   const genre = useMovieFilters((s) => s.genre);
   const setGenre = useMovieFilters((s) => s.setGenre);
-  const category = useMovieFilters((s) => s.category);
-  const setCategory = useMovieFilters((s) => s.setCategory);
   const sort = useMovieFilters((s) => s.sort);
   const setSort = useMovieFilters((s) => s.setSort);
   const pageSize = useMovieFilters((s) => s.pageSize);
@@ -49,26 +43,6 @@ export function MovieFilters({ disabled }: { disabled?: boolean }) {
           {GENRE_OPTIONS.map((g) => (
             <option key={g} value={g}>
               {g.charAt(0).toUpperCase() + g.slice(1)}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <label className="block space-y-2">
-        <span className="text-xs font-medium text-zinc-400">Category</span>
-        <select
-          value={category}
-          onChange={(e) => {
-            const v = e.target.value;
-            setCategory(v === "" ? "" : (v as MovieCategory));
-          }}
-          disabled={disabled}
-          className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/25 disabled:opacity-50"
-        >
-          <option value="">All categories</option>
-          {MOVIE_CATEGORIES.map((c) => (
-            <option key={c.value} value={c.value}>
-              {c.label}
             </option>
           ))}
         </select>

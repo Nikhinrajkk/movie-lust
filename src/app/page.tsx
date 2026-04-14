@@ -34,7 +34,6 @@ export default async function Home({
     ? await listMovies({
         search: initialQuery.search,
         genre: initialQuery.genre,
-        category: initialQuery.category || undefined,
         sort: initialQuery.sort,
         page: initialQuery.page,
         pageSize: initialQuery.pageSize,

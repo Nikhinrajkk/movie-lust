@@ -5,11 +5,6 @@ import { getMovieById } from "@/app/actions/movies";
 import { DeleteMovieForm } from "@/components/delete-movie-form";
 import { SetupCallout } from "@/components/setup-callout";
 import { isSupabaseConfigured } from "@/lib/config";
-import { MOVIE_CATEGORIES } from "@/types/movie";
-
-function categoryLabel(value: string) {
-  return MOVIE_CATEGORIES.find((c) => c.value === value)?.label ?? value;
-}
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
@@ -49,9 +44,6 @@ export default async function MovieDetailPage({
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="space-y-3">
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-300 ring-1 ring-amber-500/25">
-                    {categoryLabel(movie.category)}
-                  </span>
                   {movie.release_year != null && (
                     <span className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300">
                       {movie.release_year}

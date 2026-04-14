@@ -1,11 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { MovieRow } from "@/types/movie";
-import { MOVIE_CATEGORIES } from "@/types/movie";
-
-function categoryLabel(value: string) {
-  return MOVIE_CATEGORIES.find((c) => c.value === value)?.label ?? value;
-}
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
@@ -37,14 +32,11 @@ export function MovieCard({ movie }: { movie: MovieRow }) {
         )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-300/95 ring-1 ring-amber-500/25">
-            {categoryLabel(movie.category)}
-          </span>
-          {movie.release_year != null && (
+        {movie.release_year != null && (
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] text-zinc-500">{movie.release_year}</span>
-          )}
-        </div>
+          </div>
+        )}
         <h3 className="line-clamp-2 text-base font-semibold leading-snug text-zinc-50 group-hover:text-amber-100">
           {movie.title}
         </h3>
