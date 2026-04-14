@@ -1,6 +1,6 @@
 -- IMDb Top-chart style titles (directors corrected vs common spreadsheet errors).
 -- Skips any row whose title already exists. Run 0003_add_director_column.sql first if upgrading an old DB.
--- Posters: TMDB w500 paths.
+-- Posters: English Wikipedia / Wikimedia (stable URLs; avoids broken TMDB hashes).
 
 insert into public.movies (
   title, overview, poster_url, release_year, genres, category, rating, review_text, runtime_minutes, director
@@ -11,7 +11,7 @@ from (
     (
       'The Shawshank Redemption',
       'Two imprisoned men bond over years, finding solace and eventual redemption through acts of decency.',
-      'https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg',
       1994,
       array['drama']::text[],
       'classic',
@@ -23,7 +23,7 @@ from (
     (
       'The Godfather',
       'The aging patriarch of an organized crime dynasty transfers control to his reluctant son.',
-      'https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg',
       1972,
       array['crime', 'drama']::text[],
       'classic',
@@ -35,7 +35,7 @@ from (
     (
       'Schindler''s List',
       'In German-occupied Poland during World War II, industrialist Oskar Schindler saves over a thousand Jewish lives.',
-      'https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/3/38/Schindler%27s_List_movie.jpg',
       1993,
       array['drama', 'crime']::text[],
       'classic',
@@ -47,7 +47,7 @@ from (
     (
       '12 Angry Men',
       'The jury in a murder trial retires to deliberate, and one holdout tries to prevent a miscarriage of justice.',
-      'https://image.tmdb.org/t/p/w500/ppd84D2iBEWYS2OgsJfCHk8Dq8q.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg',
       1957,
       array['crime', 'drama']::text[],
       'classic',
@@ -59,7 +59,7 @@ from (
     (
       'The Lord of the Rings: The Return of the King',
       'Gandalf and Aragorn lead the World of Men against Sauron''s army, while Frodo reaches Mount Doom.',
-      'https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/4/48/Lord_Rings_Return_King.jpg',
       2003,
       array['action', 'adventure', 'drama']::text[],
       'classic',
@@ -71,7 +71,7 @@ from (
     (
       'The Godfather Part II',
       'Parallel stories follow young Vito Corleone''s rise and Michael''s struggle to expand the family empire.',
-      'https://image.tmdb.org/t/p/w500/hekJKvdzdXcQCVeLzRnq6RI2ZTA.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/0/03/Godfather_part_ii.jpg',
       1974,
       array['crime', 'drama']::text[],
       'classic',
@@ -83,7 +83,7 @@ from (
     (
       'Pulp Fiction',
       'Interwoven stories of Los Angeles mobsters, small-time boxers, and a mysterious briefcase.',
-      'https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg',
       1994,
       array['crime', 'drama']::text[],
       'classic',
@@ -95,7 +95,7 @@ from (
     (
       'Fight Club',
       'An insomniac office worker and a soap maker build an underground fight club that spirals out of control.',
-      'https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg',
       1999,
       array['drama']::text[],
       'classic',
@@ -107,7 +107,7 @@ from (
     (
       'The Lord of the Rings: The Fellowship of the Ring',
       'A meek Hobbit and eight companions set out to destroy the One Ring and defeat the Dark Lord Sauron.',
-      'https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/f/fb/Lord_Rings_Fellowship_Ring.jpg',
       2001,
       array['action', 'adventure', 'drama']::text[],
       'classic',
@@ -119,7 +119,7 @@ from (
     (
       'Forrest Gump',
       'The history of the United States unfolds through the life of an Alabama man with a big heart.',
-      'https://image.tmdb.org/t/p/w500/arw2lcBwnYriT5W61rXnUKNR0a0.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg',
       1994,
       array['drama', 'romance']::text[],
       'classic',
@@ -131,7 +131,7 @@ from (
     (
       'The Lord of the Rings: The Two Towers',
       'Frodo and Sam edge toward Mordor while the divided fellowship fights Saruman and Sauron''s forces.',
-      'https://image.tmdb.org/t/p/w500/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/a/a1/Lord_Rings_Two_Towers.jpg',
       2002,
       array['action', 'adventure', 'drama']::text[],
       'classic',
@@ -143,7 +143,7 @@ from (
     (
       'The Good, the Bad and the Ugly',
       'Three gunslingers compete to find a fortune in buried Confederate gold amid the Civil War.',
-      'https://image.tmdb.org/t/p/w500/bXDuYuLEIbsQdzZ1HaGiSUgWUOT.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/4/45/Good_the_bad_and_the_ugly_poster.jpg',
       1966,
       array['adventure', 'drama']::text[],
       'classic',
@@ -155,7 +155,7 @@ from (
     (
       'Spider-Man: Across the Spider-Verse',
       'Miles Morales catapults across the Multiverse and faces a team of Spider-People protecting its existence.',
-      'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61pJpD2wIQtgJ.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/b/b4/Spider-Man-_Across_the_Spider-Verse_poster.jpg',
       2023,
       array['animation', 'action', 'adventure']::text[],
       'trending',
@@ -167,7 +167,7 @@ from (
     (
       'Goodfellas',
       'The story of Henry Hill and his life in the mob, from small-time thief to FBI informant.',
-      'https://image.tmdb.org/t/p/w500/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/7/7b/Goodfellas.jpg',
       1990,
       array['crime', 'drama']::text[],
       'classic',
@@ -179,7 +179,7 @@ from (
     (
       'The Matrix',
       'A computer hacker learns reality is a simulation and joins a rebellion against its machine overlords.',
-      'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpPyUkP.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/d/db/The_Matrix.png',
       1999,
       array['action', 'sci-fi']::text[],
       'classic',
@@ -191,7 +191,7 @@ from (
     (
       'One Flew Over the Cuckoo''s Nest',
       'A rebellious patient rallies fellow inmates against a domineering nurse in a mental institution.',
-      'https://image.tmdb.org/t/p/w500/xijp2HK2DWJPrBOoMrgvBKMWx1Z.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/2/26/One_Flew_Over_the_Cuckoo%27s_Nest_poster.jpg',
       1975,
       array['drama']::text[],
       'classic',
@@ -203,7 +203,7 @@ from (
     (
       'Star Wars: Episode V - The Empire Strikes Back',
       'The Rebels scatter after the Empire attacks Hoth, while Luke trains with Yoda and learns a shattering truth.',
-      'https://image.tmdb.org/t/p/w500/miqmawcdpno3HR4fWvKiGnpvKbU.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg',
       1980,
       array['action', 'adventure', 'fantasy']::text[],
       'classic',
@@ -215,7 +215,7 @@ from (
     (
       'Oppenheimer',
       'The story of J. Robert Oppenheimer and the Manhattan Project, and the cost of building the atomic bomb.',
-      'https://image.tmdb.org/t/p/w500/uL2wTkVH7mPa5vN4hpYKpLGtyfq.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/4/4a/Oppenheimer_%28film%29.jpg',
       2023,
       array['drama', 'thriller']::text[],
       'trending',
@@ -227,7 +227,7 @@ from (
     (
       'Se7en',
       'Two detectives hunt a serial killer who uses the seven deadly sins as his motif.',
-      'https://image.tmdb.org/t/p/w500/6zxUvmfyNBbmBBTdbe4eNEgULCW.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/6/68/Seven_%28movie%29_poster.jpg',
       1995,
       array['crime', 'drama', 'thriller']::text[],
       'classic',
@@ -239,7 +239,7 @@ from (
     (
       'The Silence of the Lambs',
       'A young FBI trainee seeks the help of imprisoned cannibal Dr. Hannibal Lecter to catch another killer.',
-      'https://image.tmdb.org/t/p/w500/mSDsSDwaP3E651qUyxoWdRCd2uV.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/8/86/The_Silence_of_the_Lambs_poster.jpg',
       1991,
       array['crime', 'drama', 'thriller']::text[],
       'classic',
@@ -251,7 +251,7 @@ from (
     (
       'Star Wars: Episode IV - A New Hope',
       'Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, and two droids to save the galaxy.',
-      'https://image.tmdb.org/t/p/w500/vziqfo8YpzG8cZsVwDHHVUSfc7d.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg',
       1977,
       array['action', 'adventure', 'fantasy']::text[],
       'classic',
@@ -263,7 +263,7 @@ from (
     (
       'Saving Private Ryan',
       'Following the Normandy landings, U.S. soldiers go behind enemy lines to retrieve a paratrooper.',
-      'https://image.tmdb.org/t/p/w500/uqx37wS87S00BsVKHHFNeJl0A8G.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/a/ac/Saving_Private_Ryan_poster.jpg',
       1998,
       array['drama']::text[],
       'classic',
@@ -275,7 +275,7 @@ from (
     (
       'The Green Mile',
       'Death row guards witness supernatural events after an enigmatic inmate arrives at Cold Mountain Penitentiary.',
-      'https://image.tmdb.org/t/p/w500/clolk7rR52G2aUh0trWxe81Mylu.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/e/e2/The_Green_Mile_%28movie_poster%29.jpg',
       1999,
       array['crime', 'drama', 'fantasy']::text[],
       'classic',
@@ -287,7 +287,7 @@ from (
     (
       'Terminator 2: Judgment Day',
       'A reprogrammed Terminator protects John Connor from a more advanced liquid-metal assassin.',
-      'https://image.tmdb.org/t/p/w500/5M0j0B18abtBIJZgi6lIHfIjdTV.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/5/5e/Terminator_2-Judgment_Day.png',
       1991,
       array['action', 'sci-fi']::text[],
       'classic',
@@ -299,7 +299,7 @@ from (
     (
       'Spirited Away',
       'During her family''s move to the suburbs, a sullen girl wanders into a world ruled by gods and spirits.',
-      'https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRUgkKvg1WkYj.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/d/db/Spirited_Away_Japanese_poster.png',
       2001,
       array['animation', 'adventure', 'drama']::text[],
       'classic',
@@ -311,7 +311,7 @@ from (
     (
       'City of God',
       'In the slums of Rio, two boys take different paths as one becomes a photographer and the other a drug dealer.',
-      'https://image.tmdb.org/t/p/w500/k7eYdWvhYQyRQoU2TB2Qk9AIc5P.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/1/10/CidadedeDeus.jpg',
       2002,
       array['crime', 'drama']::text[],
       'classic',
@@ -323,7 +323,7 @@ from (
     (
       'Life Is Beautiful',
       'A Jewish Italian bookseller uses humor and imagination to shield his son from the horrors of a concentration camp.',
-      'https://image.tmdb.org/t/p/w500/rnnRP9vIP9K6DAOkmqjs3AsGlvl.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/7/7c/Vitaebella.jpg',
       1997,
       array['comedy', 'drama', 'romance']::text[],
       'classic',
@@ -335,7 +335,7 @@ from (
     (
       'It''s a Wonderful Life',
       'An angel shows a frustrated businessman what life would have been like if he had never existed.',
-      'https://image.tmdb.org/t/p/w500/bSqt9rhYsXoQ9Qbq6GHdwjvyDWQ.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/2/25/It%27s_a_Wonderful_Life_%281946_poster%29.jpeg',
       1946,
       array['drama', 'romance']::text[],
       'classic',
@@ -347,7 +347,7 @@ from (
     (
       'Seven Samurai',
       'Farmers hire seven masterless samurai to defend their village from bandits.',
-      'https://image.tmdb.org/t/p/w500/uWu7jeyxT08293WqyLueI4tnmT9.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/c/c8/Seven_Samurai_Poster.png',
       1954,
       array['action', 'drama']::text[],
       'classic',
@@ -359,7 +359,7 @@ from (
     (
       'Harakiri',
       'An aging ronin requests permission to commit ritual suicide in a lord''s courtyard, exposing hypocrisy.',
-      'https://image.tmdb.org/t/p/w500/5yJmIVzWsr8qdGmSyC9XBRNWKUR.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/f/fd/Harakiri_Poster.jpg',
       1962,
       array['action', 'drama', 'thriller']::text[],
       'classic',
@@ -371,7 +371,7 @@ from (
     (
       'Gladiator',
       'A former Roman general seeks vengeance against the corrupt emperor who murdered his family.',
-      'https://image.tmdb.org/t/p/w500/ty8TKVuvwsGiB6WJ74UAcgBoj8p.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/f/fb/Gladiator_%282000_film_poster%29.png',
       2000,
       array['action', 'adventure', 'drama']::text[],
       'classic',
@@ -383,7 +383,7 @@ from (
     (
       'Alien',
       'The crew of a commercial spacecraft encounters a deadly extraterrestrial organism.',
-      'https://image.tmdb.org/t/p/w500/vfrQk5158mNwbnDMKQh0Y9VmLO6.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/c/c3/Alien_movie_poster.jpg',
       1979,
       array['horror', 'sci-fi']::text[],
       'classic',
@@ -395,7 +395,7 @@ from (
     (
       'Parasite',
       'Greed and class discrimination threaten the symbiotic relationship between the wealthy Park family and the destitute Kims.',
-      'https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/5/53/Parasite_%282019_film%29.png',
       2019,
       array['drama', 'thriller']::text[],
       'trending',
@@ -407,7 +407,7 @@ from (
     (
       'The Departed',
       'An undercover cop and a mole in the police try to identify each other while infiltrating an Irish gang.',
-      'https://image.tmdb.org/t/p/w500/nT97ifVt2E1PmqizvLY1E8wpaqn.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/5/50/Departed234.jpg',
       2006,
       array['crime', 'drama', 'thriller']::text[],
       'classic',
@@ -419,7 +419,7 @@ from (
     (
       'The Prestige',
       'Two stage magicians engage in competitive one-upmanship in Victorian London—with deadly consequences.',
-      'https://image.tmdb.org/t/p/w500/ADMBdfp6WorduPdfboMA13jcPap.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/d/d2/Prestige_poster.jpg',
       2006,
       array['drama', 'thriller', 'sci-fi']::text[],
       'classic',
@@ -431,7 +431,7 @@ from (
     (
       'Whiplash',
       'A young drummer enrolls at a cut-throat music conservatory where a conductor pushes him past his limits.',
-      'https://image.tmdb.org/t/p/w500/lIv1QesBwgmdMSr9aLWkBAYt42v.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/0/01/Whiplash_poster.jpg',
       2014,
       array['drama']::text[],
       'classic',
@@ -443,7 +443,7 @@ from (
     (
       'Back to the Future',
       'A teen is sent 30 years into the past in a time-traveling DeLorean invented by his eccentric friend.',
-      'https://image.tmdb.org/t/p/w500/fNOH9f6a36ZUIxu1r4Y2MDBWuVz.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg',
       1985,
       array['adventure', 'comedy', 'sci-fi']::text[],
       'classic',
@@ -455,7 +455,7 @@ from (
     (
       'Léon: The Professional',
       'A hitman takes in a young girl after her family is murdered, and teaches her his trade.',
-      'https://image.tmdb.org/t/p/w500/yI6X2cvxGYWKPBRvbg5EIwcSkPI.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/0/03/Leon-poster.jpg',
       1994,
       array['action', 'crime', 'drama']::text[],
       'classic',
@@ -467,7 +467,7 @@ from (
     (
       'Django Unchained',
       'With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal plantation owner.',
-      'https://image.tmdb.org/t/p/w500/e0IbsEAHW8KTxMaxXXcMI8mCdLI.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/8/8b/Django_Unchained_Poster.jpg',
       2012,
       array['drama', 'crime']::text[],
       'classic',
@@ -479,7 +479,7 @@ from (
     (
       'The Lion King',
       'A lion prince flees his kingdom after his father''s murder, only to learn the true meaning of responsibility.',
-      'https://image.tmdb.org/t/p/w500/sKCR985pmryl7pS4rtzmCbzax3V.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/3/3d/The_Lion_King_poster.jpg',
       1994,
       array['animation', 'adventure', 'drama']::text[],
       'classic',
@@ -491,7 +491,7 @@ from (
     (
       'The Usual Suspects',
       'A sole survivor recounts the twist-filled path to a deadly harbor shoot-out.',
-      'https://image.tmdb.org/t/p/w500/kGnkULfr0jHiFA3bREUKWmeTvap.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/9/9c/Usual_suspects_ver1.jpg',
       1995,
       array['crime', 'drama', 'thriller']::text[],
       'classic',
@@ -503,7 +503,7 @@ from (
     (
       'American History X',
       'A former neo-nazi tries to prevent his younger brother from going down the same wrong path.',
-      'https://image.tmdb.org/t/p/w500/c2gsmSQ2SqvCzzzPlvVuqZERDoR.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/3/39/American_History_X_poster.png',
       1998,
       array['crime', 'drama']::text[],
       'classic',
@@ -515,7 +515,7 @@ from (
     (
       'Psycho',
       'A secretary on the run checks into a remote motel run by a young man dominated by his mother.',
-      'https://image.tmdb.org/t/p/w500/nxncaLdrcRYb5LdLtwUKuFa6anW.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/7/76/Psycho_%281960%29_theatrical_poster_%28retouched%29.jpg',
       1960,
       array['horror', 'thriller']::text[],
       'classic',
@@ -527,7 +527,7 @@ from (
     (
       'The Pianist',
       'A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto during World War II.',
-      'https://image.tmdb.org/t/p/w500/2BXdRHunY8Dq1gQXieJpKH6Qoju.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/a/a6/The_Pianist_movie.jpg',
       2002,
       array['drama']::text[],
       'classic',
@@ -539,7 +539,7 @@ from (
     (
       'Casablanca',
       'A cynical expatriate struggles to decide whether to help his former lover and her fugitive husband escape.',
-      'https://image.tmdb.org/t/p/w500/wOfvtYSqqE0OQZNrpbnAKwXolkP.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/b/b3/CasablancaPoster-Gold.jpg',
       1942,
       array['drama', 'romance']::text[],
       'classic',
@@ -551,7 +551,7 @@ from (
     (
       'The Intouchables',
       'An unlikely friendship forms between a quadriplegic aristocrat and his exuberant caregiver from the projects.',
-      'https://image.tmdb.org/t/p/w500/ttRlpniYNU0PHUYxcE6BftnkBgA.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/9/93/The_Intouchables.jpg',
       2011,
       array['comedy', 'drama']::text[],
       'classic',
@@ -563,7 +563,7 @@ from (
     (
       'Grave of the Fireflies',
       'A teenage boy and his younger sister struggle to survive in Japan during the final months of World War II.',
-      'https://image.tmdb.org/t/p/w500/gwvwjoLLeXTREGeXADYyhnSzrKY.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/a/a5/Grave_of_the_Fireflies_Japanese_poster.jpg',
       1988,
       array['animation', 'drama']::text[],
       'classic',

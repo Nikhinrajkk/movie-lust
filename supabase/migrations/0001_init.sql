@@ -59,7 +59,7 @@ values
   (
     'Inception',
     'A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea.',
-    'https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg',
+    'https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg',
     2010,
     array['sci-fi', 'thriller', 'action'],
     'trending',
@@ -71,7 +71,7 @@ values
   (
     'The Dark Knight',
     'Batman faces the Joker, a criminal mastermind who plunges Gotham into anarchy.',
-    'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+    'https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg',
     2008,
     array['action', 'crime', 'drama'],
     'classic',
@@ -83,7 +83,7 @@ values
   (
     'Dune: Part Two',
     'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.',
-    'https://image.tmdb.org/t/p/w500/8b8R8l88Qje9dn9OE8PY05Nhx1X.jpg',
+    'https://upload.wikimedia.org/wikipedia/en/5/52/Dune_Part_Two_poster.jpeg',
     2024,
     array['sci-fi', 'adventure', 'drama'],
     'now_showing',
@@ -95,7 +95,7 @@ values
   (
     'Interstellar',
     'As Earth grows uninhabitable, a group of astronauts crosses a wormhole in search of a new home for humanity—and faces time itself.',
-    'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+    'https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg',
     2014,
     array['sci-fi', 'drama', 'adventure'],
     'classic',

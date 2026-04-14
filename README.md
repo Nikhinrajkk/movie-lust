@@ -38,6 +38,7 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
    - `supabase/migrations/0001_init.sql` — schema, RLS, and starter seed rows.
    - If you already had an older DB without `director`, run `0003_add_director_column.sql`.
    - `0004_seed_imdb_chart.sql` — optional bulk seed of IMDb-style chart titles (skips existing titles).
+   - `0005_update_poster_urls_wikimedia.sql` — run if posters look broken; refreshes `poster_url` to Wikimedia art by title.
    - `0002_interstellar.sql` is only needed if you use an old `0001` without Interstellar in the seed.
 
 4. **Run locally**

@@ -5,7 +5,7 @@ insert into public.movies (title, overview, poster_url, release_year, genres, ca
 select
   'Interstellar',
   'As Earth grows uninhabitable, a group of astronauts crosses a wormhole in search of a new home for humanity—and faces time itself.',
-  'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+  'https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg',
   2014,
   array['sci-fi', 'drama', 'adventure'],
   'classic',
