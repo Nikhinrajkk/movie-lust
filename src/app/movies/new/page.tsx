@@ -2,10 +2,12 @@ import Link from "next/link";
 import { createMovieFromForm } from "@/app/actions/movies";
 import { MovieForm } from "@/components/movie-form";
 import { SetupCallout } from "@/components/setup-callout";
+import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 
-export default function NewMoviePage() {
+export default async function NewMoviePage() {
   const ready = isSupabaseConfigured();
+  const { user, isAdmin } = await getSessionUserWithProfile();
 
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">
@@ -27,7 +29,31 @@ export default function NewMoviePage() {
       </div>
 
       {!ready && <SetupCallout />}
-      {ready && <MovieForm action={createMovieFromForm} />}
+
+      {ready && !user && (
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 px-6 py-8 text-center text-sm text-zinc-300">
+          <p className="mb-4">
+            Sign in to submit a new title. Submissions from members are queued
+            for admin approval before they appear in browse.
+          </p>
+          <Link
+            href="/login?next=/movies/new"
+            className="inline-flex rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
+          >
+            Sign in to continue
+          </Link>
+        </div>
+      )}
+
+      {ready && user && !isAdmin && (
+        <p className="rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-sm text-amber-100">
+          Your submission will be reviewed by an admin. Until it is approved,
+          it won&apos;t appear on the home page — you&apos;ll still be able to
+          open it from your confirmation link or history.
+        </p>
+      )}
+
+      {ready && user && <MovieForm action={createMovieFromForm} />}
     </div>
   );
 }

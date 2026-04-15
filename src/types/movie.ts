@@ -4,6 +4,8 @@ export type MovieCategory =
   | "classic"
   | "trending";
 
+export type MovieApprovalStatus = "approved" | "pending" | "rejected";
+
 export type MovieRow = {
   id: string;
   title: string;
@@ -18,6 +20,8 @@ export type MovieRow = {
   director: string | null;
   created_at: string;
   updated_at: string;
+  approval_status?: MovieApprovalStatus;
+  created_by?: string | null;
 };
 
 export const MOVIE_CATEGORIES: { value: MovieCategory; label: string }[] = [

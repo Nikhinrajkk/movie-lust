@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getMovieById, updateMovieFromForm } from "@/app/actions/movies";
 import { MovieForm } from "@/components/movie-form";
 import { SetupCallout } from "@/components/setup-callout";
+import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 
 export default async function EditMoviePage({
@@ -12,9 +13,18 @@ export default async function EditMoviePage({
 }) {
   const { id } = await params;
   const ready = isSupabaseConfigured();
+  const { user, isAdmin } = await getSessionUserWithProfile();
   const movie = ready ? await getMovieById(id) : null;
 
   if (ready && !movie) notFound();
+
+  const owner = Boolean(user && movie?.created_by === user.id);
+  const status = movie?.approval_status ?? "approved";
+  const canEdit = isAdmin || (owner && status === "pending");
+
+  if (ready && movie && !canEdit) {
+    redirect(`/movies/${id}`);
+  }
 
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">

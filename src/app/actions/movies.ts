@@ -45,12 +45,15 @@ export async function listMovies(
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
-  const supabase = createSupabaseServerOptional();
+  const supabase = await createSupabaseServerOptional();
   if (!supabase) {
     return { movies: [], total: 0, page, pageSize, totalPages: 1 };
   }
 
-  let query = supabase.from("movies").select("*", { count: "exact" });
+  let query = supabase
+    .from("movies")
+    .select("*", { count: "exact" })
+    .eq("approval_status", "approved");
 
   const q = input.search?.trim();
   if (q) {
@@ -91,7 +94,7 @@ export async function listMovies(
 }
 
 export async function getMovieById(id: string): Promise<MovieRow | null> {
-  const supabase = createSupabaseServerOptional();
+  const supabase = await createSupabaseServerOptional();
   if (!supabase) return null;
   const { data, error } = await supabase
     .from("movies")
@@ -117,7 +120,21 @@ export type MoviePayload = {
 };
 
 export async function createMovie(payload: MoviePayload): Promise<string> {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Sign in to add a movie.");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("is_admin")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const isAdmin = Boolean(profile?.is_admin);
+  const approval_status = isAdmin ? "approved" : "pending";
+
   const { data, error } = await supabase
     .from("movies")
     .insert({
@@ -131,17 +148,20 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
       review_text: payload.review_text ?? "",
       runtime_minutes: payload.runtime_minutes ?? null,
       director: payload.director ?? "",
+      created_by: user.id,
+      approval_status,
     })
     .select("id")
     .single();
 
   if (error) throw new Error(error.message);
   revalidatePath("/");
+  revalidatePath("/admin");
   return data.id as string;
 }
 
 export async function updateMovie(id: string, payload: MoviePayload) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const { error } = await supabase
     .from("movies")
     .update({
@@ -165,10 +185,11 @@ export async function updateMovie(id: string, payload: MoviePayload) {
 }
 
 export async function deleteMovie(id: string) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const { error } = await supabase.from("movies").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/");
+  revalidatePath("/admin");
 }
 
 export type MovieFormState = {

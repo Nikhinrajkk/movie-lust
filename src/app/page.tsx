@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { listMovies } from "@/app/actions/movies";
+import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
 import { MovieDiscover } from "@/components/movie-discover";
+import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 import { buildInitialQueryFromSearchParams } from "@/lib/movie-search-params";
 
@@ -30,6 +32,11 @@ export default async function Home({
 
   const initialQuery = buildInitialQueryFromSearchParams(params);
   const supabaseReady = isSupabaseConfigured();
+  const { user } = await getSessionUserWithProfile();
+  const watchlistMovieIds =
+    supabaseReady && user ? await getWatchlistMovieIdsForUser() : [];
+  const watchlistEnabled = Boolean(user);
+
   const initial = supabaseReady
     ? await listMovies({
         search: initialQuery.search,
@@ -53,6 +60,8 @@ export default async function Home({
           initial={initial}
           initialQuery={initialQuery}
           supabaseReady={supabaseReady}
+          watchlistEnabled={watchlistEnabled}
+          watchlistMovieIds={watchlistMovieIds}
         />
       </Suspense>
     </div>

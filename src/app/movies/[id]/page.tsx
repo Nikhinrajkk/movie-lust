@@ -2,8 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMovieById } from "@/app/actions/movies";
+import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
 import { DeleteMovieForm } from "@/components/delete-movie-form";
 import { SetupCallout } from "@/components/setup-callout";
+import { WatchlistToggle } from "@/components/watchlist-toggle";
+import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 
 function posterSrc(url: string | null) {
@@ -18,9 +21,24 @@ export default async function MovieDetailPage({
 }) {
   const { id } = await params;
   const ready = isSupabaseConfigured();
+  const { user, isAdmin } = await getSessionUserWithProfile();
   const movie = ready ? await getMovieById(id) : null;
 
   if (ready && !movie) notFound();
+
+  const owner = Boolean(user && movie?.created_by === user.id);
+  const status = movie?.approval_status ?? "approved";
+  const canEdit =
+    isAdmin || (owner && status === "pending");
+  const canDelete = canEdit;
+  const showModeration =
+    status === "pending" || status === "rejected";
+
+  const watchlistIds =
+    ready && user ? await getWatchlistMovieIdsForUser() : [];
+  const inWatchlist = movie ? watchlistIds.includes(movie.id) : false;
+  const watchlistToggleEnabled =
+    Boolean(user) && status === "approved";
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
@@ -41,29 +59,50 @@ export default async function MovieDetailPage({
           </div>
 
           <div className="min-w-0 space-y-6">
+            {showModeration && (
+              <div
+                className={`rounded-2xl border px-4 py-3 text-sm ${
+                  status === "pending"
+                    ? "border-amber-500/35 bg-amber-500/10 text-amber-100"
+                    : "border-red-500/35 bg-red-500/10 text-red-100"
+                }`}
+              >
+                {status === "pending"
+                  ? "This submission is waiting for an admin review. It is only visible to you and moderators until it is approved."
+                  : "This submission was rejected and is hidden from the public catalogue."}
+              </div>
+            )}
+
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="space-y-3">
-                <div className="flex flex-wrap gap-2">
-                  {movie.release_year != null && (
-                    <span className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300">
-                      {movie.release_year}
-                    </span>
-                  )}
-                  {movie.runtime_minutes != null && (
+                {movie.runtime_minutes != null && (
+                  <div className="flex flex-wrap gap-2">
                     <span className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300">
                       {movie.runtime_minutes} min
                     </span>
-                  )}
-                </div>
+                  </div>
+                )}
                 <h1 className="text-4xl font-bold tracking-tight text-zinc-50">
                   {movie.title}
                 </h1>
-                {movie.director?.trim() ? (
+                {(movie.release_year != null || movie.director?.trim()) && (
                   <p className="text-sm text-zinc-400">
-                    Directed by{" "}
-                    <span className="text-zinc-200">{movie.director}</span>
+                    {movie.release_year != null && (
+                      <span className="font-medium text-zinc-300">
+                        {movie.release_year}
+                      </span>
+                    )}
+                    {movie.release_year != null && movie.director?.trim() && (
+                      <span className="text-zinc-600"> · </span>
+                    )}
+                    {movie.director?.trim() && (
+                      <>
+                        <span className="text-zinc-500">Directed by </span>
+                        <span className="text-zinc-200">{movie.director}</span>
+                      </>
+                    )}
                   </p>
-                ) : null}
+                )}
                 {movie.rating != null && (
                   <p className="text-sm text-zinc-400">
                     Your rating:{" "}
@@ -75,14 +114,23 @@ export default async function MovieDetailPage({
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  href={`/movies/${movie.id}/edit`}
-                  className="rounded-xl bg-amber-500 px-4 py-2 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
-                >
-                  Edit
-                </Link>
-                <DeleteMovieForm id={movie.id} />
+              <div className="flex flex-wrap items-center gap-2">
+                {watchlistToggleEnabled && (
+                  <WatchlistToggle
+                    movieId={movie.id}
+                    initialInList={inWatchlist}
+                    className="px-3"
+                  />
+                )}
+                {canEdit && (
+                  <Link
+                    href={`/movies/${movie.id}/edit`}
+                    className="rounded-xl bg-amber-500 px-4 py-2 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
+                  >
+                    Edit
+                  </Link>
+                )}
+                {canDelete && <DeleteMovieForm id={movie.id} />}
               </div>
             </div>
 

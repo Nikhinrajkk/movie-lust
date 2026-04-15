@@ -1,13 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { MovieRow } from "@/types/movie";
+import { WatchlistToggle } from "@/components/watchlist-toggle";
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
   return "https://placehold.co/400x600/18181b/78716c?text=No+poster";
 }
 
-export function MovieCard({ movie }: { movie: MovieRow }) {
+export function MovieCard({
+  movie,
+  watchlist,
+}: {
+  movie: MovieRow;
+  watchlist?: { enabled: boolean; inList: boolean };
+}) {
   return (
     <Link
       href={`/movies/${movie.id}`}
@@ -25,6 +32,13 @@ export function MovieCard({ movie }: { movie: MovieRow }) {
           }
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+        {watchlist?.enabled && (
+          <WatchlistToggle
+            movieId={movie.id}
+            initialInList={watchlist.inList}
+            className="absolute left-2 top-2"
+          />
+        )}
         {movie.rating != null && (
           <div className="absolute right-2 top-2 rounded-lg bg-zinc-950/90 px-2 py-1 text-xs font-bold text-amber-400 ring-1 ring-amber-500/40">
             {movie.rating.toFixed(1)}
@@ -32,19 +46,22 @@ export function MovieCard({ movie }: { movie: MovieRow }) {
         )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        {movie.release_year != null && (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] text-zinc-500">{movie.release_year}</span>
-          </div>
-        )}
         <h3 className="line-clamp-2 text-base font-semibold leading-snug text-zinc-50 group-hover:text-amber-100">
           {movie.title}
         </h3>
-        {movie.director?.trim() ? (
+        {(movie.release_year != null || movie.director?.trim()) && (
           <p className="line-clamp-1 text-[11px] text-zinc-500">
-            {movie.director}
+            {movie.release_year != null && (
+              <span className="text-zinc-400">{movie.release_year}</span>
+            )}
+            {movie.release_year != null && movie.director?.trim() && (
+              <span className="text-zinc-600"> · </span>
+            )}
+            {movie.director?.trim() ? (
+              <span>{movie.director}</span>
+            ) : null}
           </p>
-        ) : null}
+        )}
         <p className="line-clamp-2 text-xs leading-relaxed text-zinc-400">
           {movie.overview || movie.review_text || "No synopsis yet."}
         </p>
