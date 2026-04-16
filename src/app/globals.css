@@ -12,6 +12,21 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Catalogue: flat film-reel icon rotation */
+@keyframes cinema-reel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cinema-reel-rotate {
+  transform-origin: 0 0;
+  animation: cinema-reel-spin 2.2s linear infinite;
+}
+
 body {
   background: radial-gradient(
       ellipse 120% 80% at 50% -20%,

@@ -14,7 +14,14 @@ import { GENRE_OPTIONS, MOVIE_CATEGORIES, type MovieCategory } from "@/types/mov
 
 const FILTER_ALL = "__all__";
 
-export function MovieFilters({ disabled }: { disabled?: boolean }) {
+export function MovieFilters({
+  disabled,
+  busy,
+}: {
+  disabled?: boolean;
+  /** Results are refreshing — disable controls that would blur search if toggled mid-typing. */
+  busy?: boolean;
+}) {
   const search = useMovieFilters((s) => s.search);
   const setSearch = useMovieFilters((s) => s.setSearch);
   const genre = useMovieFilters((s) => s.genre);
@@ -85,7 +92,7 @@ export function MovieFilters({ disabled }: { disabled?: boolean }) {
       <UiSelect
         value={filterValue}
         onValueChange={onFilterChange}
-        disabled={disabled}
+        disabled={disabled || busy}
         placeholder="Filter"
         id="catalog-filter"
         aria-label="Filter catalogue"
@@ -113,7 +120,7 @@ export function MovieFilters({ disabled }: { disabled?: boolean }) {
       <UiSelect
         value={sort}
         onValueChange={(v) => setSort(v as SortOption)}
-        disabled={disabled}
+        disabled={disabled || busy}
         placeholder="Sort"
         id="catalog-sort"
         aria-label="Sort results"
@@ -129,7 +136,7 @@ export function MovieFilters({ disabled }: { disabled?: boolean }) {
         <Button
           type="button"
           variant="outline"
-          disabled={disabled}
+          disabled={disabled || busy}
           onClick={() => clearFilters()}
           className="box-border h-10 min-h-10 shrink-0 px-3 py-0 leading-none"
         >

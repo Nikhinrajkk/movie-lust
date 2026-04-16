@@ -13,6 +13,7 @@ import { listMovies } from "@/app/actions/movies";
 import type { MovieListInitialQuery } from "@/lib/movie-search-params";
 import { useMovieFilters } from "@/stores/movie-filters";
 import type { MovieListResult } from "@/types/movie";
+import { CinemaLoadingLayer } from "./cinema-loader";
 import { MovieCard } from "./movie-card";
 import { MovieFilters } from "./movie-filters";
 import { MoviePagination } from "./movie-pagination";
@@ -130,7 +131,7 @@ export function MovieDiscover({
           )}
         </div>
 
-        <MovieFilters disabled={!supabaseReady || pending} />
+        <MovieFilters disabled={!supabaseReady} busy={pending} />
       </div>
 
       {error && (
@@ -139,31 +140,33 @@ export function MovieDiscover({
         </div>
       )}
 
-      {pending && supabaseReady && (
-        <p className="text-xs text-zinc-500">Updating results…</p>
-      )}
+      <CinemaLoadingLayer active={pending && supabaseReady}>
+        <>
+          <div
+            className={`grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 transition-opacity duration-200 ${pending && supabaseReady ? "opacity-50" : ""}`}
+          >
+            {data.movies.map((m) => (
+              <MovieCard
+                key={m.id}
+                movie={m}
+                watchlist={
+                  watchlistEnabled
+                    ? { enabled: true, inList: watchlistSet.has(m.id) }
+                    : undefined
+                }
+              />
+            ))}
+          </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {data.movies.map((m) => (
-          <MovieCard
-            key={m.id}
-            movie={m}
-            watchlist={
-              watchlistEnabled
-                ? { enabled: true, inList: watchlistSet.has(m.id) }
-                : undefined
-            }
-          />
-        ))}
-      </div>
-
-      {supabaseReady && data.total > 0 && (
-        <MoviePagination
-          page={data.page}
-          totalPages={data.totalPages}
-          disabled={pending}
-        />
-      )}
+          {supabaseReady && data.total > 0 && (
+            <MoviePagination
+              page={data.page}
+              totalPages={data.totalPages}
+              disabled={pending}
+            />
+          )}
+        </>
+      </CinemaLoadingLayer>
     </div>
   );
 }
