@@ -2,9 +2,10 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { approveMovie, rejectMovie } from "@/app/actions/admin-movies";
 import type { MovieRow } from "@/types/movie";
+import { Button } from "@/components/ui/button";
+import { NavLinkButton } from "@/components/nav-link-button";
 
 export function ModerationRow({ movie }: { movie: MovieRow }) {
   const router = useRouter();
@@ -20,16 +21,18 @@ export function ModerationRow({ movie }: { movie: MovieRow }) {
           {movie.release_year != null ? `${movie.release_year}` : "Year TBD"}
           {movie.director?.trim() ? ` · ${movie.director}` : ""}
         </p>
-        <Link
+        <NavLinkButton
           href={`/movies/${movie.id}`}
-          className="inline-block text-xs font-medium text-amber-200/90 underline-offset-4 hover:underline"
+          variant="link"
+          className="inline-flex px-0 py-0 text-xs"
         >
           Open detail
-        </Link>
+        </NavLinkButton>
       </div>
       <div className="flex shrink-0 flex-wrap gap-2">
-        <button
+        <Button
           type="button"
+          variant="success"
           disabled={pending}
           onClick={() =>
             start(async () => {
@@ -37,12 +40,12 @@ export function ModerationRow({ movie }: { movie: MovieRow }) {
               router.refresh();
             })
           }
-          className="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-emerald-500 disabled:opacity-50"
         >
           Approve
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="destructive"
           disabled={pending}
           onClick={() =>
             start(async () => {
@@ -50,10 +53,9 @@ export function ModerationRow({ movie }: { movie: MovieRow }) {
               router.refresh();
             })
           }
-          className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-2 text-xs font-bold text-red-200 transition hover:bg-red-500/20 disabled:opacity-50"
         >
           Reject
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import { FieldLabel } from "@/components/ui/label";
 
 export function LoginForm() {
   const searchParams = useSearchParams();
@@ -46,12 +48,7 @@ export function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="space-y-2">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-zinc-300"
-        >
-          Email
-        </label>
+        <FieldLabel htmlFor="email">Email</FieldLabel>
         <input
           id="email"
           name="email"
@@ -77,17 +74,18 @@ export function LoginForm() {
         </p>
       )}
 
-      <button
+      <Button
         type="submit"
+        variant="primaryLg"
+        className="w-full"
         disabled={status === "sending" || status === "sent"}
-        className="w-full rounded-xl bg-amber-500 px-4 py-3 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "sending"
           ? "Sending link…"
           : status === "sent"
             ? "Link sent"
             : "Email me a magic link"}
-      </button>
+      </Button>
     </form>
   );
 }

@@ -1,10 +1,23 @@
+import {
+  GENRE_OPTIONS,
+  MOVIE_CATEGORIES,
+  type MovieCategory,
+} from "@/types/movie";
+
 export type MovieListInitialQuery = {
   search: string;
   genre: string;
+  category: MovieCategory | "";
   sort: "newest" | "title_asc" | "rating_desc" | "year_desc";
   page: number;
   pageSize: number;
 };
+
+const CATEGORY_SET = new Set<string>(
+  MOVIE_CATEGORIES.map((c) => c.value),
+);
+
+const GENRE_SET = new Set<string>([...GENRE_OPTIONS]);
 
 function parseSort(
   v: string | null,
@@ -20,22 +33,35 @@ function parseSort(
   return "newest";
 }
 
-export function buildInitialQueryFromSearchParams(
-  sp: URLSearchParams | Record<string, string | string[] | undefined>,
-): MovieListInitialQuery {
-  const get = (key: string) => {
-    const raw = sp instanceof URLSearchParams ? sp.get(key) : sp[key];
-    if (Array.isArray(raw)) return raw[0];
-    return raw ?? null;
-  };
+function firstToken(sp: URLSearchParams, key: string): string | null {
+  for (const raw of sp.getAll(key)) {
+    for (const part of raw.split(",")) {
+      const t = part.trim().toLowerCase();
+      if (t) return t;
+    }
+  }
+  return null;
+}
 
-  const pageRaw = get("page");
-  const pageSizeRaw = get("pageSize");
+export function buildInitialQueryFromSearchParams(
+  sp: URLSearchParams,
+): MovieListInitialQuery {
+  const genreRaw = firstToken(sp, "genre");
+  const genre = genreRaw && GENRE_SET.has(genreRaw) ? genreRaw : "";
+
+  const catRaw = firstToken(sp, "cat");
+  let category: MovieCategory | "" =
+    catRaw && CATEGORY_SET.has(catRaw) ? (catRaw as MovieCategory) : "";
+  if (genre && category) category = "";
+
+  const pageRaw = sp.get("page");
+  const pageSizeRaw = sp.get("pageSize");
 
   return {
-    search: get("q") ?? "",
-    genre: get("genre") ?? "",
-    sort: parseSort(get("sort")),
+    search: sp.get("q") ?? "",
+    genre,
+    category,
+    sort: parseSort(sp.get("sort")),
     page: Math.max(1, Number(pageRaw) || 1),
     pageSize: Math.min(48, Math.max(1, Number(pageSizeRaw) || 12)),
   };

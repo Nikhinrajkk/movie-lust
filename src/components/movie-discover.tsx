@@ -38,6 +38,7 @@ export function MovieDiscover({
   const hydrateFromServer = useMovieFilters((s) => s.hydrateFromServer);
   const search = useMovieFilters((s) => s.search);
   const genre = useMovieFilters((s) => s.genre);
+  const category = useMovieFilters((s) => s.category);
   const sort = useMovieFilters((s) => s.sort);
   const page = useMovieFilters((s) => s.page);
   const pageSize = useMovieFilters((s) => s.pageSize);
@@ -55,11 +56,12 @@ export function MovieDiscover({
     () => ({
       search,
       genre,
+      category,
       sort,
       page,
       pageSize,
     }),
-    [search, genre, sort, page, pageSize],
+    [search, genre, category, sort, page, pageSize],
   );
 
   const initialQueryRef = useRef(initialQuery);
@@ -83,6 +85,7 @@ export function MovieDiscover({
     const params = new URLSearchParams();
     if (search.trim()) params.set("q", search.trim());
     if (genre.trim()) params.set("genre", genre.trim());
+    if (category.trim()) params.set("cat", category.trim());
     if (sort !== "newest") params.set("sort", sort);
     if (page > 1) params.set("page", String(page));
     if (pageSize !== 12) params.set("pageSize", String(pageSize));
@@ -92,69 +95,75 @@ export function MovieDiscover({
     if (next === cur) return;
 
     router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
-   }, [genre, page, pageSize, pathname, router, search, sort, urlSearchParams]);
+  }, [
+    category,
+    genre,
+    page,
+    pageSize,
+    pathname,
+    router,
+    search,
+    sort,
+    urlSearchParams,
+  ]);
 
   return (
     <div className="space-y-8">
       {!supabaseReady && <SetupCallout />}
 
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-        <aside className="lg:w-72 lg:shrink-0">
-          <MovieFilters disabled={!supabaseReady || pending} />
-        </aside>
-        <div className="min-w-0 flex-1 space-y-6">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight text-zinc-50 sm:text-3xl">
-                What are you in the mood for?
-              </h1>
-              <p className="mt-1 text-sm text-zinc-400">
-                Search your library, filter by genre, sort, and paginate like a
-                marquee listing.
-              </p>
-            </div>
-            {supabaseReady && (
-              <p className="text-xs text-zinc-500">
-                {data.total === 0
-                  ? "No titles match."
-                  : `Showing ${data.movies.length} of ${data.total} films`}
-              </p>
-            )}
+      <div className="space-y-5">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-zinc-50 sm:text-3xl">
+              What are you in the mood for?
+            </h1>
+            <p className="mt-1 text-sm text-zinc-400">
+              Search, narrow by genre or shelf, then sort the grid.
+            </p>
           </div>
-
-          {error && (
-            <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
-              {error}
-            </div>
-          )}
-
-          {pending && supabaseReady && (
-            <p className="text-xs text-zinc-500">Updating results…</p>
-          )}
-
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-            {data.movies.map((m) => (
-              <MovieCard
-                key={m.id}
-                movie={m}
-                watchlist={
-                  watchlistEnabled
-                    ? { enabled: true, inList: watchlistSet.has(m.id) }
-                    : undefined
-                }
-              />
-            ))}
-          </div>
-
-          {supabaseReady && data.total > 0 && (
-            <MoviePagination
-              page={data.page}
-              totalPages={data.totalPages}
-              disabled={pending}
-            />
+          {supabaseReady && (
+            <p className="shrink-0 text-xs text-zinc-500">
+              {data.total === 0
+                ? "No titles match."
+                : `Showing ${data.movies.length} of ${data.total} films`}
+            </p>
           )}
         </div>
+
+        <MovieFilters disabled={!supabaseReady || pending} />
       </div>
+
+      {error && (
+        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+          {error}
+        </div>
+      )}
+
+      {pending && supabaseReady && (
+        <p className="text-xs text-zinc-500">Updating results…</p>
+      )}
+
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {data.movies.map((m) => (
+          <MovieCard
+            key={m.id}
+            movie={m}
+            watchlist={
+              watchlistEnabled
+                ? { enabled: true, inList: watchlistSet.has(m.id) }
+                : undefined
+            }
+          />
+        ))}
+      </div>
+
+      {supabaseReady && data.total > 0 && (
+        <MoviePagination
+          page={data.page}
+          totalPages={data.totalPages}
+          disabled={pending}
+        />
+      )}
     </div>
   );
 }

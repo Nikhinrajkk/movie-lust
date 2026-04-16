@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { addToWatchlist, removeFromWatchlist } from "@/app/actions/watchlist";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   movieId: string;
@@ -42,15 +43,16 @@ export function WatchlistToggle({
   const short = initialInList ? "\u2713" : "+";
 
   return (
-    <button
+    <Button
       type="button"
       title={label}
       aria-label={label}
       disabled={disabled || pending}
+      variant={initialInList ? "watchlistOn" : "watchlist"}
       onClick={onClick}
-      className={`pointer-events-auto z-10 inline-flex h-9 min-w-9 items-center justify-center rounded-lg border text-xs font-bold shadow-lg transition disabled:opacity-50 ${initialInList ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-200 hover:bg-emerald-500/30" : "border-amber-500/40 bg-zinc-950/85 text-amber-300 hover:bg-amber-500/15"} ${className}`}
+      className={`pointer-events-auto min-w-9 px-3 ${className}`.trim()}
     >
       {pending ? "…" : short}
-    </button>
+    </Button>
   );
 }

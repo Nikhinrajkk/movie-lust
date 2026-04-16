@@ -24,7 +24,13 @@ export default async function Home({
   for (const [key, value] of Object.entries(sp)) {
     if (value == null) continue;
     if (Array.isArray(value)) {
-      if (value[0] != null) params.set(key, value[0]);
+      if (key === "genre" || key === "cat") {
+        for (const v of value) {
+          if (v != null && v !== "") params.append(key, v);
+        }
+      } else if (value[0] != null) {
+        params.set(key, value[0]);
+      }
     } else {
       params.set(key, value);
     }
@@ -41,6 +47,7 @@ export default async function Home({
     ? await listMovies({
         search: initialQuery.search,
         genre: initialQuery.genre,
+        category: initialQuery.category || undefined,
         sort: initialQuery.sort,
         page: initialQuery.page,
         pageSize: initialQuery.pageSize,
