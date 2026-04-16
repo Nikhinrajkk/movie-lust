@@ -39,13 +39,13 @@ export function HeaderUserMenu({
         <Button
           type="button"
           variant="ghost"
-          className="h-auto rounded-full border-0 bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-amber-500/50"
+          className="h-auto rounded-full border-0 bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-cyan-400/50"
           aria-label="Open account menu"
         >
-          <Avatar.Root className="flex h-9 w-9 select-none items-center justify-center overflow-hidden rounded-full border border-zinc-600 bg-zinc-800 shadow-md shadow-black/30 transition hover:border-amber-500/45 hover:shadow-amber-500/10">
+          <Avatar.Root className="flex h-9 w-9 select-none items-center justify-center overflow-hidden rounded-full border border-zinc-600 bg-zinc-800 shadow-md shadow-black/30 transition hover:border-cyan-500/45 hover:shadow-cyan-500/10">
             <Avatar.Fallback
               delayMs={40}
-              className="flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-400 to-amber-700 text-[11px] font-bold tracking-tight text-zinc-950"
+              className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cyan-400 to-sky-700 text-[11px] font-bold tracking-tight text-zinc-950"
             >
               {initials}
             </Avatar.Fallback>

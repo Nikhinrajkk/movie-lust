@@ -63,7 +63,7 @@ export default async function MovieDetailPage({
               <div
                 className={`rounded-2xl border px-4 py-3 text-sm ${
                   status === "pending"
-                    ? "border-amber-500/35 bg-amber-500/10 text-amber-100"
+                    ? "border-cyan-500/35 bg-cyan-500/10 text-cyan-100"
                     : "border-red-500/35 bg-red-500/10 text-red-100"
                 }`}
               >
@@ -106,7 +106,7 @@ export default async function MovieDetailPage({
                 {movie.rating != null && (
                   <p className="text-sm text-zinc-400">
                     Your rating:{" "}
-                    <span className="font-semibold text-amber-400">
+                    <span className="font-semibold text-cyan-400">
                       {movie.rating.toFixed(1)}
                     </span>{" "}
                     / 10
@@ -156,7 +156,7 @@ export default async function MovieDetailPage({
             </section>
 
             <section className="space-y-2 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-amber-400/90">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-cyan-400/90">
                 Your review
               </h2>
               <p className="text-base leading-relaxed text-zinc-200">
@@ -169,7 +169,7 @@ export default async function MovieDetailPage({
             <NavLinkButton
               href="/"
               variant="link"
-              className="inline-flex px-0 py-0 text-zinc-400 hover:text-amber-200"
+              className="inline-flex px-0 py-0 text-zinc-400 hover:text-cyan-200"
             >
               ← Back to all movies
             </NavLinkButton>

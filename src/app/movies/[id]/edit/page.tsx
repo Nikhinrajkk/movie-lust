@@ -30,7 +30,7 @@ export default async function EditMoviePage({
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400/90">
+          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
             Edit listing
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-50">
@@ -40,7 +40,7 @@ export default async function EditMoviePage({
         <NavLinkButton
           href={movie ? `/movies/${movie.id}` : "/"}
           variant="link"
-          className="px-0 py-0 text-sm text-zinc-400 hover:text-amber-200"
+          className="px-0 py-0 text-sm text-zinc-400 hover:text-cyan-200"
         >
           ← Cancel
         </NavLinkButton>

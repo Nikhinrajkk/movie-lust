@@ -20,7 +20,7 @@ export function FormCheckbox({
   const nativeRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="flex items-stretch rounded-lg border border-zinc-800 bg-zinc-950/60 outline-none hover:border-amber-500/30 has-[[data-state=checked]]:border-amber-500/40 has-[[data-state=checked]]:bg-amber-500/5">
+    <div className="flex items-stretch rounded-lg border border-zinc-800 bg-zinc-950/60 outline-none hover:border-cyan-500/30 has-[[data-state=checked]]:border-cyan-500/40 has-[[data-state=checked]]:bg-cyan-500/5">
       <label
         htmlFor={id}
         className="flex flex-1 cursor-pointer items-center gap-2 px-3 py-2 text-sm text-zinc-300"
@@ -28,12 +28,12 @@ export function FormCheckbox({
         <Checkbox.Root
           id={id}
           defaultChecked={defaultChecked}
-          className="flex size-4 shrink-0 items-center justify-center rounded border border-zinc-600 bg-zinc-950 text-amber-500 outline-none ring-amber-500/0 focus-visible:ring-2 focus-visible:ring-amber-500/40 data-[state=checked]:border-amber-500 data-[state=checked]:bg-amber-500/20"
+          className="flex size-4 shrink-0 items-center justify-center rounded border border-zinc-600 bg-zinc-950 text-cyan-500 outline-none ring-cyan-500/0 focus-visible:ring-2 focus-visible:ring-cyan-400/40 data-[state=checked]:border-cyan-500 data-[state=checked]:bg-cyan-500/20"
           onCheckedChange={(v) => {
             if (nativeRef.current) nativeRef.current.checked = v === true;
           }}
         >
-          <Checkbox.Indicator className="text-amber-400">
+          <Checkbox.Indicator className="text-cyan-400">
             <svg
               className="size-3.5"
               fill="none"

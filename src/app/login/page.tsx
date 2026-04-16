@@ -16,7 +16,7 @@ export default function LoginPage() {
   return (
     <div className="mx-auto max-w-md space-y-8 px-4 py-16 sm:px-6">
       <div className="space-y-2 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-amber-400/90">
+        <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
           Account
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-zinc-50">

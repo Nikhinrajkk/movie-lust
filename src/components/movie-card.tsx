@@ -18,7 +18,7 @@ export function MovieCard({
   return (
     <Link
       href={`/movies/${movie.id}`}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 shadow-xl shadow-black/40 transition hover:-translate-y-1 hover:border-amber-500/40 hover:shadow-amber-500/10"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 shadow-xl shadow-black/40 transition hover:-translate-y-1 hover:border-cyan-500/40 hover:shadow-cyan-500/10"
     >
       <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-950">
         <Image
@@ -40,13 +40,13 @@ export function MovieCard({
           />
         )}
         {movie.rating != null && (
-          <div className="absolute right-2 top-2 rounded-lg bg-zinc-950/90 px-2 py-1 text-xs font-bold text-amber-400 ring-1 ring-amber-500/40">
+          <div className="absolute right-2 top-2 rounded-lg bg-zinc-950/90 px-2 py-1 text-xs font-bold text-cyan-400 ring-1 ring-cyan-500/40">
             {movie.rating.toFixed(1)}
           </div>
         )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="line-clamp-2 text-base font-semibold leading-snug text-zinc-50 group-hover:text-amber-100">
+        <h3 className="line-clamp-2 text-base font-semibold leading-snug text-zinc-50 group-hover:text-cyan-100">
           {movie.title}
         </h3>
         {(movie.release_year != null || movie.director?.trim()) && (

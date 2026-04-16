@@ -20,7 +20,7 @@ export default async function WatchlistPage() {
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400/90">
+          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
             Your picks
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-50">
@@ -33,7 +33,7 @@ export default async function WatchlistPage() {
         <NavLinkButton
           href="/"
           variant="link"
-          className="px-0 py-0 text-sm text-zinc-400 hover:text-amber-200"
+          className="px-0 py-0 text-sm text-zinc-400 hover:text-cyan-200"
         >
           ← Back to browse
         </NavLinkButton>
@@ -44,7 +44,7 @@ export default async function WatchlistPage() {
       {ready && movies.length === 0 && (
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 px-6 py-12 text-center text-sm text-zinc-400">
           Nothing here yet. Browse films and tap{" "}
-          <span className="font-semibold text-amber-200">+</span> on a poster to
+          <span className="font-semibold text-cyan-200">+</span> on a poster to
           save it.
         </div>
       )}
