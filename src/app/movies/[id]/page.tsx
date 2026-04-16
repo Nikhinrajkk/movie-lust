@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMovieById } from "@/app/actions/movies";
 import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
 import { DeleteMovieForm } from "@/components/delete-movie-form";
+import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
@@ -123,12 +123,9 @@ export default async function MovieDetailPage({
                   />
                 )}
                 {canEdit && (
-                  <Link
-                    href={`/movies/${movie.id}/edit`}
-                    className="rounded-xl bg-amber-500 px-4 py-2 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
-                  >
+                  <NavLinkButton href={`/movies/${movie.id}/edit`}>
                     Edit
-                  </Link>
+                  </NavLinkButton>
                 )}
                 {canDelete && <DeleteMovieForm id={movie.id} />}
               </div>
@@ -169,12 +166,13 @@ export default async function MovieDetailPage({
               </p>
             </section>
 
-            <Link
+            <NavLinkButton
               href="/"
-              className="inline-flex text-sm font-medium text-zinc-400 underline-offset-4 hover:text-amber-200 hover:underline"
+              variant="link"
+              className="inline-flex px-0 py-0 text-zinc-400 hover:text-amber-200"
             >
               ← Back to all movies
-            </Link>
+            </NavLinkButton>
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Suspense } from "react";
 import { LoginForm } from "@/components/login-form";
+import { NavLinkButton } from "@/components/nav-link-button";
 import { isSupabaseConfigured } from "@/lib/config";
 import { SetupCallout } from "@/components/setup-callout";
 
@@ -37,12 +37,13 @@ export default function LoginPage() {
       )}
 
       <p className="text-center text-sm text-zinc-500">
-        <Link
+        <NavLinkButton
           href="/"
-          className="font-medium text-amber-200/90 underline-offset-4 hover:underline"
+          variant="link"
+          className="inline-flex px-0 py-0"
         >
           ← Back to browse
-        </Link>
+        </NavLinkButton>
       </p>
     </div>
   );

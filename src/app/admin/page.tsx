@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { listPendingMovies } from "@/app/actions/admin-movies";
 import { ModerationRow } from "@/components/moderation-row";
+import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
@@ -35,12 +35,13 @@ export default async function AdminPage() {
             reject duplicates and spam.
           </p>
         </div>
-        <Link
+        <NavLinkButton
           href="/"
-          className="text-sm font-medium text-zinc-400 underline-offset-4 hover:text-amber-200 hover:underline"
+          variant="link"
+          className="px-0 py-0 text-sm text-zinc-400 hover:text-amber-200"
         >
           ← Back to browse
-        </Link>
+        </NavLinkButton>
       </div>
 
       {!ready && <SetupCallout />}

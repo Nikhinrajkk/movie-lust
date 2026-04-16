@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { NavLinkButton } from "@/components/nav-link-button";
+import { UiSeparator } from "@/components/ui/separator";
 
 export function SetupCallout() {
   return (
@@ -6,7 +7,8 @@ export function SetupCallout() {
       <h2 className="text-lg font-semibold text-amber-50">
         Connect Supabase to see movies
       </h2>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-amber-100/85">
+      <UiSeparator className="my-4 bg-amber-500/20" />
+      <p className="max-w-2xl text-sm leading-relaxed text-amber-100/85">
         Copy{" "}
         <code className="rounded bg-zinc-900/80 px-1.5 py-0.5 text-amber-200/90">
           .env.local.example
@@ -21,14 +23,15 @@ export function SetupCallout() {
         </code>{" "}
         in the Supabase SQL editor.
       </p>
-      <Link
+      <NavLinkButton
         href="https://supabase.com/dashboard"
-        className="mt-4 inline-flex text-sm font-medium text-amber-300 underline-offset-4 hover:underline"
+        variant="link"
         target="_blank"
         rel="noreferrer"
+        className="mt-4 inline-flex px-0 py-0 text-amber-300 hover:text-amber-200"
       >
         Open Supabase dashboard →
-      </Link>
+      </NavLinkButton>
     </div>
   );
 }

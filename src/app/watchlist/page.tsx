@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { listWatchlistMovies } from "@/app/actions/watchlist";
 import { MovieCard } from "@/components/movie-card";
+import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
@@ -30,12 +30,13 @@ export default async function WatchlistPage() {
             Titles you&apos;ve saved from the catalogue. Add or remove anytime.
           </p>
         </div>
-        <Link
+        <NavLinkButton
           href="/"
-          className="text-sm font-medium text-zinc-400 underline-offset-4 hover:text-amber-200 hover:underline"
+          variant="link"
+          className="px-0 py-0 text-sm text-zinc-400 hover:text-amber-200"
         >
           ← Back to browse
-        </Link>
+        </NavLinkButton>
       </div>
 
       {!ready && <SetupCallout />}

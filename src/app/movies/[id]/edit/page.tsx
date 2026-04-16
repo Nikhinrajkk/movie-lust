@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getMovieById, updateMovieFromForm } from "@/app/actions/movies";
 import { MovieForm } from "@/components/movie-form";
+import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
@@ -37,12 +37,13 @@ export default async function EditMoviePage({
             {movie?.title ?? "Movie"}
           </h1>
         </div>
-        <Link
+        <NavLinkButton
           href={movie ? `/movies/${movie.id}` : "/"}
-          className="text-sm font-medium text-zinc-400 underline-offset-4 hover:text-amber-200 hover:underline"
+          variant="link"
+          className="px-0 py-0 text-sm text-zinc-400 hover:text-amber-200"
         >
           ← Cancel
-        </Link>
+        </NavLinkButton>
       </div>
 
       {!ready && <SetupCallout />}

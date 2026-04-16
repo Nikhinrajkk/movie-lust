@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { createMovieFromForm } from "@/app/actions/movies";
 import { MovieForm } from "@/components/movie-form";
+import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
@@ -20,12 +20,13 @@ export default async function NewMoviePage() {
             New movie
           </h1>
         </div>
-        <Link
+        <NavLinkButton
           href="/"
-          className="text-sm font-medium text-zinc-400 underline-offset-4 hover:text-amber-200 hover:underline"
+          variant="link"
+          className="px-0 py-0 text-sm text-zinc-400 hover:text-amber-200"
         >
           ← Back to browse
-        </Link>
+        </NavLinkButton>
       </div>
 
       {!ready && <SetupCallout />}
@@ -36,12 +37,9 @@ export default async function NewMoviePage() {
             Sign in to submit a new title. Submissions from members are queued
             for admin approval before they appear in browse.
           </p>
-          <Link
-            href="/login?next=/movies/new"
-            className="inline-flex rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
-          >
+          <NavLinkButton href="/login?next=/movies/new" className="px-5 py-2.5">
             Sign in to continue
-          </Link>
+          </NavLinkButton>
         </div>
       )}
 
