@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { parseMoviePayloadFromJson } from "@/lib/movie-json-import";
 import {
   createSupabaseServer,
   createSupabaseServerOptional,
@@ -249,6 +250,34 @@ export async function createMovieFromForm(
   } catch (e: unknown) {
     return {
       error: e instanceof Error ? e.message : "Invalid form",
+    };
+  }
+
+  let id: string;
+  try {
+    id = await createMovie(payload);
+  } catch (e: unknown) {
+    return {
+      error: e instanceof Error ? e.message : "Could not create movie",
+    };
+  }
+
+  redirect(`/movies/${id}`);
+}
+
+export async function createMovieFromJson(
+  _prev: MovieFormState,
+  formData: FormData,
+): Promise<MovieFormState> {
+  const raw = String(formData.get("json") ?? "").trim();
+  if (!raw) return { error: "Paste JSON in the box first." };
+
+  let payload: MoviePayload;
+  try {
+    payload = parseMoviePayloadFromJson(raw);
+  } catch (e: unknown) {
+    return {
+      error: e instanceof Error ? e.message : "Invalid movie JSON",
     };
   }
 

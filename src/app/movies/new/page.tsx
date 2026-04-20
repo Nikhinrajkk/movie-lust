@@ -1,5 +1,6 @@
 import { createMovieFromForm } from "@/app/actions/movies";
 import { MovieForm } from "@/components/movie-form";
+import { MovieJsonImport } from "@/components/movie-json-import";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
@@ -51,7 +52,12 @@ export default async function NewMoviePage() {
         </p>
       )}
 
-      {ready && user && <MovieForm action={createMovieFromForm} />}
+      {ready && user && (
+        <div className="space-y-8">
+          <MovieJsonImport />
+          <MovieForm action={createMovieFromForm} />
+        </div>
+      )}
     </div>
   );
 }
