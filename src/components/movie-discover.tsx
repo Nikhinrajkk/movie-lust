@@ -6,7 +6,6 @@ import {
   useMemo,
   useRef,
   useState,
-  useTransition,
 } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { listMovies } from "@/app/actions/movies";
@@ -45,7 +44,7 @@ export function MovieDiscover({
   const pageSize = useMovieFilters((s) => s.pageSize);
 
   const [data, setData] = useState<MovieListResult>(initial);
-  const [pending, start] = useTransition();
+  const [listLoading, setListLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const watchlistSet = useMemo(
@@ -70,17 +69,31 @@ export function MovieDiscover({
     hydrateFromServer(initialQueryRef.current);
   }, [hydrateFromServer]);
 
+  /* Loading must update synchronously; startTransition deferred it so the overlay never painted. */
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (!supabaseReady) return;
-    start(() => {
-      setError(null);
-      listMovies(queryForList)
-        .then(setData)
-        .catch((e: unknown) => {
+    let cancelled = false;
+    setListLoading(true);
+    setError(null);
+    void listMovies(queryForList)
+      .then((result) => {
+        if (!cancelled) setData(result);
+      })
+      .catch((e: unknown) => {
+        if (!cancelled) {
           setError(e instanceof Error ? e.message : "Something went wrong");
-        });
-    });
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setListLoading(false);
+      });
+    return () => {
+      cancelled = true;
+      setListLoading(false);
+    };
   }, [queryForList, supabaseReady]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -131,7 +144,7 @@ export function MovieDiscover({
           )}
         </div>
 
-        <MovieFilters disabled={!supabaseReady} busy={pending} />
+        <MovieFilters disabled={!supabaseReady} busy={listLoading} />
       </div>
 
       {error && (
@@ -140,10 +153,10 @@ export function MovieDiscover({
         </div>
       )}
 
-      <CinemaLoadingLayer active={pending && supabaseReady}>
+      <CinemaLoadingLayer active={listLoading && supabaseReady}>
         <>
           <div
-            className={`grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 transition-opacity duration-200 ${pending && supabaseReady ? "opacity-50" : ""}`}
+            className={`grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 transition-opacity duration-200 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
           >
             {data.movies.map((m) => (
               <MovieCard
@@ -162,7 +175,7 @@ export function MovieDiscover({
             <MoviePagination
               page={data.page}
               totalPages={data.totalPages}
-              disabled={pending}
+              disabled={listLoading}
             />
           )}
         </>
