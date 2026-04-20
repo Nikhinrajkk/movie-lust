@@ -158,17 +158,22 @@ export function MovieDiscover({
           <div
             className={`grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 transition-opacity duration-200 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
           >
-            {data.movies.map((m) => (
-              <MovieCard
-                key={m.id}
-                movie={m}
-                watchlist={
-                  watchlistEnabled
-                    ? { enabled: true, inList: watchlistSet.has(m.id) }
-                    : undefined
-                }
-              />
-            ))}
+            {data.movies.map((m) => {
+              const listable =
+                watchlistEnabled &&
+                (m.approval_status ?? "approved") === "approved";
+              return (
+                <MovieCard
+                  key={m.id}
+                  movie={m}
+                  watchlist={
+                    listable
+                      ? { enabled: true, inList: watchlistSet.has(m.id) }
+                      : undefined
+                  }
+                />
+              );
+            })}
           </div>
 
           {supabaseReady && data.total > 0 && (

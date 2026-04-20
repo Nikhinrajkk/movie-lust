@@ -39,6 +39,12 @@ export function MovieCard({
             className="absolute left-2 top-2"
           />
         )}
+        {(movie.approval_status === "pending" ||
+          movie.approval_status === "rejected") && (
+          <div className="absolute left-2 bottom-14 rounded-md bg-amber-500/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-zinc-950">
+            {movie.approval_status === "pending" ? "Pending" : "Rejected"}
+          </div>
+        )}
         {movie.rating != null && (
           <div className="absolute right-2 top-2 rounded-lg bg-zinc-950/90 px-2 py-1 text-xs font-bold text-cyan-400 ring-1 ring-cyan-500/40">
             {movie.rating.toFixed(1)}

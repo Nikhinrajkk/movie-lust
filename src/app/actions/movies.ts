@@ -51,10 +51,19 @@ export async function listMovies(
     return { movies: [], total: 0, page, pageSize, totalPages: 1 };
   }
 
-  let query = supabase
-    .from("movies")
-    .select("*", { count: "exact" })
-    .eq("approval_status", "approved");
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let query = supabase.from("movies").select("*", { count: "exact" });
+
+  if (user) {
+    query = query.or(
+      `approval_status.eq.approved,and(created_by.eq.${user.id},approval_status.in.(pending,rejected))`,
+    );
+  } else {
+    query = query.eq("approval_status", "approved");
+  }
 
   const q = input.search?.trim();
   if (q) {
