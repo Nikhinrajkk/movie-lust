@@ -24,12 +24,14 @@ export function MovieDiscover({
   supabaseReady,
   watchlistEnabled,
   watchlistMovieIds,
+  watchedMovieIds,
 }: {
   initial: MovieListResult;
   initialQuery: MovieListInitialQuery;
   supabaseReady: boolean;
   watchlistEnabled: boolean;
   watchlistMovieIds: string[];
+  watchedMovieIds: string[];
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -50,6 +52,11 @@ export function MovieDiscover({
   const watchlistSet = useMemo(
     () => new Set(watchlistMovieIds),
     [watchlistMovieIds],
+  );
+
+  const watchedSet = useMemo(
+    () => new Set(watchedMovieIds),
+    [watchedMovieIds],
   );
 
   const queryForList = useMemo(
@@ -156,22 +163,26 @@ export function MovieDiscover({
       <CinemaLoadingLayer active={listLoading && supabaseReady}>
         <>
           <div
-            className={`grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 transition-opacity duration-200 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
+            className={`grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 transition-opacity duration-200 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
           >
             {data.movies.map((m) => {
-              const listable =
-                watchlistEnabled &&
+              const approved =
                 (m.approval_status ?? "approved") === "approved";
+              const actions =
+                watchlistEnabled && approved
+                  ? {
+                      watchlist: {
+                        enabled: true,
+                        inList: watchlistSet.has(m.id),
+                      },
+                      watched: {
+                        enabled: true,
+                        isWatched: watchedSet.has(m.id),
+                      },
+                    }
+                  : undefined;
               return (
-                <MovieCard
-                  key={m.id}
-                  movie={m}
-                  watchlist={
-                    listable
-                      ? { enabled: true, inList: watchlistSet.has(m.id) }
-                      : undefined
-                  }
-                />
+                <MovieCard key={m.id} movie={m} actions={actions} />
               );
             })}
           </div>

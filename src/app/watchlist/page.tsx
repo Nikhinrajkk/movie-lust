@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { listWatchlistMovies } from "@/app/actions/watchlist";
+import { getWatchedMovieIdsForUser } from "@/app/actions/watched";
 import { MovieCard } from "@/components/movie-card";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
@@ -15,6 +16,9 @@ export default async function WatchlistPage() {
   }
 
   const movies = ready && user ? await listWatchlistMovies() : [];
+  const watchedMovieIds =
+    ready && user ? await getWatchedMovieIdsForUser() : [];
+  const watchedSet = new Set(watchedMovieIds);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -43,19 +47,25 @@ export default async function WatchlistPage() {
 
       {ready && movies.length === 0 && (
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 px-6 py-12 text-center text-sm text-zinc-400">
-          Nothing here yet. Browse films and tap{" "}
-          <span className="font-semibold text-cyan-200">+</span> on a poster to
-          save it.
+          Nothing here yet. Browse films and tap the{" "}
+          <span className="font-semibold text-rose-300">heart</span> on a poster
+          to favourite it.
         </div>
       )}
 
       {ready && movies.length > 0 && (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {movies.map((m) => (
             <MovieCard
               key={m.id}
               movie={m}
-              watchlist={{ enabled: true, inList: true }}
+              actions={{
+                watchlist: { enabled: true, inList: true },
+                watched: {
+                  enabled: true,
+                  isWatched: watchedSet.has(m.id),
+                },
+              }}
             />
           ))}
         </div>

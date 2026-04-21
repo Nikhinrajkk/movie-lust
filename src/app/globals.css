@@ -27,6 +27,55 @@
   animation: cinema-reel-spin 2.2s linear infinite;
 }
 
+/* Watchlist / favourite heart (Instagram-style tap feedback) */
+@keyframes watchlist-heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  18% {
+    transform: scale(1.18);
+  }
+  38% {
+    transform: scale(0.92);
+  }
+  58% {
+    transform: scale(1.08);
+  }
+  78% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes watchlist-heart-ring-out {
+  0% {
+    transform: scale(0.35);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(2.35);
+    opacity: 0;
+  }
+}
+
+.watchlist-heart-pop {
+  animation: watchlist-heart-pop 0.52s cubic-bezier(0.34, 1.45, 0.64, 1) both;
+}
+
+.watchlist-heart-ring {
+  animation: watchlist-heart-ring-out 0.55s ease-out forwards;
+}
+
+.round-media-pop {
+  animation: watchlist-heart-pop 0.52s cubic-bezier(0.34, 1.45, 0.64, 1) both;
+}
+
+.watchlist-watched-ring {
+  animation: watchlist-heart-ring-out 0.55s ease-out forwards;
+}
+
 body {
   background: radial-gradient(
       ellipse 120% 80% at 50% -20%,

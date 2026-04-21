@@ -2,10 +2,12 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getMovieById } from "@/app/actions/movies";
 import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
+import { getWatchedMovieIdsForUser } from "@/app/actions/watched";
 import { DeleteMovieForm } from "@/components/delete-movie-form";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { WatchlistToggle } from "@/components/watchlist-toggle";
+import { WatchedToggle } from "@/components/watched-toggle";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 
@@ -36,7 +38,10 @@ export default async function MovieDetailPage({
 
   const watchlistIds =
     ready && user ? await getWatchlistMovieIdsForUser() : [];
+  const watchedIds =
+    ready && user ? await getWatchedMovieIdsForUser() : [];
   const inWatchlist = movie ? watchlistIds.includes(movie.id) : false;
+  const isWatched = movie ? watchedIds.includes(movie.id) : false;
   const watchlistToggleEnabled =
     Boolean(user) && status === "approved";
 
@@ -114,13 +119,20 @@ export default async function MovieDetailPage({
                 )}
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-row-reverse flex-wrap items-center gap-2">
                 {watchlistToggleEnabled && (
-                  <WatchlistToggle
-                    movieId={movie.id}
-                    initialInList={inWatchlist}
-                    className="px-3"
-                  />
+                  <>
+                    <WatchlistToggle
+                      movieId={movie.id}
+                      initialInList={inWatchlist}
+                      size="md"
+                    />
+                    <WatchedToggle
+                      movieId={movie.id}
+                      initialWatched={isWatched}
+                      size="md"
+                    />
+                  </>
                 )}
                 {canEdit && (
                   <NavLinkButton href={`/movies/${movie.id}/edit`}>
