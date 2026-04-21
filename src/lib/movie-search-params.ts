@@ -63,6 +63,6 @@ export function buildInitialQueryFromSearchParams(
     category,
     sort: parseSort(sp.get("sort")),
     page: Math.max(1, Number(pageRaw) || 1),
-    pageSize: Math.min(48, Math.max(1, Number(pageSizeRaw) || 12)),
+    pageSize: Math.min(48, Math.max(1, Number(pageSizeRaw) || 15)),
   };
 }

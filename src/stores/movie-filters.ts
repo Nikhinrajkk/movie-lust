@@ -36,7 +36,7 @@ const defaultState = {
   category: "",
   sort: "newest" as SortOption,
   page: 1,
-  pageSize: 12,
+  pageSize: 15,
 };
 
 export const useMovieFilters = create<MovieFiltersState>((set) => ({

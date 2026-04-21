@@ -109,7 +109,7 @@ export function MovieDiscover({
     if (category.trim()) params.set("cat", category.trim());
     if (sort !== "newest") params.set("sort", sort);
     if (page > 1) params.set("page", String(page));
-    if (pageSize !== 12) params.set("pageSize", String(pageSize));
+    if (pageSize !== 15) params.set("pageSize", String(pageSize));
 
     const next = params.toString();
     const cur = urlSearchParams?.toString() ?? "";

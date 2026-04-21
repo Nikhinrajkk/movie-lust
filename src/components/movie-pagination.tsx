@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useMovieFilters } from "@/stores/movie-filters";
 import { Button } from "@/components/ui/button";
 import { FieldLabel } from "@/components/ui/label";
@@ -17,6 +18,11 @@ export function MoviePagination({
   const setPage = useMovieFilters((s) => s.setPage);
   const pageSize = useMovieFilters((s) => s.pageSize);
   const setPageSize = useMovieFilters((s) => s.setPageSize);
+
+  const pageSizeOptions = useMemo(() => {
+    const base = [8, 15, 24, 48];
+    return [...new Set([...base, pageSize])].sort((a, b) => a - b);
+  }, [pageSize]);
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-zinc-800 pt-6">
@@ -37,7 +43,7 @@ export function MoviePagination({
             triggerClassName="h-9 w-[4.5rem] border-zinc-700 bg-zinc-900 px-2 py-1 text-xs"
             contentClassName="min-w-[4.5rem]"
           >
-            {[8, 12, 16, 24].map((n) => (
+            {pageSizeOptions.map((n) => (
               <UiSelectItem key={n} value={String(n)}>
                 {n}
               </UiSelectItem>
