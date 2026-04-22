@@ -61,7 +61,7 @@ export function CinemaLoadingLayer({
       {active && (
         <>
           <div
-            className="pointer-events-auto absolute inset-0 z-10 bg-zinc-950/50 backdrop-blur-[1px]"
+            className="pointer-events-auto absolute inset-0 z-10 bg-white/55 backdrop-blur-[2px]"
             aria-hidden
           />
           <div className="pointer-events-none fixed left-1/2 top-[50vh] z-20 -translate-x-1/2 -translate-y-1/2">

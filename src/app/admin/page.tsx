@@ -47,7 +47,7 @@ export default async function AdminPage() {
       {!ready && <SetupCallout />}
 
       {ready && pending.length === 0 && (
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 px-6 py-12 text-center text-sm text-zinc-400">
+        <div className="rounded-2xl border border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-600 shadow-sm">
           No submissions waiting for review.
         </div>
       )}

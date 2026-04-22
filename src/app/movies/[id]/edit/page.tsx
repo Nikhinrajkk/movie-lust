@@ -40,7 +40,7 @@ export default async function EditMoviePage({
         <NavLinkButton
           href={movie ? `/movies/${movie.id}` : "/"}
           variant="link"
-          className="px-0 py-0 text-sm text-zinc-400 hover:text-cyan-200"
+          className="px-0 py-0 text-sm text-gray-600 hover:text-[var(--bms-red)]"
         >
           ← Cancel
         </NavLinkButton>

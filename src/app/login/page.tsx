@@ -29,7 +29,7 @@ export default function LoginPage() {
 
       {!ready && <SetupCallout />}
       {ready && (
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <Suspense fallback={<LoginFormFallback />}>
             <LoginForm />
           </Suspense>

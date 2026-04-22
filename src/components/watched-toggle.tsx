@@ -133,7 +133,7 @@ export function WatchedToggle({
       aria-pressed={watched}
       disabled={disabled || pending}
       onClick={onClick}
-      className={`pointer-events-auto relative z-10 inline-flex ${dims} shrink-0 items-center justify-center rounded-full border border-white/15 bg-zinc-950/55 shadow-lg shadow-black/40 outline-none backdrop-blur-md transition-[transform,box-shadow,color] duration-150 hover:border-cyan-400/40 hover:bg-zinc-950/70 hover:shadow-cyan-500/15 focus-visible:ring-2 focus-visible:ring-cyan-400/50 active:scale-90 disabled:pointer-events-none disabled:opacity-45 ${watched ? "text-cyan-400" : "text-white"} ${pop ? "round-media-pop" : ""} ${className}`.trim()}
+      className={`pointer-events-auto relative z-10 inline-flex ${dims} shrink-0 items-center justify-center rounded-full border border-white/20 bg-black/50 shadow-lg shadow-black/35 outline-none backdrop-blur-md transition-[transform,box-shadow,color] duration-150 hover:border-[var(--bms-red)]/45 hover:bg-black/60 hover:shadow-[var(--bms-red)]/10 focus-visible:ring-2 focus-visible:ring-[var(--bms-red)]/45 active:scale-90 disabled:pointer-events-none disabled:opacity-45 ${watched ? "text-[var(--bms-red)]" : "text-white"} ${pop ? "round-media-pop" : ""} ${className}`.trim()}
     >
       {ringToken > 0 && watched && (
         <span
@@ -141,7 +141,7 @@ export function WatchedToggle({
           className="pointer-events-none absolute inset-0 flex items-center justify-center"
           aria-hidden
         >
-          <span className="watchlist-watched-ring absolute h-full w-full rounded-full border-2 border-cyan-400/80" />
+          <span className="watchlist-watched-ring absolute h-full w-full rounded-full border-2 border-[var(--bms-red)]/85" />
         </span>
       )}
       <WatchedGlyph watched={watched} className={`relative z-[1] ${iconSize}`} />

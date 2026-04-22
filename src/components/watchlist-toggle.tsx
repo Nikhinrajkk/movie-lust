@@ -122,7 +122,7 @@ export function WatchlistToggle({
       aria-pressed={liked}
       disabled={disabled || pending}
       onClick={onClick}
-      className={`pointer-events-auto relative z-10 inline-flex ${dims} shrink-0 items-center justify-center rounded-full border border-white/15 bg-zinc-950/55 shadow-lg shadow-black/40 outline-none backdrop-blur-md transition-[transform,box-shadow] duration-150 hover:border-rose-400/35 hover:bg-zinc-950/70 hover:shadow-rose-500/10 focus-visible:ring-2 focus-visible:ring-rose-400/50 active:scale-90 disabled:pointer-events-none disabled:opacity-45 ${pop ? "round-media-pop" : ""} ${className}`.trim()}
+      className={`pointer-events-auto relative z-10 inline-flex ${dims} shrink-0 items-center justify-center rounded-full border border-white/20 bg-black/50 shadow-lg shadow-black/35 outline-none backdrop-blur-md transition-[transform,box-shadow] duration-150 hover:border-[var(--bms-red)]/40 hover:bg-black/60 hover:shadow-[var(--bms-red)]/10 focus-visible:ring-2 focus-visible:ring-[var(--bms-red)]/45 active:scale-90 disabled:pointer-events-none disabled:opacity-45 ${pop ? "round-media-pop" : ""} ${className}`.trim()}
     >
       {ringToken > 0 && liked && (
         <span
@@ -130,7 +130,7 @@ export function WatchlistToggle({
           className="pointer-events-none absolute inset-0 flex items-center justify-center"
           aria-hidden
         >
-          <span className="watchlist-heart-ring absolute h-full w-full rounded-full border-2 border-rose-400/80" />
+          <span className="watchlist-heart-ring absolute h-full w-full rounded-full border-2 border-[var(--bms-red)]/80" />
         </span>
       )}
       <HeartGlyph filled={liked} className={`relative z-[1] ${iconSize}`} />
