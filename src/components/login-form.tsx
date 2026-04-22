@@ -57,7 +57,7 @@ export function LoginForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 outline-none ring-cyan-500/0 transition focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/30"
+          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-[var(--bms-red)] focus:ring-2 focus:ring-[var(--bms-red)]/20"
           placeholder="you@example.com"
         />
       </div>
@@ -66,8 +66,8 @@ export function LoginForm() {
         <p
           className={
             status === "error"
-              ? "text-sm text-red-300"
-              : "text-sm text-emerald-300"
+              ? "text-sm text-red-700"
+              : "text-sm text-emerald-700"
           }
         >
           {message}

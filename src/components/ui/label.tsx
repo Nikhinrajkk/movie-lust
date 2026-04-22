@@ -9,7 +9,7 @@ export const FieldLabel = forwardRef<
 >(({ className = "", ...props }, ref) => (
   <Label.Root
     ref={ref}
-    className={`text-xs font-medium text-zinc-400 ${className}`.trim()}
+    className={`text-xs font-medium text-gray-600 ${className}`.trim()}
     {...props}
   />
 ));

@@ -129,33 +129,35 @@ export function MovieDiscover({
   ]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {!supabaseReady && <SetupCallout />}
 
-      <div className="space-y-5">
+      <div className="space-y-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-zinc-50 sm:text-3xl">
-              What are you in the mood for?
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-[1.65rem]">
+              Movies
             </h1>
-            <p className="mt-1 text-sm text-zinc-400">
-              Search, narrow by genre or shelf, then sort the grid.
+            <p className="mt-0.5 text-sm text-gray-500">
+              Explore titles — search, pick a genre or shelf, then sort.
             </p>
           </div>
           {supabaseReady && (
-            <p className="shrink-0 text-xs text-zinc-500">
+            <p className="shrink-0 text-xs font-medium text-gray-500">
               {data.total === 0
                 ? "No titles match."
-                : `Showing ${data.movies.length} of ${data.total} films`}
+                : `${data.movies.length} of ${data.total} films`}
             </p>
           )}
         </div>
 
-        <MovieFilters disabled={!supabaseReady} busy={listLoading} />
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+          <MovieFilters disabled={!supabaseReady} busy={listLoading} />
+        </div>
       </div>
 
       {error && (
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
           {error}
         </div>
       )}

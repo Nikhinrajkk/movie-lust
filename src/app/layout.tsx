@@ -32,12 +32,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-screen flex-col bg-zinc-950 font-sans text-zinc-100">
+      <body className="flex min-h-screen flex-col bg-[var(--page-bg)] font-sans text-zinc-900 antialiased">
         <Header />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-zinc-900 py-8 text-center text-xs text-zinc-600">
-          MovieLust — a Next.js + Supabase demo. Not affiliated with IMDb or
-          BookMyShow.
+        <footer className="border-t border-gray-200 bg-white py-8 text-center text-xs text-gray-500">
+          MovieLust — a Next.js + Supabase demo. Explore UI inspired by
+          listings sites; not affiliated with BookMyShow or IMDb.
         </footer>
       </body>
     </html>

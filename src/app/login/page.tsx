@@ -6,7 +6,7 @@ import { SetupCallout } from "@/components/setup-callout";
 
 function LoginFormFallback() {
   return (
-    <div className="h-40 animate-pulse rounded-xl bg-zinc-900/60" aria-hidden />
+    <div className="h-40 animate-pulse rounded-xl bg-gray-200" aria-hidden />
   );
 }
 
@@ -16,13 +16,13 @@ export default function LoginPage() {
   return (
     <div className="mx-auto max-w-md space-y-8 px-4 py-16 sm:px-6">
       <div className="space-y-2 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
           Account
         </p>
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-50">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
           Sign in
         </h1>
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-gray-600">
           We&apos;ll email you a one-time link — no password to remember.
         </p>
       </div>
@@ -36,7 +36,7 @@ export default function LoginPage() {
         </div>
       )}
 
-      <p className="text-center text-sm text-zinc-500">
+      <p className="text-center text-sm text-gray-600">
         <NavLinkButton
           href="/"
           variant="link"

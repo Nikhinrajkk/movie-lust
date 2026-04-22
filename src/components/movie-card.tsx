@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { MovieRow } from "@/types/movie";
+import { MOVIE_CATEGORIES } from "@/types/movie";
 import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { WatchedToggle } from "@/components/watched-toggle";
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
-  return "https://placehold.co/400x600/18181b/78716c?text=No+poster";
+  return "https://placehold.co/400x600/e5e5e5/737373?text=No+poster";
 }
 
 export type MovieCardActions = {
@@ -24,13 +25,16 @@ export function MovieCard({
   const showWatchlist = actions?.watchlist?.enabled;
   const showWatched = actions?.watched?.enabled;
   const hasPosterActions = Boolean(showWatchlist || showWatched);
+  const categoryLabel =
+    MOVIE_CATEGORIES.find((c) => c.value === movie.category)?.label ??
+    movie.category;
 
   return (
     <Link
       href={`/movies/${movie.id}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/60 shadow-lg shadow-black/35 transition hover:-translate-y-0.5 hover:border-cyan-500/40 hover:shadow-cyan-500/10"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
     >
-      <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-950">
+      <div className="relative aspect-[2/3] w-full overflow-hidden bg-gray-100">
         <Image
           src={posterSrc(movie.poster_url)}
           alt={movie.title}
@@ -41,7 +45,7 @@ export function MovieCard({
             posterSrc(movie.poster_url).includes("placehold.co") ? true : false
           }
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
         {hasPosterActions && (
           <div className="absolute right-1.5 top-1.5 z-10 flex flex-row-reverse items-center gap-1">
             {showWatchlist && actions?.watchlist && (
@@ -62,36 +66,40 @@ export function MovieCard({
         )}
         {(movie.approval_status === "pending" ||
           movie.approval_status === "rejected") && (
-          <div className="absolute bottom-12 left-1.5 rounded bg-amber-500/90 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-zinc-950">
+          <div className="absolute bottom-12 left-1.5 rounded bg-amber-400 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-amber-950">
             {movie.approval_status === "pending" ? "Pending" : "Rejected"}
           </div>
         )}
         {movie.rating != null && (
           <div
-            className={`absolute right-1.5 rounded-md bg-zinc-950/90 px-1.5 py-0.5 text-[10px] font-bold text-cyan-400 ring-1 ring-cyan-500/40 ${hasPosterActions ? "top-10" : "top-1.5"}`}
+            className={`absolute right-1.5 rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700 shadow-sm ring-1 ring-gray-200/80 ${hasPosterActions ? "top-10" : "top-1.5"}`}
           >
             {movie.rating.toFixed(1)}
+            <span className="font-medium text-gray-500">/10</span>
           </div>
         )}
       </div>
       <div className="flex flex-1 flex-col gap-1.5 p-3">
-        <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-zinc-50 group-hover:text-cyan-100">
+        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-gray-900 group-hover:text-[var(--bms-red)]">
           {movie.title}
         </h3>
+        <p className="line-clamp-1 text-[10px] font-medium text-[var(--bms-red)]">
+          {categoryLabel}
+        </p>
         {(movie.release_year != null || movie.director?.trim()) && (
-          <p className="line-clamp-1 text-[10px] text-zinc-500">
+          <p className="line-clamp-1 text-[10px] text-gray-500">
             {movie.release_year != null && (
-              <span className="text-zinc-400">{movie.release_year}</span>
+              <span className="text-gray-700">{movie.release_year}</span>
             )}
             {movie.release_year != null && movie.director?.trim() && (
-              <span className="text-zinc-600"> · </span>
+              <span className="text-gray-400"> · </span>
             )}
             {movie.director?.trim() ? (
               <span>{movie.director}</span>
             ) : null}
           </p>
         )}
-        <p className="line-clamp-2 text-[11px] leading-snug text-zinc-400">
+        <p className="line-clamp-2 text-[11px] leading-snug text-gray-600">
           {movie.overview || movie.review_text || "No synopsis yet."}
         </p>
         {movie.genres?.length > 0 && (
@@ -99,7 +107,7 @@ export function MovieCard({
             {movie.genres.slice(0, 3).map((g) => (
               <span
                 key={g}
-                className="rounded bg-zinc-800/80 px-1.5 py-0.5 text-[9px] capitalize text-zinc-300"
+                className="rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-[9px] capitalize text-gray-600"
               >
                 {g}
               </span>

@@ -9,7 +9,7 @@ import { buildInitialQueryFromSearchParams } from "@/lib/movie-search-params";
 
 function DiscoverFallback() {
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-10 text-center text-sm text-zinc-500">
+    <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center text-sm text-gray-500 shadow-sm">
       Loading filters and catalogue…
     </div>
   );
@@ -64,7 +64,7 @@ export default async function Home({
       };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
       <Suspense fallback={<DiscoverFallback />}>
         <MovieDiscover
           initial={initial}

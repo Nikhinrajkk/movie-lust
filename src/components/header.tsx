@@ -10,14 +10,17 @@ export async function Header() {
     (user ? "Signed in" : "");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-cyan-500/15 bg-zinc-950/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6">
-        <Link href="/" className="group flex shrink-0 items-baseline gap-2">
-          <span className="text-xl font-bold tracking-tight text-cyan-400 transition group-hover:text-cyan-300">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-[var(--bms-red)] shadow-md shadow-black/10">
+      <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:h-16 sm:px-6">
+        <Link href="/" className="group flex shrink-0 items-center gap-2 sm:gap-3">
+          <span className="text-lg font-extrabold tracking-tight text-white sm:text-xl">
             MovieLust
           </span>
-          <span className="hidden text-xs font-medium uppercase tracking-widest text-zinc-500 sm:inline">
-            Discover · Review · Curate
+          <span className="hidden rounded border border-white/35 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white/95 sm:inline">
+            Kochi
+          </span>
+          <span className="hidden text-[11px] font-medium text-white/75 lg:inline">
+            Movies
           </span>
         </Link>
 

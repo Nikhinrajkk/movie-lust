@@ -30,7 +30,7 @@ function FlatFilmReelSvg() {
     >
       <title>Film reel</title>
       <g className="cinema-reel-rotate">
-        <circle r={R} fill="#0a0a0a" stroke="#27272a" strokeWidth={1} />
+        <circle r={R} fill="#1a1a1a" stroke="#404040" strokeWidth={1} />
         {outerHoles}
         <circle r={centerHoleR} fill="#fafafa" />
       </g>

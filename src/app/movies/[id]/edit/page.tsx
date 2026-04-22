@@ -30,10 +30,10 @@ export default async function EditMoviePage({
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Edit listing
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-50">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
             {movie?.title ?? "Movie"}
           </h1>
         </div>

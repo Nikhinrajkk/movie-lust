@@ -12,12 +12,12 @@ export function ModerationRow({ movie }: { movie: MovieRow }) {
   const [pending, start] = useTransition();
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
       <div className="min-w-0 space-y-1">
-        <p className="truncate text-base font-semibold text-zinc-100">
+        <p className="truncate text-base font-semibold text-gray-900">
           {movie.title}
         </p>
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-gray-500">
           {movie.release_year != null ? `${movie.release_year}` : "Year TBD"}
           {movie.director?.trim() ? ` · ${movie.director}` : ""}
         </p>

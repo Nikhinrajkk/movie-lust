@@ -46,12 +46,12 @@ export default async function MovieDetailPage({
     Boolean(user) && status === "approved";
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
       {!ready && <SetupCallout />}
 
       {ready && movie && (
         <div className="grid gap-10 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start">
-          <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950 shadow-2xl shadow-black/50 lg:mx-0">
+          <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-lg lg:mx-0">
             <Image
               src={posterSrc(movie.poster_url)}
               alt={movie.title}
@@ -68,8 +68,8 @@ export default async function MovieDetailPage({
               <div
                 className={`rounded-2xl border px-4 py-3 text-sm ${
                   status === "pending"
-                    ? "border-cyan-500/35 bg-cyan-500/10 text-cyan-100"
-                    : "border-red-500/35 bg-red-500/10 text-red-100"
+                    ? "border-cyan-200 bg-cyan-50 text-cyan-900"
+                    : "border-red-200 bg-red-50 text-red-900"
                 }`}
               >
                 {status === "pending"
@@ -82,36 +82,36 @@ export default async function MovieDetailPage({
               <div className="space-y-3">
                 {movie.runtime_minutes != null && (
                   <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300">
+                    <span className="rounded-full border border-gray-200 bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
                       {movie.runtime_minutes} min
                     </span>
                   </div>
                 )}
-                <h1 className="text-4xl font-bold tracking-tight text-zinc-50">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                   {movie.title}
                 </h1>
                 {(movie.release_year != null || movie.director?.trim()) && (
-                  <p className="text-sm text-zinc-400">
+                  <p className="text-sm text-gray-600">
                     {movie.release_year != null && (
-                      <span className="font-medium text-zinc-300">
+                      <span className="font-semibold text-gray-800">
                         {movie.release_year}
                       </span>
                     )}
                     {movie.release_year != null && movie.director?.trim() && (
-                      <span className="text-zinc-600"> · </span>
+                      <span className="text-gray-400"> · </span>
                     )}
                     {movie.director?.trim() && (
                       <>
-                        <span className="text-zinc-500">Directed by </span>
-                        <span className="text-zinc-200">{movie.director}</span>
+                        <span className="text-gray-500">Directed by </span>
+                        <span className="text-gray-900">{movie.director}</span>
                       </>
                     )}
                   </p>
                 )}
                 {movie.rating != null && (
-                  <p className="text-sm text-zinc-400">
+                  <p className="text-sm text-gray-600">
                     Your rating:{" "}
-                    <span className="font-semibold text-cyan-400">
+                    <span className="font-semibold text-[var(--bms-red)]">
                       {movie.rating.toFixed(1)}
                     </span>{" "}
                     / 10
@@ -148,7 +148,7 @@ export default async function MovieDetailPage({
                 {movie.genres.map((g) => (
                   <span
                     key={g}
-                    className="rounded-lg bg-zinc-800/90 px-3 py-1 text-xs capitalize text-zinc-200"
+                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 text-xs capitalize text-gray-700"
                   >
                     {g}
                   </span>
@@ -157,21 +157,21 @@ export default async function MovieDetailPage({
             )}
 
             <section className="space-y-2">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-500">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500">
                 Synopsis
               </h2>
-              <p className="text-base leading-relaxed text-zinc-300">
+              <p className="text-base leading-relaxed text-gray-700">
                 {movie.overview?.trim()
                   ? movie.overview
                   : "No synopsis added yet."}
               </p>
             </section>
 
-            <section className="space-y-2 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-cyan-400/90">
+            <section className="space-y-2 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--bms-red)]">
                 Your review
               </h2>
-              <p className="text-base leading-relaxed text-zinc-200">
+              <p className="text-base leading-relaxed text-gray-800">
                 {movie.review_text?.trim()
                   ? movie.review_text
                   : "No review yet — add your take from the edit screen."}
@@ -181,7 +181,7 @@ export default async function MovieDetailPage({
             <NavLinkButton
               href="/"
               variant="link"
-              className="inline-flex px-0 py-0 text-zinc-400 hover:text-cyan-200"
+              className="inline-flex px-0 py-0"
             >
               ← Back to all movies
             </NavLinkButton>

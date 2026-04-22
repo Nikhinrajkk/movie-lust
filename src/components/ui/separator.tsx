@@ -10,7 +10,7 @@ export function UiSeparator({
   return (
     <Separator.Root
       orientation={orientation}
-      className={`shrink-0 bg-zinc-800 data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px ${className}`.trim()}
+      className={`shrink-0 bg-gray-200 data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px ${className}`.trim()}
       {...props}
     />
   );

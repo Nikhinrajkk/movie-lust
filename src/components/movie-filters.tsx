@@ -61,7 +61,7 @@ export function MovieFilters({
           Search catalogue
         </FieldLabel>
         <span
-          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"
+          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
           aria-hidden
         >
           <svg
@@ -85,7 +85,7 @@ export function MovieFilters({
           onChange={(e) => setSearch(e.target.value)}
           disabled={disabled}
           placeholder="Search…"
-          className="box-border h-10 w-full min-w-0 rounded-xl border border-zinc-700 bg-zinc-950 py-0 pl-9 pr-3 text-sm font-medium leading-10 text-zinc-100 outline-none ring-cyan-500/0 transition placeholder:text-zinc-600 focus:border-cyan-500/45 focus:ring-2 focus:ring-cyan-500/20 disabled:opacity-50"
+          className="box-border h-10 w-full min-w-0 rounded-lg border border-gray-300 bg-white py-0 pl-9 pr-3 text-sm font-medium leading-10 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[var(--bms-red)] focus:ring-2 focus:ring-[var(--bms-red)]/20 disabled:opacity-50"
         />
       </div>
 
@@ -96,7 +96,7 @@ export function MovieFilters({
         placeholder="Filter"
         id="catalog-filter"
         aria-label="Filter catalogue"
-        triggerClassName="w-[10.25rem] shrink-0 sm:w-[12.5rem]"
+        triggerClassName="w-[10.25rem] shrink-0 rounded-lg sm:w-[12.5rem]"
       >
         <UiSelectItem value={FILTER_ALL}>All titles</UiSelectItem>
         <UiSelectGroup>
@@ -124,7 +124,7 @@ export function MovieFilters({
         placeholder="Sort"
         id="catalog-sort"
         aria-label="Sort results"
-        triggerClassName="w-[9.5rem] shrink-0 sm:w-[10.75rem]"
+        triggerClassName="w-[9.5rem] shrink-0 rounded-lg sm:w-[10.75rem]"
       >
         <UiSelectItem value="newest">Sort: Newest</UiSelectItem>
         <UiSelectItem value="rating_desc">Sort: Rating</UiSelectItem>

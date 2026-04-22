@@ -24,13 +24,13 @@ export default async function AdminPage() {
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Moderation
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-50">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
             Pending submissions
           </h1>
-          <p className="mt-1 text-sm text-zinc-400">
+          <p className="mt-1 text-sm text-gray-600">
             Approve new titles to publish them to the public catalogue, or
             reject duplicates and spam.
           </p>
@@ -38,7 +38,7 @@ export default async function AdminPage() {
         <NavLinkButton
           href="/"
           variant="link"
-          className="px-0 py-0 text-sm text-zinc-400 hover:text-cyan-200"
+          className="px-0 py-0 text-sm text-gray-600 hover:text-[var(--bms-red)]"
         >
           ← Back to browse
         </NavLinkButton>

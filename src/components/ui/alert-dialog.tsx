@@ -22,11 +22,11 @@ export function AlertDialogPortal({
   return (
     <AlertDialog.Portal>
       <AlertDialog.Overlay className="fixed inset-0 z-[200] bg-black/70" />
-      <AlertDialog.Content className="fixed left-1/2 top-1/2 z-[201] w-[min(calc(100vw-2rem),24rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-700 bg-zinc-900 p-6 shadow-2xl outline-none">
-        <AlertDialog.Title className="text-lg font-semibold text-zinc-50">
+      <AlertDialog.Content className="fixed left-1/2 top-1/2 z-[201] w-[min(calc(100vw-2rem),24rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl outline-none">
+        <AlertDialog.Title className="text-lg font-semibold text-gray-900">
           {title}
         </AlertDialog.Title>
-        <AlertDialog.Description className="mt-2 text-sm leading-relaxed text-zinc-400">
+        <AlertDialog.Description className="mt-2 text-sm leading-relaxed text-gray-600">
           {description}
         </AlertDialog.Description>
         <div className="mt-6 flex flex-wrap justify-end gap-2">

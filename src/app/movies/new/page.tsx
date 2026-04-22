@@ -14,17 +14,17 @@ export default async function NewMoviePage() {
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Add to collection
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-50">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
             New movie
           </h1>
         </div>
         <NavLinkButton
           href="/"
           variant="link"
-          className="px-0 py-0 text-sm text-zinc-400 hover:text-cyan-200"
+          className="px-0 py-0 text-sm text-gray-600 hover:text-[var(--bms-red)]"
         >
           ← Back to browse
         </NavLinkButton>
@@ -33,7 +33,7 @@ export default async function NewMoviePage() {
       {!ready && <SetupCallout />}
 
       {ready && !user && (
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 px-6 py-8 text-center text-sm text-zinc-300">
+        <div className="rounded-2xl border border-gray-200 bg-white px-6 py-8 text-center text-sm text-gray-700 shadow-sm">
           <p className="mb-4">
             Sign in to submit a new title. Submissions from members are queued
             for admin approval before they appear in browse.
@@ -45,7 +45,7 @@ export default async function NewMoviePage() {
       )}
 
       {ready && user && !isAdmin && (
-        <p className="rounded-2xl border border-cyan-500/25 bg-cyan-500/10 px-4 py-3 text-sm text-cyan-100">
+        <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
           Your submission will be reviewed by an admin. Until it is approved,
           it won&apos;t appear on the home page — you&apos;ll still be able to
           open it from your confirmation link or history.
