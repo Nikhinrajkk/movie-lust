@@ -34,7 +34,7 @@ const defaultState = {
   search: "",
   genre: "",
   category: "",
-  sort: "newest" as SortOption,
+  sort: "title_asc" as SortOption,
   page: 1,
   pageSize: 15,
 };

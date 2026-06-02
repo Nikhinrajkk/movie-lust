@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { sanitizeSupabaseErrorMessage } from "@/lib/supabase/errors";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import type { MovieRow } from "@/types/movie";
@@ -16,7 +17,7 @@ export async function listPendingMovies(): Promise<MovieRow[]> {
     .eq("approval_status", "pending")
     .order("created_at", { ascending: true });
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   return (data ?? []) as MovieRow[];
 }
 
@@ -34,7 +35,7 @@ export async function approveMovie(id: string) {
     .eq("id", id)
     .eq("approval_status", "pending");
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath(`/movies/${id}`);
@@ -54,7 +55,7 @@ export async function rejectMovie(id: string) {
     .eq("id", id)
     .eq("approval_status", "pending");
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath(`/movies/${id}`);

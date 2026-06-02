@@ -34,12 +34,11 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
 
 3. **Database**
 
-   In the Supabase SQL editor, run migrations in order:
-   - `supabase/migrations/0001_init.sql` — schema, RLS, and starter seed rows.
-   - If you already had an older DB without `director`, run `0003_add_director_column.sql`.
-   - `0004_seed_imdb_chart.sql` — optional bulk seed of IMDb-style chart titles (skips existing titles).
-   - `0005_update_poster_urls_wikimedia.sql` — run if posters look broken; refreshes `poster_url` to Wikimedia art by title.
-   - `0002_interstellar.sql` is only needed if you use an old `0001` without Interstellar in the seed.
+   In the Supabase SQL editor, run in order:
+   - `supabase/migrations/0001_schema.sql` — DDL only: extensions, `movies`, `profiles`, `watchlist`, functions, triggers, RLS.
+   - `supabase/migrations/0002_data.sql` — DML only: demo rows, IMDb chart seed, poster URL fixes, IMDb list catalogue inserts (all idempotent / safe to re-run where noted).
+
+   If you already applied the older numbered migrations on a project, do **not** re-run `0001_schema.sql` blindly; use a fresh database or merge changes manually.
 
 4. **Run locally**
 

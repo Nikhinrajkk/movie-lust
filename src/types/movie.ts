@@ -18,6 +18,8 @@ export type MovieRow = {
   review_text: string | null;
   runtime_minutes: number | null;
   director: string | null;
+  /** Original dialogue languages, e.g. "Spanish" or "Spanish, Catalan". */
+  language: string | null;
   created_at: string;
   updated_at: string;
   approval_status?: MovieApprovalStatus;

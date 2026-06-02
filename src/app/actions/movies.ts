@@ -4,6 +4,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { parseMoviePayloadFromJson } from "@/lib/movie-json-import";
 import {
+  isLikelyHtmlOrTransportBody,
+  logSupabaseTransportFailure,
+  sanitizeSupabaseErrorMessage,
+} from "@/lib/supabase/errors";
+import {
   createSupabaseServer,
   createSupabaseServerOptional,
 } from "@/lib/supabase/server";
@@ -33,8 +38,9 @@ function mapSort(sort: ListMoviesInput["sort"]) {
     case "year_desc":
       return { column: "release_year" as const, ascending: false };
     case "newest":
-    default:
       return { column: "created_at" as const, ascending: false };
+    default:
+      return { column: "title" as const, ascending: true };
   }
 }
 
@@ -89,7 +95,14 @@ export async function listMovies(
 
   const { data, error, count } = await query.range(from, to);
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const raw = String(error.message ?? "");
+    if (isLikelyHtmlOrTransportBody(raw)) {
+      logSupabaseTransportFailure("listMovies");
+      return { movies: [], total: 0, page, pageSize, totalPages: 1 };
+    }
+    throw new Error(sanitizeSupabaseErrorMessage(error));
+  }
 
   const total = count ?? 0;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -112,7 +125,14 @@ export async function getMovieById(id: string): Promise<MovieRow | null> {
     .eq("id", id)
     .maybeSingle();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const raw = String(error.message ?? "");
+    if (isLikelyHtmlOrTransportBody(raw)) {
+      logSupabaseTransportFailure("getMovieById");
+      return null;
+    }
+    throw new Error(sanitizeSupabaseErrorMessage(error));
+  }
   return (data as MovieRow) ?? null;
 }
 
@@ -127,6 +147,7 @@ export type MoviePayload = {
   review_text?: string;
   runtime_minutes?: number | null;
   director?: string;
+  language?: string;
 };
 
 export async function createMovie(payload: MoviePayload): Promise<string> {
@@ -158,13 +179,14 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
       review_text: payload.review_text ?? "",
       runtime_minutes: payload.runtime_minutes ?? null,
       director: payload.director ?? "",
+      language: payload.language?.trim() ?? "",
       created_by: user.id,
       approval_status,
     })
     .select("id")
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
   return data.id as string;
@@ -185,11 +207,12 @@ export async function updateMovie(id: string, payload: MoviePayload) {
       review_text: payload.review_text ?? "",
       runtime_minutes: payload.runtime_minutes ?? null,
       director: payload.director ?? "",
+      language: payload.language?.trim() ?? "",
       updated_at: new Date().toISOString(),
     })
     .eq("id", id);
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath(`/movies/${id}`);
 }
@@ -197,7 +220,7 @@ export async function updateMovie(id: string, payload: MoviePayload) {
 export async function deleteMovie(id: string) {
   const supabase = await createSupabaseServer();
   const { error } = await supabase.from("movies").delete().eq("id", id);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
 }
@@ -214,6 +237,7 @@ function parseMovieFormData(formData: FormData): MoviePayload {
   const poster_url = String(formData.get("poster_url") ?? "");
   const review_text = String(formData.get("review_text") ?? "");
   const director = String(formData.get("director") ?? "").trim();
+  const language = String(formData.get("language") ?? "").trim();
 
   const release_year_raw = String(formData.get("release_year") ?? "").trim();
   const release_year = release_year_raw ? Number(release_year_raw) : null;
@@ -244,6 +268,7 @@ function parseMovieFormData(formData: FormData): MoviePayload {
         : null,
     review_text,
     director,
+    language,
     category: categoryRaw as MovieCategory,
     genres,
   };

@@ -2,6 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import {
+  isLikelyHtmlOrTransportBody,
+  logSupabaseTransportFailure,
+  sanitizeSupabaseErrorMessage,
+} from "@/lib/supabase/errors";
+import {
   createSupabaseServer,
   createSupabaseServerOptional,
 } from "@/lib/supabase/server";
@@ -20,7 +25,7 @@ export async function addToWatchlist(movieId: string) {
     .eq("id", movieId)
     .maybeSingle();
 
-  if (movieErr) throw new Error(movieErr.message);
+  if (movieErr) throw new Error(sanitizeSupabaseErrorMessage(movieErr));
   if (!movie || movie.approval_status !== "approved") {
     throw new Error("Only published films can be added to your list.");
   }
@@ -30,7 +35,7 @@ export async function addToWatchlist(movieId: string) {
     { onConflict: "user_id,movie_id" },
   );
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
   revalidatePath(`/movies/${movieId}`);
@@ -49,7 +54,7 @@ export async function removeFromWatchlist(movieId: string) {
     .eq("user_id", user.id)
     .eq("movie_id", movieId);
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
   revalidatePath(`/movies/${movieId}`);
@@ -69,7 +74,14 @@ export async function getWatchlistMovieIdsForUser(): Promise<string[]> {
     .select("movie_id")
     .eq("user_id", user.id);
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const raw = String(error.message ?? "");
+    if (isLikelyHtmlOrTransportBody(raw)) {
+      logSupabaseTransportFailure("getWatchlistMovieIdsForUser");
+      return [];
+    }
+    throw new Error(sanitizeSupabaseErrorMessage(error));
+  }
   return (data ?? []).map((r) => r.movie_id as string);
 }
 
@@ -86,7 +98,7 @@ export async function listWatchlistMovies(): Promise<MovieRow[]> {
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
 
   return (rows ?? [])
     .map((r) => {

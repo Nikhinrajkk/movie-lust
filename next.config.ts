@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "image.tmdb.org", pathname: "/**" },
       { protocol: "https", hostname: "upload.wikimedia.org", pathname: "/**" },
       { protocol: "https", hostname: "m.media-amazon.com", pathname: "/**" },
+      {
+        protocol: "https",
+        hostname: "*.ssl-images-amazon.com",
+        pathname: "/**",
+      },
       { protocol: "https", hostname: "placehold.co", pathname: "/**" },
     ],
   },

@@ -126,10 +126,10 @@ export function MovieFilters({
         aria-label="Sort results"
         triggerClassName="w-[9.5rem] shrink-0 rounded-lg sm:w-[10.75rem]"
       >
+        <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
         <UiSelectItem value="newest">Sort: Newest</UiSelectItem>
         <UiSelectItem value="rating_desc">Sort: Rating</UiSelectItem>
         <UiSelectItem value="year_desc">Sort: Year</UiSelectItem>
-        <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
       </UiSelect>
 
       {hasTextOrFilter ? (
