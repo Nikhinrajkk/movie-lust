@@ -40,6 +40,11 @@ function humanizeGoogleOAuthError(raw: string): string | null {
   return null;
 }
 
+/** OAuth + magic-link return base URL — always the tab you’re on (avoids Production using a baked-in localhost NEXT_PUBLIC_SITE_URL on Vercel). */
+function authReturnOrigin(): string {
+  return window.location.origin;
+}
+
 function GoogleIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -84,9 +89,7 @@ export function LoginForm() {
   async function signInWithGoogle() {
     setGoogleSending(true);
     setMessage(null);
-    const site =
-      process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin;
-    const redirectTo = `${site}/auth/callback?next=${encodeURIComponent(next)}`;
+    const redirectTo = `${authReturnOrigin()}/auth/callback?next=${encodeURIComponent(next)}`;
 
     try {
       const supabase = getSupabaseBrowser();
@@ -120,15 +123,12 @@ export function LoginForm() {
     setStatus("sending");
     setMessage(null);
 
-    const site =
-      process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin;
-
     try {
       const supabase = getSupabaseBrowser();
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
         options: {
-          emailRedirectTo: `${site}/auth/callback?next=${encodeURIComponent(next)}`,
+          emailRedirectTo: `${authReturnOrigin()}/auth/callback?next=${encodeURIComponent(next)}`,
         },
       });
       if (error) {
