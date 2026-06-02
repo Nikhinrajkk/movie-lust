@@ -115,7 +115,7 @@ export function MovieDiscover({
     if (search.trim()) params.set("q", search.trim());
     if (genre.trim()) params.set("genre", genre.trim());
     if (category.trim()) params.set("cat", category.trim());
-    if (sort !== "newest") params.set("sort", sort);
+    if (sort !== "title_asc") params.set("sort", sort);
     if (page > 1) params.set("page", String(page));
     if (pageSize !== 15) params.set("pageSize", String(pageSize));
 

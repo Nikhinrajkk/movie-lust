@@ -39,6 +39,7 @@ export function MovieJsonImport() {
           <code className="text-gray-800">runtime_minutes</code>,{" "}
           <code className="text-gray-800">rating</code> (0–10),{" "}
           <code className="text-gray-800">review_text</code>,{" "}
+          <code className="text-gray-800">language</code>,{" "}
           <code className="text-gray-800">category</code> ({categoryList}
           ; default <code className="text-gray-800">trending</code>),{" "}
           <code className="text-gray-800">genres</code> (array of slugs from

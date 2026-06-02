@@ -38,8 +38,9 @@ function mapSort(sort: ListMoviesInput["sort"]) {
     case "year_desc":
       return { column: "release_year" as const, ascending: false };
     case "newest":
-    default:
       return { column: "created_at" as const, ascending: false };
+    default:
+      return { column: "title" as const, ascending: true };
   }
 }
 
@@ -146,6 +147,7 @@ export type MoviePayload = {
   review_text?: string;
   runtime_minutes?: number | null;
   director?: string;
+  language?: string;
 };
 
 export async function createMovie(payload: MoviePayload): Promise<string> {
@@ -177,6 +179,7 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
       review_text: payload.review_text ?? "",
       runtime_minutes: payload.runtime_minutes ?? null,
       director: payload.director ?? "",
+      language: payload.language?.trim() ?? "",
       created_by: user.id,
       approval_status,
     })
@@ -204,6 +207,7 @@ export async function updateMovie(id: string, payload: MoviePayload) {
       review_text: payload.review_text ?? "",
       runtime_minutes: payload.runtime_minutes ?? null,
       director: payload.director ?? "",
+      language: payload.language?.trim() ?? "",
       updated_at: new Date().toISOString(),
     })
     .eq("id", id);
@@ -233,6 +237,7 @@ function parseMovieFormData(formData: FormData): MoviePayload {
   const poster_url = String(formData.get("poster_url") ?? "");
   const review_text = String(formData.get("review_text") ?? "");
   const director = String(formData.get("director") ?? "").trim();
+  const language = String(formData.get("language") ?? "").trim();
 
   const release_year_raw = String(formData.get("release_year") ?? "").trim();
   const release_year = release_year_raw ? Number(release_year_raw) : null;
@@ -263,6 +268,7 @@ function parseMovieFormData(formData: FormData): MoviePayload {
         : null,
     review_text,
     director,
+    language,
     category: categoryRaw as MovieCategory,
     genres,
   };
