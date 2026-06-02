@@ -4,6 +4,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { parseMoviePayloadFromJson } from "@/lib/movie-json-import";
 import {
+  isLikelyHtmlOrTransportBody,
+  logSupabaseTransportFailure,
+  sanitizeSupabaseErrorMessage,
+} from "@/lib/supabase/errors";
+import {
   createSupabaseServer,
   createSupabaseServerOptional,
 } from "@/lib/supabase/server";
@@ -89,7 +94,14 @@ export async function listMovies(
 
   const { data, error, count } = await query.range(from, to);
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const raw = String(error.message ?? "");
+    if (isLikelyHtmlOrTransportBody(raw)) {
+      logSupabaseTransportFailure("listMovies");
+      return { movies: [], total: 0, page, pageSize, totalPages: 1 };
+    }
+    throw new Error(sanitizeSupabaseErrorMessage(error));
+  }
 
   const total = count ?? 0;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -112,7 +124,14 @@ export async function getMovieById(id: string): Promise<MovieRow | null> {
     .eq("id", id)
     .maybeSingle();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const raw = String(error.message ?? "");
+    if (isLikelyHtmlOrTransportBody(raw)) {
+      logSupabaseTransportFailure("getMovieById");
+      return null;
+    }
+    throw new Error(sanitizeSupabaseErrorMessage(error));
+  }
   return (data as MovieRow) ?? null;
 }
 
@@ -164,7 +183,7 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
     .select("id")
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
   return data.id as string;
@@ -189,7 +208,7 @@ export async function updateMovie(id: string, payload: MoviePayload) {
     })
     .eq("id", id);
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath(`/movies/${id}`);
 }
@@ -197,7 +216,7 @@ export async function updateMovie(id: string, payload: MoviePayload) {
 export async function deleteMovie(id: string) {
   const supabase = await createSupabaseServer();
   const { error } = await supabase.from("movies").delete().eq("id", id);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
 }
