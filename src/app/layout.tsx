@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   },
   description:
     "Discover movies, write reviews, and curate your library — inspired by marquee listings and critic scores.",
+  icons: {
+    icon: "/movie.png",
+    apple: "/movie.png",
+  },
 };
 
 export default function RootLayout({
@@ -37,7 +41,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <footer className="border-t border-gray-200 bg-white py-8 text-center text-xs text-gray-500">
           MovieLust — a Next.js + Supabase demo. Explore UI inspired by
-          listings sites; not affiliated with BookMyShow or IMDb.
+          movie listings; not affiliated with IMDb.
         </footer>
       </body>
     </html>

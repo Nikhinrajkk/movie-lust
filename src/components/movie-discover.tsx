@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { listMovies } from "@/app/actions/movies";
 import type { MovieListInitialQuery } from "@/lib/movie-search-params";
+import { searchQueryStringsEqual } from "@/lib/url-search-compare";
 import { useMovieFilters } from "@/stores/movie-filters";
 import type { MovieListResult } from "@/types/movie";
 import { CinemaLoadingLayer } from "./cinema-loader";
@@ -43,6 +44,11 @@ export function MovieDiscover({
   const [listLoading, setListLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const initialRef = useRef(initial);
+  const initialQueryRef = useRef(initialQuery);
+
+  const urlSearchSnapshot = urlSearchParams.toString();
+
   const watchlistSet = useMemo(
     () => new Set(watchlistMovieIds),
     [watchlistMovieIds],
@@ -66,6 +72,8 @@ export function MovieDiscover({
   );
 
   useLayoutEffect(() => {
+    initialRef.current = initial;
+    initialQueryRef.current = initialQuery;
     hydrateFromServer({
       search: initialQuery.search,
       genre: initialQuery.genre,
@@ -74,20 +82,27 @@ export function MovieDiscover({
       page: initialQuery.page,
       pageSize: initialQuery.pageSize,
     });
-  }, [
-    hydrateFromServer,
-    initialQuery.search,
-    initialQuery.genre,
-    initialQuery.category,
-    initialQuery.sort,
-    initialQuery.page,
-    initialQuery.pageSize,
-  ]);
+  }, [hydrateFromServer, initial, initialQuery]);
 
-  /* Loading must update synchronously; startTransition deferred it so the overlay never painted. */
-  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (!supabaseReady) return;
+
+    const iq = initialQueryRef.current;
+    const sameAsServerPayload =
+      queryForList.search === iq.search &&
+      queryForList.genre === iq.genre &&
+      queryForList.category === iq.category &&
+      queryForList.sort === iq.sort &&
+      queryForList.page === iq.page &&
+      queryForList.pageSize === iq.pageSize;
+
+    if (sameAsServerPayload) {
+      setData(initialRef.current);
+      setListLoading(false);
+      setError(null);
+      return;
+    }
+
     let cancelled = false;
     setListLoading(true);
     setError(null);
@@ -108,7 +123,6 @@ export function MovieDiscover({
       setListLoading(false);
     };
   }, [queryForList, supabaseReady]);
-  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -120,8 +134,8 @@ export function MovieDiscover({
     if (pageSize !== 15) params.set("pageSize", String(pageSize));
 
     const next = params.toString();
-    const cur = urlSearchParams?.toString() ?? "";
-    if (next === cur) return;
+    const cur = urlSearchSnapshot;
+    if (searchQueryStringsEqual(next, cur)) return;
 
     router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
   }, [
@@ -133,7 +147,7 @@ export function MovieDiscover({
     router,
     search,
     sort,
-    urlSearchParams,
+    urlSearchSnapshot,
   ]);
 
   return (
