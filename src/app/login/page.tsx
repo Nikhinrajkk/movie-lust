@@ -23,7 +23,8 @@ export default function LoginPage() {
           Sign in
         </h1>
         <p className="text-sm text-gray-600">
-          We&apos;ll email you a one-time link — no password to remember.
+          Continue with Google, or get a one-time link by email — no password
+          to remember.
         </p>
       </div>
 
