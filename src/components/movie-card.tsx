@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { MovieRow } from "@/types/movie";
-import { MOVIE_CATEGORIES } from "@/types/movie";
 import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { WatchedToggle } from "@/components/watched-toggle";
 
@@ -25,9 +24,11 @@ export function MovieCard({
   const showWatchlist = actions?.watchlist?.enabled;
   const showWatched = actions?.watched?.enabled;
   const hasPosterActions = Boolean(showWatchlist || showWatched);
-  const categoryLabel =
-    MOVIE_CATEGORIES.find((c) => c.value === movie.category)?.label ??
-    movie.category;
+
+  const metaBits: string[] = [];
+  if (movie.release_year != null) metaBits.push(String(movie.release_year));
+  if (movie.director?.trim()) metaBits.push(movie.director.trim());
+  if (movie.language?.trim()) metaBits.push(movie.language.trim());
 
   return (
     <Link
@@ -83,21 +84,8 @@ export function MovieCard({
         <h3 className="line-clamp-2 text-sm font-bold leading-snug text-gray-900 group-hover:text-[var(--bms-red)]">
           {movie.title}
         </h3>
-        <p className="line-clamp-1 text-[10px] font-medium text-[var(--bms-red)]">
-          {categoryLabel}
-        </p>
-        {(movie.release_year != null || movie.director?.trim()) && (
-          <p className="line-clamp-1 text-[10px] text-gray-500">
-            {movie.release_year != null && (
-              <span className="text-gray-700">{movie.release_year}</span>
-            )}
-            {movie.release_year != null && movie.director?.trim() && (
-              <span className="text-gray-400"> · </span>
-            )}
-            {movie.director?.trim() ? (
-              <span>{movie.director}</span>
-            ) : null}
-          </p>
+        {metaBits.length > 0 && (
+          <p className="line-clamp-2 text-[10px] text-gray-600">{metaBits.join(" · ")}</p>
         )}
         <p className="line-clamp-2 text-[11px] leading-snug text-gray-600">
           {movie.overview || movie.review_text || "No synopsis yet."}

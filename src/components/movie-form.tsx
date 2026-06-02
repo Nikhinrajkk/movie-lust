@@ -62,6 +62,17 @@ export function MovieForm({
         </div>
 
         <div className="space-y-2 sm:col-span-2">
+          <FieldLabel htmlFor="movie-language">Language</FieldLabel>
+          <input
+            id="movie-language"
+            name="language"
+            defaultValue={movie?.language ?? ""}
+            placeholder="e.g. Spanish, Catalan"
+            className={inputClass}
+          />
+        </div>
+
+        <div className="space-y-2 sm:col-span-2">
           <FieldLabel htmlFor="movie-poster">Poster URL</FieldLabel>
           <input
             id="movie-poster"

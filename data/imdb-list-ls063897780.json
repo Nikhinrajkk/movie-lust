@@ -1,0 +1,507 @@
+{
+  "source": "https://www.imdb.com/list/ls063897780/",
+  "list_title": "Top 100 Best Action Movies Of All Time",
+  "parsed_from": "https://web.archive.org/web/20241109162011/https://www.imdb.com/list/ls063897780/",
+  "movies": [
+    {
+      "imdb_id": "tt0103064",
+      "title": "Terminator 2: Judgment Day",
+      "release_year": 1991
+    },
+    {
+      "imdb_id": "tt0095016",
+      "title": "Die Hard",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt0090605",
+      "title": "Aliens",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt1392190",
+      "title": "Mad Max: Fury Road",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0082971",
+      "title": "Raiders of the Lost Ark",
+      "release_year": 1981
+    },
+    {
+      "imdb_id": "tt4912910",
+      "title": "Mission: Impossible - Fallout",
+      "release_year": 2018
+    },
+    {
+      "imdb_id": "tt0104684",
+      "title": "Hard Boiled",
+      "release_year": 1992
+    },
+    {
+      "imdb_id": "tt0066999",
+      "title": "Dirty Harry",
+      "release_year": 1971
+    },
+    {
+      "imdb_id": "tt2265171",
+      "title": "The Raid 2",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0102266",
+      "title": "The Last Boy Scout",
+      "release_year": 1991
+    },
+    {
+      "imdb_id": "tt0099426",
+      "title": "Bullet in the Head",
+      "release_year": 1990
+    },
+    {
+      "imdb_id": "tt1375666",
+      "title": "Inception",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0133093",
+      "title": "The Matrix",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt0468569",
+      "title": "The Dark Knight",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt1745960",
+      "title": "Top Gun: Maverick",
+      "release_year": 2022
+    },
+    {
+      "imdb_id": "tt10366206",
+      "title": "John Wick: Chapter 4",
+      "release_year": 2023
+    },
+    {
+      "imdb_id": "tt6723592",
+      "title": "Tenet",
+      "release_year": 2020
+    },
+    {
+      "imdb_id": "tt0080684",
+      "title": "Star Wars: Episode V - The Empire Strikes Back",
+      "release_year": 1980
+    },
+    {
+      "imdb_id": "tt0117500",
+      "title": "The Rock",
+      "release_year": 1996
+    },
+    {
+      "imdb_id": "tt0094357",
+      "title": "A Better Tomorrow II",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt0111257",
+      "title": "Speed",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt0112864",
+      "title": "Die Hard with a Vengeance",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt0172495",
+      "title": "Gladiator",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0111512",
+      "title": "Drunken Master II",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt1899353",
+      "title": "The Raid: Redemption",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0094226",
+      "title": "The Untouchables",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt1555149",
+      "title": "Elite Squad 2: The Enemy Within",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0093773",
+      "title": "Predator",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt0091209",
+      "title": "The Hitcher",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt0280609",
+      "title": "Dog Soldiers",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0097202",
+      "title": "The Killer",
+      "release_year": 1989
+    },
+    {
+      "imdb_id": "tt0093409",
+      "title": "Lethal Weapon",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt7888964",
+      "title": "Nobody",
+      "release_year": 2021
+    },
+    {
+      "imdb_id": "tt2911666",
+      "title": "John Wick",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0446029",
+      "title": "Scott Pilgrim vs. the World",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0861739",
+      "title": "Elite Squad",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0316654",
+      "title": "Spider-Man 2",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt2802144",
+      "title": "Kingsman: The Secret Service",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0440963",
+      "title": "The Bourne Ultimatum",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0082694",
+      "title": "Mad Max 2: The Road Warrior",
+      "release_year": 1981
+    },
+    {
+      "imdb_id": "tt1527788",
+      "title": "The Man from Nowhere",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0113189",
+      "title": "GoldenEye",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt4425200",
+      "title": "John Wick: Chapter 2",
+      "release_year": 2017
+    },
+    {
+      "imdb_id": "tt0083944",
+      "title": "First Blood",
+      "release_year": 1982
+    },
+    {
+      "imdb_id": "tt1074638",
+      "title": "Skyfall",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0111503",
+      "title": "True Lies",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt0145487",
+      "title": "Spider-Man",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt4649466",
+      "title": "Kingsman: The Golden Circle",
+      "release_year": 2017
+    },
+    {
+      "imdb_id": "tt6499752",
+      "title": "Upgrade",
+      "release_year": 2018
+    },
+    {
+      "imdb_id": "tt0093870",
+      "title": "RoboCop",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt0381061",
+      "title": "Casino Royale",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0086960",
+      "title": "Beverly Hills Cop",
+      "release_year": 1984
+    },
+    {
+      "imdb_id": "tt0266697",
+      "title": "Kill Bill: Vol. 1",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0144117",
+      "title": "The Boondock Saints",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt1213663",
+      "title": "The World's End",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt0116367",
+      "title": "From Dusk Till Dawn",
+      "release_year": 1996
+    },
+    {
+      "imdb_id": "tt0450232",
+      "title": "16 Blocks",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt11083552",
+      "title": "Wrath of Man",
+      "release_year": 2021
+    },
+    {
+      "imdb_id": "tt12263384",
+      "title": "Extraction II",
+      "release_year": 2023
+    },
+    {
+      "imdb_id": "tt0317919",
+      "title": "Mission: Impossible III",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0936501",
+      "title": "Taken",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt1343727",
+      "title": "Dredd",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0258463",
+      "title": "The Bourne Identity",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt2381249",
+      "title": "Mission: Impossible - Rogue Nation",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0092099",
+      "title": "Top Gun",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt3799694",
+      "title": "The Nice Guys",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt0181689",
+      "title": "Minority Report",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0790724",
+      "title": "Jack Reacher",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0475394",
+      "title": "Smokin' Aces",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt1843866",
+      "title": "Captain America: The Winter Soldier",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0493464",
+      "title": "Wanted",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0067927",
+      "title": "Vanishing Point",
+      "release_year": 1971
+    },
+    {
+      "imdb_id": "tt0106977",
+      "title": "The Fugitive",
+      "release_year": 1993
+    },
+    {
+      "imdb_id": "tt0090728",
+      "title": "Big Trouble in Little China",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt1250777",
+      "title": "Kick-Ass",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0080120",
+      "title": "The Warriors",
+      "release_year": 1979
+    },
+    {
+      "imdb_id": "tt0070034",
+      "title": "Enter the Dragon",
+      "release_year": 1973
+    },
+    {
+      "imdb_id": "tt0116908",
+      "title": "The Long Kiss Goodnight",
+      "release_year": 1996
+    },
+    {
+      "imdb_id": "tt0089374",
+      "title": "Police Story",
+      "release_year": 1985
+    },
+    {
+      "imdb_id": "tt0097576",
+      "title": "Indiana Jones and the Last Crusade",
+      "release_year": 1989
+    },
+    {
+      "imdb_id": "tt0112442",
+      "title": "Bad Boys",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt0122151",
+      "title": "Lethal Weapon 4",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt0091431",
+      "title": "Armour of God",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt0118571",
+      "title": "Air Force One",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0079501",
+      "title": "Mad Max",
+      "release_year": 1979
+    },
+    {
+      "imdb_id": "tt0097733",
+      "title": "Lethal Weapon 2",
+      "release_year": 1989
+    },
+    {
+      "imdb_id": "tt0087469",
+      "title": "Indiana Jones and the Temple of Doom",
+      "release_year": 1984
+    },
+    {
+      "imdb_id": "tt0105851",
+      "title": "Full Contact",
+      "release_year": 1992
+    },
+    {
+      "imdb_id": "tt0096256",
+      "title": "They Live",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt0074156",
+      "title": "Assault on Precinct 13",
+      "release_year": 1976
+    },
+    {
+      "imdb_id": "tt0095491",
+      "title": "Tiger on Beat",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt0068638",
+      "title": "The Getaway",
+      "release_year": 1972
+    },
+    {
+      "imdb_id": "tt0104714",
+      "title": "Lethal Weapon 3",
+      "release_year": 1992
+    },
+    {
+      "imdb_id": "tt0988045",
+      "title": "Sherlock Holmes",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt0082340",
+      "title": "Escape from New York",
+      "release_year": 1981
+    },
+    {
+      "imdb_id": "tt0102685",
+      "title": "Point Break",
+      "release_year": 1991
+    },
+    {
+      "imdb_id": "tt1436045",
+      "title": "13 Assassins",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0118880",
+      "title": "Con Air",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0088944",
+      "title": "Commando",
+      "release_year": 1985
+    },
+    {
+      "imdb_id": "tt0099365",
+      "title": "Darkman",
+      "release_year": 1990
+    }
+  ]
+}

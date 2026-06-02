@@ -1,0 +1,508 @@
+{
+  "source": "https://www.imdb.com/list/ls055422143/",
+  "list_title": "Top 250 movies (since 1990)",
+  "parsed_from": "https://web.archive.org/web/20170401125413/http://www.imdb.com/list/ls055422143/",
+  "note": "Wayback snapshot contains first page only (~100 films). Full list may have more on live IMDb.",
+  "movies": [
+    {
+      "imdb_id": "tt0102926",
+      "title": "The Silence of the Lambs",
+      "release_year": 1991
+    },
+    {
+      "imdb_id": "tt0482571",
+      "title": "The Prestige",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0137523",
+      "title": "Fight Club",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt0485947",
+      "title": "Mr. Nobody",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt0289879",
+      "title": "The Butterfly Effect",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0209144",
+      "title": "Memento",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0114369",
+      "title": "Se7en",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt0100157",
+      "title": "Misery",
+      "release_year": 1990
+    },
+    {
+      "imdb_id": "tt0114814",
+      "title": "The Usual Suspects",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt0118971",
+      "title": "The Devil's Advocate",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt1614989",
+      "title": "Headhunters",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0119174",
+      "title": "The Game",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0117381",
+      "title": "Primal Fear",
+      "release_year": 1996
+    },
+    {
+      "imdb_id": "tt0167404",
+      "title": "The Sixth Sense",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt0230600",
+      "title": "The Others",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0361862",
+      "title": "The Machinist",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0945513",
+      "title": "Source Code",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt2397535",
+      "title": "Predestination",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt1375666",
+      "title": "Inception",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt1130884",
+      "title": "Shutter Island",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0166924",
+      "title": "Mulholland Dr.",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0364569",
+      "title": "Oldboy",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0266308",
+      "title": "Battle Royale",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0289992",
+      "title": "The Life of David Gale",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt1305806",
+      "title": "The Secret in Their Eyes",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt0278504",
+      "title": "Insomnia",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0327056",
+      "title": "Mystic River",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt2267998",
+      "title": "Gone Girl",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt1392214",
+      "title": "Prisoners",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt3170832",
+      "title": "Room",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0246578",
+      "title": "Donnie Darko",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt2872718",
+      "title": "Nightcrawler",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0134119",
+      "title": "The Talented Mr. Ripley",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt1189073",
+      "title": "The Skin I Live In",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt2884206",
+      "title": "I Origins",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0309698",
+      "title": "Identity",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0109830",
+      "title": "Forrest Gump",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt0111161",
+      "title": "The Shawshank Redemption",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt0120338",
+      "title": "Titanic",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0116209",
+      "title": "The English Patient",
+      "release_year": 1996
+    },
+    {
+      "imdb_id": "tt0268978",
+      "title": "A Beautiful Mind",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt2980516",
+      "title": "The Theory of Everything",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt2084970",
+      "title": "The Imitation Game",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt2140373",
+      "title": "Saving Mr. Banks",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt0120382",
+      "title": "The Truman Show",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt0120689",
+      "title": "The Green Mile",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt0401383",
+      "title": "The Diving Bell and the Butterfly",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt1675434",
+      "title": "The Intouchables",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0369702",
+      "title": "The Sea Inside",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0287467",
+      "title": "Talk to Her",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt2106476",
+      "title": "The Hunt",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0307901",
+      "title": "25th Hour",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0120586",
+      "title": "American History X",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt0180093",
+      "title": "Requiem for a Dream",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0117951",
+      "title": "Trainspotting",
+      "release_year": 1996
+    },
+    {
+      "imdb_id": "tt0120815",
+      "title": "Saving Private Ryan",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt2713180",
+      "title": "Fury",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0112573",
+      "title": "Braveheart",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt0172495",
+      "title": "Gladiator",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0245844",
+      "title": "The Count of Monte Cristo",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0110322",
+      "title": "Legends of the Fall",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt1663202",
+      "title": "The Revenant",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0783233",
+      "title": "Atonement",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt1840417",
+      "title": "The Words",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt1935179",
+      "title": "Mud",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0119217",
+      "title": "Good Will Hunting",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0405159",
+      "title": "Million Dollar Baby",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt1205489",
+      "title": "Gran Torino",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0454921",
+      "title": "The Pursuit of Happyness",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt1291584",
+      "title": "Warrior",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt1979320",
+      "title": "Rush",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt2582802",
+      "title": "Whiplash",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0953318",
+      "title": "Ben X",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt2024544",
+      "title": "12 Years a Slave",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt0395169",
+      "title": "Hotel Rwanda",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt1024648",
+      "title": "Argo",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0107207",
+      "title": "In the Name of the Father",
+      "release_year": 1993
+    },
+    {
+      "imdb_id": "tt0405094",
+      "title": "The Lives of Others",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0301357",
+      "title": "Good Bye Lenin!",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0363163",
+      "title": "Downfall",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0118799",
+      "title": "Life Is Beautiful",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0108052",
+      "title": "Schindler's List",
+      "release_year": 1993
+    },
+    {
+      "imdb_id": "tt1832382",
+      "title": "A Separation",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0808417",
+      "title": "Persepolis",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt3011894",
+      "title": "Wild Tales",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0449467",
+      "title": "Babel",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt1010048",
+      "title": "Slumdog Millionaire",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0454876",
+      "title": "Life of Pi",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0163978",
+      "title": "The Beach",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0758758",
+      "title": "Into the Wild",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0421715",
+      "title": "The Curious Case of Benjamin Button",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0414993",
+      "title": "The Fountain",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0319061",
+      "title": "Big Fish",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0460791",
+      "title": "The Fall",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0325980",
+      "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0120737",
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0457430",
+      "title": "Pan's Labyrinth",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0110148",
+      "title": "Interview with the Vampire: The Vampire Chronicles",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt0330373",
+      "title": "Harry Potter and the Goblet of Fire",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0109836",
+      "title": "Mary Shelley's Frankenstein",
+      "release_year": 1994
+    }
+  ]
+}

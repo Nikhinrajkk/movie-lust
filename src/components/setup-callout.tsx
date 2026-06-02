@@ -17,9 +17,13 @@ export function SetupCallout() {
         <code className="rounded border border-amber-200 bg-white px-1.5 py-0.5 text-amber-900">
           .env.local
         </code>
-        , add your project URL and anon key, then run the SQL in{" "}
+        , add your project URL and anon key, then run{" "}
         <code className="rounded border border-amber-200 bg-white px-1.5 py-0.5 text-amber-900">
-          supabase/migrations/0001_init.sql
+          supabase/migrations/0001_schema.sql
+        </code>{" "}
+        then{" "}
+        <code className="rounded border border-amber-200 bg-white px-1.5 py-0.5 text-amber-900">
+          0002_data.sql
         </code>{" "}
         in the Supabase SQL editor.
       </p>

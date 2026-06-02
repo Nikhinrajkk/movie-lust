@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { listMovies } from "@/app/actions/movies";
 import type { MovieListInitialQuery } from "@/lib/movie-search-params";
@@ -71,10 +65,24 @@ export function MovieDiscover({
     [search, genre, category, sort, page, pageSize],
   );
 
-  const initialQueryRef = useRef(initialQuery);
   useLayoutEffect(() => {
-    hydrateFromServer(initialQueryRef.current);
-  }, [hydrateFromServer]);
+    hydrateFromServer({
+      search: initialQuery.search,
+      genre: initialQuery.genre,
+      category: initialQuery.category,
+      sort: initialQuery.sort,
+      page: initialQuery.page,
+      pageSize: initialQuery.pageSize,
+    });
+  }, [
+    hydrateFromServer,
+    initialQuery.search,
+    initialQuery.genre,
+    initialQuery.category,
+    initialQuery.sort,
+    initialQuery.page,
+    initialQuery.pageSize,
+  ]);
 
   /* Loading must update synchronously; startTransition deferred it so the overlay never painted. */
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -107,7 +115,7 @@ export function MovieDiscover({
     if (search.trim()) params.set("q", search.trim());
     if (genre.trim()) params.set("genre", genre.trim());
     if (category.trim()) params.set("cat", category.trim());
-    if (sort !== "newest") params.set("sort", sort);
+    if (sort !== "title_asc") params.set("sort", sort);
     if (page > 1) params.set("page", String(page));
     if (pageSize !== 15) params.set("pageSize", String(pageSize));
 

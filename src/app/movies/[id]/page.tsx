@@ -90,20 +90,32 @@ export default async function MovieDetailPage({
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                   {movie.title}
                 </h1>
-                {(movie.release_year != null || movie.director?.trim()) && (
+                {(movie.release_year != null ||
+                  movie.director?.trim() ||
+                  movie.language?.trim()) && (
                   <p className="text-sm text-gray-600">
                     {movie.release_year != null && (
                       <span className="font-semibold text-gray-800">
                         {movie.release_year}
                       </span>
                     )}
-                    {movie.release_year != null && movie.director?.trim() && (
-                      <span className="text-gray-400"> · </span>
-                    )}
+                    {movie.release_year != null &&
+                      (movie.director?.trim() || movie.language?.trim()) && (
+                        <span className="text-gray-400"> · </span>
+                      )}
                     {movie.director?.trim() && (
                       <>
                         <span className="text-gray-500">Directed by </span>
                         <span className="text-gray-900">{movie.director}</span>
+                      </>
+                    )}
+                    {movie.director?.trim() && movie.language?.trim() && (
+                      <span className="text-gray-400"> · </span>
+                    )}
+                    {movie.language?.trim() && (
+                      <>
+                        <span className="text-gray-500">Language </span>
+                        <span className="text-gray-900">{movie.language}</span>
                       </>
                     )}
                   </p>

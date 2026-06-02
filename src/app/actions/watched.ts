@@ -2,6 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import {
+  isLikelyHtmlOrTransportBody,
+  logSupabaseTransportFailure,
+  sanitizeSupabaseErrorMessage,
+} from "@/lib/supabase/errors";
+import {
   createSupabaseServer,
   createSupabaseServerOptional,
 } from "@/lib/supabase/server";
@@ -19,7 +24,7 @@ export async function markMovieWatched(movieId: string) {
     .eq("id", movieId)
     .maybeSingle();
 
-  if (movieErr) throw new Error(movieErr.message);
+  if (movieErr) throw new Error(sanitizeSupabaseErrorMessage(movieErr));
   if (!movie || movie.approval_status !== "approved") {
     throw new Error("Only published films can be marked as watched.");
   }
@@ -29,7 +34,7 @@ export async function markMovieWatched(movieId: string) {
     { onConflict: "user_id,movie_id" },
   );
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
   revalidatePath(`/movies/${movieId}`);
@@ -48,7 +53,7 @@ export async function unmarkMovieWatched(movieId: string) {
     .eq("user_id", user.id)
     .eq("movie_id", movieId);
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
   revalidatePath(`/movies/${movieId}`);
@@ -68,6 +73,13 @@ export async function getWatchedMovieIdsForUser(): Promise<string[]> {
     .select("movie_id")
     .eq("user_id", user.id);
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const raw = String(error.message ?? "");
+    if (isLikelyHtmlOrTransportBody(raw)) {
+      logSupabaseTransportFailure("getWatchedMovieIdsForUser");
+      return [];
+    }
+    throw new Error(sanitizeSupabaseErrorMessage(error));
+  }
   return (data ?? []).map((r) => r.movie_id as string);
 }

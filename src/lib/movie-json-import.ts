@@ -19,7 +19,8 @@ export const MOVIE_JSON_FORMAT_EXAMPLE = `{
   "rating": 8.8,
   "review_text": "Layered, propulsive, and worth rewatching.",
   "category": "trending",
-  "genres": ["sci-fi", "thriller", "action"]
+  "genres": ["sci-fi", "thriller", "action"],
+  "language": "English"
 }`;
 
 function asOptionalString(v: unknown): string | undefined {
@@ -44,7 +45,7 @@ function asOptionalNumber(v: unknown): number | null | undefined {
  * Parses and validates a JSON string into {@link MoviePayload}.
  * Required: `title`. Optional: `director`, `overview`, `poster_url`, `release_year`,
  * `runtime_minutes`, `rating` (0–10), `review_text`, `category` (shelf),
- * `genres` (array of known genre slugs).
+ * `genres` (array of known genre slugs), optional `language`.
  */
 export function parseMoviePayloadFromJson(raw: string): MoviePayload {
   let parsed: unknown;
@@ -122,5 +123,6 @@ export function parseMoviePayloadFromJson(raw: string): MoviePayload {
     review_text: asOptionalString(o.review_text) ?? "",
     category: categoryRaw,
     genres,
+    language: asOptionalString(o.language)?.trim() || undefined,
   };
 }

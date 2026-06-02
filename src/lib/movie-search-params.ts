@@ -30,7 +30,7 @@ function parseSort(
   ) {
     return v;
   }
-  return "newest";
+  return "title_asc";
 }
 
 function firstToken(sp: URLSearchParams, key: string): string | null {
