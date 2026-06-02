@@ -1,0 +1,507 @@
+{
+  "source": "https://www.imdb.com/list/ls062655785/",
+  "list_title": "100 Scariest Movies of All Time",
+  "parsed_from": "https://web.archive.org/web/20251026203646/https://www.imdb.com/list/ls062655785/",
+  "movies": [
+    {
+      "imdb_id": "tt0070047",
+      "title": "The Exorcist",
+      "release_year": 1973
+    },
+    {
+      "imdb_id": "tt7784604",
+      "title": "Hereditary",
+      "release_year": 2018
+    },
+    {
+      "imdb_id": "tt4263482",
+      "title": "The Witch",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0072271",
+      "title": "The Texas Chain Saw Massacre",
+      "release_year": 1974
+    },
+    {
+      "imdb_id": "tt2321549",
+      "title": "The Babadook",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0338095",
+      "title": "High Tension",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt5052448",
+      "title": "Get Out",
+      "release_year": 2017
+    },
+    {
+      "imdb_id": "tt1437358",
+      "title": "Sleep Tight",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt1288558",
+      "title": "Evil Dead",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt0082418",
+      "title": "Friday the 13th Part 2",
+      "release_year": 1981
+    },
+    {
+      "imdb_id": "tt8772262",
+      "title": "Midsommar",
+      "release_year": 2019
+    },
+    {
+      "imdb_id": "tt1034415",
+      "title": "Suspiria",
+      "release_year": 2018
+    },
+    {
+      "imdb_id": "tt3086442",
+      "title": "Goodnight Mommy",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt1029234",
+      "title": "Martyrs",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0465203",
+      "title": "Them",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0054215",
+      "title": "Psycho",
+      "release_year": 1960
+    },
+    {
+      "imdb_id": "tt7984734",
+      "title": "The Lighthouse",
+      "release_year": 2019
+    },
+    {
+      "imdb_id": "tt6857112",
+      "title": "Us",
+      "release_year": 2019
+    },
+    {
+      "imdb_id": "tt0081505",
+      "title": "The Shining",
+      "release_year": 1980
+    },
+    {
+      "imdb_id": "tt0066993",
+      "title": "The Devils",
+      "release_year": 1971
+    },
+    {
+      "imdb_id": "tt5109784",
+      "title": "Mother!",
+      "release_year": 2017
+    },
+    {
+      "imdb_id": "tt10229558",
+      "title": "The Dark and the Wicked",
+      "release_year": 2020
+    },
+    {
+      "imdb_id": "tt1038988",
+      "title": "REC",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0373883",
+      "title": "Halloween",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0059646",
+      "title": "Repulsion",
+      "release_year": 1965
+    },
+    {
+      "imdb_id": "tt0073195",
+      "title": "Jaws",
+      "release_year": 1975
+    },
+    {
+      "imdb_id": "tt15791034",
+      "title": "Barbarian",
+      "release_year": 2022
+    },
+    {
+      "imdb_id": "tt0074486",
+      "title": "Eraserhead",
+      "release_year": 1977
+    },
+    {
+      "imdb_id": "tt0087050",
+      "title": "Children of the Corn",
+      "release_year": 1984
+    },
+    {
+      "imdb_id": "tt0081114",
+      "title": "Maniac",
+      "release_year": 1980
+    },
+    {
+      "imdb_id": "tt4935418",
+      "title": "Baskin",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0251736",
+      "title": "House of 1000 Corpses",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt13560574",
+      "title": "X",
+      "release_year": 2022
+    },
+    {
+      "imdb_id": "tt2105044",
+      "title": "V/H/S",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt3235888",
+      "title": "It Follows",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt0185937",
+      "title": "The Blair Witch Project",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt0092991",
+      "title": "Evil Dead II",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt0435625",
+      "title": "The Descent",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0374102",
+      "title": "Open Water",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0114369",
+      "title": "Se7en",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt1530509",
+      "title": "The Human Centipede 2 (Full Sequence)",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0470705",
+      "title": "Bug",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0808279",
+      "title": "Funny Games",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0095294",
+      "title": "Hellbound: Hellraiser II",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt0454841",
+      "title": "The Hills Have Eyes",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0450278",
+      "title": "Hostel",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0324216",
+      "title": "The Texas Chainsaw Massacre",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0080761",
+      "title": "Friday the 13th",
+      "release_year": 1980
+    },
+    {
+      "imdb_id": "tt0078748",
+      "title": "Alien",
+      "release_year": 1979
+    },
+    {
+      "imdb_id": "tt0264616",
+      "title": "Frailty",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0084787",
+      "title": "The Thing",
+      "release_year": 1982
+    },
+    {
+      "imdb_id": "tt1127180",
+      "title": "Drag Me to Hell",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt2870612",
+      "title": "As Above, So Below",
+      "release_year": 2014
+    },
+    {
+      "imdb_id": "tt4062536",
+      "title": "Green Room",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0075005",
+      "title": "The Omen",
+      "release_year": 1976
+    },
+    {
+      "imdb_id": "tt0070917",
+      "title": "The Wicker Man",
+      "release_year": 1973
+    },
+    {
+      "imdb_id": "tt0263488",
+      "title": "Jeepers Creepers",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0395584",
+      "title": "The Devil's Rejects",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0119081",
+      "title": "Event Horizon",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0096071",
+      "title": "The Serpent and the Rainbow",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt0087800",
+      "title": "A Nightmare on Elm Street",
+      "release_year": 1984
+    },
+    {
+      "imdb_id": "tt0078935",
+      "title": "Cannibal Holocaust",
+      "release_year": 1980
+    },
+    {
+      "imdb_id": "tt0091064",
+      "title": "The Fly",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt0235198",
+      "title": "Audition",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt0289043",
+      "title": "28 Days Later",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt8368406",
+      "title": "Vivarium",
+      "release_year": 2019
+    },
+    {
+      "imdb_id": "tt0303816",
+      "title": "Cabin Fever",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt3567288",
+      "title": "The Visit",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0078767",
+      "title": "The Amityville Horror",
+      "release_year": 1979
+    },
+    {
+      "imdb_id": "tt0084516",
+      "title": "Poltergeist",
+      "release_year": 1982
+    },
+    {
+      "imdb_id": "tt0296042",
+      "title": "Ichi the Killer",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0384537",
+      "title": "Silent Hill",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0086320",
+      "title": "Sleepaway Camp",
+      "release_year": 1983
+    },
+    {
+      "imdb_id": "tt0482606",
+      "title": "The Strangers",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0298130",
+      "title": "The Ring",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt1179904",
+      "title": "Paranormal Activity",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0099871",
+      "title": "Jacob's Ladder",
+      "release_year": 1990
+    },
+    {
+      "imdb_id": "tt4954522",
+      "title": "Raw",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt0295700",
+      "title": "Wrong Turn",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt4361050",
+      "title": "Ouija: Origin of Evil",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt0363547",
+      "title": "Dawn of the Dead",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt18925334",
+      "title": "Pearl",
+      "release_year": 2022
+    },
+    {
+      "imdb_id": "tt1259521",
+      "title": "The Cabin in the Woods",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0387564",
+      "title": "Saw",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0082010",
+      "title": "An American Werewolf in London",
+      "release_year": 1981
+    },
+    {
+      "imdb_id": "tt0093177",
+      "title": "Hellraiser",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt1139797",
+      "title": "Let the Right One In",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0082700",
+      "title": "Cannibal Ferox",
+      "release_year": 1981
+    },
+    {
+      "imdb_id": "tt0089885",
+      "title": "Re-Animator",
+      "release_year": 1985
+    },
+    {
+      "imdb_id": "tt3289956",
+      "title": "The Autopsy of Jane Doe",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt0450385",
+      "title": "1408",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0790686",
+      "title": "Mirrors",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt1320244",
+      "title": "The Last Exorcism",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0094862",
+      "title": "Child's Play",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt8508734",
+      "title": "His House",
+      "release_year": 2020
+    },
+    {
+      "imdb_id": "tt0844708",
+      "title": "The Last House on the Left",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt1242432",
+      "title": "I Spit on Your Grave",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt1731697",
+      "title": "The Lords of Salem",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0082533",
+      "title": "The Howling",
+      "release_year": 1981
+    },
+    {
+      "imdb_id": "tt5715874",
+      "title": "The Killing of a Sacred Deer",
+      "release_year": 2017
+    }
+  ]
+}
