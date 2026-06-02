@@ -1,0 +1,508 @@
+{
+  "source": "https://www.imdb.com/list/ls000985554/",
+  "list_title": "Top 100 Korean Movies",
+  "parsed_from": "https://web.archive.org/web/20250827101656/https://www.imdb.com/list/ls000985554/",
+  "note": "100 titles from archived page __NEXT_DATA__ (full list).",
+  "movies": [
+    {
+      "imdb_id": "tt0364569",
+      "title": "Oldboy",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0289181",
+      "title": "Failan",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt1190539",
+      "title": "The Chaser",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt1588170",
+      "title": "I Saw the Devil",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0456912",
+      "title": "A Bittersweet Life",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0348568",
+      "title": "The Classic",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0353969",
+      "title": "Memories of Murder",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0386064",
+      "title": "Tae Guk Gi: The Brotherhood of War",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0310775",
+      "title": "Sympathy for Mr. Vengeance",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt1230385",
+      "title": "The Yellow Sea",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0260991",
+      "title": "Joint Security Area",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0821442",
+      "title": "A Dirty Carnival",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0451094",
+      "title": "Lady Vengeance",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt1527788",
+      "title": "The Man from Nowhere",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0423866",
+      "title": "3-Iron",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0428870",
+      "title": "A Moment to Remember",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt1216496",
+      "title": "Mother",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt6751668",
+      "title": "Parasite",
+      "release_year": 2019
+    },
+    {
+      "imdb_id": "tt0901487",
+      "title": "The Good, the Bad, the Weird",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0365376",
+      "title": "A Tale of Two Sisters",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt1662557",
+      "title": "No Mercy",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0762073",
+      "title": "Thirst",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt1606384",
+      "title": "My Way",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0282599",
+      "title": "Il Mare",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0468704",
+      "title": "Daisy",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt2299842",
+      "title": "Pieta",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0374546",
+      "title": "Spring, Summer, Fall, Winter... and Spring",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0293715",
+      "title": "My Sassy Girl",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0457007",
+      "title": "Crying Fist",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0468492",
+      "title": "The Host",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt2070649",
+      "title": "Silenced",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0475783",
+      "title": "Welcome to Dongmakgol",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0497137",
+      "title": "I'm a Cyborg, But That's OK",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt2942522",
+      "title": "Moebius",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt1814819",
+      "title": "Man of Vendetta",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt2828840",
+      "title": "Fists of Legend",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt0317234",
+      "title": "Painted Fire",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0262246",
+      "title": "Attack the Gas Station",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt1984208",
+      "title": "Moby Dick",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0188503",
+      "title": "The Quiet Family",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt0445396",
+      "title": "The President's Last Bang",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt2625030",
+      "title": "New World",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt0817225",
+      "title": "Secret Sunshine",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0192657",
+      "title": "Shiri",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt1287878",
+      "title": "Poetry",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt2007387",
+      "title": "The Front Line",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0420251",
+      "title": "Three... Extremes",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt1314652",
+      "title": "The Housemaid",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0296658",
+      "title": "Take Care of My Cat",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt1843120",
+      "title": "The Unjust",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt4016934",
+      "title": "The Handmaiden",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt0497986",
+      "title": "Time",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0220806",
+      "title": "Tell Me Something",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt2082221",
+      "title": "Nameless Gangster: Rules of the Time",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0303068",
+      "title": "The Shower",
+      "release_year": 1979
+    },
+    {
+      "imdb_id": "tt1646959",
+      "title": "Bedevilled",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0255589",
+      "title": "The Isle",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0475711",
+      "title": "Sad Movie",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0377645",
+      "title": "The Last Witness",
+      "release_year": 1980
+    },
+    {
+      "imdb_id": "tt0462703",
+      "title": "Antarctic Journal",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0306909",
+      "title": "Public Enemy",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0969268",
+      "title": "Voice of a Murderer",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt1694019",
+      "title": "Moss",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt1233473",
+      "title": "Rainbow Eyes",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt1193490",
+      "title": "Black House",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0997229",
+      "title": "Seven Days",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt2025506",
+      "title": "Blind",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0826031",
+      "title": "Arang",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0275083",
+      "title": "The Warrior",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt1900891",
+      "title": "Haunters",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0397619",
+      "title": "Samaritan Girl",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt2186819",
+      "title": "Howling",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt7057496",
+      "title": "Forgotten",
+      "release_year": 2017
+    },
+    {
+      "imdb_id": "tt1533086",
+      "title": "Secret",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt0470967",
+      "title": "Voice",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt1002567",
+      "title": "Hansel and Gretel",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0417072",
+      "title": "R-Point",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0372937",
+      "title": "Into the Mirror",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0307213",
+      "title": "Bad Guy",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0870958",
+      "title": "Bloody Reunion",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0266075",
+      "title": "Memento Mori",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt0287583",
+      "title": "I Wish I Had a Wife",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0140825",
+      "title": "Christmas in August",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt6878038",
+      "title": "A Taxi Driver",
+      "release_year": 2017
+    },
+    {
+      "imdb_id": "tt7282468",
+      "title": "Burning",
+      "release_year": 2018
+    },
+    {
+      "imdb_id": "tt0475532",
+      "title": "Cello",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt5215952",
+      "title": "The Wailing",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt6914542",
+      "title": "The Drug King",
+      "release_year": 2018
+    },
+    {
+      "imdb_id": "tt5700672",
+      "title": "Train to Busan",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt2390253",
+      "title": "A Muse",
+      "release_year": 2012
+    },
+    {
+      "imdb_id": "tt0247613",
+      "title": "Peppermint Candy",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt10208198",
+      "title": "The Gangster, the Cop, the Devil",
+      "release_year": 2019
+    },
+    {
+      "imdb_id": "tt2659414",
+      "title": "Miracle in Cell No. 7",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt3153634",
+      "title": "Hope",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt3404140",
+      "title": "The Attorney",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt11358398",
+      "title": "The Man Standing Next",
+      "release_year": 2020
+    },
+    {
+      "imdb_id": "tt4914580",
+      "title": "The Age of Shadows",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt11777040",
+      "title": "Time to Hunt",
+      "release_year": 2020
+    },
+    {
+      "imdb_id": "tt2967578",
+      "title": "Secretly Greatly",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt1430638",
+      "title": "24 Hours to Die",
+      "release_year": 2008
+    }
+  ]
+}
