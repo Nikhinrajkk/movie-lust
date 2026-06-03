@@ -35,7 +35,6 @@ export function MovieDiscover({
   const hydrateFromServer = useMovieFilters((s) => s.hydrateFromServer);
   const search = useMovieFilters((s) => s.search);
   const genre = useMovieFilters((s) => s.genre);
-  const category = useMovieFilters((s) => s.category);
   const sort = useMovieFilters((s) => s.sort);
   const page = useMovieFilters((s) => s.page);
   const pageSize = useMovieFilters((s) => s.pageSize);
@@ -63,12 +62,11 @@ export function MovieDiscover({
     () => ({
       search,
       genre,
-      category,
       sort,
       page,
       pageSize,
     }),
-    [search, genre, category, sort, page, pageSize],
+    [search, genre, sort, page, pageSize],
   );
 
   useLayoutEffect(() => {
@@ -77,7 +75,6 @@ export function MovieDiscover({
     hydrateFromServer({
       search: initialQuery.search,
       genre: initialQuery.genre,
-      category: initialQuery.category,
       sort: initialQuery.sort,
       page: initialQuery.page,
       pageSize: initialQuery.pageSize,
@@ -91,7 +88,6 @@ export function MovieDiscover({
     const sameAsServerPayload =
       queryForList.search === iq.search &&
       queryForList.genre === iq.genre &&
-      queryForList.category === iq.category &&
       queryForList.sort === iq.sort &&
       queryForList.page === iq.page &&
       queryForList.pageSize === iq.pageSize;
@@ -128,7 +124,6 @@ export function MovieDiscover({
     const params = new URLSearchParams();
     if (search.trim()) params.set("q", search.trim());
     if (genre.trim()) params.set("genre", genre.trim());
-    if (category.trim()) params.set("cat", category.trim());
     if (sort !== "title_asc") params.set("sort", sort);
     if (page > 1) params.set("page", String(page));
     if (pageSize !== 15) params.set("pageSize", String(pageSize));
@@ -139,7 +134,6 @@ export function MovieDiscover({
 
     router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
   }, [
-    category,
     genre,
     page,
     pageSize,
@@ -161,7 +155,7 @@ export function MovieDiscover({
               Movies
             </h1>
             <p className="mt-0.5 text-sm text-gray-500">
-              Explore titles — search, pick a genre or shelf, then sort.
+              Explore titles — search, pick a genre, then sort.
             </p>
           </div>
           {supabaseReady && (

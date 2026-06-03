@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import type { MovieFormState } from "@/app/actions/movies";
 import type { MovieRow } from "@/types/movie";
-import { GENRE_OPTIONS } from "@/types/movie";
+import { GENRE_OPTIONS, formatGenreLabel } from "@/types/movie";
 import { Button } from "@/components/ui/button";
 import { FormCheckbox } from "@/components/ui/checkbox";
 import { FieldLabel } from "@/components/ui/label";
@@ -137,7 +137,7 @@ export function MovieForm({
                 id={`genre-${g}`}
                 name={`genre_${g}`}
                 defaultChecked={checked}
-                labelText={g}
+                labelText={formatGenreLabel(g)}
               />
             );
           })}

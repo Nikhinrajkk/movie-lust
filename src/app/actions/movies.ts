@@ -24,7 +24,7 @@ export type ListMoviesInput = {
   search?: string;
   genre?: string;
   category?: string;
-  sort?: "newest" | "title_asc" | "rating_desc" | "year_desc";
+  sort?: "title_asc" | "rating_desc" | "year_desc";
   page?: number;
   pageSize?: number;
 };
@@ -37,8 +37,6 @@ function mapSort(sort: ListMoviesInput["sort"]) {
       return { column: "rating" as const, ascending: false };
     case "year_desc":
       return { column: "release_year" as const, ascending: false };
-    case "newest":
-      return { column: "created_at" as const, ascending: false };
     default:
       return { column: "title" as const, ascending: true };
   }

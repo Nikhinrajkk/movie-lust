@@ -25,7 +25,7 @@ export default async function Home({
   for (const [key, value] of Object.entries(sp)) {
     if (value == null) continue;
     if (Array.isArray(value)) {
-      if (key === "genre" || key === "cat") {
+      if (key === "genre") {
         for (const v of value) {
           if (v != null && v !== "") params.append(key, v);
         }
@@ -50,7 +50,6 @@ export default async function Home({
     ? await listMovies({
         search: initialQuery.search,
         genre: initialQuery.genre,
-        category: initialQuery.category || undefined,
         sort: initialQuery.sort,
         page: initialQuery.page,
         pageSize: initialQuery.pageSize,

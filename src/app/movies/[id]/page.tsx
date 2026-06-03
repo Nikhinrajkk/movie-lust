@@ -11,6 +11,7 @@ import { WatchedToggle } from "@/components/watched-toggle";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 import { createSupabaseServer } from "@/lib/supabase/server";
+import { formatGenreLabel } from "@/types/movie";
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
@@ -186,9 +187,9 @@ export default async function MovieDetailPage({
                 {movie.genres.map((g) => (
                   <span
                     key={g}
-                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 text-xs capitalize text-gray-700"
+                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 text-xs text-gray-700"
                   >
-                    {g}
+                    {formatGenreLabel(g)}
                   </span>
                 ))}
               </div>

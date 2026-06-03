@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useMovieFilters } from "@/stores/movie-filters";
 import type { SortOption } from "@/stores/movie-filters";
 import { Button } from "@/components/ui/button";
@@ -10,9 +11,10 @@ import {
   UiSelectGroupLabel,
   UiSelectItem,
 } from "@/components/ui/select";
-import { GENRE_OPTIONS, MOVIE_CATEGORIES, type MovieCategory } from "@/types/movie";
+import { GENRE_OPTIONS, formatGenreLabel } from "@/types/movie";
 
 const FILTER_ALL = "__all__";
+const SEARCH_DEBOUNCE_MS = 320;
 
 export function MovieFilters({
   disabled,
@@ -26,33 +28,47 @@ export function MovieFilters({
   const setSearch = useMovieFilters((s) => s.setSearch);
   const genre = useMovieFilters((s) => s.genre);
   const setGenre = useMovieFilters((s) => s.setGenre);
-  const category = useMovieFilters((s) => s.category);
-  const setCategory = useMovieFilters((s) => s.setCategory);
   const clearFilters = useMovieFilters((s) => s.clearFilters);
   const sort = useMovieFilters((s) => s.sort);
   const setSort = useMovieFilters((s) => s.setSort);
 
-  const filterValue = genre ? `g:${genre}` : category ? `c:${category}` : FILTER_ALL;
+  const [draftSearch, setDraftSearch] = useState(search);
 
-  function onFilterChange(raw: string) {
+  useEffect(() => {
+    setDraftSearch(search);
+  }, [search]);
+
+  useEffect(() => {
+    const trimmed = draftSearch.trim();
+    const applied = search.trim();
+    if (trimmed === applied) return;
+    const id = window.setTimeout(() => {
+      setSearch(draftSearch.trim());
+    }, SEARCH_DEBOUNCE_MS);
+    return () => window.clearTimeout(id);
+  }, [draftSearch, search, setSearch]);
+
+  function flushSearchToStore() {
+    const trimmed = draftSearch.trim();
+    if (trimmed !== search.trim()) {
+      setSearch(trimmed);
+    }
+  }
+
+  const genreValue = genre ? `g:${genre}` : FILTER_ALL;
+
+  function onGenreChange(raw: string) {
     if (raw === FILTER_ALL) {
       setGenre("");
-      setCategory("");
       return;
     }
     if (raw.startsWith("g:")) {
       setGenre(raw.slice(2));
-      setCategory("");
-      return;
-    }
-    if (raw.startsWith("c:")) {
-      setCategory(raw.slice(2) as MovieCategory);
-      setGenre("");
     }
   }
 
   const hasTextOrFilter =
-    search.trim().length > 0 || Boolean(genre) || Boolean(category);
+    draftSearch.trim().length > 0 || Boolean(genre);
 
   return (
     <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
@@ -82,8 +98,9 @@ export function MovieFilters({
         <input
           id="catalog-search"
           type="search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={draftSearch}
+          onChange={(e) => setDraftSearch(e.target.value)}
+          onBlur={flushSearchToStore}
           disabled={disabled}
           placeholder="Search…"
           className="box-border h-10 w-full min-w-0 rounded-lg border border-gray-300 bg-white py-0 pl-9 pr-3 text-sm font-medium leading-10 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[var(--bms-red)] focus:ring-2 focus:ring-[var(--bms-red)]/20 disabled:opacity-50"
@@ -91,60 +108,51 @@ export function MovieFilters({
       </div>
 
       <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:flex-1 sm:flex-nowrap sm:items-center sm:gap-3 sm:[&>*]:min-w-0">
-      <UiSelect
-        value={filterValue}
-        onValueChange={onFilterChange}
-        disabled={disabled || busy}
-        placeholder="Filter"
-        id="catalog-filter"
-        aria-label="Filter catalogue"
-        triggerClassName="w-full min-w-0 rounded-lg sm:w-[12.5rem] sm:shrink-0"
-      >
-        <UiSelectItem value={FILTER_ALL}>All titles</UiSelectItem>
-        <UiSelectGroup>
-          <UiSelectGroupLabel>Genre</UiSelectGroupLabel>
-          {GENRE_OPTIONS.map((g) => (
-            <UiSelectItem key={g} value={`g:${g}`}>
-              {g.charAt(0).toUpperCase() + g.slice(1)}
-            </UiSelectItem>
-          ))}
-        </UiSelectGroup>
-        <UiSelectGroup>
-          <UiSelectGroupLabel>Shelf</UiSelectGroupLabel>
-          {MOVIE_CATEGORIES.map((c) => (
-            <UiSelectItem key={c.value} value={`c:${c.value}`}>
-              {c.label}
-            </UiSelectItem>
-          ))}
-        </UiSelectGroup>
-      </UiSelect>
-
-      <UiSelect
-        value={sort}
-        onValueChange={(v) => setSort(v as SortOption)}
-        disabled={disabled || busy}
-        placeholder="Sort"
-        id="catalog-sort"
-        aria-label="Sort results"
-        triggerClassName="w-full min-w-0 rounded-lg sm:w-[10.75rem] sm:shrink-0"
-      >
-        <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
-        <UiSelectItem value="newest">Sort: Newest</UiSelectItem>
-        <UiSelectItem value="rating_desc">Sort: Rating</UiSelectItem>
-        <UiSelectItem value="year_desc">Sort: Year</UiSelectItem>
-      </UiSelect>
-
-      {hasTextOrFilter ? (
-        <Button
-          type="button"
-          variant="outline"
+        <UiSelect
+          value={genreValue}
+          onValueChange={onGenreChange}
           disabled={disabled || busy}
-          onClick={() => clearFilters()}
-          className="col-span-2 box-border h-10 min-h-10 w-full shrink-0 px-3 py-0 leading-none sm:col-span-1 sm:w-auto"
+          placeholder="Genre"
+          id="catalog-genre"
+          aria-label="Filter by genre"
+          triggerClassName="w-full min-w-0 rounded-lg sm:w-[12.5rem] sm:shrink-0"
         >
-          Clear
-        </Button>
-      ) : null}
+          <UiSelectItem value={FILTER_ALL}>All genres</UiSelectItem>
+          <UiSelectGroup>
+            <UiSelectGroupLabel>Genre</UiSelectGroupLabel>
+            {GENRE_OPTIONS.map((g) => (
+              <UiSelectItem key={g} value={`g:${g}`}>
+                {formatGenreLabel(g)}
+              </UiSelectItem>
+            ))}
+          </UiSelectGroup>
+        </UiSelect>
+
+        <UiSelect
+          value={sort}
+          onValueChange={(v) => setSort(v as SortOption)}
+          disabled={disabled || busy}
+          placeholder="Sort"
+          id="catalog-sort"
+          aria-label="Sort results"
+          triggerClassName="w-full min-w-0 rounded-lg sm:w-[10.75rem] sm:shrink-0"
+        >
+          <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
+          <UiSelectItem value="rating_desc">Sort: Rating</UiSelectItem>
+          <UiSelectItem value="year_desc">Sort: Year</UiSelectItem>
+        </UiSelect>
+
+        {hasTextOrFilter ? (
+          <Button
+            type="button"
+            variant="outline"
+            disabled={disabled || busy}
+            onClick={() => clearFilters()}
+            className="col-span-2 box-border h-10 min-h-10 w-full shrink-0 px-3 py-0 leading-none sm:col-span-1 sm:w-auto"
+          >
+            Clear
+          </Button>
+        ) : null}
       </div>
     </div>
   );

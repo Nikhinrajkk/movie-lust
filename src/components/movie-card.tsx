@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { MovieRow } from "@/types/movie";
+import { formatGenreLabel, type MovieRow } from "@/types/movie";
 import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { WatchedToggle } from "@/components/watched-toggle";
 
@@ -95,9 +95,9 @@ export function MovieCard({
             {movie.genres.slice(0, 3).map((g) => (
               <span
                 key={g}
-                className="rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-[9px] capitalize text-gray-600"
+                className="rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-[9px] text-gray-600"
               >
-                {g}
+                {formatGenreLabel(g)}
               </span>
             ))}
           </div>

@@ -43,11 +43,35 @@ export const GENRE_OPTIONS = [
   "crime",
   "drama",
   "fantasy",
+  "feelgood",
   "horror",
+  "investigation",
+  "mystery",
   "romance",
   "sci-fi",
+  "serial-killer",
   "thriller",
 ] as const;
+
+export type GenreSlug = (typeof GENRE_OPTIONS)[number];
+
+/** Human-readable genre for filters, forms, and chips (slugs stay URL-safe). */
+export function formatGenreLabel(slug: string): string {
+  const map: Partial<Record<GenreSlug, string>> = {
+    "sci-fi": "Sci-Fi",
+    "serial-killer": "Serial killer",
+  };
+  const asSlug = slug as GenreSlug;
+  const mapped = map[asSlug];
+  if (mapped) return mapped;
+  if (!slug.includes("-")) {
+    return slug.charAt(0).toUpperCase() + slug.slice(1);
+  }
+  return slug
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
 
 export type MovieListResult = {
   movies: MovieRow[];
