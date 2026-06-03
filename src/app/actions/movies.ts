@@ -57,19 +57,10 @@ export async function listMovies(
     return { movies: [], total: 0, page, pageSize, totalPages: 1 };
   }
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  let query = supabase.from("movies").select("*", { count: "exact" });
-
-  if (user) {
-    query = query.or(
-      `approval_status.eq.approved,and(created_by.eq.${user.id},approval_status.in.(pending,rejected))`,
-    );
-  } else {
-    query = query.eq("approval_status", "approved");
-  }
+  let query = supabase
+    .from("movies")
+    .select("*", { count: "exact" })
+    .eq("approval_status", "approved");
 
   const q = input.search?.trim();
   if (q) {
@@ -116,6 +107,34 @@ export async function listMovies(
   };
 }
 
+/** Titles the signed-in user submitted (any approval status). */
+export async function listMoviesCreatedByUser(): Promise<MovieRow[]> {
+  const supabase = await createSupabaseServerOptional();
+  if (!supabase) return [];
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data, error } = await supabase
+    .from("movies")
+    .select("*")
+    .eq("created_by", user.id)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    const raw = String(error.message ?? "");
+    if (isLikelyHtmlOrTransportBody(raw)) {
+      logSupabaseTransportFailure("listMoviesCreatedByUser");
+      return [];
+    }
+    throw new Error(sanitizeSupabaseErrorMessage(error));
+  }
+
+  return (data ?? []) as MovieRow[];
+}
+
 export async function getMovieById(id: string): Promise<MovieRow | null> {
   const supabase = await createSupabaseServerOptional();
   if (!supabase) return null;
@@ -157,15 +176,6 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Sign in to add a movie.");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("is_admin")
-    .eq("id", user.id)
-    .maybeSingle();
-
-  const isAdmin = Boolean(profile?.is_admin);
-  const approval_status = isAdmin ? "approved" : "pending";
-
   const { data, error } = await supabase
     .from("movies")
     .insert({
@@ -181,7 +191,7 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
       director: payload.director ?? "",
       language: payload.language?.trim() ?? "",
       created_by: user.id,
-      approval_status,
+      approval_status: "pending",
     })
     .select("id")
     .single();
@@ -189,6 +199,7 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
+  revalidatePath("/my-movies");
   return data.id as string;
 }
 
@@ -215,6 +226,7 @@ export async function updateMovie(id: string, payload: MoviePayload) {
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath(`/movies/${id}`);
+  revalidatePath("/my-movies");
 }
 
 export async function deleteMovie(id: string) {
@@ -223,6 +235,9 @@ export async function deleteMovie(id: string) {
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/admin");
+  revalidatePath("/watchlist");
+  revalidatePath("/watched");
+  revalidatePath("/my-movies");
 }
 
 export type MovieFormState = {

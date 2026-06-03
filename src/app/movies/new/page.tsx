@@ -8,7 +8,7 @@ import { isSupabaseConfigured } from "@/lib/config";
 
 export default async function NewMoviePage() {
   const ready = isSupabaseConfigured();
-  const { user, isAdmin } = await getSessionUserWithProfile();
+  const { user } = await getSessionUserWithProfile();
 
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">
@@ -35,8 +35,8 @@ export default async function NewMoviePage() {
       {ready && !user && (
         <div className="rounded-2xl border border-gray-200 bg-white px-6 py-8 text-center text-sm text-gray-700 shadow-sm">
           <p className="mb-4">
-            Sign in to submit a new title. Submissions from members are queued
-            for admin approval before they appear in browse.
+            Sign in to submit a new title. Every submission is queued for admin
+            approval before it appears in the public catalogue.
           </p>
           <NavLinkButton href="/login?next=/movies/new" className="px-5 py-2.5">
             Sign in to continue
@@ -44,16 +44,21 @@ export default async function NewMoviePage() {
         </div>
       )}
 
-      {ready && user && !isAdmin && (
-        <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-          Your submission will be reviewed by an admin. Until it is approved,
-          it won&apos;t appear on the home page — you&apos;ll still be able to
-          open it from your confirmation link or history.
-        </p>
-      )}
-
       {ready && user && (
         <div className="space-y-8">
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            New titles stay <span className="font-semibold">pending</span> until
+            an admin approves them. They won&apos;t show on the home page or to
+            other members until then — you can open yours from{" "}
+            <NavLinkButton
+              href="/my-movies"
+              variant="link"
+              className="inline-flex px-0 py-0 font-semibold"
+            >
+              My movies
+            </NavLinkButton>{" "}
+            or the link after you save.
+          </p>
           <MovieJsonImport />
           <MovieForm action={createMovieFromForm} />
         </div>

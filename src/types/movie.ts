@@ -23,6 +23,8 @@ export type MovieRow = {
   created_at: string;
   updated_at: string;
   approval_status?: MovieApprovalStatus;
+  /** Set when an admin approves the submission (moderation). */
+  approved_by?: string | null;
   created_by?: string | null;
 };
 

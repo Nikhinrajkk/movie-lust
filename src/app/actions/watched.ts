@@ -10,6 +10,7 @@ import {
   createSupabaseServer,
   createSupabaseServerOptional,
 } from "@/lib/supabase/server";
+import type { MovieRow } from "@/types/movie";
 
 export async function markMovieWatched(movieId: string) {
   const supabase = await createSupabaseServer();
@@ -37,6 +38,7 @@ export async function markMovieWatched(movieId: string) {
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
+  revalidatePath("/watched");
   revalidatePath(`/movies/${movieId}`);
 }
 
@@ -56,6 +58,7 @@ export async function unmarkMovieWatched(movieId: string) {
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
+  revalidatePath("/watched");
   revalidatePath(`/movies/${movieId}`);
 }
 
@@ -82,4 +85,34 @@ export async function getWatchedMovieIdsForUser(): Promise<string[]> {
     throw new Error(sanitizeSupabaseErrorMessage(error));
   }
   return (data ?? []).map((r) => r.movie_id as string);
+}
+
+export async function listWatchedMovies(): Promise<MovieRow[]> {
+  const supabase = await createSupabaseServer();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data: rows, error } = await supabase
+    .from("watched_movies")
+    .select("movie_id, movies(*)")
+    .eq("user_id", user.id);
+
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
+
+  const movies = (rows ?? [])
+    .map((r) => {
+      const m = r.movies as MovieRow | MovieRow[] | null;
+      if (m && !Array.isArray(m)) return m;
+      if (Array.isArray(m) && m[0]) return m[0];
+      return null;
+    })
+    .filter((m): m is MovieRow => m != null);
+
+  return movies.sort((a, b) =>
+    (a.title ?? "").localeCompare(b.title ?? "", undefined, {
+      sensitivity: "base",
+    }),
+  );
 }

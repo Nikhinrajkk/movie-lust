@@ -38,6 +38,7 @@ export async function addToWatchlist(movieId: string) {
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
+  revalidatePath("/watched");
   revalidatePath(`/movies/${movieId}`);
 }
 
@@ -57,6 +58,7 @@ export async function removeFromWatchlist(movieId: string) {
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");
   revalidatePath("/watchlist");
+  revalidatePath("/watched");
   revalidatePath(`/movies/${movieId}`);
 }
 

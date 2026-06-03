@@ -38,7 +38,9 @@ MovieLust is a **Next.js** app for browsing, searching, filtering, and reviewing
 
    In the Supabase SQL editor, run in order:
    - `supabase/migrations/0001_schema.sql` — DDL only: extensions, `movies`, `profiles`, `watchlist`, functions, triggers, RLS.
+   - `supabase/migrations/0003_watched_movies.sql` — `watched_movies` table + RLS (mark-as-watched feature).
    - `supabase/migrations/0002_data.sql` — DML only: demo rows, IMDb chart seed, poster URL fixes, IMDb list catalogue inserts (all idempotent / safe to re-run where noted).
+   - `supabase/migrations/0004_movie_moderation_gate.sql` — moderation gate: `approved_by`, default `pending` for new rows, insert RLS + trigger so new movies (UI or SQL) must be approved before they appear in browse. **Run after `0002_data.sql`** so seed data can still insert as `approved` before this gate exists.
 
    If you already applied the older numbered migrations on a project, do **not** re-run `0001_schema.sql` blindly; use a fresh database or merge changes manually.
 

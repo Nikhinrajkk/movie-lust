@@ -57,7 +57,7 @@ export function HeaderUserMenu({
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="z-50 min-w-[13.5rem] overflow-hidden rounded-xl border border-gray-200 bg-white p-1 shadow-xl"
+          className="z-50 min-w-[15.5rem] overflow-hidden rounded-xl border border-gray-200 bg-white p-1 shadow-xl"
           sideOffset={8}
           align="end"
           collisionPadding={12}
@@ -75,7 +75,17 @@ export function HeaderUserMenu({
 
           <DropdownMenu.Item asChild>
             <Link href="/watchlist" className={linkItemClass}>
-              My list
+              FAV MOVIES
+            </Link>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item asChild>
+            <Link href="/my-movies" className={linkItemClass}>
+              MY MOVIES
+            </Link>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item asChild>
+            <Link href="/watched" className={linkItemClass}>
+              WATCHED MOVIES
             </Link>
           </DropdownMenu.Item>
 

@@ -1,10 +1,6 @@
 -- MovieLust data (DML only). Run after 0001_schema.sql.
 -- Consolidates former 0001 demo seeds, 0002_interstellar, 0004_seed_imdb_chart, 0005_update_poster_urls_wikimedia,
-<<<<<<< HEAD
 -- 0008–0012 IMDb list seeds, plus ls062655785 (100 Scariest Movies of All Time).
-=======
--- 0008–0012 IMDb list seeds.
->>>>>>> 9c0f7afa696477fbc2c2c9297f81c47cd663f038
 
 -- Demo catalogue rows (formerly 0001_init + 0002_interstellar)
 insert into public.movies (
@@ -8778,7 +8774,6 @@ where not exists (
   select 1 from public.movies m where m.title = 'Darkman'
 );
 
-<<<<<<< HEAD
 -- ---- IMDb list ls062655785 (100 Scariest Movies of All Time) ----
 -- https://www.imdb.com/list/ls062655785/
 -- Parsed from Internet Archive snapshot 20251026203646 (__NEXT_DATA__).
@@ -10984,5 +10979,3 @@ where not exists (
   select 1 from public.movies m where m.title = 'The Killing of a Sacred Deer'
 );
 
-=======
->>>>>>> 9c0f7afa696477fbc2c2c9297f81c47cd663f038

@@ -26,10 +26,16 @@ export async function approveMovie(id: string) {
   if (!isAdmin) throw new Error("Admin access required.");
 
   const supabase = await createSupabaseServer();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Sign in to approve.");
+
   const { error } = await supabase
     .from("movies")
     .update({
       approval_status: "approved",
+      approved_by: user.id,
       updated_at: new Date().toISOString(),
     })
     .eq("id", id)
@@ -39,6 +45,7 @@ export async function approveMovie(id: string) {
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath(`/movies/${id}`);
+  revalidatePath("/my-movies");
 }
 
 export async function rejectMovie(id: string) {
@@ -50,6 +57,7 @@ export async function rejectMovie(id: string) {
     .from("movies")
     .update({
       approval_status: "rejected",
+      approved_by: null,
       updated_at: new Date().toISOString(),
     })
     .eq("id", id)
@@ -59,4 +67,5 @@ export async function rejectMovie(id: string) {
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath(`/movies/${id}`);
+  revalidatePath("/my-movies");
 }

@@ -10,6 +10,7 @@ import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { WatchedToggle } from "@/components/watched-toggle";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
+import { createSupabaseServer } from "@/lib/supabase/server";
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
@@ -45,6 +46,24 @@ export default async function MovieDetailPage({
   const watchlistToggleEnabled =
     Boolean(user) && status === "approved";
 
+  let approverLabel: string | null = null;
+  if (
+    ready &&
+    movie &&
+    status === "approved" &&
+    movie.approved_by &&
+    isAdmin
+  ) {
+    const supabase = await createSupabaseServer();
+    const { data: approver } = await supabase
+      .from("profiles")
+      .select("display_name")
+      .eq("id", movie.approved_by)
+      .maybeSingle();
+    const dn = approver?.display_name?.trim();
+    approverLabel = dn && dn.length > 0 ? dn : movie.approved_by;
+  }
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
       {!ready && <SetupCallout />}
@@ -77,6 +96,13 @@ export default async function MovieDetailPage({
                   : "This submission was rejected and is hidden from the public catalogue."}
               </div>
             )}
+
+            {approverLabel ? (
+              <p className="text-xs text-gray-500">
+                Approved for catalogue by{" "}
+                <span className="font-medium text-gray-700">{approverLabel}</span>
+              </p>
+            ) : null}
 
             <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-4">
               <div className="space-y-3">
