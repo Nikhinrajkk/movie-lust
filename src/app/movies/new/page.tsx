@@ -17,7 +17,7 @@ export default async function NewMoviePage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Add to collection
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
             New movie
           </h1>
         </div>

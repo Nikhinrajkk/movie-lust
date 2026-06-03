@@ -5,6 +5,11 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 let browserClient: SupabaseClient | null = null;
 
+/** Drop cached client so the next call builds a fresh instance (e.g. after sign-out). */
+export function resetSupabaseBrowserClient(): void {
+  browserClient = null;
+}
+
 export function getSupabaseBrowser(): SupabaseClient {
   if (browserClient) return browserClient;
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

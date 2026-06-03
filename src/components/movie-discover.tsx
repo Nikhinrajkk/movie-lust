@@ -157,7 +157,7 @@ export function MovieDiscover({
       <div className="space-y-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-[1.65rem]">
+            <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-[1.65rem]">
               Movies
             </h1>
             <p className="mt-0.5 text-sm text-gray-500">
@@ -165,7 +165,7 @@ export function MovieDiscover({
             </p>
           </div>
           {supabaseReady && (
-            <p className="shrink-0 text-xs font-medium text-gray-500">
+            <p className="shrink-0 text-right text-xs font-medium leading-snug text-gray-500 sm:text-left">
               {data.total === 0
                 ? "No titles match."
                 : `${data.movies.length} of ${data.total} films`}
@@ -173,7 +173,7 @@ export function MovieDiscover({
           )}
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+        <div className="rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:p-4">
           <MovieFilters disabled={!supabaseReady} busy={listLoading} />
         </div>
       </div>
@@ -187,7 +187,7 @@ export function MovieDiscover({
       <CinemaLoadingLayer active={listLoading && supabaseReady}>
         <>
           <div
-            className={`grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 transition-opacity duration-200 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
+            className={`grid min-w-0 grid-cols-2 gap-2 transition-opacity duration-200 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
           >
             {data.movies.map((m) => {
               const approved =

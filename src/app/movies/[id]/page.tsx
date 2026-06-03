@@ -78,7 +78,7 @@ export default async function MovieDetailPage({
               </div>
             )}
 
-            <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-4">
               <div className="space-y-3">
                 {movie.runtime_minutes != null && (
                   <div className="flex flex-wrap gap-2">
@@ -87,7 +87,7 @@ export default async function MovieDetailPage({
                     </span>
                   </div>
                 )}
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+                <h1 className="break-words text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-4xl">
                   {movie.title}
                 </h1>
                 {(movie.release_year != null ||
@@ -131,7 +131,7 @@ export default async function MovieDetailPage({
                 )}
               </div>
 
-              <div className="flex flex-row-reverse flex-wrap items-center gap-2">
+              <div className="flex w-full min-w-0 flex-wrap items-center justify-start gap-2 sm:w-auto sm:flex-row-reverse sm:justify-end">
                 {watchlistToggleEnabled && (
                   <>
                     <WatchlistToggle

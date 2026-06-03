@@ -27,7 +27,7 @@ export default async function WatchlistPage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Your picks
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
             My list
           </h1>
           <p className="mt-1 text-sm text-gray-600">
@@ -54,7 +54,7 @@ export default async function WatchlistPage() {
       )}
 
       {ready && movies.length > 0 && (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {movies.map((m) => (
             <MovieCard
               key={m.id}

@@ -122,7 +122,7 @@ export function WatchlistToggle({
       aria-pressed={liked}
       disabled={disabled || pending}
       onClick={onClick}
-      className={`pointer-events-auto relative z-10 inline-flex ${dims} shrink-0 items-center justify-center rounded-full border border-white/20 bg-black/50 shadow-lg shadow-black/35 outline-none backdrop-blur-md transition-[transform,box-shadow] duration-150 hover:border-[var(--bms-red)]/40 hover:bg-black/60 hover:shadow-[var(--bms-red)]/10 focus-visible:ring-2 focus-visible:ring-[var(--bms-red)]/45 active:scale-90 disabled:pointer-events-none disabled:opacity-45 ${pop ? "round-media-pop" : ""} ${className}`.trim()}
+      className={`pointer-events-auto relative z-10 inline-flex ${dims} shrink-0 items-center justify-center rounded-full border border-white/20 outline-none transition-[transform,box-shadow] duration-150 hover:border-[var(--bms-red)]/40 hover:bg-black/60 hover:shadow-[var(--bms-red)]/10 focus-visible:ring-2 focus-visible:ring-[var(--bms-red)]/45 active:scale-90 disabled:pointer-events-none disabled:opacity-45 ${pop ? "round-media-pop" : ""} ${className}`.trim()}
     >
       {ringToken > 0 && liked && (
         <span

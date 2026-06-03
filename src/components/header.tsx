@@ -12,7 +12,7 @@ export async function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[var(--bms-red)] shadow-md shadow-[var(--bms-red)]/25">
-      <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:h-16 sm:px-6">
+      <div className="mx-auto flex h-14 min-w-0 max-w-7xl items-center gap-2 px-3 sm:h-16 sm:gap-4 sm:px-6">
         <Link href="/" className="group flex shrink-0 items-center gap-2 sm:gap-3">
 
 

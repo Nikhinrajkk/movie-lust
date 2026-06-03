@@ -4,6 +4,8 @@ import * as Avatar from "@radix-ui/react-avatar";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import { signOut } from "@/app/actions/auth";
+import { clearAllBrowserStorage } from "@/lib/clear-browser-storage";
+import { resetSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 
 function initialsFrom(displayLabel: string, email: string | null | undefined) {
@@ -87,16 +89,17 @@ export function HeaderUserMenu({
 
           <DropdownMenu.Separator className="my-1 h-px bg-gray-200" />
 
-          <DropdownMenu.Item asChild>
-            <form action={signOut} className="m-0 w-full">
-              <Button
-                type="submit"
-                variant="ghost"
-                className={`${itemClass} h-auto w-full justify-start rounded-lg border-0 bg-transparent px-2 py-2 text-left text-red-600 shadow-none hover:bg-red-50`}
-              >
-                Sign out
-              </Button>
-            </form>
+          <DropdownMenu.Item
+            className={`${itemClass} text-red-600 data-[highlighted]:bg-red-50 data-[highlighted]:text-red-700`}
+            onSelect={() => {
+              void (async () => {
+                await clearAllBrowserStorage();
+                resetSupabaseBrowserClient();
+                await signOut();
+              })();
+            }}
+          >
+            Sign out
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

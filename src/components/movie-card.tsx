@@ -33,7 +33,7 @@ export function MovieCard({
   return (
     <Link
       href={`/movies/${movie.id}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
+      className="group relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
     >
       <div className="relative aspect-[2/3] w-full overflow-hidden bg-gray-100">
         <Image

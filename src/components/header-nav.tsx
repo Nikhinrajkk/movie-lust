@@ -19,9 +19,11 @@ export function HeaderNav({
     <nav className="flex min-w-0 flex-1 flex-wrap items-center justify-end gap-1.5 sm:gap-2">
       <Button
         asChild
-        className="rounded-lg bg-white px-3 py-2 text-sm font-bold text-[var(--bms-red)] shadow-sm transition hover:bg-white/90"
+        className="rounded-lg bg-white px-2 py-2 text-sm font-bold text-[var(--bms-red)] shadow-sm transition hover:bg-white/90 sm:px-3"
       >
-        <Link href="/movies/new" className="text-sm font-bold !text-[var(--bms-red)]">Add movie</Link>
+        <Link href="/movies/new" className="text-sm font-bold !text-[var(--bms-red)]">
+          Add<span className="hidden min-[380px]:inline"> movie</span>
+        </Link>
       </Button>
 
       {user ? (

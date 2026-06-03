@@ -23,13 +23,15 @@ export function MovieJsonImport() {
 
   return (
     <details className="rounded-2xl border border-gray-200 bg-white shadow-sm">
-      <summary className="cursor-pointer list-none px-4 py-3 text-sm font-medium text-gray-900 [&::-webkit-details-marker]:hidden">
-        <span className="text-[var(--bms-red)]">Add from JSON</span>
-        <span className="ml-2 text-gray-500">
-          — paste an object (see format below)
+      <summary className="cursor-pointer list-none px-3 py-3 text-sm font-medium text-gray-900 sm:px-4 [&::-webkit-details-marker]:hidden">
+        <span className="block sm:inline">
+          <span className="text-[var(--bms-red)]">Add from JSON</span>
+          <span className="mt-1 block text-gray-500 sm:ml-2 sm:mt-0 sm:inline">
+            — paste an object (see format below)
+          </span>
         </span>
       </summary>
-      <div className="space-y-4 border-t border-gray-200 px-4 pb-4 pt-2">
+        <div className="space-y-4 border-t border-gray-200 px-3 pb-4 pt-2 sm:px-4">
         <p className="text-xs text-gray-600">
           Required: <code className="text-gray-800">title</code>. Optional:{" "}
           <code className="text-gray-800">director</code>,{" "}

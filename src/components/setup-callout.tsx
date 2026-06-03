@@ -8,7 +8,7 @@ export function SetupCallout() {
         Connect Supabase to see movies
       </h2>
       <UiSeparator className="my-4 bg-amber-200" />
-      <p className="max-w-2xl text-sm leading-relaxed text-amber-900/90">
+      <p className="max-w-2xl text-sm leading-relaxed break-words text-amber-900/90">
         Copy{" "}
         <code className="rounded border border-amber-200 bg-white px-1.5 py-0.5 text-amber-900">
           .env.local.example

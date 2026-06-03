@@ -55,8 +55,8 @@ export function MovieFilters({
     search.trim().length > 0 || Boolean(genre) || Boolean(category);
 
   return (
-    <div className="flex min-w-0 flex-nowrap items-center gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-3 [&::-webkit-scrollbar]:hidden">
-      <div className="relative min-w-[8rem] flex-1 basis-0">
+    <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+      <div className="relative min-w-0 w-full sm:min-w-[10rem] sm:flex-1 sm:basis-[min(100%,18rem)]">
         <FieldLabel htmlFor="catalog-search" className="sr-only">
           Search catalogue
         </FieldLabel>
@@ -70,6 +70,7 @@ export function MovieFilters({
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -89,6 +90,7 @@ export function MovieFilters({
         />
       </div>
 
+      <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:flex-1 sm:flex-nowrap sm:items-center sm:gap-3 sm:[&>*]:min-w-0">
       <UiSelect
         value={filterValue}
         onValueChange={onFilterChange}
@@ -96,7 +98,7 @@ export function MovieFilters({
         placeholder="Filter"
         id="catalog-filter"
         aria-label="Filter catalogue"
-        triggerClassName="w-[10.25rem] shrink-0 rounded-lg sm:w-[12.5rem]"
+        triggerClassName="w-full min-w-0 rounded-lg sm:w-[12.5rem] sm:shrink-0"
       >
         <UiSelectItem value={FILTER_ALL}>All titles</UiSelectItem>
         <UiSelectGroup>
@@ -124,7 +126,7 @@ export function MovieFilters({
         placeholder="Sort"
         id="catalog-sort"
         aria-label="Sort results"
-        triggerClassName="w-[9.5rem] shrink-0 rounded-lg sm:w-[10.75rem]"
+        triggerClassName="w-full min-w-0 rounded-lg sm:w-[10.75rem] sm:shrink-0"
       >
         <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
         <UiSelectItem value="newest">Sort: Newest</UiSelectItem>
@@ -138,11 +140,12 @@ export function MovieFilters({
           variant="outline"
           disabled={disabled || busy}
           onClick={() => clearFilters()}
-          className="box-border h-10 min-h-10 shrink-0 px-3 py-0 leading-none"
+          className="col-span-2 box-border h-10 min-h-10 w-full shrink-0 px-3 py-0 leading-none sm:col-span-1 sm:w-auto"
         >
           Clear
         </Button>
       ) : null}
+      </div>
     </div>
   );
 }
