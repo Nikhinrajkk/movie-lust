@@ -71,8 +71,8 @@ export function MovieFilters({
     draftSearch.trim().length > 0 || Boolean(genre);
 
   return (
-    <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-      <div className="relative min-w-0 w-full sm:min-w-[10rem] sm:flex-1 sm:basis-[min(100%,18rem)]">
+    <div className="grid min-w-0 items-center gap-x-2 gap-y-2 max-[650px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[651px]:grid-cols-[minmax(0,1fr)_11.5rem_10.5rem] min-[651px]:gap-x-3 min-[651px]:gap-y-3">
+      <div className="relative min-w-0 max-[650px]:col-span-2">
         <FieldLabel htmlFor="catalog-search" className="sr-only">
           Search catalogue
         </FieldLabel>
@@ -107,53 +107,51 @@ export function MovieFilters({
         />
       </div>
 
-      <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:flex-1 sm:flex-nowrap sm:items-center sm:gap-3 sm:[&>*]:min-w-0">
-        <UiSelect
-          value={genreValue}
-          onValueChange={onGenreChange}
-          disabled={disabled || busy}
-          placeholder="Genre"
-          id="catalog-genre"
-          aria-label="Filter by genre"
-          triggerClassName="w-full min-w-0 rounded-lg sm:w-[12.5rem] sm:shrink-0"
-        >
-          <UiSelectItem value={FILTER_ALL}>All genres</UiSelectItem>
-          <UiSelectGroup>
-            <UiSelectGroupLabel>Genre</UiSelectGroupLabel>
-            {GENRE_OPTIONS.map((g) => (
-              <UiSelectItem key={g} value={`g:${g}`}>
-                {formatGenreLabel(g)}
-              </UiSelectItem>
-            ))}
-          </UiSelectGroup>
-        </UiSelect>
+      <UiSelect
+        value={genreValue}
+        onValueChange={onGenreChange}
+        disabled={disabled || busy}
+        placeholder="Genre"
+        id="catalog-genre"
+        aria-label="Filter by genre"
+        triggerClassName="w-full min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap rounded-lg px-3 text-sm"
+      >
+        <UiSelectItem value={FILTER_ALL}>All genres</UiSelectItem>
+        <UiSelectGroup>
+          <UiSelectGroupLabel>Genre</UiSelectGroupLabel>
+          {GENRE_OPTIONS.map((g) => (
+            <UiSelectItem key={g} value={`g:${g}`}>
+              {formatGenreLabel(g)}
+            </UiSelectItem>
+          ))}
+        </UiSelectGroup>
+      </UiSelect>
 
-        <UiSelect
-          value={sort}
-          onValueChange={(v) => setSort(v as SortOption)}
-          disabled={disabled || busy}
-          placeholder="Sort"
-          id="catalog-sort"
-          aria-label="Sort results"
-          triggerClassName="w-full min-w-0 rounded-lg sm:w-[10.75rem] sm:shrink-0"
-        >
-          <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
-          <UiSelectItem value="rating_desc">Sort: Rating</UiSelectItem>
-          <UiSelectItem value="year_desc">Sort: Year</UiSelectItem>
-        </UiSelect>
+      <UiSelect
+        value={sort}
+        onValueChange={(v) => setSort(v as SortOption)}
+        disabled={disabled || busy}
+        placeholder="Sort"
+        id="catalog-sort"
+        aria-label="Sort results"
+        triggerClassName="w-full min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap rounded-lg px-3 text-sm"
+      >
+        <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
+        <UiSelectItem value="rating_desc">Sort: Rating</UiSelectItem>
+        <UiSelectItem value="year_desc">Sort: Year</UiSelectItem>
+      </UiSelect>
 
-        {hasTextOrFilter ? (
-          <Button
-            type="button"
-            variant="outline"
-            disabled={disabled || busy}
-            onClick={() => clearFilters()}
-            className="col-span-2 box-border h-10 min-h-10 w-full shrink-0 px-3 py-0 leading-none sm:col-span-1 sm:w-auto"
-          >
-            Clear
-          </Button>
-        ) : null}
-      </div>
+      {hasTextOrFilter ? (
+        <Button
+          type="button"
+          variant="outline"
+          disabled={disabled || busy}
+          onClick={() => clearFilters()}
+          className="col-span-2 box-border h-10 min-h-10 w-full justify-self-stretch px-3 py-0 leading-none min-[651px]:col-span-3"
+        >
+          Clear
+        </Button>
+      ) : null}
     </div>
   );
 }
