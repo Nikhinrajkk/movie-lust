@@ -112,14 +112,12 @@ function IconUnpublish({ className }: { className?: string }) {
 	);
 }
 
+/** Action icons always visible (hover-only hid them on touch / some hover chains). */
 const actionRailClass =
-	"flex shrink-0 flex-row items-center justify-center gap-0.5 self-stretch border-l border-gray-200 bg-gray-50/80 px-1 py-2 sm:px-1.5 " +
-	"opacity-0 pointer-events-none transition-opacity duration-150 " +
-	"group-hover/moderation:opacity-100 group-hover/moderation:pointer-events-auto " +
-	"group-focus-within/moderation:opacity-100 group-focus-within/moderation:pointer-events-auto";
+	"relative z-10 flex shrink-0 flex-row items-center justify-center gap-1 self-stretch border-l border-gray-200 bg-gray-50/90 px-1.5 py-2 sm:gap-1.5 sm:px-2";
 
 const iconBtnClass =
-	"inline-flex size-9 shrink-0 items-center justify-center rounded-lg p-0 [&_svg]:size-[1.15rem]";
+	"inline-flex size-9 shrink-0 items-center justify-center rounded-lg p-0 text-current [&_svg]:size-[1.2rem]";
 
 export function ModerationRow({
 	movie,
@@ -134,14 +132,15 @@ export function ModerationRow({
 	const watch = getWatchProviderBySlug(movie.watch_provider ?? null);
 
 	return (
-		<div className="group/moderation relative flex items-stretch overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+		<div className="relative flex items-stretch overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
 			{/*
 			  Single poster: thumbnail in the collapsed row morphs into the large poster slot when open.
 			  summary uses display:contents so poster + header participate in the details grid.
 			*/}
-			<details className="group/details grid min-w-0 flex-1 grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-x-3 p-3 shadow-none open:grid-cols-[min(100%,140px)_minmax(0,1fr)] open:grid-rows-[auto_minmax(0,1fr)] open:items-start open:gap-x-4 open:gap-y-4 open:py-4 open:pl-3 open:pr-3 open:sm:grid-cols-[140px_minmax(0,1fr)] open:sm:px-4 open:sm:pb-5 open:sm:pt-4 [&:open]:bg-white">
+			<details className="group/details grid min-w-0 flex-1 grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-x-6 p-3 shadow-none open:grid-cols-[min(100%,140px)_minmax(0,1fr)] open:grid-rows-[auto_minmax(0,1fr)] open:items-start open:gap-x-6 open:gap-y-4 open:py-4 open:pl-3 open:pr-3 open:sm:grid-cols-[140px_minmax(0,1fr)] open:sm:px-4 open:sm:pb-5 open:sm:pt-4 [&:open]:bg-white">
 				<summary className="contents cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden">
-					<div className="relative col-start-1 row-start-1 h-16 w-11 shrink-0 overflow-hidden rounded-lg bg-gray-100 transition-[width,height,border-radius,box-shadow] duration-300 ease-out will-change-[width,height] sm:h-20 sm:w-14 group-open/details:z-10 group-open/details:row-span-2 group-open/details:h-[210px] group-open/details:w-full group-open/details:max-w-[140px] group-open/details:self-start group-open/details:rounded-xl group-open/details:border group-open/details:border-gray-200 group-open/details:shadow-sm">
+					{/* me-*: extra space between poster and title when collapsed (display:contents + grid gap can be thin in some browsers) */}
+					<div className="relative col-start-1 row-start-1 me-5 h-16 w-11 shrink-0 overflow-hidden rounded-lg bg-gray-100 transition-[width,height,border-radius,box-shadow,margin] duration-300 ease-out will-change-[width,height] sm:me-6 sm:h-20 sm:w-14 group-open/details:z-10 group-open/details:me-0 group-open/details:row-span-2 group-open/details:h-[210px] group-open/details:w-full group-open/details:max-w-[140px] group-open/details:self-start group-open/details:rounded-xl group-open/details:border group-open/details:border-gray-200 group-open/details:shadow-sm">
 						<Image
 							src={poster}
 							alt={`${movie.title} poster`}
