@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import type { MovieFormState } from "@/app/actions/movies";
 import type { MovieRow } from "@/types/movie";
-import { GENRE_OPTIONS, formatGenreLabel } from "@/types/movie";
+import { GENRE_OPTIONS, WATCH_PROVIDERS, formatGenreLabel } from "@/types/movie";
 import { Button } from "@/components/ui/button";
 import { FormCheckbox } from "@/components/ui/checkbox";
 import { FieldLabel } from "@/components/ui/label";
@@ -70,6 +70,23 @@ export function MovieForm({
             placeholder="e.g. Spanish, Catalan"
             className={inputClass}
           />
+        </div>
+
+        <div className="space-y-2 sm:col-span-2">
+          <FieldLabel htmlFor="movie-watch-provider">Where to watch (OTT)</FieldLabel>
+          <select
+            id="movie-watch-provider"
+            name="watch_provider"
+            defaultValue={movie?.watch_provider ?? ""}
+            className={inputClass}
+          >
+            <option value="">Not listed</option>
+            {WATCH_PROVIDERS.map((p) => (
+              <option key={p.slug} value={p.slug}>
+                {p.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="space-y-2 sm:col-span-2">

@@ -11,7 +11,8 @@ import { WatchedToggle } from "@/components/watched-toggle";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 import { createSupabaseServer } from "@/lib/supabase/server";
-import { formatGenreLabel } from "@/types/movie";
+import { formatGenreLabel, getWatchProviderBySlug } from "@/types/movie";
+import { WatchProviderIcon } from "@/components/watch-provider-icon";
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
@@ -64,6 +65,8 @@ export default async function MovieDetailPage({
     const dn = approver?.display_name?.trim();
     approverLabel = dn && dn.length > 0 ? dn : movie.approved_by;
   }
+
+  const watch = movie ? getWatchProviderBySlug(movie.watch_provider ?? null) : null;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
@@ -193,6 +196,24 @@ export default async function MovieDetailPage({
                   </span>
                 ))}
               </div>
+            )}
+
+            {watch && (
+              <section className="flex flex-wrap items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50/80 px-4 py-3">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Where to watch
+                </h2>
+                <div className="flex items-center gap-2">
+                  <WatchProviderIcon
+                    slug={watch.slug}
+                    className="h-7 w-auto max-w-[8rem] object-contain"
+                    title={watch.label}
+                  />
+                  <span className="text-sm font-medium text-gray-800">
+                    {watch.label}
+                  </span>
+                </div>
+              </section>
             )}
 
             <section className="space-y-2">

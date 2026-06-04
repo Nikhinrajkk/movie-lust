@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatGenreLabel, type MovieRow } from "@/types/movie";
+import {
+  formatGenreLabel,
+  getWatchProviderBySlug,
+  type MovieRow,
+} from "@/types/movie";
+import { WatchProviderIcon } from "@/components/watch-provider-icon";
 import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { WatchedToggle } from "@/components/watched-toggle";
 
@@ -29,6 +34,8 @@ export function MovieCard({
   if (movie.release_year != null) metaBits.push(String(movie.release_year));
   if (movie.director?.trim()) metaBits.push(movie.director.trim());
   if (movie.language?.trim()) metaBits.push(movie.language.trim());
+
+  const watch = getWatchProviderBySlug(movie.watch_provider ?? null);
 
   return (
     <Link
@@ -90,18 +97,32 @@ export function MovieCard({
         <p className="line-clamp-2 text-[11px] leading-snug text-gray-600">
           {movie.overview || movie.review_text || "No synopsis yet."}
         </p>
-        {movie.genres?.length > 0 && (
-          <div className="mt-auto flex flex-wrap gap-1 pt-0.5">
-            {movie.genres.slice(0, 3).map((g) => (
-              <span
-                key={g}
-                className="rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-[9px] text-gray-600"
-              >
-                {formatGenreLabel(g)}
+        <div className="mt-auto flex flex-col gap-1.5 pt-0.5">
+          {movie.genres?.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {movie.genres.slice(0, 3).map((g) => (
+                <span
+                  key={g}
+                  className="rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-[9px] text-gray-600"
+                >
+                  {formatGenreLabel(g)}
+                </span>
+              ))}
+            </div>
+          )}
+          {watch && (
+            <div className="flex items-center gap-1.5 border-t border-gray-100 pt-1.5">
+              <span className="text-[9px] font-medium uppercase tracking-wide text-gray-500">
+                Watch
               </span>
-            ))}
-          </div>
-        )}
+              <WatchProviderIcon
+                slug={watch.slug}
+                className="h-4 w-auto max-w-[5rem] shrink-0 object-contain object-left"
+                title={watch.label}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </Link>
   );

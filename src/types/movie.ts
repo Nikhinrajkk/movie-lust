@@ -20,6 +20,8 @@ export type MovieRow = {
   director: string | null;
   /** Original dialogue languages, e.g. "Spanish" or "Spanish, Catalan". */
   language: string | null;
+  /** OTT / streaming slug; see {@link WATCH_PROVIDERS}. Omitted on older rows until migration. */
+  watch_provider?: string | null;
   created_at: string;
   updated_at: string;
   approval_status?: MovieApprovalStatus;
@@ -27,6 +29,39 @@ export type MovieRow = {
   approved_by?: string | null;
   created_by?: string | null;
 };
+
+/** Curated streaming options (slug stored in `movies.watch_provider`). Logos render in the UI. */
+export const WATCH_PROVIDERS = [
+  { slug: "netflix", label: "Netflix" },
+  { slug: "primevideo", label: "Prime Video" },
+  { slug: "disneyplus", label: "Disney+" },
+  { slug: "hulu", label: "Hulu" },
+  { slug: "appletv", label: "Apple TV+" },
+  { slug: "max", label: "Max" },
+  { slug: "paramountplus", label: "Paramount+" },
+  { slug: "youtube", label: "YouTube" },
+  { slug: "crunchyroll", label: "Crunchyroll" },
+  { slug: "tubi", label: "Tubi" },
+  { slug: "mubi", label: "MUBI" },
+] as const;
+
+export type WatchProviderSlug = (typeof WATCH_PROVIDERS)[number]["slug"];
+
+const WATCH_PROVIDER_BY_SLUG = Object.fromEntries(
+  WATCH_PROVIDERS.map((p) => [p.slug, p]),
+) as Record<WatchProviderSlug, (typeof WATCH_PROVIDERS)[number]>;
+
+export const WATCH_PROVIDER_SLUG_SET = new Set<string>(
+  WATCH_PROVIDERS.map((p) => p.slug),
+);
+
+export function getWatchProviderBySlug(
+  slug: string | null | undefined,
+): (typeof WATCH_PROVIDERS)[number] | null {
+  if (!slug || typeof slug !== "string") return null;
+  const key = slug.trim().toLowerCase() as WatchProviderSlug;
+  return WATCH_PROVIDER_BY_SLUG[key] ?? null;
+}
 
 export const MOVIE_CATEGORIES: { value: MovieCategory; label: string }[] = [
   { value: "now_showing", label: "Now Showing" },

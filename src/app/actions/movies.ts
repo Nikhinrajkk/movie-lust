@@ -15,6 +15,7 @@ import {
 import {
   GENRE_OPTIONS,
   MOVIE_CATEGORIES,
+  WATCH_PROVIDER_SLUG_SET,
   type MovieCategory,
   type MovieListResult,
   type MovieRow,
@@ -165,6 +166,8 @@ export type MoviePayload = {
   runtime_minutes?: number | null;
   director?: string;
   language?: string;
+  /** OTT slug from {@link WATCH_PROVIDER_SLUG_SET}; null = not listed. */
+  watch_provider?: string | null;
 };
 
 export async function createMovie(payload: MoviePayload): Promise<string> {
@@ -188,6 +191,7 @@ export async function createMovie(payload: MoviePayload): Promise<string> {
       runtime_minutes: payload.runtime_minutes ?? null,
       director: payload.director ?? "",
       language: payload.language?.trim() ?? "",
+      watch_provider: payload.watch_provider ?? null,
       created_by: user.id,
       approval_status: "pending",
     })
@@ -217,6 +221,7 @@ export async function updateMovie(id: string, payload: MoviePayload) {
       runtime_minutes: payload.runtime_minutes ?? null,
       director: payload.director ?? "",
       language: payload.language?.trim() ?? "",
+      watch_provider: payload.watch_provider ?? null,
       updated_at: new Date().toISOString(),
     })
     .eq("id", id);
@@ -269,6 +274,12 @@ function parseMovieFormData(formData: FormData): MoviePayload {
     (g) => formData.get(`genre_${g}`) === "on",
   ).map((g) => g);
 
+  const watchRaw = String(formData.get("watch_provider") ?? "").trim();
+  const watch_provider =
+    watchRaw.length > 0 && WATCH_PROVIDER_SLUG_SET.has(watchRaw)
+      ? watchRaw
+      : null;
+
   return {
     title,
     overview,
@@ -284,6 +295,7 @@ function parseMovieFormData(formData: FormData): MoviePayload {
     language,
     category: categoryRaw as MovieCategory,
     genres,
+    watch_provider,
   };
 }
 

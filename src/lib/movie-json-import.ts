@@ -1,6 +1,6 @@
 import type { MoviePayload } from "@/app/actions/movies";
 import type { MovieCategory } from "@/types/movie";
-import { GENRE_OPTIONS, MOVIE_CATEGORIES } from "@/types/movie";
+import { GENRE_OPTIONS, MOVIE_CATEGORIES, WATCH_PROVIDER_SLUG_SET } from "@/types/movie";
 
 const CATEGORY_SET = new Set<string>(
   MOVIE_CATEGORIES.map((c) => c.value as string),
@@ -20,7 +20,8 @@ export const MOVIE_JSON_FORMAT_EXAMPLE = `{
   "review_text": "Layered, propulsive, and worth rewatching.",
   "category": "trending",
   "genres": ["sci-fi", "thriller", "action"],
-  "language": "English"
+  "language": "English",
+  "watch_provider": "netflix"
 }`;
 
 function asOptionalString(v: unknown): string | undefined {
@@ -45,7 +46,7 @@ function asOptionalNumber(v: unknown): number | null | undefined {
  * Parses and validates a JSON string into {@link MoviePayload}.
  * Required: `title`. Optional: `director`, `overview`, `poster_url`, `release_year`,
  * `runtime_minutes`, `rating` (0–10), `review_text`, `category` (shelf),
- * `genres` (array of known genre slugs), optional `language`.
+ * `genres` (array of known genre slugs), optional `language`, optional `watch_provider` (OTT slug).
  */
 export function parseMoviePayloadFromJson(raw: string): MoviePayload {
   let parsed: unknown;
@@ -102,6 +103,24 @@ export function parseMoviePayloadFromJson(raw: string): MoviePayload {
     rating = Math.min(10, Math.max(0, ratingRaw));
   }
 
+  let watch_provider: string | null | undefined = undefined;
+  if (Object.prototype.hasOwnProperty.call(o, "watch_provider")) {
+    const w = o.watch_provider;
+    if (w == null || (typeof w === "string" && w.trim() === "")) {
+      watch_provider = null;
+    } else if (typeof w === "string") {
+      const sl = w.trim().toLowerCase();
+      if (!WATCH_PROVIDER_SLUG_SET.has(sl)) {
+        throw new Error(
+          `Unknown "watch_provider" "${sl}". Allowed: ${[...WATCH_PROVIDER_SLUG_SET].sort().join(", ")}.`,
+        );
+      }
+      watch_provider = sl;
+    } else {
+      throw new Error('Field "watch_provider" must be a string, null, or omitted.');
+    }
+  }
+
   return {
     title,
     director: asOptionalString(o.director)?.trim() || undefined,
@@ -124,5 +143,6 @@ export function parseMoviePayloadFromJson(raw: string): MoviePayload {
     category: categoryRaw,
     genres,
     language: asOptionalString(o.language)?.trim() || undefined,
+    ...(watch_provider !== undefined ? { watch_provider } : {}),
   };
 }
