@@ -39,10 +39,6 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col bg-[var(--page-bg)] font-sans text-zinc-900 antialiased">
         <Header />
         <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
-        <footer className="border-t border-gray-200 bg-white px-4 py-6 text-center text-xs leading-relaxed text-gray-500 sm:py-8">
-          MovieLust — a Next.js + Supabase demo. Explore UI inspired by
-          movie listings; not affiliated with IMDb.
-        </footer>
       </body>
     </html>
   );

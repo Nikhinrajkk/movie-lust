@@ -6,19 +6,79 @@ import { createSupabaseServer } from "@/lib/supabase/server";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import type { MovieRow } from "@/types/movie";
 
-export async function listPendingMovies(): Promise<MovieRow[]> {
+export type AdminMoviesPageResult = {
+  movies: MovieRow[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+};
+
+async function listMoviesByStatusPaged(
+  status: "pending" | "approved" | "rejected",
+  input: { page?: number; pageSize?: number },
+): Promise<AdminMoviesPageResult> {
   const { isAdmin } = await getSessionUserWithProfile();
   if (!isAdmin) throw new Error("Admin access required.");
 
+  const page = Math.max(1, input.page ?? 1);
+  const pageSize = Math.min(50, Math.max(5, input.pageSize ?? 10));
+
   const supabase = await createSupabaseServer();
+  const { count, error: countError } = await supabase
+    .from("movies")
+    .select("*", { count: "exact", head: true })
+    .eq("approval_status", status);
+
+  if (countError) throw new Error(sanitizeSupabaseErrorMessage(countError));
+
+  const total = count ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const safePage = Math.min(page, totalPages);
+  const from = (safePage - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const order =
+    status === "pending"
+      ? { column: "created_at" as const, ascending: true }
+      : status === "approved"
+        ? { column: "title" as const, ascending: true }
+        : { column: "updated_at" as const, ascending: false };
+
   const { data, error } = await supabase
     .from("movies")
     .select("*")
-    .eq("approval_status", "pending")
-    .order("created_at", { ascending: true });
+    .eq("approval_status", status)
+    .order(order.column, { ascending: order.ascending })
+    .range(from, to);
 
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
-  return (data ?? []) as MovieRow[];
+
+  return {
+    movies: (data ?? []) as MovieRow[],
+    total,
+    page: safePage,
+    pageSize,
+    totalPages,
+  };
+}
+
+export async function listPendingMoviesPaged(
+  input: { page?: number; pageSize?: number } = {},
+): Promise<AdminMoviesPageResult> {
+  return listMoviesByStatusPaged("pending", input);
+}
+
+export async function listApprovedMoviesPaged(
+  input: { page?: number; pageSize?: number } = {},
+): Promise<AdminMoviesPageResult> {
+  return listMoviesByStatusPaged("approved", input);
+}
+
+export async function listRejectedMoviesPaged(
+  input: { page?: number; pageSize?: number } = {},
+): Promise<AdminMoviesPageResult> {
+  return listMoviesByStatusPaged("rejected", input);
 }
 
 export async function approveMovie(id: string) {
@@ -62,6 +122,54 @@ export async function rejectMovie(id: string) {
     })
     .eq("id", id)
     .eq("approval_status", "pending");
+
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
+  revalidatePath("/");
+  revalidatePath("/admin");
+  revalidatePath(`/movies/${id}`);
+  revalidatePath("/my-movies");
+}
+
+/** Return a published title to the moderation queue (pending). */
+export async function disapproveMovie(id: string) {
+  const { isAdmin } = await getSessionUserWithProfile();
+  if (!isAdmin) throw new Error("Admin access required.");
+
+  const supabase = await createSupabaseServer();
+  const { error } = await supabase
+    .from("movies")
+    .update({
+      approval_status: "pending",
+      approved_by: null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id)
+    .eq("approval_status", "approved");
+
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
+  revalidatePath("/");
+  revalidatePath("/admin");
+  revalidatePath(`/movies/${id}`);
+  revalidatePath("/my-movies");
+  revalidatePath("/watchlist");
+  revalidatePath("/watched");
+}
+
+/** Move a rejected submission back to the pending queue. */
+export async function returnRejectedToPending(id: string) {
+  const { isAdmin } = await getSessionUserWithProfile();
+  if (!isAdmin) throw new Error("Admin access required.");
+
+  const supabase = await createSupabaseServer();
+  const { error } = await supabase
+    .from("movies")
+    .update({
+      approval_status: "pending",
+      approved_by: null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id)
+    .eq("approval_status", "rejected");
 
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
   revalidatePath("/");

@@ -7,7 +7,11 @@ const inactive =
 const active =
   "border-gray-200 bg-white text-[var(--bms-red)] shadow-[0_1px_0_0_white]";
 
-export function AdminTabs({ current }: { current: "pending" | "users" }) {
+export function AdminTabs({
+  current,
+}: {
+  current: "pending" | "approved" | "rejected" | "users";
+}) {
   return (
     <nav className="-mb-px flex flex-wrap gap-1 border-b border-gray-200" aria-label="Admin sections">
       <Link
@@ -16,6 +20,20 @@ export function AdminTabs({ current }: { current: "pending" | "users" }) {
         aria-current={current === "pending" ? "page" : undefined}
       >
         Pending
+      </Link>
+      <Link
+        href="/admin?tab=approved"
+        className={`${tabBase} ${current === "approved" ? active : inactive}`}
+        aria-current={current === "approved" ? "page" : undefined}
+      >
+        Approved
+      </Link>
+      <Link
+        href="/admin?tab=rejected"
+        className={`${tabBase} ${current === "rejected" ? active : inactive}`}
+        aria-current={current === "rejected" ? "page" : undefined}
+      >
+        Rejected
       </Link>
       <Link
         href="/admin?tab=users"
