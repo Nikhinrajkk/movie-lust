@@ -1,253 +1,146 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getMovieById } from "@/app/actions/movies";
-import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
 import { getWatchedMovieIdsForUser } from "@/app/actions/watched";
+import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
 import { DeleteMovieForm } from "@/components/delete-movie-form";
+import {
+	MovieDetailPosterLinkRows,
+	MovieDetailThreeColumn,
+} from "@/components/movie-detail-card";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
-import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { WatchedToggle } from "@/components/watched-toggle";
+import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 import { createSupabaseServer } from "@/lib/supabase/server";
-import { formatGenreLabel, getWatchProviderBySlug } from "@/types/movie";
-import { WatchProviderIcon } from "@/components/watch-provider-icon";
 
 function posterSrc(url: string | null) {
-  if (url && url.trim().length > 0) return url;
-  return "https://placehold.co/600x900/18181b/78716c?text=No+poster";
+	if (url && url.trim().length > 0) return url;
+	return "https://placehold.co/600x900/18181b/78716c?text=No+poster";
+}
+
+function publicFooterLine(
+	movie: NonNullable<Awaited<ReturnType<typeof getMovieById>>>,
+	status: string,
+	approverLabel: string | null,
+) {
+	if (status === "approved" && approverLabel) {
+		return `Approved for catalogue · ${approverLabel}`;
+	}
+	return `Submitted ${new Date(movie.created_at).toLocaleString(undefined, {
+		dateStyle: "medium",
+		timeStyle: "short",
+	})}`;
 }
 
 export default async function MovieDetailPage({
-  params,
+	params,
 }: {
-  params: Promise<{ id: string }>;
+	params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  const ready = isSupabaseConfigured();
-  const { user, isAdmin } = await getSessionUserWithProfile();
-  const movie = ready ? await getMovieById(id) : null;
+	const { id } = await params;
+	const ready = isSupabaseConfigured();
+	const { user, isAdmin } = await getSessionUserWithProfile();
+	const movie = ready ? await getMovieById(id) : null;
 
-  if (ready && !movie) notFound();
+	if (ready && !movie) notFound();
 
-  const owner = Boolean(user && movie?.created_by === user.id);
-  const status = movie?.approval_status ?? "approved";
-  const canEdit =
-    isAdmin || (owner && status === "pending");
-  const canDelete = canEdit;
-  const showModeration =
-    status === "pending" || status === "rejected";
+	const owner = Boolean(user && movie?.created_by === user.id);
+	const status = movie?.approval_status ?? "approved";
+	const canEdit = isAdmin || (owner && status === "pending");
+	const canDelete = canEdit;
+	const showModeration = status === "pending" || status === "rejected";
 
-  const watchlistIds =
-    ready && user ? await getWatchlistMovieIdsForUser() : [];
-  const watchedIds =
-    ready && user ? await getWatchedMovieIdsForUser() : [];
-  const inWatchlist = movie ? watchlistIds.includes(movie.id) : false;
-  const isWatched = movie ? watchedIds.includes(movie.id) : false;
-  const watchlistToggleEnabled =
-    Boolean(user) && status === "approved";
+	const watchlistIds = ready && user ? await getWatchlistMovieIdsForUser() : [];
+	const watchedIds = ready && user ? await getWatchedMovieIdsForUser() : [];
+	const inWatchlist = movie ? watchlistIds.includes(movie.id) : false;
+	const isWatched = movie ? watchedIds.includes(movie.id) : false;
+	const watchlistToggleEnabled = Boolean(user) && status === "approved";
 
-  let approverLabel: string | null = null;
-  if (
-    ready &&
-    movie &&
-    status === "approved" &&
-    movie.approved_by &&
-    isAdmin
-  ) {
-    const supabase = await createSupabaseServer();
-    const { data: approver } = await supabase
-      .from("profiles")
-      .select("display_name")
-      .eq("id", movie.approved_by)
-      .maybeSingle();
-    const dn = approver?.display_name?.trim();
-    approverLabel = dn && dn.length > 0 ? dn : movie.approved_by;
-  }
+	let approverLabel: string | null = null;
+	if (ready && movie && status === "approved" && movie.approved_by && isAdmin) {
+		const supabase = await createSupabaseServer();
+		const { data: approver } = await supabase
+			.from("profiles")
+			.select("display_name")
+			.eq("id", movie.approved_by)
+			.maybeSingle();
+		const dn = approver?.display_name?.trim();
+		approverLabel = dn && dn.length > 0 ? dn : movie.approved_by;
+	}
 
-  const watch = movie ? getWatchProviderBySlug(movie.watch_provider ?? null) : null;
+	const p = movie ? posterSrc(movie.poster_url) : "";
 
-  return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
-      {!ready && <SetupCallout />}
+	return (
+		<div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+			{!ready && <SetupCallout />}
 
-      {ready && movie && (
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start">
-          <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-lg lg:mx-0">
-            <Image
-              src={posterSrc(movie.poster_url)}
-              alt={movie.title}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1024px) 80vw, 320px"
-              unoptimized={posterSrc(movie.poster_url).includes("placehold.co")}
-            />
-          </div>
+			{ready && movie && (
+				<div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+					<div className="p-4 sm:p-6 lg:p-8">
+						{showModeration && (
+							<div
+								className={`mb-6 rounded-xl border px-4 py-3 text-sm ${
+									status === "pending"
+										? "border-amber-200 bg-amber-50 text-amber-900"
+										: "border-red-200 bg-red-50 text-red-900"
+								}`}
+							>
+								{status === "pending"
+									? "This submission is waiting for an admin review. It is only visible to you and moderators until it is approved."
+									: "This submission was rejected and is hidden from the public catalogue."}
+							</div>
+						)}
 
-          <div className="min-w-0 space-y-6">
-            {showModeration && (
-              <div
-                className={`rounded-2xl border px-4 py-3 text-sm ${
-                  status === "pending"
-                    ? "border-amber-200 bg-amber-50 text-amber-900"
-                    : "border-red-200 bg-red-50 text-red-900"
-                }`}
-              >
-                {status === "pending"
-                  ? "This submission is waiting for an admin review. It is only visible to you and moderators until it is approved."
-                  : "This submission was rejected and is hidden from the public catalogue."}
-              </div>
-            )}
+						<MovieDetailThreeColumn
+							movie={movie}
+							posterSrc={p}
+							posterSizes="(max-width: 1024px) 50vw, 240px"
+							posterUnoptimized={p.includes("placehold.co")}
+							bodyFooterLine={publicFooterLine(movie, status, approverLabel)}
+							posterFooter={
+								<div className="flex flex-col gap-3">
+									{watchlistToggleEnabled && (
+										<div className="flex flex-wrap gap-2">
+											<WatchlistToggle
+												movieId={movie.id}
+												initialInList={inWatchlist}
+												size="md"
+											/>
+											<WatchedToggle
+												movieId={movie.id}
+												initialWatched={isWatched}
+												size="md"
+											/>
+										</div>
+									)}
+									<MovieDetailPosterLinkRows
+										movieId={movie.id}
+										mode="public"
+										showEdit={canEdit}
+									/>
+									{canDelete && (
+										<div className="pt-1">
+											<DeleteMovieForm id={movie.id} />
+										</div>
+									)}
+								</div>
+							}
+						/>
 
-            {approverLabel ? (
-              <p className="text-xs text-gray-500">
-                Approved for catalogue by{" "}
-                <span className="font-medium text-gray-700">{approverLabel}</span>
-              </p>
-            ) : null}
-
-            <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-4">
-              <div className="space-y-3">
-                {movie.runtime_minutes != null && (
-                  <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full border border-gray-200 bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-                      {movie.runtime_minutes} min
-                    </span>
-                  </div>
-                )}
-                <h1 className="break-words text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-4xl">
-                  {movie.title}
-                </h1>
-                {(movie.release_year != null ||
-                  movie.director?.trim() ||
-                  movie.language?.trim()) && (
-                  <p className="text-sm text-gray-600">
-                    {movie.release_year != null && (
-                      <span className="font-semibold text-gray-800">
-                        {movie.release_year}
-                      </span>
-                    )}
-                    {movie.release_year != null &&
-                      (movie.director?.trim() || movie.language?.trim()) && (
-                        <span className="text-gray-400"> · </span>
-                      )}
-                    {movie.director?.trim() && (
-                      <>
-                        <span className="text-gray-500">Directed by </span>
-                        <span className="text-gray-900">{movie.director}</span>
-                      </>
-                    )}
-                    {movie.director?.trim() && movie.language?.trim() && (
-                      <span className="text-gray-400"> · </span>
-                    )}
-                    {movie.language?.trim() && (
-                      <>
-                        <span className="text-gray-500">Language </span>
-                        <span className="text-gray-900">{movie.language}</span>
-                      </>
-                    )}
-                  </p>
-                )}
-                {movie.rating != null && (
-                  <p className="text-sm text-gray-600">
-                    Your rating:{" "}
-                    <span className="font-semibold text-[var(--bms-red)]">
-                      {movie.rating.toFixed(1)}
-                    </span>{" "}
-                    / 10
-                  </p>
-                )}
-              </div>
-
-              <div className="flex w-full min-w-0 flex-wrap items-center justify-start gap-2 sm:w-auto sm:flex-row-reverse sm:justify-end">
-                {watchlistToggleEnabled && (
-                  <>
-                    <WatchlistToggle
-                      movieId={movie.id}
-                      initialInList={inWatchlist}
-                      size="md"
-                    />
-                    <WatchedToggle
-                      movieId={movie.id}
-                      initialWatched={isWatched}
-                      size="md"
-                    />
-                  </>
-                )}
-                {canEdit && (
-                  <NavLinkButton href={`/movies/${movie.id}/edit`}>
-                    Edit
-                  </NavLinkButton>
-                )}
-                {canDelete && <DeleteMovieForm id={movie.id} />}
-              </div>
-            </div>
-
-            {movie.genres?.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {movie.genres.map((g) => (
-                  <span
-                    key={g}
-                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 text-xs text-gray-700"
-                  >
-                    {formatGenreLabel(g)}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {watch && (
-              <section className="flex flex-wrap items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50/80 px-4 py-3">
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Where to watch
-                </h2>
-                <div className="flex items-center gap-2">
-                  <WatchProviderIcon
-                    slug={watch.slug}
-                    className="h-7 w-auto max-w-[8rem] object-contain"
-                    title={watch.label}
-                  />
-                  <span className="text-sm font-medium text-gray-800">
-                    {watch.label}
-                  </span>
-                </div>
-              </section>
-            )}
-
-            <section className="space-y-2">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500">
-                Synopsis
-              </h2>
-              <p className="text-base leading-relaxed text-gray-700">
-                {movie.overview?.trim()
-                  ? movie.overview
-                  : "No synopsis added yet."}
-              </p>
-            </section>
-
-            <section className="space-y-2 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--bms-red)]">
-                Your review
-              </h2>
-              <p className="text-base leading-relaxed text-gray-800">
-                {movie.review_text?.trim()
-                  ? movie.review_text
-                  : "No review yet — add your take from the edit screen."}
-              </p>
-            </section>
-
-            <NavLinkButton
-              href="/"
-              variant="link"
-              className="inline-flex px-0 py-0"
-            >
-              ← Back to all movies
-            </NavLinkButton>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+						<div className="mt-8 border-t border-gray-100 pt-6">
+							<NavLinkButton
+								href="/"
+								variant="link"
+								className="inline-flex px-0 py-0 text-gray-600 hover:text-[var(--bms-red)]"
+							>
+								← Back to all movies
+							</NavLinkButton>
+						</div>
+					</div>
+				</div>
+			)}
+		</div>
+	);
 }
