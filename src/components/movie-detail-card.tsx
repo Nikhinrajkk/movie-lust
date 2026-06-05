@@ -426,9 +426,12 @@ export function MovieDetailPosterLinkRows({
 export function MovieDetailBody({
 	movie,
 	footerLine,
+	headerActions,
 }: {
 	movie: MovieRow;
 	footerLine?: string;
+	/** e.g. moderation approve/reject — shown to the right of the title row */
+	headerActions?: ReactNode;
 }) {
 	const submitted =
 		footerLine ??
@@ -440,18 +443,27 @@ export function MovieDetailBody({
 	return (
 		<div className="min-w-0 space-y-6">
 			<header className="space-y-2 border-b border-gray-100 pb-5">
-				<h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-[2rem] lg:leading-tight">
-					{movie.title}
-				</h1>
-				<div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
-					{movie.release_year != null && (
-						<span className="font-medium text-gray-800">
-							{movie.release_year}
-						</span>
-					)}
-					<span className="rounded-md border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600">
-						Catalogue
-					</span>
+				<div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+					<div className="min-w-0 flex-1 space-y-2">
+						<h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-[2rem] lg:leading-tight">
+							{movie.title}
+						</h1>
+						<div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
+							{movie.release_year != null && (
+								<span className="font-medium text-gray-800">
+									{movie.release_year}
+								</span>
+							)}
+							<span className="rounded-md border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600">
+								Catalogue
+							</span>
+						</div>
+					</div>
+					{headerActions ? (
+						<div className="flex shrink-0 flex-row flex-wrap items-center justify-start gap-2 sm:justify-end">
+							{headerActions}
+						</div>
+					) : null}
 				</div>
 			</header>
 
@@ -520,6 +532,7 @@ export function MovieDetailThreeColumn({
 	bodyFooterLine,
 	topBanner,
 	showMetadataAside = true,
+	headerActions,
 }: {
 	movie: MovieRow;
 	posterSrc: string;
@@ -532,12 +545,22 @@ export function MovieDetailThreeColumn({
 	topBanner?: ReactNode;
 	/** When false, the right column only shows `rightBottomSlot` (e.g. admin actions; centre already lists year/category). */
 	showMetadataAside?: boolean;
+	/** Shown to the right of the title in the main column (e.g. inline moderation actions when expanded). */
+	headerActions?: ReactNode;
 }) {
+	const hasRightCol =
+		showMetadataAside !== false || Boolean(rightBottomSlot);
 
 	return (
 		<div className="w-full min-w-0">
 			{topBanner}
-			<div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[220px_1fr]">
+			<div
+				className={
+					hasRightCol
+						? "grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)_minmax(0,200px)] lg:gap-8 xl:grid-cols-[220px_1fr_240px] xl:gap-10"
+						: "grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[220px_1fr]"
+				}
+			>
 				<aside className="mx-auto flex w-full max-w-[220px] flex-col gap-4 lg:mx-0 lg:max-w-none">
 					<div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-md">
 						<Image
@@ -553,9 +576,38 @@ export function MovieDetailThreeColumn({
 					{posterFooter}
 				</aside>
 
-				<main className="min-w-0 lg:border-gray-100 ">
-					<MovieDetailBody movie={movie} footerLine={bodyFooterLine} />
+				<main
+					className={
+						hasRightCol
+							? "min-w-0 lg:border-r lg:border-gray-100 lg:pr-6 xl:pr-8"
+							: "min-w-0 lg:border-gray-100"
+					}
+				>
+					<MovieDetailBody
+						movie={movie}
+						footerLine={bodyFooterLine}
+						headerActions={headerActions}
+					/>
 				</main>
+
+				{hasRightCol ? (
+					<aside className="flex min-w-0 flex-col gap-4 lg:min-h-0">
+						{showMetadataAside !== false ? (
+							<MovieDetailMetadataAside movie={movie} />
+						) : null}
+						{rightBottomSlot ? (
+							<div
+								className={
+									showMetadataAside !== false
+										? "mt-auto border-t border-gray-100 pt-4"
+										: "flex flex-col gap-3 border-t border-gray-100 pt-4"
+								}
+							>
+								{rightBottomSlot}
+							</div>
+						) : null}
+					</aside>
+				) : null}
 			</div>
 		</div>
 	);

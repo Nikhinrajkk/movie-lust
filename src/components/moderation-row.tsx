@@ -118,6 +118,10 @@ const iconBtnClass =
 const bigActionBtn =
 	"flex size-16 shrink-0 items-center justify-center rounded-2xl p-0 shadow-md disabled:opacity-50";
 
+/** Inline actions beside the title (expanded row) — always clickable, matches rail sizing */
+const headerActionBtn =
+	"inline-flex size-10 shrink-0 items-center justify-center rounded-lg p-0 text-current shadow-sm disabled:opacity-50 [&_svg]:size-6 [&_svg]:shrink-0";
+
 function moderationFooterLine(
 	movie: MovieRow,
 	mode: "pending" | "approved" | "rejected",
@@ -172,14 +176,56 @@ function ModerationOpenRightSlot({
 	pending,
 	start,
 	router,
+	layout = "panel",
 }: {
 	movie: MovieRow;
 	mode: "pending" | "approved" | "rejected";
 	pending: boolean;
 	start: (fn: () => void | Promise<void>) => void;
 	router: ReturnType<typeof useRouter>;
+	layout?: "panel" | "header";
 }) {
+	const isHeader = layout === "header";
+
 	if (mode === "pending") {
+		if (isHeader) {
+			return (
+				<>
+					<Button
+						type="button"
+						variant="success"
+						disabled={pending}
+						title="Approve"
+						aria-label="Approve"
+						className={headerActionBtn}
+						onClick={() =>
+							start(async () => {
+								await approveMovie(movie.id);
+								router.refresh();
+							})
+						}
+					>
+						<IconCheck />
+					</Button>
+					<Button
+						type="button"
+						variant="destructive"
+						disabled={pending}
+						title="Reject"
+						aria-label="Reject"
+						className={headerActionBtn}
+						onClick={() =>
+							start(async () => {
+								await rejectMovie(movie.id);
+								router.refresh();
+							})
+						}
+					>
+						<IconX />
+					</Button>
+				</>
+			);
+		}
 		return (
 			<div className="flex flex-wrap justify-center gap-5 sm:justify-start">
 				<div className="flex flex-col items-center gap-1.5">
@@ -226,6 +272,26 @@ function ModerationOpenRightSlot({
 		);
 	}
 	if (mode === "rejected") {
+		if (isHeader) {
+			return (
+				<Button
+					type="button"
+					variant="secondary"
+					disabled={pending}
+					title="Return to pending queue"
+					aria-label="Return to pending"
+					className={headerActionBtn}
+					onClick={() =>
+						start(async () => {
+							await returnRejectedToPending(movie.id);
+							router.refresh();
+						})
+					}
+				>
+					<IconUndo />
+				</Button>
+			);
+		}
 		return (
 			<div className="flex flex-col items-center gap-1.5 sm:items-start">
 				<Button
@@ -248,6 +314,26 @@ function ModerationOpenRightSlot({
 					Return to pending
 				</span>
 			</div>
+		);
+	}
+	if (isHeader) {
+		return (
+			<Button
+				type="button"
+				variant="secondary"
+				disabled={pending}
+				title="Dis-approve — return to pending queue"
+				aria-label="Dis-approve"
+				className={`${headerActionBtn} border-amber-300 bg-amber-50 text-amber-950 hover:bg-amber-100`}
+				onClick={() =>
+					start(async () => {
+						await disapproveMovie(movie.id);
+						router.refresh();
+					})
+				}
+			>
+				<IconUnpublish />
+			</Button>
 		);
 	}
 	return (
@@ -334,13 +420,14 @@ export function ModerationRow({
 						posterSizes="(max-width: 1024px) 45vw, 220px"
 						posterUnoptimized={poster.includes("placehold.co")}
 						showMetadataAside={false}
-						rightBottomSlot={
+						headerActions={
 							<ModerationOpenRightSlot
 								movie={movie}
 								mode={mode}
 								pending={pending}
 								start={start}
 								router={router}
+								layout="header"
 							/>
 						}
 						posterFooter={
