@@ -253,33 +253,33 @@ export function MovieDetailStatsRow({ movie }: { movie: MovieRow }) {
 	const rating = movie.rating != null ? `${movie.rating.toFixed(1)}/10` : "—";
 
 	return (
-		<div className="grid w-full max-w-full gap-3 [grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))]">
-			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-				<div className="flex min-w-0 items-center gap-2 text-violet-600">
-					<IconClock className="size-5 shrink-0" />
-					<span className="truncate text-sm font-semibold text-gray-900">
+		<div className="grid w-full max-w-full grid-cols-3 gap-2 sm:gap-3">
+			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
+				<div className="flex min-w-0 items-center gap-1.5 text-violet-600 sm:gap-2">
+					<IconClock className="size-4 shrink-0 sm:size-5" />
+					<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
 						{runtime}
 					</span>
 				</div>
-				<span className="text-xs text-gray-500">Runtime</span>
+				<span className="text-[0.65rem] text-gray-500 sm:text-xs">Runtime</span>
 			</div>
-			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-				<div className="flex min-w-0 items-center gap-2 text-amber-500">
-					<IconStar className="size-5 shrink-0" />
-					<span className="truncate text-sm font-semibold text-gray-900">
+			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
+				<div className="flex min-w-0 items-center gap-1.5 text-amber-500 sm:gap-2">
+					<IconStar className="size-4 shrink-0 sm:size-5" />
+					<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
 						{rating}
 					</span>
 				</div>
-				<span className="text-xs text-gray-500">Rating</span>
+				<span className="text-[0.65rem] text-gray-500 sm:text-xs">Rating</span>
 			</div>
-			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-				<div className="flex min-w-0 items-center gap-2 text-sky-600">
-					<IconTrend className="size-5 shrink-0" />
-					<span className="truncate text-sm font-semibold text-gray-900">
+			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
+				<div className="flex min-w-0 items-center gap-1.5 text-sky-600 sm:gap-2">
+					<IconTrend className="size-4 shrink-0 sm:size-5" />
+					<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
 						{isTrending ? "Trending" : categoryLabel(cat)}
 					</span>
 				</div>
-				<span className="text-xs text-gray-500">
+				<span className="text-[0.65rem] text-gray-500 sm:text-xs">
 					{isTrending ? "Popular now" : "Category"}
 				</span>
 			</div>
@@ -348,7 +348,7 @@ export function MovieDetailMetadataAside({ movie }: { movie: MovieRow }) {
 }
 
 const posterLinkRowClass =
-	"flex w-full items-center justify-between gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-left text-sm font-medium shadow-sm transition hover:border-gray-300 hover:bg-gray-50";
+	"flex w-full items-center justify-between gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-left text-sm font-medium shadow-sm transition hover:border-gray-300 hover:bg-gray-50 sm:gap-3 sm:px-4 sm:py-3";
 
 function IconHome({ className }: { className?: string }) {
 	return (
@@ -551,17 +551,27 @@ export function MovieDetailThreeColumn({
 	const hasRightCol =
 		showMetadataAside !== false || Boolean(rightBottomSlot);
 
+	const mainLgClasses = hasRightCol
+		? "min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:border-r lg:border-gray-100 lg:pr-6 xl:pr-8"
+		: "min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:border-gray-100";
+
+	const posterShellClass =
+		"mx-auto w-full max-w-[220px] lg:mx-0 lg:max-w-none lg:justify-self-start lg:col-start-1 lg:row-start-1";
+
+	const footerShellClass =
+		"mx-auto w-full max-w-[220px] lg:mx-0 lg:max-w-none lg:justify-self-start lg:col-start-1 lg:row-start-2";
+
 	return (
 		<div className="w-full min-w-0">
 			{topBanner}
 			<div
 				className={
 					hasRightCol
-						? "grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)_minmax(0,200px)] lg:gap-8 xl:grid-cols-[220px_1fr_240px] xl:gap-10"
-						: "grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[220px_1fr]"
+						? "grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)_minmax(0,200px)] lg:gap-x-8 lg:gap-y-0 xl:grid-cols-[220px_1fr_240px] xl:gap-x-10"
+						: "grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)] lg:gap-x-10 lg:gap-y-0 xl:grid-cols-[220px_1fr]"
 				}
 			>
-				<aside className="mx-auto flex w-full max-w-[220px] flex-col gap-4 lg:mx-0 lg:max-w-none">
+				<div className={posterShellClass}>
 					<div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-md">
 						<Image
 							src={posterSrc}
@@ -573,16 +583,9 @@ export function MovieDetailThreeColumn({
 							unoptimized={posterUnoptimized}
 						/>
 					</div>
-					{posterFooter}
-				</aside>
+				</div>
 
-				<main
-					className={
-						hasRightCol
-							? "min-w-0 lg:border-r lg:border-gray-100 lg:pr-6 xl:pr-8"
-							: "min-w-0 lg:border-gray-100"
-					}
-				>
+				<main className={mainLgClasses}>
 					<MovieDetailBody
 						movie={movie}
 						footerLine={bodyFooterLine}
@@ -590,8 +593,12 @@ export function MovieDetailThreeColumn({
 					/>
 				</main>
 
+				{posterFooter ? (
+					<div className={`flex flex-col gap-3 ${footerShellClass}`}>{posterFooter}</div>
+				) : null}
+
 				{hasRightCol ? (
-					<aside className="flex min-w-0 flex-col gap-4 lg:min-h-0">
+					<aside className="flex min-w-0 flex-col gap-4 lg:col-start-3 lg:row-start-1 lg:row-span-2 lg:min-h-0">
 						{showMetadataAside !== false ? (
 							<MovieDetailMetadataAside movie={movie} />
 						) : null}

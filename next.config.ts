@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
       { protocol: "https", hostname: "placehold.co", pathname: "/**" },
+      /** WordPress.com CDN (Photon) — common for hotlinked poster URLs */
+      { protocol: "https", hostname: "i0.wp.com", pathname: "/**" },
+      { protocol: "https", hostname: "i1.wp.com", pathname: "/**" },
+      { protocol: "https", hostname: "i2.wp.com", pathname: "/**" },
     ],
   },
 };
