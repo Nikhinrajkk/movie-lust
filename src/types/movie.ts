@@ -86,6 +86,18 @@ export const GENRE_OPTIONS = [
   "sci-fi",
   "serial-killer",
   "thriller",
+  /** Common catalogue / TMDB-style genres beyond the core set above */
+  "biography",
+  "documentary",
+  "family",
+  "history",
+  "musical",
+  "music",
+  "sports",
+  "superhero",
+  "tv-movie",
+  "war",
+  "western",
 ] as const;
 
 export type GenreSlug = (typeof GENRE_OPTIONS)[number];
@@ -94,7 +106,8 @@ export type GenreSlug = (typeof GENRE_OPTIONS)[number];
 export function formatGenreLabel(slug: string): string {
   const map: Partial<Record<GenreSlug, string>> = {
     "sci-fi": "Sci-Fi",
-    "serial-killer": "Serial killer",
+    "serial-killer": "Serial Killer",
+    "tv-movie": "TV Movie",
   };
   const asSlug = slug as GenreSlug;
   const mapped = map[asSlug];
