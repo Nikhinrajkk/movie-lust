@@ -389,7 +389,7 @@ export function MovieDetailPosterLinkRows({
 				>
 					<span className="flex items-center gap-2">
 						<IconEye className="size-5 text-teal-600" />
-						View public page
+						Public page
 					</span>
 					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
 				</NavLinkButton>
@@ -519,6 +519,7 @@ export function MovieDetailThreeColumn({
 	posterFooter,
 	bodyFooterLine,
 	topBanner,
+	showMetadataAside = true,
 }: {
 	movie: MovieRow;
 	posterSrc: string;
@@ -529,11 +530,14 @@ export function MovieDetailThreeColumn({
 	posterFooter?: ReactNode;
 	bodyFooterLine?: string;
 	topBanner?: ReactNode;
+	/** When false, the right column only shows `rightBottomSlot` (e.g. admin actions; centre already lists year/category). */
+	showMetadataAside?: boolean;
 }) {
+
 	return (
 		<div className="w-full min-w-0">
 			{topBanner}
-			<div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)_minmax(0,220px)] lg:gap-10 xl:grid-cols-[220px_1fr_240px]">
+			<div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[220px_1fr]">
 				<aside className="mx-auto flex w-full max-w-[220px] flex-col gap-4 lg:mx-0 lg:max-w-none">
 					<div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-md">
 						<Image
@@ -549,20 +553,9 @@ export function MovieDetailThreeColumn({
 					{posterFooter}
 				</aside>
 
-				<main className="min-w-0 lg:border-r lg:border-gray-100 lg:pr-8">
+				<main className="min-w-0 lg:border-gray-100 ">
 					<MovieDetailBody movie={movie} footerLine={bodyFooterLine} />
 				</main>
-
-				<aside className="flex min-h-0 flex-col self-stretch lg:pl-0">
-					<div className="min-h-0 flex-1">
-						<MovieDetailMetadataAside movie={movie} />
-					</div>
-					{rightBottomSlot ? (
-						<div className="shrink-0 border-t border-gray-200 pt-6">
-							{rightBottomSlot}
-						</div>
-					) : null}
-				</aside>
 			</div>
 		</div>
 	);

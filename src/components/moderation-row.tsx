@@ -333,6 +333,7 @@ export function ModerationRow({
 						posterSrc={poster}
 						posterSizes="(max-width: 1024px) 45vw, 220px"
 						posterUnoptimized={poster.includes("placehold.co")}
+						showMetadataAside={false}
 						rightBottomSlot={
 							<ModerationOpenRightSlot
 								movie={movie}
