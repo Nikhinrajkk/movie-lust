@@ -3,74 +3,95 @@
 import { useMemo } from "react";
 import { useMovieFilters } from "@/stores/movie-filters";
 import { Button } from "@/components/ui/button";
-import { FieldLabel } from "@/components/ui/label";
-import { UiSelect, UiSelectItem } from "@/components/ui/select";
+import { MovieListPaginationBar } from "@/components/movie-list-pagination-bar";
+
+const perPagePillClass = (active: boolean) =>
+	`shrink-0 rounded-md px-2 py-1 font-medium transition ${
+		active
+			? "bg-[var(--bms-red)]/10 text-[var(--bms-red)]"
+			: "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+	}`;
 
 export function MoviePagination({
-  page,
-  totalPages,
-  disabled,
+	page,
+	totalPages,
+	total,
+	disabled,
 }: {
-  page: number;
-  totalPages: number;
-  disabled?: boolean;
+	page: number;
+	totalPages: number;
+	/** Total catalogue count for “Showing … of …”. */
+	total: number;
+	disabled?: boolean;
 }) {
-  const setPage = useMovieFilters((s) => s.setPage);
-  const pageSize = useMovieFilters((s) => s.pageSize);
-  const setPageSize = useMovieFilters((s) => s.setPageSize);
+	const setPage = useMovieFilters((s) => s.setPage);
+	const pageSize = useMovieFilters((s) => s.pageSize);
+	const setPageSize = useMovieFilters((s) => s.setPageSize);
 
-  const pageSizeOptions = useMemo(() => {
-    const base = [8, 15, 24, 48];
-    return [...new Set([...base, pageSize])].sort((a, b) => a - b);
-  }, [pageSize]);
+	const pageSizeOptions = useMemo(() => {
+		const base = [8, 15, 24, 48];
+		return [...new Set([...base, pageSize])].sort((a, b) => a - b);
+	}, [pageSize]);
 
-  return (
-    <div className="flex min-w-0 flex-col gap-4 border-t border-gray-200 px-1 pt-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
-      <div className="flex min-w-0 flex-wrap items-center gap-3">
-        <p className="text-xs font-medium text-gray-600">
-          Page {page} of {totalPages}
-        </p>
-        <div className="flex min-w-0 flex-wrap items-center gap-2">
-          <FieldLabel htmlFor="page-size" className="whitespace-nowrap text-xs text-gray-500">
-            Per page
-          </FieldLabel>
-          <UiSelect
-            value={String(pageSize)}
-            onValueChange={(v) => setPageSize(Number(v))}
-            disabled={disabled}
-            id="page-size"
-            aria-label="Results per page"
-            triggerClassName="h-9 w-full min-w-[4.5rem] max-w-[5.5rem] rounded-lg px-2 py-1 text-xs sm:w-[4.5rem]"
-            contentClassName="min-w-[4.5rem]"
-          >
-            {pageSizeOptions.map((n) => (
-              <UiSelectItem key={n} value={String(n)}>
-                {n}
-              </UiSelectItem>
-            ))}
-          </UiSelect>
-        </div>
-      </div>
-      <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:w-auto sm:shrink-0 sm:gap-2">
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={disabled || page <= 1}
-          onClick={() => setPage(Math.max(1, page - 1))}
-          className="min-w-0"
-        >
-          Previous
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={disabled || page >= totalPages}
-          onClick={() => setPage(Math.min(totalPages, page + 1))}
-          className="min-w-0"
-        >
-          Next
-        </Button>
-      </div>
-    </div>
-  );
+	const startText =
+		totalPages > 1 ? (
+			<p className="text-xs text-gray-600">
+				Showing {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, total)} of{" "}
+				{total}
+			</p>
+		) : (
+			<p className="text-xs text-gray-600">
+				{total} film{total === 1 ? "" : "s"}
+			</p>
+		);
+
+	const middle = (
+		<>
+			<span className="shrink-0 text-gray-500">Per page:</span>
+			{pageSizeOptions.map((n) => (
+				<button
+					key={n}
+					type="button"
+					disabled={disabled}
+					aria-pressed={pageSize === n}
+					aria-label={`Show ${n} results per page`}
+					className={perPagePillClass(pageSize === n)}
+					onClick={() => setPageSize(n)}
+				>
+					{n}
+				</button>
+			))}
+		</>
+	);
+
+	const end =
+		totalPages > 1 ? (
+			<>
+				<Button
+					type="button"
+					variant="secondary"
+					className="px-3 py-1.5 text-xs"
+					disabled={disabled || page <= 1}
+					onClick={() => setPage(Math.max(1, page - 1))}
+				>
+					Previous
+				</Button>
+				<span className="whitespace-nowrap px-1 text-xs font-medium text-gray-600">
+					Page {page} / {totalPages}
+				</span>
+				<Button
+					type="button"
+					variant="secondary"
+					className="px-3 py-1.5 text-xs"
+					disabled={disabled || page >= totalPages}
+					onClick={() => setPage(Math.min(totalPages, page + 1))}
+				>
+					Next
+				</Button>
+			</>
+		) : null;
+
+	return (
+		<MovieListPaginationBar start={startText} middle={middle} end={end} />
+	);
 }

@@ -209,6 +209,7 @@ export function MovieDiscover({
             <MoviePagination
               page={data.page}
               totalPages={data.totalPages}
+              total={data.total}
               disabled={listLoading}
             />
           )}
