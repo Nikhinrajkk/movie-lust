@@ -82,6 +82,7 @@ export const GENRE_OPTIONS = [
   "horror",
   "investigation",
   "mystery",
+  "psychological",
   "romance",
   "sci-fi",
   "serial-killer",
