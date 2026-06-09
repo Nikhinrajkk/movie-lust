@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { WatchProviderIcon } from "@/components/watch-provider-icon";
+import type { MovieUserReviewAggregate } from "@/types/movie-user-review";
 import type { MovieRow } from "@/types/movie";
 import {
 	formatGenreLabel,
@@ -227,33 +228,50 @@ function IconEye({ className }: { className?: string }) {
 	);
 }
 
-function RatingStars({ rating }: { rating: number }) {
-	const filled = Math.min(5, Math.max(0, Math.round((rating / 10) * 5)));
+function UserRatingFiveStars({ avg }: { avg: number }) {
+	const filled = Math.min(5, Math.max(0, Math.round(avg)));
 	return (
 		<div
 			role="img"
-			aria-label={`${rating.toFixed(1)} out of 10`}
+			aria-label={`${avg.toFixed(1)} out of 5 average from users`}
 			className="flex gap-0.5"
 		>
 			{([1, 2, 3, 4, 5] as const).map((starIndex) => (
 				<IconStar
-					key={`rating-star-${starIndex}`}
-					className={`size-5 ${starIndex <= filled ? "text-amber-400" : "text-gray-200"}`}
+					key={`user-avg-star-${starIndex}`}
+					className={`size-4 sm:size-5 ${starIndex <= filled ? "text-amber-400" : "text-gray-200"}`}
 				/>
 			))}
 		</div>
 	);
 }
 
-export function MovieDetailStatsRow({ movie }: { movie: MovieRow }) {
+export function MovieDetailStatsRow({
+	movie,
+	userReviewAggregate,
+}: {
+	movie: MovieRow;
+	userReviewAggregate?: MovieUserReviewAggregate;
+}) {
 	const cat = movie.category;
 	const isTrending = cat === "trending";
 	const runtime =
 		movie.runtime_minutes != null ? `${movie.runtime_minutes} min` : "—";
-	const rating = movie.rating != null ? `${movie.rating.toFixed(1)}/10` : "—";
+	const catalogueRating =
+		movie.rating != null ? `${movie.rating.toFixed(1)}/10` : "—";
+
+	const hasUserAgg = userReviewAggregate !== undefined;
+	const userAvg = userReviewAggregate?.avgStars ?? null;
+	const userCount = userReviewAggregate?.ratingCount ?? 0;
+	const userScoreText =
+		userAvg != null ? `${userAvg.toFixed(1)}/5` : "—";
+
+	const gridClass = hasUserAgg
+		? "grid w-full max-w-full grid-cols-2 gap-1 sm:grid-cols-4 sm:gap-2"
+		: "grid w-full max-w-full grid-cols-3 gap-1 sm:gap-2";
 
 	return (
-		<div className="grid w-full max-w-full grid-cols-3 gap-1 sm:gap-2">
+		<div className={gridClass}>
 			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
 				<div className="flex min-w-0 items-center gap-1.5 text-violet-600 sm:gap-2">
 					<IconClock className="size-4 shrink-0 sm:size-5" />
@@ -267,11 +285,24 @@ export function MovieDetailStatsRow({ movie }: { movie: MovieRow }) {
 				<div className="flex min-w-0 items-center gap-1.5 text-amber-500 sm:gap-2">
 					<IconStar className="size-4 shrink-0 sm:size-5" />
 					<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
-						{rating}
+						{catalogueRating}
 					</span>
 				</div>
-				<span className="text-[0.65rem] text-gray-500 sm:text-xs">Rating</span>
+				<span className="text-[0.65rem] text-gray-500 sm:text-xs">Catalogue</span>
 			</div>
+			{hasUserAgg ? (
+				<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
+					<div className="flex min-w-0 flex-col gap-1 text-amber-600 sm:gap-1.5">
+						<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
+							{userScoreText}
+						</span>
+						{userAvg != null ? <UserRatingFiveStars avg={userAvg} /> : null}
+					</div>
+					<span className="text-[0.65rem] text-gray-500 sm:text-xs">
+						{userCount > 0 ? `Users (${userCount})` : "Users"}
+					</span>
+				</div>
+			) : null}
 			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
 				<div className="flex min-w-0 items-center gap-1.5 text-sky-600 sm:gap-2">
 					<IconTrend className="size-4 shrink-0 sm:size-5" />
@@ -381,7 +412,7 @@ export function MovieDetailPosterLinkRows({
 }) {
 	return (
 		<div className="flex w-full flex-col gap-2">
-			{mode === "admin" ? (
+			{mode === "admin" && (
 				<NavLinkButton
 					href={`/movies/${movieId}`}
 					variant="outline"
@@ -390,18 +421,6 @@ export function MovieDetailPosterLinkRows({
 					<span className="flex items-center gap-2">
 						<IconEye className="size-5 text-teal-600" />
 						Public page
-					</span>
-					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
-				</NavLinkButton>
-			) : (
-				<NavLinkButton
-					href="/"
-					variant="outline"
-					className={`${posterLinkRowClass} text-gray-800`}
-				>
-					<span className="flex items-center gap-2">
-						<IconHome className="size-5 text-gray-500" />
-						Browse catalogue
 					</span>
 					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
 				</NavLinkButton>
@@ -427,11 +446,16 @@ export function MovieDetailBody({
 	movie,
 	footerLine,
 	headerActions,
+	userReviewAggregate,
+	reviewsSlot,
 }: {
 	movie: MovieRow;
 	footerLine?: string;
 	/** e.g. moderation approve/reject — shown to the right of the title row */
 	headerActions?: ReactNode;
+	userReviewAggregate?: MovieUserReviewAggregate;
+	/** User ratings & comments (same layout as former catalogue Review block). */
+	reviewsSlot?: ReactNode;
 }) {
 	const submitted =
 		footerLine ??
@@ -467,7 +491,10 @@ export function MovieDetailBody({
 				</div>
 			</header>
 
-			<MovieDetailStatsRow movie={movie} />
+			<MovieDetailStatsRow
+				movie={movie}
+				userReviewAggregate={userReviewAggregate}
+			/>
 
 			{movie.genres?.length > 0 && (
 				<section className="space-y-2">
@@ -499,20 +526,17 @@ export function MovieDetailBody({
 				</p>
 			</section>
 
-			<section className="space-y-3 border-t border-gray-100 pt-3">
-				<h2 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
-					<span className="flex size-8 items-center justify-center rounded-lg bg-violet-100 text-violet-700">
-						<IconQuote className="size-4" />
-					</span>
-					Review
-				</h2>
-				<p className="text-sm leading-relaxed text-gray-800 sm:text-base">
-					{movie.review_text?.trim()
-						? movie.review_text
-						: "No review yet — add your take from the edit screen."}
-				</p>
-				{movie.rating != null && <RatingStars rating={movie.rating} />}
-			</section>
+			{reviewsSlot ? (
+				<section className="space-y-3 border-t border-gray-100 pt-3">
+					<h2 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
+						<span className="flex size-8 items-center justify-center rounded-lg bg-violet-100 text-violet-700">
+							<IconQuote className="size-4" />
+						</span>
+						Reviews
+					</h2>
+					<div className="space-y-3">{reviewsSlot}</div>
+				</section>
+			) : null}
 
 			<p className="flex items-center gap-2 border-t border-gray-100 pt-4 text-xs text-gray-500">
 				<IconCalendar className="size-4 shrink-0 text-gray-400" />
@@ -533,6 +557,8 @@ export function MovieDetailThreeColumn({
 	topBanner,
 	showMetadataAside = true,
 	headerActions,
+	userReviewAggregate,
+	reviewsSlot,
 }: {
 	movie: MovieRow;
 	posterSrc: string;
@@ -547,6 +573,10 @@ export function MovieDetailThreeColumn({
 	showMetadataAside?: boolean;
 	/** Shown to the right of the title in the main column (e.g. inline moderation actions when expanded). */
 	headerActions?: ReactNode;
+	/** When set, stats row includes aggregate user star average for this movie. */
+	userReviewAggregate?: MovieUserReviewAggregate;
+	/** User reviews UI (rendered under the Reviews heading in the main column). */
+	reviewsSlot?: ReactNode;
 }) {
 	const hasRightCol =
 		showMetadataAside !== false || Boolean(rightBottomSlot);
@@ -590,6 +620,8 @@ export function MovieDetailThreeColumn({
 						movie={movie}
 						footerLine={bodyFooterLine}
 						headerActions={headerActions}
+						userReviewAggregate={userReviewAggregate}
+						reviewsSlot={reviewsSlot}
 					/>
 				</main>
 

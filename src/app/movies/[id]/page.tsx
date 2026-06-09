@@ -1,4 +1,8 @@
 import { notFound } from "next/navigation";
+import {
+	getMovieUserReviewAggregate,
+	listMovieUserReviews,
+} from "@/app/actions/movie-user-reviews";
 import { getMovieById } from "@/app/actions/movies";
 import { getWatchedMovieIdsForUser } from "@/app/actions/watched";
 import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
@@ -7,6 +11,7 @@ import {
 	MovieDetailPosterLinkRows,
 	MovieDetailThreeColumn,
 } from "@/components/movie-detail-card";
+import { MovieUserReviewsClient } from "@/components/movie-user-reviews";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
 import { WatchedToggle } from "@/components/watched-toggle";
@@ -72,6 +77,16 @@ export default async function MovieDetailPage({
 
 	const p = movie ? posterSrc(movie.poster_url) : "";
 
+	const userReviews = ready && movie ? await listMovieUserReviews(movie.id) : [];
+	const userReviewAggregate =
+		ready && movie ? await getMovieUserReviewAggregate(movie.id) : undefined;
+	const myUserReview = user
+		? (userReviews.find((r) => r.user_id === user.id) ?? null)
+		: null;
+	const reviewsListKey = userReviews
+		.map((r) => `${r.id}:${r.updated_at}`)
+		.join("|");
+
 	return (
 		<div className="mx-auto max-w-6xl px-0 py-0 sm:px-6 sm:py-10">
 			{!ready && <SetupCallout />}
@@ -98,7 +113,19 @@ export default async function MovieDetailPage({
 							posterSrc={p}
 							posterSizes="(max-width: 1023px) 100vw, 240px"
 							posterUnoptimized={p.includes("placehold.co")}
+							userReviewAggregate={userReviewAggregate}
 							bodyFooterLine={publicFooterLine(movie, status, approverLabel)}
+							reviewsSlot={
+								<MovieUserReviewsClient
+									key={reviewsListKey}
+									movieId={movie.id}
+									reviews={userReviews}
+									currentUserId={user?.id ?? null}
+									isAdmin={isAdmin}
+									initialStars={myUserReview?.stars ?? null}
+									initialComment={myUserReview?.comment ?? ""}
+								/>
+							}
 							posterFooter={
 								<div className="flex flex-col gap-3">
 									{watchlistToggleEnabled && (
