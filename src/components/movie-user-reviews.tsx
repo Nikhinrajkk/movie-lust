@@ -89,13 +89,13 @@ export function MovieUserReviewsClient({
 
 	return (
 		<div className="space-y-3">
-			<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-sm">
+			<p className="mdc-prose text-sm leading-[1.8]">
 				Click a star once for a half star, again for a full star (up to 5). You can also
 				leave a short note.
 			</p>
 
 			{error ? (
-				<p className="mdc-error text-sm leading-relaxed text-red-800 sm:text-base" role="alert">
+				<p className="mdc-error text-sm leading-[1.8]" role="alert">
 					{error}
 				</p>
 			) : null}
@@ -122,7 +122,7 @@ export function MovieUserReviewsClient({
 					}}
 				>
 					<div className="space-y-2">
-						<span className="mdc-label text-xs font-semibold uppercase tracking-wider text-gray-500">
+						<span className="mdc-label text-xs font-semibold uppercase tracking-wider">
 							Your rating
 						</span>
 						<StarPicker value={stars} onChange={setStars} disabled={pending} />
@@ -130,7 +130,7 @@ export function MovieUserReviewsClient({
 					<div className="space-y-2">
 						<label
 							htmlFor="movie-user-review-comment"
-							className="mdc-label text-xs font-semibold uppercase tracking-wider text-gray-500"
+							className="mdc-label text-xs font-semibold uppercase tracking-wider"
 						>
 							Your note
 						</label>
@@ -144,7 +144,7 @@ export function MovieUserReviewsClient({
 								value={comment}
 								onChange={(e) => setComment(e.target.value.slice(0, NOTE_MAX))}
 								placeholder="What did you think?"
-								className="mdc-textarea w-full resize-y rounded-lg border border-gray-200 bg-white px-3 py-2.5 pr-14 text-sm leading-relaxed text-gray-800 shadow-sm outline-none placeholder:text-gray-400 focus:border-violet-300 focus:ring-2 focus:ring-violet-100 disabled:opacity-60 sm:text-base"
+								className="mdc-textarea w-full resize-y rounded-lg px-3 py-2.5 pr-14 text-sm leading-[1.8] outline-none disabled:opacity-60"
 							/>
 							<span className="mdc-label pointer-events-none absolute bottom-2 right-2 text-xs tabular-nums">
 								{comment.length}/{NOTE_MAX}
@@ -160,17 +160,17 @@ export function MovieUserReviewsClient({
 					</button>
 				</form>
 			) : (
-				<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-sm">
+				<p className="mdc-prose text-sm leading-[1.8]">
 					Sign in to add your rating or comment.
 				</p>
 			)}
 
-			<div className="mdc-divider space-y-2 border-t border-gray-100 pt-3">
-				<h3 className="mdc-label text-xs font-semibold uppercase tracking-wider text-gray-500">
+			<div className="mdc-divider space-y-2 border-t pt-3">
+				<h3 className="mdc-label text-xs font-semibold uppercase tracking-wider">
 					From the community
 				</h3>
 				{reviews.length === 0 ? (
-					<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-sm">
+					<p className="mdc-prose text-sm leading-[1.8]">
 						No reviews yet — be the first.
 					</p>
 				) : (
@@ -183,10 +183,10 @@ export function MovieUserReviewsClient({
 								<li key={r.id} className="space-y-2">
 									<div className="flex flex-wrap items-start justify-between gap-2">
 										<div>
-											<p className="mdc-section-title text-sm font-semibold text-gray-900">
+											<p className="mdc-section-title text-sm font-semibold">
 												{r.author_display_name || "Member"}
 											</p>
-											<p className="mdc-label text-xs text-gray-500">
+											<p className="mdc-label text-xs">
 												{new Date(r.created_at).toLocaleString(undefined, {
 													dateStyle: "medium",
 													timeStyle: "short",
@@ -228,7 +228,7 @@ export function MovieUserReviewsClient({
 										</div>
 									) : null}
 									{r.comment.trim() ? (
-										<p className="mdc-review-quote whitespace-pre-wrap text-sm leading-relaxed text-gray-800 sm:text-base">
+										<p className="mdc-review-quote whitespace-pre-wrap text-sm leading-[1.8]">
 											{r.comment.trim()}
 										</p>
 									) : null}

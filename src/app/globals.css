@@ -485,7 +485,7 @@ html[data-app-theme] .mdc-aside-row-value {
 }
 
 html[data-app-theme] .mdc-aside-icon {
-  color: var(--md-text-muted);
+  color: var(--md-gold);
 }
 
 html[data-app-theme] .mdc-poster-frame {
