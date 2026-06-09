@@ -17,14 +17,14 @@ export default async function NewMoviePage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Add to collection
           </p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          <h1 className="app-page-title mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
             New movie
           </h1>
         </div>
         <NavLinkButton
           href="/"
           variant="link"
-          className="px-0 py-0 text-sm text-gray-600 hover:text-[var(--bms-red)]"
+          className="app-nav-link px-0 py-0 text-sm"
         >
           ← Back to browse
         </NavLinkButton>
@@ -33,7 +33,7 @@ export default async function NewMoviePage() {
       {!ready && <SetupCallout />}
 
       {ready && !user && (
-        <div className="rounded-2xl border border-gray-200 bg-white px-6 py-8 text-center text-sm text-gray-700 shadow-sm">
+        <div className="app-panel px-6 py-8 text-center text-sm text-[var(--md-text-muted)]">
           <p className="mb-4">
             Sign in to submit a new title. Every submission is queued for admin
             approval before it appears in the public catalogue.

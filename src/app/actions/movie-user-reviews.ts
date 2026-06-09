@@ -92,7 +92,7 @@ export async function upsertMovieUserReview(
 	} = await supabase.auth.getUser();
 	if (!user) throw new Error("Sign in to leave a rating or comment.");
 
-	const comment = input.comment.trim();
+	const comment = input.comment.trim().slice(0, 500);
 	const stars = normalizeHalfStarRating(
 		input.stars != null && Number.isFinite(input.stars)
 			? Number(input.stars)

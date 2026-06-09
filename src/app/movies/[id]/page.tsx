@@ -88,85 +88,84 @@ export default async function MovieDetailPage({
 		.join("|");
 
 	return (
-		<div className="mx-auto max-w-6xl px-0 py-0 sm:px-6 sm:py-10">
+		<div className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
 			{!ready && <SetupCallout />}
 
 			{ready && movie && (
-				<div className="overflow-hidden rounded-none sm:rounded-2xl border border-gray-200 bg-white shadow-lg">
-					<div className="p-4 sm:p-6">
-						{showModeration && (
-							<div
-								className={`mb-6 rounded-xl border px-4 py-3 text-sm ${
-									status === "pending"
-										? "border-amber-200 bg-amber-50 text-amber-900"
-										: "border-red-200 bg-red-50 text-red-900"
-								}`}
-							>
-								{status === "pending"
-									? "This submission is waiting for an admin review. It is only visible to you and moderators until it is approved."
-									: "This submission was rejected and is hidden from the public catalogue."}
-							</div>
-						)}
-
-						<MovieDetailThreeColumn
-							movie={movie}
-							posterSrc={p}
-							posterSizes="(max-width: 1023px) 100vw, 240px"
-							posterUnoptimized={p.includes("placehold.co")}
-							userReviewAggregate={userReviewAggregate}
-							bodyFooterLine={publicFooterLine(movie, status, approverLabel)}
-							reviewsSlot={
-								<MovieUserReviewsClient
-									key={reviewsListKey}
-									movieId={movie.id}
-									reviews={userReviews}
-									currentUserId={user?.id ?? null}
-									isAdmin={isAdmin}
-									initialStars={myUserReview?.stars ?? null}
-									initialComment={myUserReview?.comment ?? ""}
-								/>
-							}
-							posterFooter={
-								<div className="flex flex-col gap-3">
-									{watchlistToggleEnabled && (
-										<div className="flex flex-wrap gap-2">
-											<WatchlistToggle
-												movieId={movie.id}
-												initialInList={inWatchlist}
-												size="md"
-											/>
-											<WatchedToggle
-												movieId={movie.id}
-												initialWatched={isWatched}
-												size="md"
-											/>
-										</div>
-									)}
-									<MovieDetailPosterLinkRows
-										movieId={movie.id}
-										mode="public"
-										showEdit={canEdit}
-									/>
-									{canDelete && (
-										<div className="pt-1">
-											<DeleteMovieForm id={movie.id} />
-										</div>
-									)}
-								</div>
-							}
-						/>
-
-						<div className="mt-8 border-t border-gray-100 pt-6">
-							<NavLinkButton
-								href="/"
-								variant="link"
-								className="inline-flex px-0 py-0 text-gray-600 hover:text-[var(--bms-red)]"
-							>
-								← Back to all movies
-							</NavLinkButton>
+				<>
+					{showModeration && (
+						<div
+							className={`mb-8 rounded-2xl border px-4 py-3 text-sm ${
+								status === "pending"
+									? "mdc-moderation-pending"
+									: "mdc-moderation-rejected"
+							}`}
+						>
+							{status === "pending"
+								? "This submission is waiting for an admin review. It is only visible to you and moderators until it is approved."
+								: "This submission was rejected and is hidden from the public catalogue."}
 						</div>
+					)}
+
+					<MovieDetailThreeColumn
+						movie={movie}
+						posterSrc={p}
+						posterSizes="(max-width: 1023px) 100vw, 320px"
+						posterUnoptimized={p.includes("placehold.co")}
+						userReviewAggregate={userReviewAggregate}
+						shareTitle={movie.title}
+						bodyFooterLine={publicFooterLine(movie, status, approverLabel)}
+						reviewsSlot={
+							<MovieUserReviewsClient
+								key={reviewsListKey}
+								movieId={movie.id}
+								reviews={userReviews}
+								currentUserId={user?.id ?? null}
+								isAdmin={isAdmin}
+								initialStars={myUserReview?.stars ?? null}
+								initialComment={myUserReview?.comment ?? ""}
+							/>
+						}
+						posterFooter={
+							<div className="flex flex-col gap-3">
+								{watchlistToggleEnabled && (
+									<div className="mdc-watchlist-ring">
+										<WatchlistToggle
+											movieId={movie.id}
+											initialInList={inWatchlist}
+											size="md"
+										/>
+										<WatchedToggle
+											movieId={movie.id}
+											initialWatched={isWatched}
+											size="md"
+										/>
+									</div>
+								)}
+								<MovieDetailPosterLinkRows
+									movieId={movie.id}
+									mode="public"
+									showEdit={canEdit}
+								/>
+								{canDelete && (
+									<div className="pt-1">
+										<DeleteMovieForm id={movie.id} />
+									</div>
+								)}
+							</div>
+						}
+					/>
+
+					<div className="mt-10 border-t border-[var(--md-border)] pt-6">
+						<NavLinkButton
+							href="/"
+							variant="link"
+							className="mdc-back-link inline-flex px-0 py-0"
+						>
+							← Back to all movies
+						</NavLinkButton>
 					</div>
-				</div>
+				</>
 			)}
 		</div>
 	);

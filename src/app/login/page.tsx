@@ -6,7 +6,7 @@ import { SetupCallout } from "@/components/setup-callout";
 
 function LoginFormFallback() {
   return (
-    <div className="h-40 animate-pulse rounded-xl bg-gray-200" aria-hidden />
+    <div className="h-40 animate-pulse rounded-xl bg-[var(--app-surface-muted)]" aria-hidden />
   );
 }
 
@@ -19,10 +19,10 @@ export default function LoginPage() {
         <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
           Account
         </p>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+        <h1 className="app-page-title text-3xl font-bold tracking-tight">
           Sign in
         </h1>
-        <p className="text-sm text-gray-600">
+        <p className="app-page-sub text-sm">
           Continue with Google, or get a one-time link by email — no password
           to remember.
         </p>
@@ -30,18 +30,18 @@ export default function LoginPage() {
 
       {!ready && <SetupCallout />}
       {ready && (
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="app-panel p-6">
           <Suspense fallback={<LoginFormFallback />}>
             <LoginForm />
           </Suspense>
         </div>
       )}
 
-      <p className="text-center text-sm text-gray-600">
+      <p className="text-center text-sm text-[var(--md-text-muted)]">
         <NavLinkButton
           href="/"
           variant="link"
-          className="inline-flex px-0 py-0"
+          className="app-nav-link inline-flex px-0 py-0"
         >
           ← Back to browse
         </NavLinkButton>

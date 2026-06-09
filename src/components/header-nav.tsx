@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { AppThemeToggle } from "@/components/app-theme-toggle";
 import { Button } from "@/components/ui/button";
 import { HeaderUserMenu } from "@/components/header-user-menu";
 
@@ -17,6 +18,7 @@ export function HeaderNav({
 }) {
   return (
     <nav className="flex min-w-0 flex-1 flex-wrap items-center justify-end gap-1.5 sm:gap-2">
+      <AppThemeToggle />
       <Button
         asChild
         className="rounded-lg bg-white px-2 py-2 text-sm font-bold text-[var(--bms-red)] shadow-sm transition hover:bg-white/90 sm:px-3"

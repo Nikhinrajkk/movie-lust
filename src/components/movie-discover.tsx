@@ -151,15 +151,15 @@ export function MovieDiscover({
       <div className="space-y-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-[1.65rem]">
+            <h1 className="app-page-title text-xl font-bold tracking-tight sm:text-2xl md:text-[1.65rem]">
               Movies
             </h1>
-            <p className="mt-0.5 text-sm text-gray-500">
+            <p className="app-page-sub mt-0.5 text-sm">
               Explore titles — search, pick a genre, then sort.
             </p>
           </div>
           {supabaseReady && (
-            <p className="shrink-0 text-right text-xs font-medium leading-snug text-gray-500 sm:text-left">
+            <p className="shrink-0 text-right text-xs font-medium leading-snug text-[var(--md-text-muted)] sm:text-left">
               {data.total === 0
                 ? "No titles match."
                 : `${data.movies.length} of ${data.total} films`}
@@ -167,13 +167,13 @@ export function MovieDiscover({
           )}
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:p-4">
+        <div className="app-panel p-3 sm:p-4">
           <MovieFilters disabled={!supabaseReady} busy={listLoading} />
         </div>
       </div>
 
       {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-200">
           {error}
         </div>
       )}

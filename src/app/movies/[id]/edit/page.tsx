@@ -33,14 +33,14 @@ export default async function EditMoviePage({
           <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Edit listing
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="app-page-title mt-2 text-3xl font-bold tracking-tight">
             {movie?.title ?? "Movie"}
           </h1>
         </div>
         <NavLinkButton
           href={movie ? `/movies/${movie.id}` : "/"}
           variant="link"
-          className="px-0 py-0 text-sm text-gray-600 hover:text-[var(--bms-red)]"
+          className="app-nav-link px-0 py-0 text-sm"
         >
           ← Cancel
         </NavLinkButton>

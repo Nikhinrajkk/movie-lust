@@ -7,9 +7,10 @@ import {
 	upsertMovieUserReview,
 } from "@/app/actions/movie-user-reviews";
 import { StarMeter, StarMeterSlot } from "@/components/star-meter";
-import { Button } from "@/components/ui/button";
 import { ratingAfterStarClick, starFillFraction } from "@/lib/user-star-rating";
 import type { MovieUserReviewRow } from "@/types/movie-user-review";
+
+const NOTE_MAX = 500;
 
 function StarPicker({
 	value,
@@ -36,7 +37,7 @@ function StarPicker({
 							type="button"
 							disabled={disabled}
 							onClick={() => onChange(ratingAfterStarClick(n, value))}
-							className="rounded-md p-0.5 text-gray-300 transition hover:text-amber-300 disabled:opacity-50"
+							className="rounded-md p-0.5 text-gray-300 transition hover:opacity-90 disabled:opacity-50"
 							aria-label={`Star ${n} of 5`}
 							aria-pressed={fill >= 1}
 						>
@@ -50,7 +51,7 @@ function StarPicker({
 					type="button"
 					disabled={disabled}
 					onClick={() => onChange(null)}
-					className="text-xs font-medium text-gray-500 underline-offset-2 hover:text-gray-800 hover:underline disabled:opacity-50"
+					className="mdc-clear-stars text-xs font-medium text-gray-500 underline-offset-2 hover:text-gray-800 hover:underline disabled:opacity-50"
 				>
 					Clear stars
 				</button>
@@ -77,7 +78,7 @@ export function MovieUserReviewsClient({
 	const router = useRouter();
 	const [pending, start] = useTransition();
 	const [stars, setStars] = useState<number | null>(initialStars);
-	const [comment, setComment] = useState(initialComment);
+	const [comment, setComment] = useState(initialComment.slice(0, NOTE_MAX));
 	const [error, setError] = useState<string | null>(null);
 
 	const canSubmit = useMemo(() => {
@@ -88,16 +89,13 @@ export function MovieUserReviewsClient({
 
 	return (
 		<div className="space-y-3">
-			<p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+			<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-base">
 				Click a star once for a half star, again for a full star (up to 5). You can also
 				leave a short note.
 			</p>
 
 			{error ? (
-				<p
-					className="text-sm leading-relaxed text-red-800 sm:text-base"
-					role="alert"
-				>
+				<p className="mdc-error text-sm leading-relaxed text-red-800 sm:text-base" role="alert">
 					{error}
 				</p>
 			) : null}
@@ -124,46 +122,55 @@ export function MovieUserReviewsClient({
 					}}
 				>
 					<div className="space-y-2">
-						<span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-							Your stars
+						<span className="mdc-label text-xs font-semibold uppercase tracking-wider text-gray-500">
+							Your rating
 						</span>
 						<StarPicker value={stars} onChange={setStars} disabled={pending} />
 					</div>
 					<div className="space-y-2">
 						<label
 							htmlFor="movie-user-review-comment"
-							className="text-xs font-semibold uppercase tracking-wider text-gray-500"
+							className="mdc-label text-xs font-semibold uppercase tracking-wider text-gray-500"
 						>
 							Your note
 						</label>
-						<textarea
-							id="movie-user-review-comment"
-							name="comment"
-							rows={4}
-							maxLength={4000}
-							disabled={pending}
-							value={comment}
-							onChange={(e) => setComment(e.target.value)}
-							placeholder="What did you think?"
-							className="w-full resize-y rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm leading-relaxed text-gray-800 shadow-sm outline-none placeholder:text-gray-400 focus:border-violet-300 focus:ring-2 focus:ring-violet-100 disabled:opacity-60 sm:text-base"
-						/>
+						<div className="relative">
+							<textarea
+								id="movie-user-review-comment"
+								name="comment"
+								rows={4}
+								maxLength={NOTE_MAX}
+								disabled={pending}
+								value={comment}
+								onChange={(e) => setComment(e.target.value.slice(0, NOTE_MAX))}
+								placeholder="What did you think?"
+								className="mdc-textarea w-full resize-y rounded-lg border border-gray-200 bg-white px-3 py-2.5 pr-14 text-sm leading-relaxed text-gray-800 shadow-sm outline-none placeholder:text-gray-400 focus:border-violet-300 focus:ring-2 focus:ring-violet-100 disabled:opacity-60 sm:text-base"
+							/>
+							<span className="mdc-label pointer-events-none absolute bottom-2 right-2 text-xs tabular-nums">
+								{comment.length}/{NOTE_MAX}
+							</span>
+						</div>
 					</div>
-					<Button type="submit" disabled={pending || !canSubmit}>
+					<button
+						type="submit"
+						disabled={pending || !canSubmit}
+						className="mdc-btn-gold font-sans disabled:pointer-events-none"
+					>
 						{pending ? "Saving…" : "Save"}
-					</Button>
+					</button>
 				</form>
 			) : (
-				<p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+				<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-base">
 					Sign in to add your rating or comment.
 				</p>
 			)}
 
-			<div className="space-y-2 border-t border-gray-100 pt-3">
-				<h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+			<div className="mdc-divider space-y-2 border-t border-gray-100 pt-3">
+				<h3 className="mdc-label text-xs font-semibold uppercase tracking-wider text-gray-500">
 					From the community
 				</h3>
 				{reviews.length === 0 ? (
-					<p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+					<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-base">
 						No reviews yet — be the first.
 					</p>
 				) : (
@@ -171,16 +178,15 @@ export function MovieUserReviewsClient({
 						{reviews.map((r) => {
 							const mine = currentUserId != null && r.user_id === currentUserId;
 							const canRemove = isAdmin || mine;
-							const starVal =
-								r.stars == null ? null : Number(r.stars);
+							const starVal = r.stars == null ? null : Number(r.stars);
 							return (
 								<li key={r.id} className="space-y-2">
 									<div className="flex flex-wrap items-start justify-between gap-2">
 										<div>
-											<p className="text-sm font-semibold text-gray-900">
+											<p className="mdc-section-title text-sm font-semibold text-gray-900">
 												{r.author_display_name || "Member"}
 											</p>
-											<p className="text-xs text-gray-500">
+											<p className="mdc-label text-xs text-gray-500">
 												{new Date(r.created_at).toLocaleString(undefined, {
 													dateStyle: "medium",
 													timeStyle: "short",
@@ -188,10 +194,9 @@ export function MovieUserReviewsClient({
 											</p>
 										</div>
 										{canRemove ? (
-											<Button
+											<button
 												type="button"
-												variant="ghost"
-												className="shrink-0 px-2 py-1.5 text-xs text-red-700 hover:bg-red-50"
+												className="mdc-btn-remove font-sans disabled:opacity-50"
 												disabled={pending}
 												onClick={() =>
 													start(async () => {
@@ -210,7 +215,7 @@ export function MovieUserReviewsClient({
 												}
 											>
 												Remove
-											</Button>
+											</button>
 										) : null}
 									</div>
 									{starVal != null && Number.isFinite(starVal) ? (
@@ -223,7 +228,7 @@ export function MovieUserReviewsClient({
 										</div>
 									) : null}
 									{r.comment.trim() ? (
-										<p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-800 sm:text-base">
+										<p className="mdc-review-quote whitespace-pre-wrap text-sm leading-relaxed text-gray-800 sm:text-base">
 											{r.comment.trim()}
 										</p>
 									) : null}

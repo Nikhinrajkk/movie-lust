@@ -109,15 +109,15 @@ export default async function AdminPage({
           <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
             Admin
           </p>
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          <h1 className="app-page-title text-2xl font-bold tracking-tight sm:text-3xl">
             {headline}
           </h1>
-          <p className="mt-1 text-sm text-gray-600">{subline}</p>
+          <p className="app-page-sub mt-1 text-sm">{subline}</p>
         </div>
         <NavLinkButton
           href="/"
           variant="link"
-          className="px-0 py-0 text-sm text-gray-600 hover:text-[var(--bms-red)]"
+          className="app-nav-link px-0 py-0 text-sm"
         >
           ← Back to browse
         </NavLinkButton>
@@ -132,7 +132,7 @@ export default async function AdminPage({
       {!ready && <SetupCallout />}
 
       {ready && tab === "pending" && pendingResult && pendingResult.total === 0 && (
-        <div className="rounded-2xl border border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-600 shadow-sm">
+        <div className="app-panel px-6 py-12 text-center text-sm text-[var(--md-text-muted)]">
           No submissions waiting for review.
         </div>
       )}
@@ -157,7 +157,7 @@ export default async function AdminPage({
       )}
 
       {ready && tab === "approved" && approvedResult && approvedResult.total === 0 && (
-        <div className="rounded-2xl border border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-600 shadow-sm">
+        <div className="app-panel px-6 py-12 text-center text-sm text-[var(--md-text-muted)]">
           No approved titles in the catalogue yet.
         </div>
       )}
@@ -182,7 +182,7 @@ export default async function AdminPage({
       )}
 
       {ready && tab === "rejected" && rejectedResult && rejectedResult.total === 0 && (
-        <div className="rounded-2xl border border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-600 shadow-sm">
+        <div className="app-panel px-6 py-12 text-center text-sm text-[var(--md-text-muted)]">
           No rejected titles.
         </div>
       )}
