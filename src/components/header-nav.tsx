@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { AppThemeToggle } from "@/components/app-theme-toggle";
-import { Button } from "@/components/ui/button";
 import { HeaderUserMenu } from "@/components/header-user-menu";
 
 export function HeaderNav({
@@ -19,14 +18,12 @@ export function HeaderNav({
   return (
     <nav className="flex min-w-0 flex-1 flex-wrap items-center justify-end gap-1.5 sm:gap-2">
       <AppThemeToggle />
-      <Button
-        asChild
-        className="rounded-lg bg-white px-2 py-2 text-sm font-bold text-[var(--bms-red)] shadow-sm transition hover:bg-white/90 sm:px-3"
+      <Link
+        href="/movies/new"
+        className="inline-flex items-center gap-1 rounded-lg border border-[var(--md-gold)] bg-transparent px-2.5 py-1.5 text-sm font-semibold text-[var(--md-gold)] transition hover:bg-[var(--md-gold-soft)] sm:px-3"
       >
-        <Link href="/movies/new" className="text-sm font-bold !text-[var(--bms-red)]">
-          Add<span className="hidden min-[380px]:inline"> movie</span>
-        </Link>
-      </Button>
+        + <span className="hidden min-[380px]:inline">Add movie</span><span className="min-[380px]:hidden">Add</span>
+      </Link>
 
       {user ? (
         <div className="flex shrink-0 items-center pl-1">
@@ -37,13 +34,12 @@ export function HeaderNav({
           />
         </div>
       ) : (
-        <Button
-          asChild
-          variant="ghost"
-          className="border-white/80 bg-transparent px-3 py-2 text-xs font-semibold text-white hover:bg-white/10"
+        <Link
+          href="/login"
+          className="inline-flex items-center rounded-lg border border-[var(--app-border)] bg-transparent px-3 py-2 text-xs font-semibold text-[var(--md-text-muted)] transition hover:bg-[var(--app-surface-muted)] hover:text-[var(--md-title)]"
         >
-          <Link href="/login">Sign in</Link>
-        </Button>
+          Sign in
+        </Link>
       )}
     </nav>
   );

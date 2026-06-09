@@ -197,6 +197,50 @@ html[data-app-theme="dark"] body {
     linear-gradient(180deg, #08111f, #050b16);
 }
 
+/* ── Header ──────────────────────────────────────────────────────────── */
+html[data-app-theme] .app-header {
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+html[data-app-theme="dark"] .app-header {
+  background: rgba(5, 11, 22, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+/* ── Dropdown menu ───────────────────────────────────────────────────── */
+html[data-app-theme] .app-menu-content {
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: var(--md-text);
+}
+html[data-app-theme="dark"] .app-menu-content {
+  background: #0c1628;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+}
+html[data-app-theme] .app-menu-item {
+  color: var(--md-text);
+}
+html[data-app-theme] .app-menu-item[data-highlighted] {
+  background: var(--app-surface-muted);
+  color: var(--md-title);
+  outline: none;
+}
+html[data-app-theme] .app-menu-item-danger {
+  color: var(--md-danger);
+}
+html[data-app-theme] .app-menu-item-danger[data-highlighted] {
+  background: var(--md-danger-bg);
+  color: var(--md-danger);
+  outline: none;
+}
+html[data-app-theme] .app-menu-separator {
+  background: var(--md-border);
+}
+
 html[data-app-theme] .app-theme-toggle {
   border: 1px solid var(--app-theme-toggle-border);
   background: var(--app-theme-toggle-bg);
