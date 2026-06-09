@@ -93,7 +93,7 @@ export default async function MovieDetailPage({
 
 			{ready && movie && (
 				<div className="overflow-hidden rounded-none sm:rounded-2xl border border-gray-200 bg-white shadow-lg">
-					<div className="p-4 sm:p-6 lg:p-8">
+					<div className="p-4 sm:p-6">
 						{showModeration && (
 							<div
 								className={`mb-6 rounded-xl border px-4 py-3 text-sm ${

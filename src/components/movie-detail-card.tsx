@@ -286,10 +286,11 @@ export function MovieDetailStatsRow({
 			{hasUserAgg ? (
 				<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
 					<div className="flex min-w-0 flex-col gap-1 text-amber-600 sm:gap-1.5">
-						<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
+						<span className="truncate text-xs flex items-center gap-1 font-semibold text-gray-900 sm:text-sm">
+							<IconStar className="size-4 shrink-0 sm:size-5 text-amber-500 sm:gap-2" />
 							{userScoreText}
 						</span>
-						{userAvg != null ? <UserRatingFiveStars avg={userAvg} /> : null}
+						{/* {userAvg != null ? <UserRatingFiveStars avg={userAvg} /> : null} */}
 					</div>
 					<span className="text-[0.65rem] text-gray-500 sm:text-xs">
 						{userCount > 0 ? `Users (${userCount})` : "Users"}
@@ -405,7 +406,7 @@ export function MovieDetailPosterLinkRows({
 }) {
 	return (
 		<div className="flex w-full flex-col gap-2">
-			{mode === "admin" ? (
+			{mode === "admin" && (
 				<NavLinkButton
 					href={`/movies/${movieId}`}
 					variant="outline"
@@ -414,18 +415,6 @@ export function MovieDetailPosterLinkRows({
 					<span className="flex items-center gap-2">
 						<IconEye className="size-5 text-teal-600" />
 						Public page
-					</span>
-					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
-				</NavLinkButton>
-			) : (
-				<NavLinkButton
-					href="/"
-					variant="outline"
-					className={`${posterLinkRowClass} text-gray-800`}
-				>
-					<span className="flex items-center gap-2">
-						<IconHome className="size-5 text-gray-500" />
-						Browse catalogue
 					</span>
 					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
 				</NavLinkButton>
