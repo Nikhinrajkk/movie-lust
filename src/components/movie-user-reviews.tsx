@@ -37,7 +37,7 @@ function StarPicker({
 							type="button"
 							disabled={disabled}
 							onClick={() => onChange(ratingAfterStarClick(n, value))}
-							className="rounded-md p-0.5 text-gray-300 transition hover:opacity-90 disabled:opacity-50"
+							className="rounded-md p-0.5 text-[var(--md-star-empty)] transition hover:opacity-90 disabled:opacity-50"
 							aria-label={`Star ${n} of 5`}
 							aria-pressed={fill >= 1}
 						>
@@ -51,7 +51,7 @@ function StarPicker({
 					type="button"
 					disabled={disabled}
 					onClick={() => onChange(null)}
-					className="mdc-clear-stars text-xs font-medium text-gray-500 underline-offset-2 hover:text-gray-800 hover:underline disabled:opacity-50"
+					className="mdc-clear-stars disabled:opacity-50"
 				>
 					Clear stars
 				</button>
@@ -89,7 +89,7 @@ export function MovieUserReviewsClient({
 
 	return (
 		<div className="space-y-3">
-			<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-base">
+			<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-sm">
 				Click a star once for a half star, again for a full star (up to 5). You can also
 				leave a short note.
 			</p>
@@ -160,7 +160,7 @@ export function MovieUserReviewsClient({
 					</button>
 				</form>
 			) : (
-				<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-base">
+				<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-sm">
 					Sign in to add your rating or comment.
 				</p>
 			)}
@@ -170,7 +170,7 @@ export function MovieUserReviewsClient({
 					From the community
 				</h3>
 				{reviews.length === 0 ? (
-					<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-base">
+					<p className="mdc-prose text-sm leading-relaxed text-gray-700 sm:text-sm">
 						No reviews yet — be the first.
 					</p>
 				) : (
