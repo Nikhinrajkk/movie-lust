@@ -253,7 +253,7 @@ export function MovieDetailStatsRow({ movie }: { movie: MovieRow }) {
 	const rating = movie.rating != null ? `${movie.rating.toFixed(1)}/10` : "—";
 
 	return (
-		<div className="grid w-full max-w-full grid-cols-3 gap-2 sm:gap-3">
+		<div className="grid w-full max-w-full grid-cols-3 gap-1 sm:gap-2">
 			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
 				<div className="flex min-w-0 items-center gap-1.5 text-violet-600 sm:gap-2">
 					<IconClock className="size-4 shrink-0 sm:size-5" />
@@ -441,8 +441,8 @@ export function MovieDetailBody({
 		})}`;
 
 	return (
-		<div className="min-w-0 space-y-6">
-			<header className="space-y-2 border-b border-gray-100 pb-5">
+		<div className="min-w-0 space-y-3">
+			<header className="space-y-1 border-b border-gray-100 pb-3">
 				<div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
 					<div className="min-w-0 flex-1 space-y-2">
 						<h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-[2rem] lg:leading-tight">
@@ -487,7 +487,7 @@ export function MovieDetailBody({
 				</section>
 			)}
 
-			<section className="space-y-2 border-t border-gray-100 pt-5">
+			<section className="space-y-2 border-t border-gray-100 pt-3">
 				<h2 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
 					<span className="flex size-8 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
 						<IconBook className="size-4" />
@@ -499,7 +499,7 @@ export function MovieDetailBody({
 				</p>
 			</section>
 
-			<section className="space-y-3 border-t border-gray-100 pt-5">
+			<section className="space-y-3 border-t border-gray-100 pt-3">
 				<h2 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
 					<span className="flex size-8 items-center justify-center rounded-lg bg-violet-100 text-violet-700">
 						<IconQuote className="size-4" />
@@ -556,10 +556,10 @@ export function MovieDetailThreeColumn({
 		: "min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:border-gray-100";
 
 	const posterShellClass =
-		"mx-auto w-full max-w-[220px] lg:mx-0 lg:max-w-none lg:justify-self-start lg:col-start-1 lg:row-start-1";
+		"w-full min-w-0 lg:col-start-1 lg:row-start-1 lg:justify-self-start";
 
 	const footerShellClass =
-		"mx-auto w-full max-w-[220px] lg:mx-0 lg:max-w-none lg:justify-self-start lg:col-start-1 lg:row-start-2";
+		"w-full min-w-0 lg:col-start-1 lg:row-start-2 lg:justify-self-start";
 
 	return (
 		<div className="w-full min-w-0">

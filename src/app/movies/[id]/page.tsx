@@ -73,7 +73,7 @@ export default async function MovieDetailPage({
 	const p = movie ? posterSrc(movie.poster_url) : "";
 
 	return (
-		<div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+		<div className="mx-auto max-w-6xl px-0 py-0 sm:px-6 sm:py-10">
 			{!ready && <SetupCallout />}
 
 			{ready && movie && (
@@ -96,7 +96,7 @@ export default async function MovieDetailPage({
 						<MovieDetailThreeColumn
 							movie={movie}
 							posterSrc={p}
-							posterSizes="(max-width: 1024px) 50vw, 240px"
+							posterSizes="(max-width: 1023px) 100vw, 240px"
 							posterUnoptimized={p.includes("placehold.co")}
 							bodyFooterLine={publicFooterLine(movie, status, approverLabel)}
 							posterFooter={

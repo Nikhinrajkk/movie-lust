@@ -417,7 +417,7 @@ export function ModerationRow({
 					<MovieDetailThreeColumn
 						movie={movie}
 						posterSrc={poster}
-						posterSizes="(max-width: 1024px) 45vw, 220px"
+						posterSizes="(max-width: 1023px) 100vw, 220px"
 						posterUnoptimized={poster.includes("placehold.co")}
 						showMetadataAside={false}
 						headerActions={

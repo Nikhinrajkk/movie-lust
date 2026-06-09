@@ -76,13 +76,18 @@ export const GENRE_OPTIONS = [
   "animation",
   "comedy",
   "crime",
+  "neo-noir",
   "drama",
   "fantasy",
   "feelgood",
+  "gothic",
   "horror",
+  "bloodshed",
+  "body-horror",
   "investigation",
   "mystery",
   "psychological",
+  "mind-fuck",
   "romance",
   "sci-fi",
   "serial-killer",
@@ -109,6 +114,9 @@ export function formatGenreLabel(slug: string): string {
     "sci-fi": "Sci-Fi",
     "serial-killer": "Serial Killer",
     "tv-movie": "TV Movie",
+    "body-horror": "Body horror",
+    "neo-noir": "Neo Noir",
+    "mind-fuck": "Mind Fuck",
   };
   const asSlug = slug as GenreSlug;
   const mapped = map[asSlug];
