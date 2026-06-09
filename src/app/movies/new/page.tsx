@@ -46,7 +46,7 @@ export default async function NewMoviePage() {
 
       {ready && user && (
         <div className="space-y-8">
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          <p className="mdc-moderation-pending rounded-2xl px-4 py-3 text-sm">
             New titles stay <span className="font-semibold">pending</span> until
             an admin approves them. They won&apos;t show on the home page or to
             other members until then — you can open yours from{" "}

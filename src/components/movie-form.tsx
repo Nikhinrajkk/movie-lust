@@ -14,7 +14,7 @@ type Action = (
 ) => Promise<MovieFormState>;
 
 const inputClass =
-  "w-full rounded-xl border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 outline-none focus:border-[var(--bms-red)] focus:ring-2 focus:ring-[var(--bms-red)]/20";
+  "w-full rounded-xl border border-[var(--md-input-border)] bg-[var(--md-input-bg)] px-3 py-2.5 text-sm text-[var(--md-input-fg)] outline-none placeholder:text-[var(--md-input-placeholder)] focus:border-[var(--md-gold)] focus:ring-2 focus:ring-[var(--md-gold-soft)]";
 
 export function MovieForm({
   action,
@@ -34,7 +34,7 @@ export function MovieForm({
         value={movie?.category ?? "trending"}
       />
       {state.error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+        <div className="mdc-moderation-rejected rounded-xl px-4 py-3 text-sm">
           {state.error}
         </div>
       )}
@@ -141,7 +141,7 @@ export function MovieForm({
         </div>
       </div>
 
-      <fieldset className="space-y-3 rounded-2xl border border-gray-200 bg-gray-50/80 p-4">
+      <fieldset className="space-y-3 rounded-2xl border border-[var(--md-border)] bg-[var(--app-surface-muted)] p-4">
         <legend className="px-1 text-xs font-semibold uppercase tracking-wider text-[var(--bms-red)]">
           Genres
         </legend>

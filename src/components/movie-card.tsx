@@ -40,9 +40,9 @@ export function MovieCard({
   return (
     <Link
       href={`/movies/${movie.id}`}
-      className="group relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
+      className="group relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-[var(--md-border)] bg-[var(--app-surface)] shadow-sm transition hover:-translate-y-0.5 hover:border-[var(--md-gold)]/40 hover:shadow-md"
     >
-      <div className="relative aspect-[2/3] w-full overflow-hidden bg-gray-100">
+      <div className="relative aspect-[2/3] w-full overflow-hidden bg-[var(--app-surface-muted)]">
         <Image
           src={posterSrc(movie.poster_url)}
           alt={movie.title}
@@ -80,21 +80,21 @@ export function MovieCard({
         )}
         {movie.rating != null && (
           <div
-            className={`absolute right-1.5 rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700 shadow-sm ring-1 ring-gray-200/80 ${hasPosterActions ? "top-10" : "top-1.5"}`}
+            className={`absolute right-1.5 rounded-md bg-black/60 px-1.5 py-0.5 text-[10px] font-bold text-white shadow-sm ring-1 ring-white/10 backdrop-blur-sm ${hasPosterActions ? "top-10" : "top-1.5"}`}
           >
             {movie.rating.toFixed(1)}
-            <span className="font-medium text-gray-500">/10</span>
+            <span className="font-medium text-white/60">/10</span>
           </div>
         )}
       </div>
       <div className="flex flex-1 flex-col gap-1.5 p-3">
-        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-gray-900 group-hover:text-[var(--bms-red)]">
+        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-[var(--md-title)] group-hover:text-[var(--bms-red)]">
           {movie.title}
         </h3>
         {metaBits.length > 0 && (
-          <p className="line-clamp-2 text-[10px] text-gray-600">{metaBits.join(" · ")}</p>
+          <p className="line-clamp-2 text-[10px] text-[var(--md-text-muted)]">{metaBits.join(" · ")}</p>
         )}
-        <p className="line-clamp-2 text-[11px] leading-snug text-gray-600">
+        <p className="line-clamp-2 text-[11px] leading-snug text-[var(--md-text-muted)]">
           {movie.overview || movie.review_text || "No synopsis yet."}
         </p>
         <div className="mt-auto flex flex-col gap-1.5 pt-0.5">
@@ -103,7 +103,7 @@ export function MovieCard({
               {movie.genres.slice(0, 3).map((g) => (
                 <span
                   key={g}
-                  className="rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-[9px] text-gray-600"
+                  className="rounded border border-[var(--md-border)] bg-[var(--app-surface-muted)] px-1.5 py-0.5 text-[9px] text-[var(--md-text-muted)]"
                 >
                   {formatGenreLabel(g)}
                 </span>
@@ -111,8 +111,8 @@ export function MovieCard({
             </div>
           )}
           {watch && (
-            <div className="flex items-center gap-1.5 border-t border-gray-100 pt-1.5">
-              <span className="text-[9px] font-medium uppercase tracking-wide text-gray-500">
+            <div className="flex items-center gap-1.5 border-t border-[var(--md-border)] pt-1.5">
+              <span className="text-[9px] font-medium uppercase tracking-wide text-[var(--md-text-muted)]">
                 Watch
               </span>
               <WatchProviderIcon

@@ -20,15 +20,15 @@ export function FormCheckbox({
   const nativeRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="flex items-stretch rounded-lg border border-gray-200 bg-gray-50/80 outline-none hover:border-[var(--bms-red)]/35 has-[[data-state=checked]]:border-[var(--bms-red)]/50 has-[[data-state=checked]]:bg-[var(--bms-red)]/5">
+    <div className="flex items-stretch rounded-lg border border-[var(--md-border)] bg-[var(--app-surface-muted)] outline-none hover:border-[var(--bms-red)]/35 has-[[data-state=checked]]:border-[var(--bms-red)]/50 has-[[data-state=checked]]:bg-[var(--bms-red)]/5">
       <label
         htmlFor={id}
-        className="flex flex-1 cursor-pointer items-center gap-2 px-3 py-2 text-sm text-gray-700"
+        className="flex flex-1 cursor-pointer items-center gap-2 px-3 py-2 text-sm text-[var(--md-text)]"
       >
         <Checkbox.Root
           id={id}
           defaultChecked={defaultChecked}
-          className="flex size-4 shrink-0 items-center justify-center rounded border border-gray-400 bg-white text-[var(--bms-red)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--bms-red)]/40 data-[state=checked]:border-[var(--bms-red)] data-[state=checked]:bg-[var(--bms-red)]/15"
+          className="flex size-4 shrink-0 items-center justify-center rounded border border-[var(--md-input-border)] bg-[var(--md-input-bg)] text-[var(--bms-red)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--bms-red)]/40 data-[state=checked]:border-[var(--bms-red)] data-[state=checked]:bg-[var(--bms-red)]/15"
           onCheckedChange={(v) => {
             if (nativeRef.current) nativeRef.current.checked = v === true;
           }}

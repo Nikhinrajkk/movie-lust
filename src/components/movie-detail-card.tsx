@@ -198,8 +198,8 @@ export function MovieDetailStatsRow({
 		userAvg != null ? `${userAvg.toFixed(1)}/5` : "—";
 
 	const gridClass = hasUserAgg
-		? "grid w-full grid-cols-2 gap-4 sm:grid-cols-4"
-		: "grid w-full grid-cols-2 gap-4 sm:grid-cols-3";
+		? "grid w-full grid-cols-2 gap-4 sm:grid-cols-3"
+		: "grid w-full grid-cols-2 gap-4 sm:grid-cols-2";
 
 	return (
 		<div className={gridClass}>
@@ -229,15 +229,6 @@ export function MovieDetailStatsRow({
 					</div>
 				</div>
 			) : null}
-			<div className="mdc-stat-card px-4 py-3">
-				<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-category)]">
-					<IconTrend className="size-4 shrink-0" />
-					<span className="mdc-section-title truncate text-sm font-semibold">
-						{isTrending ? "Trending" : categoryLabel(cat)}
-					</span>
-				</div>
-				<div className="mdc-stat-label mt-1.5">{isTrending ? "Popular now" : "Category"}</div>
-			</div>
 		</div>
 	);
 }

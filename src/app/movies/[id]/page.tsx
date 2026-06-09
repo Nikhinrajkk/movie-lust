@@ -11,11 +11,13 @@ import {
 	MovieDetailPosterLinkRows,
 	MovieDetailThreeColumn,
 } from "@/components/movie-detail-card";
+import {
+	MovieDetailWatchedButton,
+	MovieDetailWatchlistButton,
+} from "@/components/movie-detail-watchlist-button";
 import { MovieUserReviewsClient } from "@/components/movie-user-reviews";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
-import { WatchedToggle } from "@/components/watched-toggle";
-import { WatchlistToggle } from "@/components/watchlist-toggle";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
 import { createSupabaseServer } from "@/lib/supabase/server";
@@ -127,20 +129,18 @@ export default async function MovieDetailPage({
 							/>
 						}
 						posterFooter={
-							<div className="flex flex-col gap-3">
+							<div className="flex flex-col gap-2.5">
 								{watchlistToggleEnabled && (
-									<div className="mdc-watchlist-ring">
-										<WatchlistToggle
+									<>
+										<MovieDetailWatchlistButton
 											movieId={movie.id}
 											initialInList={inWatchlist}
-											size="md"
 										/>
-										<WatchedToggle
+										<MovieDetailWatchedButton
 											movieId={movie.id}
 											initialWatched={isWatched}
-											size="md"
 										/>
-									</div>
+									</>
 								)}
 								<MovieDetailPosterLinkRows
 									movieId={movie.id}
