@@ -77,7 +77,7 @@ export default async function MovieDetailPage({
 			{!ready && <SetupCallout />}
 
 			{ready && movie && (
-				<div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+				<div className="overflow-hidden rounded-none sm:rounded-2xl border border-gray-200 bg-white shadow-lg">
 					<div className="p-4 sm:p-6 lg:p-8">
 						{showModeration && (
 							<div
