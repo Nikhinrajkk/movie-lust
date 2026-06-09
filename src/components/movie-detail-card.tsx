@@ -4,12 +4,91 @@ import { NavLinkButton } from "@/components/nav-link-button";
 import { MovieDetailShareButton } from "@/components/movie-detail-share-button";
 import { MovieDetailTrailerPill } from "@/components/movie-detail-trailer-pill";
 import { MovieDetailWhereToWatch } from "@/components/movie-detail-where-to-watch";
+import { WatchProviderIcon } from "@/components/watch-provider-icon";
 import type { MovieUserReviewAggregate } from "@/types/movie-user-review";
 import type { MovieRow } from "@/types/movie";
-import { formatGenreLabel, MOVIE_CATEGORIES } from "@/types/movie";
+import {
+	formatGenreLabel,
+	getWatchProviderBySlug,
+	MOVIE_CATEGORIES,
+} from "@/types/movie";
 
 function categoryLabel(slug: string) {
 	return MOVIE_CATEGORIES.find((c) => c.value === slug)?.label ?? slug;
+}
+
+/* ── inline SVG helpers ────────────────────────────────────────────── */
+
+function IconClock({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Clock</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+		</svg>
+	);
+}
+
+function IconStar({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+			<title>Star</title>
+			<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+		</svg>
+	);
+}
+
+function IconUsers({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Users</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm12 10v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+		</svg>
+	);
+}
+
+function IconTrend({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Category</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" />
+		</svg>
+	);
+}
+
+function IconUser({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Person</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+		</svg>
+	);
+}
+
+function IconCalendarSm({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Calendar</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+		</svg>
+	);
+}
+
+function IconGlobe({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Language</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+		</svg>
+	);
+}
+
+function IconTag({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Category</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" />
+		</svg>
+	);
 }
 
 function IconChevronRight({ className }: { className?: string }) {
@@ -124,52 +203,80 @@ export function MovieDetailStatsRow({
 
 	return (
 		<div className={gridClass}>
-			<div className="mdc-stat-card p-5">
-				<div className="mdc-stat-value">{runtime}</div>
-				<div className="mdc-stat-label">Runtime</div>
+			{/* Each card: [icon + value] on one line, label below */}
+			<div className="mdc-stat-card px-4 py-3">
+				<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-runtime)]">
+					<IconClock className="size-4 shrink-0" />
+					<span className="mdc-section-title truncate text-sm font-semibold">{runtime}</span>
+				</div>
+				<div className="mdc-stat-label mt-1.5">Runtime</div>
 			</div>
-			<div className="mdc-stat-card p-5">
-				<div className="mdc-stat-value">{catalogueRating}</div>
-				<div className="mdc-stat-label">Catalogue</div>
+			<div className="mdc-stat-card px-4 py-3">
+				<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-catalogue)]">
+					<IconStar className="size-4 shrink-0" />
+					<span className="mdc-section-title truncate text-sm font-semibold">{catalogueRating}</span>
+				</div>
+				<div className="mdc-stat-label mt-1.5">Catalogue</div>
 			</div>
 			{hasUserAgg ? (
-				<div className="mdc-stat-card p-5">
-					<div className="mdc-stat-value">{userScoreText}</div>
-					<div className="mdc-stat-label">
+				<div className="mdc-stat-card px-4 py-3">
+					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-users)]">
+						<IconUsers className="size-4 shrink-0" />
+						<span className="mdc-section-title truncate text-sm font-semibold">{userScoreText}</span>
+					</div>
+					<div className="mdc-stat-label mt-1.5">
 						Users{userCount > 0 ? ` (${userCount})` : ""}
 					</div>
 				</div>
 			) : null}
-			<div className="mdc-stat-card p-5">
-				<div className="mdc-stat-value truncate">{isTrending ? "Trending" : categoryLabel(cat)}</div>
-				<div className="mdc-stat-label">{isTrending ? "Popular now" : "Category"}</div>
+			<div className="mdc-stat-card px-4 py-3">
+				<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-category)]">
+					<IconTrend className="size-4 shrink-0" />
+					<span className="mdc-section-title truncate text-sm font-semibold">
+						{isTrending ? "Trending" : categoryLabel(cat)}
+					</span>
+				</div>
+				<div className="mdc-stat-label mt-1.5">{isTrending ? "Popular now" : "Category"}</div>
 			</div>
 		</div>
 	);
 }
 
 export function MovieDetailMetadataAside({ movie }: { movie: MovieRow }) {
-	const rows: { label: string; value: string }[] = [];
+	const watch = getWatchProviderBySlug(movie.watch_provider ?? null);
+	const rows: { icon: ReactNode; label: string; value: ReactNode }[] = [];
 	if (movie.director?.trim()) {
-		rows.push({ label: "Director", value: movie.director.trim() });
+		rows.push({ icon: <IconUser className="size-4" />, label: "Director", value: movie.director.trim() });
 	}
 	if (movie.release_year != null) {
-		rows.push({ label: "Release", value: String(movie.release_year) });
+		rows.push({ icon: <IconCalendarSm className="size-4" />, label: "Release", value: String(movie.release_year) });
 	}
 	if (movie.language?.trim()) {
-		rows.push({ label: "Language", value: movie.language.trim() });
+		rows.push({ icon: <IconGlobe className="size-4" />, label: "Language", value: movie.language.trim() });
 	}
-	rows.push({ label: "Category", value: categoryLabel(movie.category) });
+	if (watch) {
+		rows.push({
+			icon: (
+				<WatchProviderIcon slug={watch.slug} className="h-4 w-auto max-w-[3rem] object-contain opacity-80" title={watch.label} />
+			),
+			label: "Streaming",
+			value: watch.label,
+		});
+	}
+	rows.push({ icon: <IconTag className="size-4" />, label: "Category", value: categoryLabel(movie.category) });
 
 	return (
 		<div className="mdc-sidebar-card p-5">
 			{rows.map((r, i) => (
 				<div
 					key={r.label}
-					className={`${i < rows.length - 1 ? "border-b border-[var(--md-border)]" : ""} ${i === 0 ? "pb-4" : i === rows.length - 1 ? "pt-4" : "py-4"}`}
+					className={`flex items-start gap-3 ${i < rows.length - 1 ? "border-b border-[var(--md-border)]" : ""} ${i === 0 ? "pb-4" : i === rows.length - 1 ? "pt-4" : "py-4"}`}
 				>
-					<p className="mdc-aside-row-label text-xs">{r.label}</p>
-					<p className="mdc-aside-row-value mt-1 text-base font-medium leading-snug">{r.value}</p>
+					<span className="mdc-aside-icon mt-0.5 shrink-0">{r.icon}</span>
+					<div className="min-w-0">
+						<p className="mdc-aside-row-label text-xs">{r.label}</p>
+						<p className="mdc-aside-row-value mt-1 text-base font-medium leading-snug">{r.value}</p>
+					</div>
 				</div>
 			))}
 		</div>
