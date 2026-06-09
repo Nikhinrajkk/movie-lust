@@ -195,6 +195,7 @@ html[data-app-theme="dark"] body {
   background:
     radial-gradient(circle at top center, rgba(25, 55, 110, 0.65), transparent 35%),
     linear-gradient(180deg, #08111f, #050b16);
+  background-attachment: fixed;
 }
 
 /* ── Header ──────────────────────────────────────────────────────────── */
@@ -209,6 +210,43 @@ html[data-app-theme="dark"] .app-header {
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: none;
+}
+
+/* ── Select / filter controls ───────────────────────────────────────── */
+html[data-app-theme] .app-select-trigger {
+  border-color: var(--md-input-border);
+  background: var(--md-input-bg);
+  color: var(--md-input-fg);
+}
+html[data-app-theme] .app-select-trigger[data-placeholder] > span {
+  color: var(--md-input-placeholder);
+}
+html[data-app-theme] .app-select-trigger:not([data-disabled]):hover {
+  border-color: var(--md-gold);
+}
+html[data-app-theme] .app-select-trigger:focus {
+  border-color: var(--md-gold);
+  box-shadow: 0 0 0 2px var(--md-gold-soft);
+}
+html[data-app-theme] .app-select-content {
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: var(--md-text);
+}
+html[data-app-theme="dark"] .app-select-content {
+  background: #0c1628;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+html[data-app-theme] .app-select-item {
+  color: var(--md-text);
+}
+html[data-app-theme] .app-select-item[data-highlighted] {
+  background: var(--app-surface-muted);
+  color: var(--md-title);
+  outline: none;
+}
+html[data-app-theme] .app-select-group-label {
+  color: var(--md-text-muted);
 }
 
 /* ── Dropdown menu ───────────────────────────────────────────────────── */
