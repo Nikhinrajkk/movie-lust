@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { NavLinkButton } from "@/components/nav-link-button";
+import { StarMeter } from "@/components/star-meter";
 import { WatchProviderIcon } from "@/components/watch-provider-icon";
 import type { MovieUserReviewAggregate } from "@/types/movie-user-review";
 import type { MovieRow } from "@/types/movie";
@@ -229,20 +230,12 @@ function IconEye({ className }: { className?: string }) {
 }
 
 function UserRatingFiveStars({ avg }: { avg: number }) {
-	const filled = Math.min(5, Math.max(0, Math.round(avg)));
 	return (
-		<div
-			role="img"
-			aria-label={`${avg.toFixed(1)} out of 5 average from users`}
-			className="flex gap-0.5"
-		>
-			{([1, 2, 3, 4, 5] as const).map((starIndex) => (
-				<IconStar
-					key={`user-avg-star-${starIndex}`}
-					className={`size-4 sm:size-5 ${starIndex <= filled ? "text-amber-400" : "text-gray-200"}`}
-				/>
-			))}
-		</div>
+		<StarMeter
+			value={avg}
+			starClassName="size-4 sm:size-5"
+			ariaLabel={`${avg.toFixed(1)} out of 5 average from users`}
+		/>
 	);
 }
 
@@ -412,7 +405,7 @@ export function MovieDetailPosterLinkRows({
 }) {
 	return (
 		<div className="flex w-full flex-col gap-2">
-			{mode === "admin" && (
+			{mode === "admin" ? (
 				<NavLinkButton
 					href={`/movies/${movieId}`}
 					variant="outline"
@@ -421,6 +414,18 @@ export function MovieDetailPosterLinkRows({
 					<span className="flex items-center gap-2">
 						<IconEye className="size-5 text-teal-600" />
 						Public page
+					</span>
+					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
+				</NavLinkButton>
+			) : (
+				<NavLinkButton
+					href="/"
+					variant="outline"
+					className={`${posterLinkRowClass} text-gray-800`}
+				>
+					<span className="flex items-center gap-2">
+						<IconHome className="size-5 text-gray-500" />
+						Browse catalogue
 					</span>
 					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
 				</NavLinkButton>

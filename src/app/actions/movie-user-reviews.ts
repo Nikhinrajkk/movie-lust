@@ -1,16 +1,17 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import type {
+	MovieUserReviewAggregate,
+	MovieUserReviewRow,
+} from "@/types/movie-user-review";
 import {
 	isLikelyHtmlOrTransportBody,
 	logSupabaseTransportFailure,
 	sanitizeSupabaseErrorMessage,
 } from "@/lib/supabase/errors";
 import { createSupabaseServerOptional } from "@/lib/supabase/server";
-import type {
-	MovieUserReviewAggregate,
-	MovieUserReviewRow,
-} from "@/types/movie-user-review";
+import { normalizeHalfStarRating } from "@/lib/user-star-rating";
 
 export async function listMovieUserReviews(
 	movieId: string,
@@ -35,7 +36,15 @@ export async function listMovieUserReviews(
 		throw new Error(sanitizeSupabaseErrorMessage(error));
 	}
 
-	return (data ?? []) as MovieUserReviewRow[];
+	return (data ?? []).map((row) => {
+		const r = row as MovieUserReviewRow;
+		const s = r.stars as unknown;
+		const num =
+			s == null || s === "" ? null : Number(s);
+		const stars =
+			num != null && Number.isFinite(num) ? num : null;
+		return { ...r, stars };
+	});
 }
 
 export async function getMovieUserReviewAggregate(
@@ -58,13 +67,15 @@ export async function getMovieUserReviewAggregate(
 		throw new Error(sanitizeSupabaseErrorMessage(error));
 	}
 
-	const withStars = (data ?? []).filter(
-		(r: { stars: number | null }) => r.stars != null && Number.isFinite(r.stars),
-	) as { stars: number }[];
+	const withStars = (data ?? [])
+		.map((r: { stars: unknown }) =>
+			r.stars == null ? null : Number(r.stars),
+		)
+		.filter((s): s is number => s != null && Number.isFinite(s));
 	if (withStars.length === 0) {
 		return { avgStars: null, ratingCount: 0 };
 	}
-	const sum = withStars.reduce((acc, r) => acc + r.stars, 0);
+	const sum = withStars.reduce((acc, r) => acc + r, 0);
 	const avgStars = Math.round((sum / withStars.length) * 10) / 10;
 	return { avgStars, ratingCount: withStars.length };
 }
@@ -82,13 +93,11 @@ export async function upsertMovieUserReview(
 	if (!user) throw new Error("Sign in to leave a rating or comment.");
 
 	const comment = input.comment.trim();
-	const stars =
-		input.stars != null &&
-		Number.isFinite(input.stars) &&
-		input.stars >= 1 &&
-		input.stars <= 5
-			? Math.round(input.stars)
-			: null;
+	const stars = normalizeHalfStarRating(
+		input.stars != null && Number.isFinite(input.stars)
+			? Number(input.stars)
+			: null,
+	);
 
 	if (stars == null && comment.length === 0) {
 		throw new Error("Add a star rating and/or a comment.");

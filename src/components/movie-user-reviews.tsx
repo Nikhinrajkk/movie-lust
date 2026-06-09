@@ -6,24 +6,10 @@ import {
 	deleteMovieUserReview,
 	upsertMovieUserReview,
 } from "@/app/actions/movie-user-reviews";
+import { StarMeter, StarMeterSlot } from "@/components/star-meter";
 import { Button } from "@/components/ui/button";
+import { ratingAfterStarClick, starFillFraction } from "@/lib/user-star-rating";
 import type { MovieUserReviewRow } from "@/types/movie-user-review";
-
-function IconStar({ className, filled }: { className?: string; filled?: boolean }) {
-	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill={filled ? "currentColor" : "none"}
-			stroke="currentColor"
-			strokeWidth={filled ? 0 : 1.5}
-			aria-hidden
-		>
-			<title>Star</title>
-			<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-		</svg>
-	);
-}
 
 function StarPicker({
 	value,
@@ -34,6 +20,7 @@ function StarPicker({
 	onChange: (n: number | null) => void;
 	disabled?: boolean;
 }) {
+	const display = value ?? 0;
 	return (
 		<div className="flex flex-wrap items-center gap-2">
 			<fieldset
@@ -42,20 +29,18 @@ function StarPicker({
 			>
 				<legend className="sr-only">Your star rating</legend>
 				{([1, 2, 3, 4, 5] as const).map((n) => {
-					const active = value != null && n <= value;
+					const fill = starFillFraction(n, display);
 					return (
 						<button
 							key={n}
 							type="button"
 							disabled={disabled}
-							onClick={() => onChange(n)}
-							className={`rounded-md p-1 transition ${
-								active ? "text-amber-500" : "text-gray-300 hover:text-amber-300"
-							} disabled:opacity-50`}
-							aria-label={`${n} star${n === 1 ? "" : "s"}`}
-							aria-pressed={active}
+							onClick={() => onChange(ratingAfterStarClick(n, value))}
+							className="rounded-md p-0.5 text-gray-300 transition hover:text-amber-300 disabled:opacity-50"
+							aria-label={`Star ${n} of 5`}
+							aria-pressed={fill >= 1}
 						>
-							<IconStar className="size-7 sm:size-8" filled={active} />
+							<StarMeterSlot fill={fill} className="size-7 sm:size-8" />
 						</button>
 					);
 				})}
@@ -70,21 +55,6 @@ function StarPicker({
 					Clear stars
 				</button>
 			) : null}
-		</div>
-	);
-}
-
-function ReviewStarsRow({ stars }: { stars: number }) {
-	const s = Math.min(5, Math.max(1, Math.round(stars)));
-	return (
-		<div className="flex gap-0.5" role="img" aria-label={`${s} out of 5 stars`}>
-			{([1, 2, 3, 4, 5] as const).map((i) => (
-				<IconStar
-					key={i}
-					className={`size-4 sm:size-5 ${i <= s ? "text-amber-400" : "text-gray-200"}`}
-					filled={i <= s}
-				/>
-			))}
 		</div>
 	);
 }
@@ -111,7 +81,7 @@ export function MovieUserReviewsClient({
 	const [error, setError] = useState<string | null>(null);
 
 	const canSubmit = useMemo(() => {
-		return (stars != null && stars >= 1) || comment.trim().length > 0;
+		return (stars != null && stars >= 0.5) || comment.trim().length > 0;
 	}, [stars, comment]);
 
 	const signedIn = Boolean(currentUserId);
@@ -119,7 +89,8 @@ export function MovieUserReviewsClient({
 	return (
 		<div className="space-y-3">
 			<p className="text-sm leading-relaxed text-gray-700 sm:text-base">
-				Add a 1–5 star rating and/or a short note. You can update your entry anytime.
+				Click a star once for a half star, again for a full star (up to 5). You can also
+				leave a short note.
 			</p>
 
 			{error ? (
@@ -200,6 +171,8 @@ export function MovieUserReviewsClient({
 						{reviews.map((r) => {
 							const mine = currentUserId != null && r.user_id === currentUserId;
 							const canRemove = isAdmin || mine;
+							const starVal =
+								r.stars == null ? null : Number(r.stars);
 							return (
 								<li key={r.id} className="space-y-2">
 									<div className="flex flex-wrap items-start justify-between gap-2">
@@ -240,9 +213,13 @@ export function MovieUserReviewsClient({
 											</Button>
 										) : null}
 									</div>
-									{r.stars != null ? (
+									{starVal != null && Number.isFinite(starVal) ? (
 										<div>
-											<ReviewStarsRow stars={r.stars} />
+											<StarMeter
+												value={starVal}
+												starClassName="size-4 sm:size-5"
+												ariaLabel={`${starVal} out of 5 stars`}
+											/>
 										</div>
 									) : null}
 									{r.comment.trim() ? (
