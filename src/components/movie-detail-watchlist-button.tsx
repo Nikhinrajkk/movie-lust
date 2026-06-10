@@ -151,32 +151,31 @@ export function MovieDetailWatchedButton({
 			disabled={pending}
 			onClick={handleClick}
 			className={[
-				"flex w-full items-center justify-center gap-2.5 rounded-xl border py-2.5 text-sm font-medium transition-all duration-150",
-				"disabled:cursor-not-allowed disabled:opacity-50",
+				"mdc-link-row flex w-full items-center justify-between gap-2.5 rounded-xl border px-3 py-3 text-left text-sm font-medium transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4",
 				pop ? "round-media-pop" : "",
-				watched
-					? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
-					: "border-[var(--md-border)] bg-transparent text-[var(--md-text-muted)] hover:border-[var(--md-gold)] hover:text-[var(--md-gold)]",
+				watched ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20" : "",
 			]
 				.filter(Boolean)
 				.join(" ")}
 		>
-			{pending ? (
-				<svg className="size-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden={true}>
-					<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-					<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-				</svg>
-			) : watched ? (
-				<svg className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-label="Watched">
-					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-				</svg>
-			) : (
-				<svg className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-label="Not watched">
-					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
-					<circle cx="12" cy="12" r="3.25" stroke="currentColor" strokeWidth={1.75} />
-				</svg>
-			)}
-			{pending ? "Saving…" : watched ? "Watched · Unmark" : "Mark as Watched"}
+			<span className="flex items-center gap-2.5">
+				{pending ? (
+					<svg className="size-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden={true}>
+						<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+						<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+					</svg>
+				) : watched ? (
+					<svg className="size-4 shrink-0 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-label="Watched">
+						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+				) : (
+					<svg className="size-4 shrink-0 text-[var(--md-gold)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-label="Not watched">
+						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+						<circle cx="12" cy="12" r="3.25" stroke="currentColor" strokeWidth={1.75} />
+					</svg>
+				)}
+				{pending ? "Saving…" : watched ? "Watched · Unmark" : "Mark as Watched"}
+			</span>
 		</button>
 	);
 }

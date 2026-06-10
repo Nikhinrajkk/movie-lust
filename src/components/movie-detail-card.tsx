@@ -275,7 +275,7 @@ export function MovieDetailMetadataAside({ movie }: { movie: MovieRow }) {
 }
 
 const posterLinkRowClass =
-	"mdc-link-row flex w-full items-center justify-between gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-left text-sm font-medium shadow-sm transition sm:gap-3 sm:px-4 sm:py-3";
+	"mdc-link-row flex w-full items-center justify-between gap-2 rounded-xl border px-3 py-3 text-left text-sm font-medium transition sm:gap-3 sm:px-4";
 
 function IconHome({ className }: { className?: string }) {
 	return (
@@ -308,44 +308,44 @@ export function MovieDetailPosterLinkRows({
 }) {
 	return (
 		<div className="flex w-full flex-col gap-2">
-			{mode === "admin" ? (
-				<NavLinkButton
-					href={`/movies/${movieId}`}
-					variant="outline"
-					className={`${posterLinkRowClass} text-teal-700`}
-				>
-					<span className="flex items-center gap-2">
-						<IconEye className="size-5 text-teal-600" />
-						Public page
-					</span>
-					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
-				</NavLinkButton>
-			) : (
-				<NavLinkButton
-					href="/"
-					variant="outline"
-					className={`${posterLinkRowClass} text-gray-800`}
-				>
-					<span className="flex items-center gap-2">
-						<IconHome className="size-5 text-gray-500" />
-						Browse catalogue
-					</span>
-					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
-				</NavLinkButton>
-			)}
-			{showEdit && (
-				<NavLinkButton
-					href={`/movies/${movieId}/edit`}
-					variant="outline"
-					className={`${posterLinkRowClass} text-gray-800`}
-				>
-					<span className="flex items-center gap-2">
-						<IconPencil className="size-5 text-gray-500" />
-						Edit details
-					</span>
-					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
-				</NavLinkButton>
-			)}
+		{mode === "admin" ? (
+			<NavLinkButton
+				href={`/movies/${movieId}`}
+				variant="outline"
+				className={posterLinkRowClass}
+			>
+				<span className="flex items-center gap-2.5">
+					<IconEye className="size-4 shrink-0 text-[var(--md-gold)]" />
+					Public page
+				</span>
+				<IconChevronRight className="size-4 shrink-0 text-[var(--md-text-muted)]" />
+			</NavLinkButton>
+		) : (
+			<NavLinkButton
+				href="/"
+				variant="outline"
+				className={posterLinkRowClass}
+			>
+				<span className="flex items-center gap-2.5">
+					<IconHome className="size-4 shrink-0 text-[var(--md-gold)]" />
+					Browse catalogue
+				</span>
+				<IconChevronRight className="size-4 shrink-0 text-[var(--md-text-muted)]" />
+			</NavLinkButton>
+		)}
+		{showEdit && (
+			<NavLinkButton
+				href={`/movies/${movieId}/edit`}
+				variant="outline"
+				className={posterLinkRowClass}
+			>
+				<span className="flex items-center gap-2.5">
+					<IconPencil className="size-4 shrink-0 text-[var(--md-gold)]" />
+					Edit details
+				</span>
+				<IconChevronRight className="size-4 shrink-0 text-[var(--md-text-muted)]" />
+			</NavLinkButton>
+		)}
 		</div>
 	);
 }

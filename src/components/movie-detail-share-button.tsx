@@ -25,9 +25,9 @@ export function MovieDetailShareButton({ title }: { title: string }) {
 		<button
 			type="button"
 			onClick={() => void share()}
-			className="mdc-share-btn"
+			className="mdc-link-row flex w-full items-center gap-2.5 rounded-xl border px-3 py-3 text-left text-sm font-medium transition sm:px-4"
 		>
-			<svg className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<svg className="size-4 shrink-0 text-[var(--md-gold)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
 				<title>Share</title>
 				<path
 					strokeLinecap="round"
