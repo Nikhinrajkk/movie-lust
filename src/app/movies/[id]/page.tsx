@@ -4,17 +4,13 @@ import {
 	listMovieUserReviews,
 } from "@/app/actions/movie-user-reviews";
 import { getMovieById } from "@/app/actions/movies";
-import { getWatchedMovieIdsForUser } from "@/app/actions/watched";
 import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
 import { DeleteMovieForm } from "@/components/delete-movie-form";
 import {
 	MovieDetailPosterLinkRows,
 	MovieDetailThreeColumn,
 } from "@/components/movie-detail-card";
-import {
-	MovieDetailWatchedButton,
-	MovieDetailWatchlistButton,
-} from "@/components/movie-detail-watchlist-button";
+import { MovieDetailWatchlistButton } from "@/components/movie-detail-watchlist-button";
 import { MovieUserReviewsClient } from "@/components/movie-user-reviews";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
@@ -60,9 +56,7 @@ export default async function MovieDetailPage({
 	const showModeration = status === "pending" || status === "rejected";
 
 	const watchlistIds = ready && user ? await getWatchlistMovieIdsForUser() : [];
-	const watchedIds = ready && user ? await getWatchedMovieIdsForUser() : [];
 	const inWatchlist = movie ? watchlistIds.includes(movie.id) : false;
-	const isWatched = movie ? watchedIds.includes(movie.id) : false;
 	const watchlistToggleEnabled = Boolean(user) && status === "approved";
 
 	let approverLabel: string | null = null;
@@ -131,16 +125,10 @@ export default async function MovieDetailPage({
 						posterFooter={
 							<div className="flex flex-col gap-2.5">
 								{watchlistToggleEnabled && (
-									<>
-										<MovieDetailWatchlistButton
-											movieId={movie.id}
-											initialInList={inWatchlist}
-										/>
-										<MovieDetailWatchedButton
-											movieId={movie.id}
-											initialWatched={isWatched}
-										/>
-									</>
+									<MovieDetailWatchlistButton
+										movieId={movie.id}
+										initialInList={inWatchlist}
+									/>
 								)}
 								<MovieDetailPosterLinkRows
 									movieId={movie.id}

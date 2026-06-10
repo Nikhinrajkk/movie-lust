@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { listMoviesCreatedByUser } from "@/app/actions/movies";
 import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
-import { getWatchedMovieIdsForUser } from "@/app/actions/watched";
 import { MovieCard } from "@/components/movie-card";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SetupCallout } from "@/components/setup-callout";
@@ -19,10 +18,7 @@ export default async function MyMoviesPage() {
   const movies = ready && user ? await listMoviesCreatedByUser() : [];
   const watchlistMovieIds =
     ready && user ? await getWatchlistMovieIdsForUser() : [];
-  const watchedMovieIds =
-    ready && user ? await getWatchedMovieIdsForUser() : [];
   const watchlistSet = new Set(watchlistMovieIds);
-  const watchedSet = new Set(watchedMovieIds);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -82,10 +78,6 @@ export default async function MyMoviesPage() {
                         watchlist: {
                           enabled: true,
                           inList: watchlistSet.has(m.id),
-                        },
-                        watched: {
-                          enabled: true,
-                          isWatched: watchedSet.has(m.id),
                         },
                       }
                     : undefined

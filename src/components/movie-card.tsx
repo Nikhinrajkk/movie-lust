@@ -7,7 +7,6 @@ import {
 } from "@/types/movie";
 import { WatchProviderIcon } from "@/components/watch-provider-icon";
 import { WatchlistToggle } from "@/components/watchlist-toggle";
-import { WatchedToggle } from "@/components/watched-toggle";
 
 function posterSrc(url: string | null) {
   if (url && url.trim().length > 0) return url;
@@ -16,7 +15,6 @@ function posterSrc(url: string | null) {
 
 export type MovieCardActions = {
   watchlist?: { enabled: boolean; inList: boolean };
-  watched?: { enabled: boolean; isWatched: boolean };
 };
 
 export function MovieCard({
@@ -27,8 +25,7 @@ export function MovieCard({
   actions?: MovieCardActions;
 }) {
   const showWatchlist = actions?.watchlist?.enabled;
-  const showWatched = actions?.watched?.enabled;
-  const hasPosterActions = Boolean(showWatchlist || showWatched);
+  const hasPosterActions = Boolean(showWatchlist);
 
   const metaBits: string[] = [];
   if (movie.release_year != null) metaBits.push(String(movie.release_year));
@@ -60,13 +57,6 @@ export function MovieCard({
               <WatchlistToggle
                 movieId={movie.id}
                 initialInList={actions.watchlist.inList}
-                size="xs"
-              />
-            )}
-            {showWatched && actions?.watched && (
-              <WatchedToggle
-                movieId={movie.id}
-                initialWatched={actions.watched.isWatched}
                 size="xs"
               />
             )}

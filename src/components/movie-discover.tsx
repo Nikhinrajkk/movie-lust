@@ -19,14 +19,12 @@ export function MovieDiscover({
   supabaseReady,
   watchlistEnabled,
   watchlistMovieIds,
-  watchedMovieIds,
 }: {
   initial: MovieListResult;
   initialQuery: MovieListInitialQuery;
   supabaseReady: boolean;
   watchlistEnabled: boolean;
   watchlistMovieIds: string[];
-  watchedMovieIds: string[];
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -51,11 +49,6 @@ export function MovieDiscover({
   const watchlistSet = useMemo(
     () => new Set(watchlistMovieIds),
     [watchlistMovieIds],
-  );
-
-  const watchedSet = useMemo(
-    () => new Set(watchedMovieIds),
-    [watchedMovieIds],
   );
 
   const queryForList = useMemo(
@@ -192,10 +185,6 @@ export function MovieDiscover({
                       watchlist: {
                         enabled: true,
                         inList: watchlistSet.has(m.id),
-                      },
-                      watched: {
-                        enabled: true,
-                        isWatched: watchedSet.has(m.id),
                       },
                     }
                   : undefined;

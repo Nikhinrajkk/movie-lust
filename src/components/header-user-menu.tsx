@@ -75,17 +75,12 @@ export function HeaderUserMenu({
 
           <DropdownMenu.Item asChild>
             <Link href="/watchlist" className={linkItemClass}>
-              Fav Movies
+              Watchlist
             </Link>
           </DropdownMenu.Item>
           <DropdownMenu.Item asChild>
             <Link href="/my-movies" className={linkItemClass}>
               My Movies
-            </Link>
-          </DropdownMenu.Item>
-          <DropdownMenu.Item asChild>
-            <Link href="/watched" className={linkItemClass}>
-              Watched Movies
             </Link>
           </DropdownMenu.Item>
 
