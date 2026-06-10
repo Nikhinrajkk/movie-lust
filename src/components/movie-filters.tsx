@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useMovieFilters } from "@/stores/movie-filters";
 import type { SortOption } from "@/stores/movie-filters";
-import { Button } from "@/components/ui/button";
 import { FieldLabel } from "@/components/ui/label";
 import {
   UiSelect,
@@ -77,7 +76,7 @@ export function MovieFilters({
           Search catalogue
         </FieldLabel>
         <span
-          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--md-input-placeholder)]"
           aria-hidden
         >
           <svg
@@ -103,7 +102,7 @@ export function MovieFilters({
           onBlur={flushSearchToStore}
           disabled={disabled}
           placeholder="Search…"
-          className="box-border h-10 w-full min-w-0 rounded-lg border border-gray-300 bg-white py-0 pl-9 pr-3 text-sm font-medium leading-10 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[var(--bms-red)] focus:ring-2 focus:ring-[var(--bms-red)]/20 disabled:opacity-50"
+          className="box-border h-10 w-full min-w-0 rounded-lg border border-[var(--md-input-border)] bg-[var(--md-input-bg)] py-0 pl-9 pr-3 text-sm font-medium leading-10 text-[var(--md-input-fg)] outline-none transition placeholder:text-[var(--md-input-placeholder)] focus:border-[var(--md-gold)] focus:ring-2 focus:ring-[var(--md-gold-soft)] disabled:opacity-50"
         />
       </div>
 
@@ -142,15 +141,14 @@ export function MovieFilters({
       </UiSelect>
 
       {hasTextOrFilter ? (
-        <Button
+        <button
           type="button"
-          variant="outline"
           disabled={disabled || busy}
           onClick={() => clearFilters()}
-          className="col-span-2 box-border h-10 min-h-10 w-full justify-self-stretch px-3 py-0 leading-none min-[651px]:col-span-3"
+          className="col-span-2 box-border h-10 min-h-10 w-full rounded-lg border border-[var(--md-border)] bg-transparent px-3 py-0 text-sm font-medium leading-none text-[var(--md-text-muted)] transition hover:border-[var(--md-gold)]/50 hover:text-[var(--md-title)] disabled:cursor-not-allowed disabled:opacity-50 min-[651px]:col-span-3"
         >
           Clear
-        </Button>
+        </button>
       ) : null}
     </div>
   );

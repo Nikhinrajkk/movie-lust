@@ -9,7 +9,7 @@ import { buildInitialQueryFromSearchParams } from "@/lib/movie-search-params";
 
 function DiscoverFallback() {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center text-sm text-gray-500 shadow-sm">
+    <div className="app-panel p-10 text-center text-sm text-[var(--md-text-muted)]">
       Loading filters and catalogue…
     </div>
   );

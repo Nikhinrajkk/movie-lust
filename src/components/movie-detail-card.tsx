@@ -1,7 +1,9 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { NavLinkButton } from "@/components/nav-link-button";
-import { StarMeter } from "@/components/star-meter";
+import { MovieDetailShareButton } from "@/components/movie-detail-share-button";
+import { MovieDetailTrailerPill } from "@/components/movie-detail-trailer-pill";
+import { MovieDetailWhereToWatch } from "@/components/movie-detail-where-to-watch";
 import { WatchProviderIcon } from "@/components/watch-provider-icon";
 import type { MovieUserReviewAggregate } from "@/types/movie-user-review";
 import type { MovieRow } from "@/types/movie";
@@ -15,90 +17,76 @@ function categoryLabel(slug: string) {
 	return MOVIE_CATEGORIES.find((c) => c.value === slug)?.label ?? slug;
 }
 
+/* ── inline SVG helpers ────────────────────────────────────────────── */
+
 function IconClock({ className }: { className?: string }) {
 	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			aria-hidden
-		>
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
 			<title>Clock</title>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-			/>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 		</svg>
 	);
 }
 
 function IconStar({ className }: { className?: string }) {
 	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill="currentColor"
-			aria-hidden
-		>
+		<svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
 			<title>Star</title>
 			<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
 		</svg>
 	);
 }
 
+function IconUsers({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Users</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm12 10v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+		</svg>
+	);
+}
+
 function IconTrend({ className }: { className?: string }) {
 	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			aria-hidden
-		>
-			<title>Trend</title>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-			/>
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Category</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" />
 		</svg>
 	);
 }
 
-function IconBook({ className }: { className?: string }) {
+function IconUser({ className }: { className?: string }) {
 	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			aria-hidden
-		>
-			<title>Book</title>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-			/>
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Person</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 		</svg>
 	);
 }
 
-function IconQuote({ className }: { className?: string }) {
+function IconCalendarSm({ className }: { className?: string }) {
 	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill="currentColor"
-			aria-hidden
-		>
-			<title>Quote</title>
-			<path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Calendar</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+		</svg>
+	);
+}
+
+function IconGlobe({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Language</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+		</svg>
+	);
+}
+
+function IconTag({ className }: { className?: string }) {
+	return (
+		<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+			<title>Category</title>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" />
 		</svg>
 	);
 }
@@ -118,26 +106,6 @@ function IconChevronRight({ className }: { className?: string }) {
 				strokeLinejoin="round"
 				strokeWidth={2}
 				d="M9 5l7 7-7 7"
-			/>
-		</svg>
-	);
-}
-
-function IconUser({ className }: { className?: string }) {
-	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			aria-hidden
-		>
-			<title>User</title>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
 			/>
 		</svg>
 	);
@@ -183,26 +151,6 @@ function IconCalendar({ className }: { className?: string }) {
 	);
 }
 
-function IconGlobe({ className }: { className?: string }) {
-	return (
-		<svg
-			className={className}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			aria-hidden
-		>
-			<title>Globe</title>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-			/>
-		</svg>
-	);
-}
-
 function IconEye({ className }: { className?: string }) {
 	return (
 		<svg
@@ -229,16 +177,6 @@ function IconEye({ className }: { className?: string }) {
 	);
 }
 
-function UserRatingFiveStars({ avg }: { avg: number }) {
-	return (
-		<StarMeter
-			value={avg}
-			starClassName="size-4 sm:size-5"
-			ariaLabel={`${avg.toFixed(1)} out of 5 average from users`}
-		/>
-	);
-}
-
 export function MovieDetailStatsRow({
 	movie,
 	userReviewAggregate,
@@ -260,120 +198,84 @@ export function MovieDetailStatsRow({
 		userAvg != null ? `${userAvg.toFixed(1)}/5` : "—";
 
 	const gridClass = hasUserAgg
-		? "grid w-full max-w-full grid-cols-2 gap-1 sm:grid-cols-4 sm:gap-2"
-		: "grid w-full max-w-full grid-cols-3 gap-1 sm:gap-2";
+		? "grid w-full grid-cols-2 gap-4 sm:grid-cols-3"
+		: "grid w-full grid-cols-2 gap-4 sm:grid-cols-2";
 
 	return (
 		<div className={gridClass}>
-			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
-				<div className="flex min-w-0 items-center gap-1.5 text-violet-600 sm:gap-2">
-					<IconClock className="size-4 shrink-0 sm:size-5" />
-					<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
-						{runtime}
-					</span>
+			{/* Each card: [icon + value] on one line, label below */}
+			<div className="mdc-stat-card px-4 py-3">
+				<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-runtime)]">
+					<IconClock className="size-4 shrink-0" />
+					<span className="mdc-section-title truncate text-sm font-semibold">{runtime}</span>
 				</div>
-				<span className="text-[0.65rem] text-gray-500 sm:text-xs">Runtime</span>
+				<div className="mdc-stat-label mt-1.5">Runtime</div>
 			</div>
-			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
-				<div className="flex min-w-0 items-center gap-1.5 text-amber-500 sm:gap-2">
-					<IconStar className="size-4 shrink-0 sm:size-5" />
-					<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
-						{catalogueRating}
-					</span>
+			<div className="mdc-stat-card px-4 py-3">
+				<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-catalogue)]">
+					<IconStar className="size-4 shrink-0" />
+					<span className="mdc-section-title truncate text-sm font-semibold">{catalogueRating}</span>
 				</div>
-				<span className="text-[0.65rem] text-gray-500 sm:text-xs">Catalogue</span>
+				<div className="mdc-stat-label mt-1.5">Catalogue</div>
 			</div>
 			{hasUserAgg ? (
-				<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
-					<div className="flex min-w-0 flex-col gap-1 text-amber-600 sm:gap-1.5">
-						<span className="truncate text-xs flex items-center gap-1 font-semibold text-gray-900 sm:text-sm">
-							<IconStar className="size-4 shrink-0 sm:size-5 text-amber-500 sm:gap-2" />
-							{userScoreText}
-						</span>
-						{/* {userAvg != null ? <UserRatingFiveStars avg={userAvg} /> : null} */}
+				<div className="mdc-stat-card px-4 py-3">
+					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-users)]">
+						<IconUsers className="size-4 shrink-0" />
+						<span className="mdc-section-title truncate text-sm font-semibold">{userScoreText}</span>
 					</div>
-					<span className="text-[0.65rem] text-gray-500 sm:text-xs">
-						{userCount > 0 ? `Users (${userCount})` : "Users"}
-					</span>
+					<div className="mdc-stat-label mt-1.5">
+						Users{userCount > 0 ? ` (${userCount})` : ""}
+					</div>
 				</div>
 			) : null}
-			<div className="flex min-w-0 flex-col gap-1 rounded-xl border border-gray-200 bg-white px-2.5 py-2 shadow-sm sm:px-4 sm:py-3">
-				<div className="flex min-w-0 items-center gap-1.5 text-sky-600 sm:gap-2">
-					<IconTrend className="size-4 shrink-0 sm:size-5" />
-					<span className="truncate text-xs font-semibold text-gray-900 sm:text-sm">
-						{isTrending ? "Trending" : categoryLabel(cat)}
-					</span>
-				</div>
-				<span className="text-[0.65rem] text-gray-500 sm:text-xs">
-					{isTrending ? "Popular now" : "Category"}
-				</span>
-			</div>
 		</div>
 	);
 }
 
 export function MovieDetailMetadataAside({ movie }: { movie: MovieRow }) {
 	const watch = getWatchProviderBySlug(movie.watch_provider ?? null);
-	const rows: { icon: ReactNode; label: string; value: string }[] = [];
+	const rows: { icon: ReactNode; label: string; value: ReactNode }[] = [];
 	if (movie.director?.trim()) {
-		rows.push({
-			icon: <IconUser className="size-4 text-gray-400" />,
-			label: "Director",
-			value: movie.director.trim(),
-		});
+		rows.push({ icon: <IconUser className="size-4" />, label: "Director", value: movie.director.trim() });
 	}
 	if (movie.release_year != null) {
-		rows.push({
-			icon: <IconCalendar className="size-4 text-gray-400" />,
-			label: "Release",
-			value: String(movie.release_year),
-		});
+		rows.push({ icon: <IconCalendarSm className="size-4" />, label: "Release", value: String(movie.release_year) });
 	}
 	if (movie.language?.trim()) {
-		rows.push({
-			icon: <IconGlobe className="size-4 text-gray-400" />,
-			label: "Language",
-			value: movie.language.trim(),
-		});
+		rows.push({ icon: <IconGlobe className="size-4" />, label: "Language", value: movie.language.trim() });
 	}
 	if (watch) {
 		rows.push({
 			icon: (
-				<WatchProviderIcon
-					slug={watch.slug}
-					className="h-5 w-auto max-w-[4.5rem] object-contain opacity-80"
-					title={watch.label}
-				/>
+				<WatchProviderIcon slug={watch.slug} className="h-4 w-auto max-w-[3rem] object-contain opacity-80" title={watch.label} />
 			),
 			label: "Streaming",
 			value: watch.label,
 		});
 	}
-	rows.push({
-		icon: <IconPencil className="size-4 text-gray-400" />,
-		label: "Category",
-		value: categoryLabel(movie.category),
-	});
+	rows.push({ icon: <IconTag className="size-4" />, label: "Category", value: categoryLabel(movie.category) });
 
 	return (
-		<aside className="space-y-0 border-t border-gray-100 pt-4 lg:border-l lg:border-t-0 lg:pt-0 lg:pl-5">
-			<ul className="divide-y divide-gray-100">
-				{rows.map((r) => (
-					<li key={r.label} className="flex gap-3 py-3 first:pt-0">
-						<span className="mt-0.5 shrink-0">{r.icon}</span>
-						<div className="min-w-0">
-							<p className="text-xs font-medium text-gray-500">{r.label}</p>
-							<p className="text-sm text-gray-900">{r.value}</p>
-						</div>
-					</li>
-				))}
-			</ul>
-		</aside>
+		<div className="mdc-sidebar-card p-5">
+			{rows.map((r, i) => (
+				<div
+					key={r.label}
+					className={`flex items-start gap-3 ${i < rows.length - 1 ? "border-b border-[var(--md-border)]" : ""} ${i === 0 ? "pb-4" : i === rows.length - 1 ? "pt-4" : "py-4"}`}
+				>
+					<span className="mdc-aside-icon mt-0.5 shrink-0">{r.icon}</span>
+					<div className="min-w-0">
+						<p className="mdc-aside-row-label text-xs">{r.label}</p>
+						<p className="mdc-aside-row-value mt-1 text-base font-medium leading-snug">{r.value}</p>
+					</div>
+				</div>
+			))}
+		</div>
 	);
 }
 
 const posterLinkRowClass =
-	"flex w-full items-center justify-between gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-left text-sm font-medium shadow-sm transition hover:border-gray-300 hover:bg-gray-50 sm:gap-3 sm:px-4 sm:py-3";
+	"mdc-link-row flex w-full items-center justify-between gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-left text-sm font-medium shadow-sm transition sm:gap-3 sm:px-4 sm:py-3";
 
 function IconHome({ className }: { className?: string }) {
 	return (
@@ -406,7 +308,7 @@ export function MovieDetailPosterLinkRows({
 }) {
 	return (
 		<div className="flex w-full flex-col gap-2">
-			{mode === "admin" && (
+			{mode === "admin" ? (
 				<NavLinkButton
 					href={`/movies/${movieId}`}
 					variant="outline"
@@ -415,6 +317,18 @@ export function MovieDetailPosterLinkRows({
 					<span className="flex items-center gap-2">
 						<IconEye className="size-5 text-teal-600" />
 						Public page
+					</span>
+					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
+				</NavLinkButton>
+			) : (
+				<NavLinkButton
+					href="/"
+					variant="outline"
+					className={`${posterLinkRowClass} text-gray-800`}
+				>
+					<span className="flex items-center gap-2">
+						<IconHome className="size-5 text-gray-500" />
+						Browse catalogue
 					</span>
 					<IconChevronRight className="size-4 shrink-0 text-gray-400" />
 				</NavLinkButton>
@@ -459,20 +373,20 @@ export function MovieDetailBody({
 		})}`;
 
 	return (
-		<div className="min-w-0 space-y-3">
-			<header className="space-y-1 border-b border-gray-100 pb-3">
+		<div className="min-w-0 space-y-6">
+			<header>
 				<div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-					<div className="min-w-0 flex-1 space-y-2">
-						<h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-[2rem] lg:leading-tight">
+					<div className="min-w-0 flex-1">
+						<h1 className="mdc-h1 text-[clamp(1.75rem,3.5vw,2.5rem)] font-extrabold leading-tight tracking-tight">
 							{movie.title}
 						</h1>
-						<div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
+						<div className="mt-3 flex flex-wrap items-center gap-2">
 							{movie.release_year != null && (
-								<span className="font-medium text-gray-800">
+								<span className="mdc-muted text-base font-medium">
 									{movie.release_year}
 								</span>
 							)}
-							<span className="rounded-md border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600">
+							<span className="mdc-badge rounded-full px-3 py-1.5 text-sm font-medium">
 								Catalogue
 							</span>
 						</div>
@@ -491,15 +405,15 @@ export function MovieDetailBody({
 			/>
 
 			{movie.genres?.length > 0 && (
-				<section className="space-y-2">
-					<h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+				<section className="space-y-3">
+					<h2 className="mdc-label text-xs font-semibold uppercase tracking-widest">
 						Genres
 					</h2>
 					<div className="flex flex-wrap gap-2">
 						{movie.genres.map((g) => (
 							<span
 								key={g}
-								className="rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-medium text-violet-900"
+								className="mdc-genre-pill rounded-full border px-4 py-2 text-sm font-medium"
 							>
 								{formatGenreLabel(g)}
 							</span>
@@ -508,32 +422,22 @@ export function MovieDetailBody({
 				</section>
 			)}
 
-			<section className="space-y-2 border-t border-gray-100 pt-3">
-				<h2 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
-					<span className="flex size-8 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
-						<IconBook className="size-4" />
-					</span>
-					Synopsis
-				</h2>
-				<p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+			<section className="mdc-content-card">
+				<h3 className="mb-3 text-lg font-semibold">📖 Synopsis</h3>
+				<p className="mdc-prose text-sm leading-[1.8]">
 					{movie.overview?.trim() ? movie.overview : "No synopsis added yet."}
 				</p>
 			</section>
 
 			{reviewsSlot ? (
-				<section className="space-y-3 border-t border-gray-100 pt-3">
-					<h2 className="flex items-center gap-2 text-sm font-semibold text-gray-900">
-						<span className="flex size-8 items-center justify-center rounded-lg bg-violet-100 text-violet-700">
-							<IconQuote className="size-4" />
-						</span>
-						Reviews
-					</h2>
-					<div className="space-y-3">{reviewsSlot}</div>
+				<section className="mdc-content-card space-y-4">
+					<h3 className="text-lg font-semibold">💬 Reviews</h3>
+					<div>{reviewsSlot}</div>
 				</section>
 			) : null}
 
-			<p className="flex items-center gap-2 border-t border-gray-100 pt-4 text-xs text-gray-500">
-				<IconCalendar className="size-4 shrink-0 text-gray-400" />
+			<p className="mdc-footer-line flex items-center gap-2 pt-1 text-xs">
+				<IconCalendar className="size-4 shrink-0" />
 				{submitted}
 			</p>
 		</div>
@@ -553,6 +457,7 @@ export function MovieDetailThreeColumn({
 	headerActions,
 	userReviewAggregate,
 	reviewsSlot,
+	shareTitle,
 }: {
 	movie: MovieRow;
 	posterSrc: string;
@@ -571,19 +476,12 @@ export function MovieDetailThreeColumn({
 	userReviewAggregate?: MovieUserReviewAggregate;
 	/** User reviews UI (rendered under the Reviews heading in the main column). */
 	reviewsSlot?: ReactNode;
+	/** When set with a right column, shows Share in the sidebar (uses current page URL on the client). */
+	shareTitle?: string;
 }) {
 	const hasRightCol =
 		showMetadataAside !== false || Boolean(rightBottomSlot);
-
-	const mainLgClasses = hasRightCol
-		? "min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:border-r lg:border-gray-100 lg:pr-6 xl:pr-8"
-		: "min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:border-gray-100";
-
-	const posterShellClass =
-		"w-full min-w-0 lg:col-start-1 lg:row-start-1 lg:justify-self-start";
-
-	const footerShellClass =
-		"w-full min-w-0 lg:col-start-1 lg:row-start-2 lg:justify-self-start";
+	const posterFooterInAside = hasRightCol && Boolean(posterFooter);
 
 	return (
 		<div className="w-full min-w-0">
@@ -591,12 +489,13 @@ export function MovieDetailThreeColumn({
 			<div
 				className={
 					hasRightCol
-						? "grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)_minmax(0,200px)] lg:gap-x-8 lg:gap-y-0 xl:grid-cols-[220px_1fr_240px] xl:gap-x-10"
-						: "grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,200px)_minmax(0,1fr)] lg:gap-x-10 lg:gap-y-0 xl:grid-cols-[220px_1fr]"
+						? "grid grid-cols-1 items-start gap-8 lg:grid-cols-[200px_1fr_240px] lg:gap-x-8 lg:gap-y-0 xl:grid-cols-[220px_1fr_260px] xl:gap-x-10"
+						: "grid grid-cols-1 items-start gap-8 lg:grid-cols-[200px_1fr] lg:gap-x-8 xl:grid-cols-[220px_1fr]"
 				}
 			>
-				<div className={posterShellClass}>
-					<div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-md">
+				{/* Left: sticky poster + trailer button */}
+				<div className="lg:sticky lg:top-8 lg:col-start-1 lg:row-start-1 lg:self-start">
+					<div className="mdc-poster-frame relative aspect-[2/3] w-full overflow-hidden rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,.45)]">
 						<Image
 							src={posterSrc}
 							alt={movie.title}
@@ -607,9 +506,11 @@ export function MovieDetailThreeColumn({
 							unoptimized={posterUnoptimized}
 						/>
 					</div>
+					<MovieDetailTrailerPill title={movie.title} />
 				</div>
 
-				<main className={mainLgClasses}>
+				{/* Center: body */}
+				<main className="min-w-0 lg:col-start-2 lg:row-start-1">
 					<MovieDetailBody
 						movie={movie}
 						footerLine={bodyFooterLine}
@@ -619,27 +520,30 @@ export function MovieDetailThreeColumn({
 					/>
 				</main>
 
-				{posterFooter ? (
-					<div className={`flex flex-col gap-3 ${footerShellClass}`}>{posterFooter}</div>
-				) : null}
-
+				{/* Right sidebar */}
 				{hasRightCol ? (
-					<aside className="flex min-w-0 flex-col gap-4 lg:col-start-3 lg:row-start-1 lg:row-span-2 lg:min-h-0">
+					<aside className="flex min-w-0 flex-col gap-5 lg:col-start-3 lg:row-start-1 lg:sticky lg:top-8 lg:self-start">
 						{showMetadataAside !== false ? (
 							<MovieDetailMetadataAside movie={movie} />
 						) : null}
+						<MovieDetailWhereToWatch movie={movie} />
+						{posterFooterInAside ? (
+							<div className="flex flex-col gap-3">{posterFooter}</div>
+						) : null}
+						{shareTitle ? <MovieDetailShareButton title={shareTitle} /> : null}
 						{rightBottomSlot ? (
-							<div
-								className={
-									showMetadataAside !== false
-										? "mt-auto border-t border-gray-100 pt-4"
-										: "flex flex-col gap-3 border-t border-gray-100 pt-4"
-								}
-							>
+							<div className="flex flex-col gap-3 border-t border-[var(--md-border)] pt-4">
 								{rightBottomSlot}
 							</div>
 						) : null}
 					</aside>
+				) : null}
+
+				{/* Fallback: poster footer outside aside (no right column) */}
+				{posterFooter && !posterFooterInAside ? (
+					<div className="flex flex-col gap-3 lg:col-start-1 lg:row-start-2">
+						{posterFooter}
+					</div>
 				) : null}
 			</div>
 		</div>

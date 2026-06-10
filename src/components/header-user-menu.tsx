@@ -20,9 +20,9 @@ function initialsFrom(displayLabel: string, email: string | null | undefined) {
 }
 
 const itemClass =
-  "flex cursor-pointer select-none items-center rounded-lg px-2 py-2 text-sm text-gray-800 outline-none data-[highlighted]:bg-gray-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50";
+  "app-menu-item flex cursor-pointer select-none items-center rounded-lg px-2 py-2 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50";
 
-const linkItemClass = `${itemClass} no-underline hover:text-[var(--bms-red)]`;
+const linkItemClass = `${itemClass} no-underline`;
 
 export function HeaderUserMenu({
   displayLabel,
@@ -44,10 +44,10 @@ export function HeaderUserMenu({
           className="h-auto rounded-full border-0 bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white/60"
           aria-label="Open account menu"
         >
-          <Avatar.Root className="flex h-9 w-9 select-none items-center justify-center overflow-hidden rounded-full border-2 border-white/90 bg-white shadow-md transition hover:ring-2 hover:ring-white/50">
+          <Avatar.Root className="flex h-9 w-9 select-none items-center justify-center overflow-hidden rounded-full border-2 border-[var(--md-gold)]/70 bg-[var(--app-surface-muted)] shadow-md transition hover:ring-2 hover:ring-[var(--md-gold)]/40">
             <Avatar.Fallback
               delayMs={40}
-              className="flex h-full w-full items-center justify-center bg-white text-[11px] font-bold tracking-tight text-[var(--bms-red)]"
+              className="flex h-full w-full items-center justify-center bg-[var(--app-surface-muted)] text-[11px] font-bold tracking-tight text-[var(--md-gold)]"
             >
               {initials}
             </Avatar.Fallback>
@@ -57,35 +57,35 @@ export function HeaderUserMenu({
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="z-50 min-w-[15.5rem] overflow-hidden rounded-xl border border-gray-200 bg-white p-1 shadow-xl"
+          className="app-menu-content z-50 min-w-[15.5rem] overflow-hidden rounded-xl p-1 shadow-xl"
           sideOffset={8}
           align="end"
           collisionPadding={12}
         >
           <div className="px-2 py-2">
-            <p className="truncate text-sm font-semibold text-gray-900">
+            <p className="truncate text-sm font-semibold text-[var(--md-title)]">
               {displayLabel.trim() || "Account"}
             </p>
             {email ? (
-              <p className="mt-0.5 truncate text-xs text-gray-500">{email}</p>
+              <p className="mt-0.5 truncate text-xs text-[var(--md-text-muted)]">{email}</p>
             ) : null}
           </div>
 
-          <DropdownMenu.Separator className="my-1 h-px bg-gray-200" />
+          <DropdownMenu.Separator className="app-menu-separator my-1 h-px" />
 
           <DropdownMenu.Item asChild>
             <Link href="/watchlist" className={linkItemClass}>
-              FAV MOVIES
+              Fav Movies
             </Link>
           </DropdownMenu.Item>
           <DropdownMenu.Item asChild>
             <Link href="/my-movies" className={linkItemClass}>
-              MY MOVIES
+              My Movies
             </Link>
           </DropdownMenu.Item>
           <DropdownMenu.Item asChild>
             <Link href="/watched" className={linkItemClass}>
-              WATCHED MOVIES
+              Watched Movies
             </Link>
           </DropdownMenu.Item>
 
@@ -97,10 +97,10 @@ export function HeaderUserMenu({
             </DropdownMenu.Item>
           ) : null}
 
-          <DropdownMenu.Separator className="my-1 h-px bg-gray-200" />
+          <DropdownMenu.Separator className="app-menu-separator my-1 h-px" />
 
           <DropdownMenu.Item
-            className={`${itemClass} text-red-600 data-[highlighted]:bg-red-50 data-[highlighted]:text-red-700`}
+            className={`${itemClass} app-menu-item-danger`}
             onSelect={() => {
               void (async () => {
                 await clearAllBrowserStorage();

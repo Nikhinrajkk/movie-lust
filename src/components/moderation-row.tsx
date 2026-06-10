@@ -413,7 +413,7 @@ export function ModerationRow({
 					</svg>
 				</summary>
 
-				<div className="border-t border-gray-100 px-3 py-5 sm:px-5 sm:py-6">
+				<div className="border-t border-[var(--md-border)] px-3 py-5 sm:px-5 sm:py-6">
 					<MovieDetailThreeColumn
 						movie={movie}
 						posterSrc={poster}

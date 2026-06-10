@@ -24,12 +24,16 @@ export function StarMeterSlot({
 	const pct = `${Math.min(100, Math.max(0, fill * 100))}%`;
 	return (
 		<span className={`relative inline-block shrink-0 ${className}`}>
-			<StarSvg className={`pointer-events-none block text-gray-200 ${className}`} />
+			<StarSvg
+				className={`pointer-events-none block text-[var(--md-star-empty,#d1d5db)] ${className}`}
+			/>
 			<span
-				className="pointer-events-none absolute bottom-0 left-0 top-0 overflow-hidden text-amber-400"
+				className="pointer-events-none absolute bottom-0 left-0 top-0 overflow-hidden text-[var(--md-star-fill,#fbbf24)]"
 				style={{ width: pct }}
 			>
-				<StarSvg className={`block shrink-0 text-amber-400 ${className}`} />
+				<StarSvg
+					className={`block shrink-0 text-[var(--md-star-fill,#fbbf24)] ${className}`}
+				/>
 			</span>
 		</span>
 	);
