@@ -12,6 +12,7 @@ import {
   createSupabaseServer,
   createSupabaseServerOptional,
 } from "@/lib/supabase/server";
+import { getSessionUserWithProfile } from "@/lib/auth/session";
 import {
   GENRE_OPTIONS,
   MOVIE_CATEGORIES,
@@ -359,21 +360,36 @@ export async function updateMovieFromForm(
   const id = String(formData.get("id") ?? "").trim();
   if (!id) return { error: "Missing movie id" };
 
+  // Explicit authorization: admin can edit any movie; owner can only edit their own pending movie.
+  const { user, isAdmin } = await getSessionUserWithProfile();
+  if (!user) return { error: "Sign in to edit movies." };
+
+  if (!isAdmin) {
+    const supabase = await createSupabaseServer();
+    const { data: existing } = await supabase
+      .from("movies")
+      .select("created_by, approval_status")
+      .eq("id", id)
+      .maybeSingle();
+
+    const isOwner = existing?.created_by === user.id;
+    const isPending = existing?.approval_status === "pending";
+    if (!isOwner || !isPending) {
+      return { error: "You don't have permission to edit this movie." };
+    }
+  }
+
   let payload: MoviePayload;
   try {
     payload = parseMovieFormData(formData);
   } catch (e: unknown) {
-    return {
-      error: e instanceof Error ? e.message : "Invalid form",
-    };
+    return { error: e instanceof Error ? e.message : "Invalid form" };
   }
 
   try {
     await updateMovie(id, payload);
   } catch (e: unknown) {
-    return {
-      error: e instanceof Error ? e.message : "Could not update movie",
-    };
+    return { error: e instanceof Error ? e.message : "Could not update movie" };
   }
 
   redirect(`/movies/${id}`);
