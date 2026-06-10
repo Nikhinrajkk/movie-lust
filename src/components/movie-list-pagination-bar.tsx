@@ -11,7 +11,7 @@ export function MovieListPaginationBar({
 	end: ReactNode;
 }) {
 	return (
-		<div className="mt-6 overflow-x-auto border-t border-gray-200 pt-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+		<div className="mt-6 overflow-x-auto border-t border-[var(--md-border)] pt-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 			<div className="grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2">
 				<div className="min-w-0 justify-self-start">{start}</div>
 				<div className="flex shrink-0 flex-nowrap items-center justify-center gap-2 justify-self-center text-xs">

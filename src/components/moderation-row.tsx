@@ -106,7 +106,7 @@ function IconUnpublish({ className }: { className?: string }) {
 }
 
 const actionRailClass =
-	"relative z-10 flex shrink-0 flex-row items-center justify-center gap-1 self-stretch border-l border-gray-200 bg-gray-50/95 px-1.5 py-2 sm:gap-1.5 sm:px-2 " +
+	"relative z-10 flex shrink-0 flex-row items-center justify-center gap-1 self-stretch border-l border-[var(--md-border)] bg-[var(--app-surface)]/95 px-1.5 py-2 sm:gap-1.5 sm:px-2 " +
 	"opacity-0 transition-opacity duration-200 " +
 	"group-hover/moderation:opacity-100 group-focus-within/moderation:opacity-100";
 
@@ -245,7 +245,7 @@ function ModerationOpenRightSlot({
 					>
 						<IconCheck className="size-8 text-white" />
 					</Button>
-					<span className="text-xs font-semibold text-emerald-700">
+					<span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
 						Approve
 					</span>
 				</div>
@@ -256,7 +256,7 @@ function ModerationOpenRightSlot({
 						disabled={pending}
 						title="Reject"
 						aria-label="Reject"
-						className={`${bigActionBtn} border-2 border-red-200 bg-red-50 hover:bg-red-100`}
+						className={`${bigActionBtn} border-2 border-red-300 bg-red-50 hover:bg-red-100 dark:border-red-800 dark:bg-red-950/60 dark:hover:bg-red-950`}
 						onClick={() =>
 							start(async () => {
 								await rejectMovie(movie.id);
@@ -264,9 +264,9 @@ function ModerationOpenRightSlot({
 							})
 						}
 					>
-						<IconX className="size-8 text-red-700" />
+						<IconX className="size-8 text-red-600 dark:text-red-400" />
 					</Button>
-					<span className="text-xs font-semibold text-red-700">Reject</span>
+					<span className="text-xs font-semibold text-red-600 dark:text-red-400">Reject</span>
 				</div>
 			</div>
 		);
@@ -300,19 +300,19 @@ function ModerationOpenRightSlot({
 					disabled={pending}
 					title="Return to pending queue"
 					aria-label="Return to pending"
-					className={`${bigActionBtn} border border-gray-300 bg-white`}
-					onClick={() =>
-						start(async () => {
-							await returnRejectedToPending(movie.id);
-							router.refresh();
-						})
-					}
-				>
-					<IconUndo className="size-7 text-gray-800" />
-				</Button>
-				<span className="text-xs font-semibold text-gray-700">
-					Return to pending
-				</span>
+				className={`${bigActionBtn} border border-[var(--md-border)] bg-[var(--app-surface)]`}
+						onClick={() =>
+							start(async () => {
+								await returnRejectedToPending(movie.id);
+								router.refresh();
+							})
+						}
+					>
+						<IconUndo className="size-7 text-[var(--md-text)]" />
+					</Button>
+					<span className="text-xs font-semibold text-[var(--md-text-muted)]">
+						Return to pending
+					</span>
 			</div>
 		);
 	}
@@ -324,7 +324,7 @@ function ModerationOpenRightSlot({
 				disabled={pending}
 				title="Dis-approve — return to pending queue"
 				aria-label="Dis-approve"
-				className={`${headerActionBtn} border-amber-300 bg-amber-50 text-amber-950 hover:bg-amber-100`}
+				className={`${headerActionBtn} border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-950/60 dark:text-amber-300 dark:hover:bg-amber-950`}
 				onClick={() =>
 					start(async () => {
 						await disapproveMovie(movie.id);
@@ -344,7 +344,7 @@ function ModerationOpenRightSlot({
 				disabled={pending}
 				title="Dis-approve — return to pending queue"
 				aria-label="Dis-approve"
-				className={`${bigActionBtn} border-2 border-amber-300 bg-amber-50 text-amber-950 hover:bg-amber-100`}
+				className={`${bigActionBtn} border-2 border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-950/60 dark:text-amber-300 dark:hover:bg-amber-950`}
 				onClick={() =>
 					start(async () => {
 						await disapproveMovie(movie.id);
@@ -352,9 +352,9 @@ function ModerationOpenRightSlot({
 					})
 				}
 			>
-				<IconUnpublish className="size-7 text-amber-950" />
+				<IconUnpublish className="size-7 text-amber-900 dark:text-amber-300" />
 			</Button>
-			<span className="text-xs font-semibold text-amber-900">Dis-approve</span>
+			<span className="text-xs font-semibold text-amber-900 dark:text-amber-400">Dis-approve</span>
 		</div>
 	);
 }
@@ -371,10 +371,10 @@ export function ModerationRow({
 	const poster = posterSrc(movie.poster_url);
 
 	return (
-		<div className="group/moderation relative flex items-stretch overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+		<div className="group/moderation relative flex items-stretch overflow-hidden rounded-2xl border border-[var(--md-border)] bg-[var(--app-surface)] shadow-sm">
 			<details className="peer group/details min-w-0 flex-1 list-none">
 				<summary className="flex cursor-pointer list-none items-center gap-3 p-3 marker:content-none group-open/details:justify-end sm:gap-4 sm:p-4 [&::-webkit-details-marker]:hidden">
-					<div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-lg bg-gray-100 group-open/details:hidden sm:h-20 sm:w-14">
+					<div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-lg bg-[var(--app-surface-muted)] group-open/details:hidden sm:h-20 sm:w-14">
 						<Image
 							src={poster}
 							alt={`${movie.title} poster`}
@@ -385,10 +385,10 @@ export function ModerationRow({
 						/>
 					</div>
 					<div className="min-w-0 flex-1 space-y-0.5 pr-1 group-open/details:hidden">
-						<p className="truncate text-sm font-bold text-gray-900 sm:text-base">
+						<p className="truncate text-sm font-bold text-[var(--md-title)] sm:text-base">
 							{movie.title}
 						</p>
-						<p className="text-xs text-gray-500">
+						<p className="text-xs text-[var(--md-text-muted)]">
 							{movie.release_year != null
 								? `${movie.release_year}`
 								: "Year TBD"}
@@ -396,7 +396,7 @@ export function ModerationRow({
 						</p>
 					</div>
 					<svg
-						className="size-5 shrink-0 text-gray-400 transition-transform duration-300 group-open/details:rotate-180"
+						className="size-5 shrink-0 text-[var(--md-text-muted)] transition-transform duration-300 group-open/details:rotate-180"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"

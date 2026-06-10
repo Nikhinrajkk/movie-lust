@@ -7,17 +7,17 @@ function shortId(id: string) {
 export function AdminUsersList({ users }: { users: AdminProfileRow[] }) {
   if (users.length === 0) {
     return (
-      <div className="rounded-2xl border border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-600 shadow-sm">
+      <div className="rounded-2xl border border-[var(--md-border)] bg-[var(--app-surface)] px-6 py-12 text-center text-sm text-[var(--md-text-muted)] shadow-sm">
         No profiles yet. Users appear here after they sign up.
       </div>
     );
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-[var(--md-border)] bg-[var(--app-surface)] shadow-sm">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[32rem] text-left text-sm">
-          <thead className="border-b border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wide text-gray-500">
+          <thead className="border-b border-[var(--md-border)] bg-[var(--app-surface-muted)] text-xs font-semibold uppercase tracking-wide text-[var(--md-text-muted)]">
             <tr>
               <th className="px-4 py-3">User id</th>
               <th className="px-4 py-3">Display name</th>
@@ -25,25 +25,25 @@ export function AdminUsersList({ users }: { users: AdminProfileRow[] }) {
               <th className="px-4 py-3">Joined</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[var(--md-border)]">
             {users.map((u) => (
-              <tr key={u.id} className="text-gray-800">
-                <td className="px-4 py-3 font-mono text-xs text-gray-600" title={u.id}>
+              <tr key={u.id} className="text-[var(--md-text)]">
+                <td className="px-4 py-3 font-mono text-xs text-[var(--md-text-muted)]" title={u.id}>
                   {shortId(u.id)}…
                 </td>
-                <td className="px-4 py-3 font-medium text-gray-900">
+                <td className="px-4 py-3 font-medium text-[var(--md-title)]">
                   {u.display_name.trim() || "—"}
                 </td>
                 <td className="px-4 py-3">
                   {u.is_admin ? (
-                    <span className="rounded-full bg-[var(--bms-red)]/10 px-2 py-0.5 text-xs font-semibold text-[var(--bms-red)]">
+                    <span className="rounded-full bg-[var(--md-gold-soft)] px-2 py-0.5 text-xs font-semibold text-[var(--md-gold)]">
                       Admin
                     </span>
                   ) : (
-                    <span className="text-xs text-gray-500">Member</span>
+                    <span className="text-xs text-[var(--md-text-muted)]">Member</span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-xs text-gray-600">
+                <td className="px-4 py-3 text-xs text-[var(--md-text-muted)]">
                   {u.created_at
                     ? new Date(u.created_at).toLocaleString(undefined, {
                         dateStyle: "medium",
@@ -56,9 +56,9 @@ export function AdminUsersList({ users }: { users: AdminProfileRow[] }) {
           </tbody>
         </table>
       </div>
-      <p className="border-t border-gray-100 px-4 py-3 text-xs text-gray-500">
+      <p className="border-t border-[var(--md-border)] px-4 py-3 text-xs text-[var(--md-text-muted)]">
         Emails live in Supabase Auth; this list is from{" "}
-        <code className="rounded bg-gray-100 px-1 py-0.5 text-gray-700">
+        <code className="rounded bg-[var(--app-surface-muted)] px-1 py-0.5 text-[var(--md-text)]">
           public.profiles
         </code>{" "}
         (one row per signed-up user).

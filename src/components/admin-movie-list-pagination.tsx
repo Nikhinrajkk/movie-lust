@@ -29,11 +29,11 @@ export function AdminMovieListPagination({
 
 	const start =
 		totalPages > 1 ? (
-			<p className="text-xs text-gray-600">
+			<p className="text-xs text-[var(--md-text-muted)]">
 				Showing {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, total)} of {total}
 			</p>
 		) : (
-			<p className="text-xs text-gray-600">
+			<p className="text-xs text-[var(--md-text-muted)]">
 				{total} {itemWord}
 				{total === 1 ? "" : "s"}
 			</p>
@@ -41,7 +41,7 @@ export function AdminMovieListPagination({
 
 	const middle = (
 		<>
-			<span className="shrink-0 text-gray-500">Per page:</span>
+			<span className="shrink-0 text-[var(--md-text-muted)]">Per page:</span>
 			{[5, 10, 15, 25].map((n) => (
 				<Link
 					key={n}
@@ -49,8 +49,8 @@ export function AdminMovieListPagination({
 					scroll={false}
 					className={`shrink-0 rounded-md px-2 py-1 font-medium transition ${
 						pageSize === n
-							? "bg-[var(--bms-red)]/10 text-[var(--bms-red)]"
-							: "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+							? "bg-[var(--md-gold-soft)] text-[var(--md-gold)]"
+							: "text-[var(--md-text-muted)] hover:bg-[var(--app-surface-muted)] hover:text-[var(--md-title)]"
 					}`}
 				>
 					{n}
@@ -72,7 +72,7 @@ export function AdminMovieListPagination({
 						Previous
 					</Link>
 				</Button>
-				<span className="whitespace-nowrap px-1 text-xs font-medium text-gray-600">
+				<span className="whitespace-nowrap px-1 text-xs font-medium text-[var(--md-text-muted)]">
 					Page {page} / {totalPages}
 				</span>
 				<Button

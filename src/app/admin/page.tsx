@@ -106,7 +106,7 @@ export default async function AdminPage({
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--bms-red)]">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--md-gold)]">
             Admin
           </p>
           <h1 className="app-page-title text-2xl font-bold tracking-tight sm:text-3xl">

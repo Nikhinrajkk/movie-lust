@@ -3,9 +3,9 @@ import Link from "next/link";
 const tabBase =
   "inline-flex items-center rounded-t-lg border border-b-0 px-4 py-2.5 text-sm font-semibold transition";
 const inactive =
-  "border-transparent text-gray-500 hover:border-gray-200 hover:bg-gray-50 hover:text-gray-800";
+  "border-transparent text-[var(--md-text-muted)] hover:border-[var(--md-border)] hover:bg-[var(--app-surface-muted)] hover:text-[var(--md-title)]";
 const active =
-  "border-gray-200 bg-white text-[var(--bms-red)] shadow-[0_1px_0_0_white]";
+  "border-[var(--md-border)] bg-[var(--app-surface)] text-[var(--md-gold)] shadow-[0_1px_0_0_var(--app-surface)]";
 
 export function AdminTabs({
   current,
@@ -13,7 +13,7 @@ export function AdminTabs({
   current: "pending" | "approved" | "rejected" | "users";
 }) {
   return (
-    <nav className="-mb-px flex flex-wrap gap-1 border-b border-gray-200" aria-label="Admin sections">
+    <nav className="-mb-px flex flex-wrap gap-1 border-b border-[var(--md-border)]" aria-label="Admin sections">
       <Link
         href="/admin"
         className={`${tabBase} ${current === "pending" ? active : inactive}`}
