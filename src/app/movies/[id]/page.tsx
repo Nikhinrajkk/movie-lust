@@ -6,6 +6,7 @@ import {
 import { getMovieById } from "@/app/actions/movies";
 import { getWatchlistMovieIdsForUser } from "@/app/actions/watchlist";
 import { DeleteMovieForm } from "@/components/delete-movie-form";
+import { MovieDetailAdminActions } from "@/components/movie-detail-admin-actions";
 import {
 	MovieDetailPosterLinkRows,
 	MovieDetailThreeColumn,
@@ -124,6 +125,12 @@ export default async function MovieDetailPage({
 						}
 						posterFooter={
 							<div className="flex flex-col gap-2.5">
+								{isAdmin && (
+									<MovieDetailAdminActions
+										movieId={movie.id}
+										status={status as "pending" | "approved" | "rejected"}
+									/>
+								)}
 								{watchlistToggleEnabled && (
 									<MovieDetailWatchlistButton
 										movieId={movie.id}
