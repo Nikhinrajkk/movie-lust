@@ -58,6 +58,11 @@ export function MovieDiscover({
   const urlSearchSnapshotRef = useRef(urlSearchSnapshot);
   urlSearchSnapshotRef.current = urlSearchSnapshot;
 
+  // Guard against stale-closure redirects that happen when hydrateFromServer
+  // changes the Zustand store asynchronously (the useEffect fires with the
+  // pre-hydration closure values and would wrongly push the old URL).
+  const justHydratedRef = useRef(false);
+
   const watchlistSet = useMemo(
     () => new Set(watchlistMovieIds),
     [watchlistMovieIds],
@@ -75,6 +80,7 @@ export function MovieDiscover({
   );
 
   useLayoutEffect(() => {
+    justHydratedRef.current = true;
     hydrateFromServer({
       search: iqSearch,
       genre: iqGenre,
@@ -124,6 +130,16 @@ export function MovieDiscover({
   }, [queryForList, supabaseReady]);
 
   useEffect(() => {
+    // Skip the first URL sync after a hydrateFromServer call.
+    // hydrateFromServer (in useLayoutEffect) updates the Zustand store but
+    // the re-render is asynchronous, so this effect can fire with stale closure
+    // values from the render BEFORE the hydration. Without this guard those
+    // stale values would produce an incorrect router.replace → redirect loop.
+    if (justHydratedRef.current) {
+      justHydratedRef.current = false;
+      return;
+    }
+
     const params = new URLSearchParams();
     if (search.trim()) params.set("q", search.trim());
     if (genre.trim()) params.set("genre", genre.trim());
