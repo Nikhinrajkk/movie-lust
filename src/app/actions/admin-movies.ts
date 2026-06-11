@@ -14,9 +14,18 @@ export type AdminMoviesPageResult = {
   totalPages: number;
 };
 
+function adminMovieSearchFilter(search?: string): string | null {
+  const q = search?.trim();
+  if (!q) return null;
+  const safe = q.replace(/%/g, "").replace(/,/g, "").slice(0, 200);
+  if (safe.length === 0) return null;
+  const p = `%${safe}%`;
+  return `title.ilike.${p},overview.ilike.${p},review_text.ilike.${p},director.ilike.${p}`;
+}
+
 async function listMoviesByStatusPaged(
   status: "pending" | "approved" | "rejected",
-  input: { page?: number; pageSize?: number },
+  input: { page?: number; pageSize?: number; search?: string },
 ): Promise<AdminMoviesPageResult> {
   const { isAdmin } = await getSessionUserWithProfile();
   if (!isAdmin) throw new Error("Admin access required.");
@@ -25,10 +34,14 @@ async function listMoviesByStatusPaged(
   const pageSize = Math.min(50, Math.max(5, input.pageSize ?? 10));
 
   const supabase = await createSupabaseServer();
-  const { count, error: countError } = await supabase
+  let countQuery = supabase
     .from("movies")
     .select("*", { count: "exact", head: true })
     .eq("approval_status", status);
+  const searchFilter = adminMovieSearchFilter(input.search);
+  if (searchFilter) countQuery = countQuery.or(searchFilter);
+
+  const { count, error: countError } = await countQuery;
 
   if (countError) throw new Error(sanitizeSupabaseErrorMessage(countError));
 
@@ -47,10 +60,13 @@ async function listMoviesByStatusPaged(
       ? { column: "created_at" as const, ascending: false }
       : { column: "updated_at" as const, ascending: false };
 
-  const { data, error } = await supabase
+  let dataQuery = supabase
     .from("movies")
     .select("*")
-    .eq("approval_status", status)
+    .eq("approval_status", status);
+  if (searchFilter) dataQuery = dataQuery.or(searchFilter);
+
+  const { data, error } = await dataQuery
     .order(order.column, { ascending: order.ascending })
     .range(from, to);
 
@@ -66,19 +82,19 @@ async function listMoviesByStatusPaged(
 }
 
 export async function listPendingMoviesPaged(
-  input: { page?: number; pageSize?: number } = {},
+  input: { page?: number; pageSize?: number; search?: string } = {},
 ): Promise<AdminMoviesPageResult> {
   return listMoviesByStatusPaged("pending", input);
 }
 
 export async function listApprovedMoviesPaged(
-  input: { page?: number; pageSize?: number } = {},
+  input: { page?: number; pageSize?: number; search?: string } = {},
 ): Promise<AdminMoviesPageResult> {
   return listMoviesByStatusPaged("approved", input);
 }
 
 export async function listRejectedMoviesPaged(
-  input: { page?: number; pageSize?: number } = {},
+  input: { page?: number; pageSize?: number; search?: string } = {},
 ): Promise<AdminMoviesPageResult> {
   return listMoviesByStatusPaged("rejected", input);
 }

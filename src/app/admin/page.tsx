@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import {
   listApprovedMoviesPaged,
@@ -6,6 +7,7 @@ import {
 } from "@/app/actions/admin-movies";
 import { listProfilesForAdmin } from "@/app/actions/admin-users";
 import { AdminMovieListPagination } from "@/components/admin-movie-list-pagination";
+import { AdminSearch } from "@/components/admin-search";
 import { AdminTabs } from "@/components/admin-tabs";
 import { AdminUsersList } from "@/components/admin-users-list";
 import { ModerationRow } from "@/components/moderation-row";
@@ -36,6 +38,15 @@ function intFromSearch(
   return Number.isFinite(n) ? n : fallback;
 }
 
+function textFromSearch(
+  sp: Record<string, string | string[] | undefined>,
+  key: string,
+): string {
+  const raw = sp[key];
+  const s = Array.isArray(raw) ? raw[0] : raw;
+  return typeof s === "string" ? s : "";
+}
+
 export default async function AdminPage({
   searchParams,
 }: {
@@ -45,6 +56,7 @@ export default async function AdminPage({
   const tab = tabFromSearch(sp);
   const listPage = Math.max(1, intFromSearch(sp, "page", 1));
   const listPageSize = Math.min(50, Math.max(5, intFromSearch(sp, "perPage", 10)));
+  const listSearch = textFromSearch(sp, "q");
 
   const ready = isSupabaseConfigured();
   const { user, isAdmin } = await getSessionUserWithProfile();
@@ -62,6 +74,7 @@ export default async function AdminPage({
       ? await listPendingMoviesPaged({
           page: listPage,
           pageSize: listPageSize,
+          search: listSearch,
         })
       : null;
 
@@ -70,6 +83,7 @@ export default async function AdminPage({
       ? await listApprovedMoviesPaged({
           page: listPage,
           pageSize: listPageSize,
+          search: listSearch,
         })
       : null;
 
@@ -78,6 +92,7 @@ export default async function AdminPage({
       ? await listRejectedMoviesPaged({
           page: listPage,
           pageSize: listPageSize,
+          search: listSearch,
         })
       : null;
 
@@ -124,8 +139,15 @@ export default async function AdminPage({
       </div>
 
       {ready && isAdmin && (
-        <div className="mb-6">
-          <AdminTabs current={tab} />
+        <div className="mb-6 space-y-4">
+          <AdminTabs current={tab} search={listSearch} />
+          <Suspense
+            fallback={
+              <div className="h-10 w-full rounded-lg border border-[var(--md-input-border)] bg-[var(--md-input-bg)]" />
+            }
+          >
+            <AdminSearch initialSearch={listSearch} tab={tab} />
+          </Suspense>
         </div>
       )}
 
@@ -133,7 +155,9 @@ export default async function AdminPage({
 
       {ready && tab === "pending" && pendingResult && pendingResult.total === 0 && (
         <div className="app-panel px-6 py-12 text-center text-sm text-[var(--md-text-muted)]">
-          No submissions waiting for review.
+          {listSearch.trim()
+            ? "No pending submissions match your search."
+            : "No submissions waiting for review."}
         </div>
       )}
 
@@ -152,13 +176,16 @@ export default async function AdminPage({
             pageSize={pendingResult.pageSize}
             total={pendingResult.total}
             totalPages={pendingResult.totalPages}
+            search={listSearch}
           />
         </>
       )}
 
       {ready && tab === "approved" && approvedResult && approvedResult.total === 0 && (
         <div className="app-panel px-6 py-12 text-center text-sm text-[var(--md-text-muted)]">
-          No approved titles in the catalogue yet.
+          {listSearch.trim()
+            ? "No approved titles match your search."
+            : "No approved titles in the catalogue yet."}
         </div>
       )}
 
@@ -177,13 +204,16 @@ export default async function AdminPage({
             pageSize={approvedResult.pageSize}
             total={approvedResult.total}
             totalPages={approvedResult.totalPages}
+            search={listSearch}
           />
         </>
       )}
 
       {ready && tab === "rejected" && rejectedResult && rejectedResult.total === 0 && (
         <div className="app-panel px-6 py-12 text-center text-sm text-[var(--md-text-muted)]">
-          No rejected titles.
+          {listSearch.trim()
+            ? "No rejected titles match your search."
+            : "No rejected titles."}
         </div>
       )}
 
@@ -202,6 +232,7 @@ export default async function AdminPage({
             pageSize={rejectedResult.pageSize}
             total={rejectedResult.total}
             totalPages={rejectedResult.totalPages}
+            search={listSearch}
           />
         </>
       )}

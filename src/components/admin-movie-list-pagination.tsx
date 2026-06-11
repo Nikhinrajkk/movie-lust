@@ -2,11 +2,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MovieListPaginationBar } from "@/components/movie-list-pagination-bar";
 
-function href(tab: "pending" | "approved" | "rejected", page: number, pageSize: number) {
+function href(
+	tab: "pending" | "approved" | "rejected",
+	page: number,
+	pageSize: number,
+	search?: string,
+) {
 	const p = new URLSearchParams();
 	if (tab !== "pending") p.set("tab", tab);
 	if (page > 1) p.set("page", String(page));
 	if (pageSize !== 10) p.set("perPage", String(pageSize));
+	const trimmed = search?.trim();
+	if (trimmed) p.set("q", trimmed);
 	const q = p.toString();
 	return q ? `/admin?${q}` : "/admin";
 }
@@ -17,12 +24,14 @@ export function AdminMovieListPagination({
 	pageSize,
 	total,
 	totalPages,
+	search = "",
 }: {
 	tab: "pending" | "approved" | "rejected";
 	page: number;
 	pageSize: number;
 	total: number;
 	totalPages: number;
+	search?: string;
 }) {
 	const itemWord =
 		tab === "pending" ? "submission" : tab === "rejected" ? "rejected title" : "title";
@@ -45,7 +54,7 @@ export function AdminMovieListPagination({
 			{[5, 10, 15, 25].map((n) => (
 				<Link
 					key={n}
-					href={href(tab, 1, n)}
+					href={href(tab, 1, n, search)}
 					scroll={false}
 					className={`shrink-0 rounded-md px-2 py-1 font-medium transition ${
 						pageSize === n
@@ -68,7 +77,7 @@ export function AdminMovieListPagination({
 					disabled={page <= 1}
 					asChild
 				>
-					<Link href={href(tab, Math.max(1, page - 1), pageSize)} scroll>
+					<Link href={href(tab, Math.max(1, page - 1), pageSize, search)} scroll>
 						Previous
 					</Link>
 				</Button>
@@ -81,7 +90,7 @@ export function AdminMovieListPagination({
 					disabled={page >= totalPages}
 					asChild
 				>
-					<Link href={href(tab, Math.min(totalPages, page + 1), pageSize)} scroll>
+					<Link href={href(tab, Math.min(totalPages, page + 1), pageSize, search)} scroll>
 						Next
 					</Link>
 				</Button>
