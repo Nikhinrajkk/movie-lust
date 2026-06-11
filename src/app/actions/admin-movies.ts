@@ -38,12 +38,14 @@ async function listMoviesByStatusPaged(
   const from = (safePage - 1) * pageSize;
   const to = from + pageSize - 1;
 
+  // All tabs: newest activity first.
+  // Pending  → created_at DESC (latest submissions at top)
+  // Approved → updated_at DESC (most recently approved/edited first)
+  // Rejected → updated_at DESC (most recently actioned first)
   const order =
     status === "pending"
-      ? { column: "created_at" as const, ascending: true }
-      : status === "approved"
-        ? { column: "title" as const, ascending: true }
-        : { column: "updated_at" as const, ascending: false };
+      ? { column: "created_at" as const, ascending: false }
+      : { column: "updated_at" as const, ascending: false };
 
   const { data, error } = await supabase
     .from("movies")

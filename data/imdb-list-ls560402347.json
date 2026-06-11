@@ -1,0 +1,127 @@
+{
+  "source": "https://www.imdb.com/list/ls560402347/",
+  "list_title": "The 50 Best Feel-Good Movies to Make You Happy",
+  "parsed_from": "https://graphql.imdb.com/",
+  "movies": [
+    {
+      "imdb_id": "tt0454921",
+      "title": "The Pursuit of Happyness",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0097165",
+      "title": "Dead Poets Society",
+      "release_year": 1989
+    },
+    {
+      "imdb_id": "tt0878804",
+      "title": "The Blind Side",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt1210166",
+      "title": "Moneyball",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt1675434",
+      "title": "The Intouchables",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0116695",
+      "title": "Jerry Maguire",
+      "release_year": 1996
+    },
+    {
+      "imdb_id": "tt0087781",
+      "title": "The Natural",
+      "release_year": 1984
+    },
+    {
+      "imdb_id": "tt1068680",
+      "title": "Yes Man",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt0132477",
+      "title": "October Sky",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt1057500",
+      "title": "Invictus",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt0825232",
+      "title": "The Bucket List",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0075148",
+      "title": "Rocky",
+      "release_year": 1976
+    },
+    {
+      "imdb_id": "tt0332379",
+      "title": "School of Rock",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0412080",
+      "title": "The World's Fastest Indian",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0129290",
+      "title": "Patch Adams",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt10366460",
+      "title": "CODA",
+      "release_year": 2021
+    },
+    {
+      "imdb_id": "tt3488710",
+      "title": "The Walk",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt4209788",
+      "title": "Molly's Game",
+      "release_year": 2017
+    },
+    {
+      "imdb_id": "tt0241303",
+      "title": "Chocolat",
+      "release_year": 2000
+    },
+    {
+      "imdb_id": "tt0119164",
+      "title": "The Full Monty",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt25471950",
+      "title": "Flora and Son",
+      "release_year": 2023
+    },
+    {
+      "imdb_id": "tt0276751",
+      "title": "About a Boy",
+      "release_year": 2002
+    },
+    {
+      "imdb_id": "tt0343660",
+      "title": "50 First Dates",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0249462",
+      "title": "Billy Elliot",
+      "release_year": 2000
+    }
+  ]
+}
