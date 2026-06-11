@@ -126,48 +126,24 @@ function moderationFooterLine(
 	movie: MovieRow,
 	mode: "pending" | "approved" | "rejected",
 ) {
+	const fmt = (iso: string) =>
+		new Date(iso).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
+
 	if (mode === "approved") {
-		const added = `Added ${new Date(movie.created_at).toLocaleString(
-			undefined,
-			{
-				dateStyle: "medium",
-				timeStyle: "short",
-			},
-		)}`;
+		const added = `Added ${fmt(movie.created_at)}`;
 		if (movie.updated_at && movie.updated_at !== movie.created_at) {
-			return `${added} · Updated ${new Date(movie.updated_at).toLocaleString(
-				undefined,
-				{
-					dateStyle: "medium",
-					timeStyle: "short",
-				},
-			)}`;
+			return `${added} · Updated ${fmt(movie.updated_at)}`;
 		}
 		return added;
 	}
 	if (mode === "rejected") {
-		const sub = `Submitted ${new Date(movie.created_at).toLocaleString(
-			undefined,
-			{
-				dateStyle: "medium",
-				timeStyle: "short",
-			},
-		)}`;
+		const sub = `Submitted ${fmt(movie.created_at)}`;
 		if (movie.updated_at) {
-			return `${sub} · Rejected ${new Date(movie.updated_at).toLocaleString(
-				undefined,
-				{
-					dateStyle: "medium",
-					timeStyle: "short",
-				},
-			)}`;
+			return `${sub} · Rejected ${fmt(movie.updated_at)}`;
 		}
 		return sub;
 	}
-	return `Submitted ${new Date(movie.created_at).toLocaleString(undefined, {
-		dateStyle: "medium",
-		timeStyle: "short",
-	})}`;
+	return `Submitted ${fmt(movie.created_at)}`;
 }
 
 function ModerationOpenRightSlot({

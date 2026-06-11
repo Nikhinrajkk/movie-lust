@@ -43,8 +43,20 @@ export function MovieDiscover({
 
   const initialRef = useRef(initial);
   const initialQueryRef = useRef(initialQuery);
+  // Always keep refs up to date at render time (no effect needed).
+  initialRef.current = initial;
+  initialQueryRef.current = initialQuery;
+
+  // Destructure to primitive values so useLayoutEffect deps use value equality,
+  // not object-reference equality (initialQuery is a new object on every server render).
+  const { search: iqSearch, genre: iqGenre, sort: iqSort, page: iqPage, pageSize: iqPageSize } = initialQuery;
 
   const urlSearchSnapshot = urlSearchParams.toString();
+  // Keep a ref so the URL sync effect can read the latest value without
+  // including it in the deps array (which would re-trigger the effect after
+  // every router.replace and cause a redirect feedback loop).
+  const urlSearchSnapshotRef = useRef(urlSearchSnapshot);
+  urlSearchSnapshotRef.current = urlSearchSnapshot;
 
   const watchlistSet = useMemo(
     () => new Set(watchlistMovieIds),
@@ -63,16 +75,14 @@ export function MovieDiscover({
   );
 
   useLayoutEffect(() => {
-    initialRef.current = initial;
-    initialQueryRef.current = initialQuery;
     hydrateFromServer({
-      search: initialQuery.search,
-      genre: initialQuery.genre,
-      sort: initialQuery.sort,
-      page: initialQuery.page,
-      pageSize: initialQuery.pageSize,
+      search: iqSearch,
+      genre: iqGenre,
+      sort: iqSort,
+      page: iqPage,
+      pageSize: iqPageSize,
     });
-  }, [hydrateFromServer, initial, initialQuery]);
+  }, [hydrateFromServer, iqSearch, iqGenre, iqSort, iqPage, iqPageSize]);
 
   useEffect(() => {
     if (!supabaseReady) return;
@@ -122,20 +132,13 @@ export function MovieDiscover({
     if (pageSize !== 15) params.set("pageSize", String(pageSize));
 
     const next = params.toString();
-    const cur = urlSearchSnapshot;
+    // Read via ref so a URL change doesn't re-trigger this effect and loop.
+    const cur = urlSearchSnapshotRef.current;
     if (searchQueryStringsEqual(next, cur)) return;
 
     router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
-  }, [
-    genre,
-    page,
-    pageSize,
-    pathname,
-    router,
-    search,
-    sort,
-    urlSearchSnapshot,
-  ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [genre, page, pageSize, pathname, router, search, sort]);
 
   return (
     <div className="space-y-6">

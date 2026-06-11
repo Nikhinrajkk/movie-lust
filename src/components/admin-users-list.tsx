@@ -45,7 +45,7 @@ export function AdminUsersList({ users }: { users: AdminProfileRow[] }) {
                 </td>
                 <td className="px-4 py-3 text-xs text-[var(--md-text-muted)]">
                   {u.created_at
-                    ? new Date(u.created_at).toLocaleString(undefined, {
+                    ? new Date(u.created_at).toLocaleString("en-US", {
                         dateStyle: "medium",
                         timeStyle: "short",
                       })

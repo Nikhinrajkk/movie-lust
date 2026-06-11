@@ -186,8 +186,8 @@ export function MovieUserReviewsClient({
 											<p className="mdc-section-title text-sm font-semibold">
 												{r.author_display_name || "Member"}
 											</p>
-										<p className="mdc-label text-xs" suppressHydrationWarning>
-											{new Date(r.created_at).toLocaleString(undefined, {
+										<p className="mdc-label text-xs">
+											{new Date(r.created_at).toLocaleString("en-US", {
 												dateStyle: "medium",
 												timeStyle: "short",
 											})}
