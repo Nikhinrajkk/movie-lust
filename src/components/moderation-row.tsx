@@ -13,7 +13,6 @@ import {
 	MovieDetailPosterLinkRows,
 	MovieDetailThreeColumn,
 } from "@/components/movie-detail-card";
-import { Button } from "@/components/ui/button";
 import type { MovieRow } from "@/types/movie";
 
 function posterSrc(url: string | null) {
@@ -112,15 +111,14 @@ const actionRailClass =
 
 const iconBtnClass =
 	"pointer-events-none group-hover/moderation:pointer-events-auto group-focus-within/moderation:pointer-events-auto " +
-	"inline-flex size-10 shrink-0 items-center justify-center rounded-lg p-0 text-current shadow-sm " +
-	"[&_svg]:size-6 [&_svg]:shrink-0";
+	"mdc-admin-action mdc-admin-action--icon size-10 shrink-0 [&_svg]:size-6 [&_svg]:shrink-0";
 
 const bigActionBtn =
-	"flex size-16 shrink-0 items-center justify-center rounded-2xl p-0 shadow-md disabled:opacity-50";
+	"mdc-admin-action mdc-admin-action--lg size-16 shrink-0 [&_svg]:shrink-0";
 
 /** Inline actions beside the title (expanded row) — always clickable, matches rail sizing */
 const headerActionBtn =
-	"inline-flex size-10 shrink-0 items-center justify-center rounded-lg p-0 text-current shadow-sm disabled:opacity-50 [&_svg]:size-6 [&_svg]:shrink-0";
+	"mdc-admin-action mdc-admin-action--icon size-10 shrink-0 [&_svg]:size-6 [&_svg]:shrink-0";
 
 function moderationFooterLine(
 	movie: MovieRow,
@@ -167,13 +165,12 @@ function ModerationOpenRightSlot({
 		if (isHeader) {
 			return (
 				<>
-					<Button
+					<button
 						type="button"
-						variant="success"
 						disabled={pending}
 						title="Approve"
 						aria-label="Approve"
-						className={headerActionBtn}
+						className={`${headerActionBtn} mdc-admin-action--success`}
 						onClick={() =>
 							start(async () => {
 								await approveMovie(movie.id);
@@ -182,14 +179,13 @@ function ModerationOpenRightSlot({
 						}
 					>
 						<IconCheck />
-					</Button>
-					<Button
+					</button>
+					<button
 						type="button"
-						variant="destructive"
 						disabled={pending}
 						title="Reject"
 						aria-label="Reject"
-						className={headerActionBtn}
+						className={`${headerActionBtn} mdc-admin-action--danger`}
 						onClick={() =>
 							start(async () => {
 								await rejectMovie(movie.id);
@@ -198,20 +194,19 @@ function ModerationOpenRightSlot({
 						}
 					>
 						<IconX />
-					</Button>
+					</button>
 				</>
 			);
 		}
 		return (
 			<div className="flex flex-wrap justify-center gap-5 sm:justify-start">
 				<div className="flex flex-col items-center gap-1.5">
-					<Button
+					<button
 						type="button"
-						variant="success"
 						disabled={pending}
 						title="Approve"
 						aria-label="Approve"
-						className={`${bigActionBtn} bg-emerald-600 hover:bg-emerald-500`}
+						className={`${bigActionBtn} mdc-admin-action--success`}
 						onClick={() =>
 							start(async () => {
 								await approveMovie(movie.id);
@@ -219,20 +214,17 @@ function ModerationOpenRightSlot({
 							})
 						}
 					>
-						<IconCheck className="size-8 text-white" />
-					</Button>
-					<span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-						Approve
-					</span>
+						<IconCheck className="size-8" />
+					</button>
+					<span className="mdc-admin-action-label">Approve</span>
 				</div>
 				<div className="flex flex-col items-center gap-1.5">
-					<Button
+					<button
 						type="button"
-						variant="destructive"
 						disabled={pending}
 						title="Reject"
 						aria-label="Reject"
-						className={`${bigActionBtn} border-2 border-red-300 bg-red-50 hover:bg-red-100 dark:border-red-800 dark:bg-red-950/60 dark:hover:bg-red-950`}
+						className={`${bigActionBtn} mdc-admin-action--danger`}
 						onClick={() =>
 							start(async () => {
 								await rejectMovie(movie.id);
@@ -240,9 +232,11 @@ function ModerationOpenRightSlot({
 							})
 						}
 					>
-						<IconX className="size-8 text-red-600 dark:text-red-400" />
-					</Button>
-					<span className="text-xs font-semibold text-red-600 dark:text-red-400">Reject</span>
+						<IconX className="size-8" />
+					</button>
+					<span className="mdc-admin-action-label mdc-admin-action-label--danger">
+						Reject
+					</span>
 				</div>
 			</div>
 		);
@@ -250,13 +244,12 @@ function ModerationOpenRightSlot({
 	if (mode === "rejected") {
 		if (isHeader) {
 			return (
-				<Button
+				<button
 					type="button"
-					variant="secondary"
 					disabled={pending}
 					title="Return to pending queue"
 					aria-label="Return to pending"
-					className={headerActionBtn}
+					className={`${headerActionBtn} mdc-admin-action--neutral`}
 					onClick={() =>
 						start(async () => {
 							await returnRejectedToPending(movie.id);
@@ -265,42 +258,40 @@ function ModerationOpenRightSlot({
 					}
 				>
 					<IconUndo />
-				</Button>
+				</button>
 			);
 		}
 		return (
 			<div className="flex flex-col items-center gap-1.5 sm:items-start">
-				<Button
+				<button
 					type="button"
-					variant="secondary"
 					disabled={pending}
 					title="Return to pending queue"
 					aria-label="Return to pending"
-				className={`${bigActionBtn} border border-[var(--md-border)] bg-[var(--app-surface)]`}
-						onClick={() =>
-							start(async () => {
-								await returnRejectedToPending(movie.id);
-								router.refresh();
-							})
-						}
-					>
-						<IconUndo className="size-7 text-[var(--md-text)]" />
-					</Button>
-					<span className="text-xs font-semibold text-[var(--md-text-muted)]">
-						Return to pending
-					</span>
+					className={`${bigActionBtn} mdc-admin-action--neutral`}
+					onClick={() =>
+						start(async () => {
+							await returnRejectedToPending(movie.id);
+							router.refresh();
+						})
+					}
+				>
+					<IconUndo className="size-7" />
+				</button>
+				<span className="mdc-admin-action-label mdc-admin-action-label--neutral">
+					Return to pending
+				</span>
 			</div>
 		);
 	}
 	if (isHeader) {
 		return (
-			<Button
+			<button
 				type="button"
-				variant="secondary"
 				disabled={pending}
 				title="Dis-approve — return to pending queue"
 				aria-label="Dis-approve"
-				className={`${headerActionBtn} border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-950/60 dark:text-amber-300 dark:hover:bg-amber-950`}
+				className={`${headerActionBtn} mdc-admin-action--warning`}
 				onClick={() =>
 					start(async () => {
 						await disapproveMovie(movie.id);
@@ -309,18 +300,17 @@ function ModerationOpenRightSlot({
 				}
 			>
 				<IconUnpublish />
-			</Button>
+			</button>
 		);
 	}
 	return (
 		<div className="flex flex-col items-center gap-1.5 sm:items-start">
-			<Button
+			<button
 				type="button"
-				variant="secondary"
 				disabled={pending}
 				title="Dis-approve — return to pending queue"
 				aria-label="Dis-approve"
-				className={`${bigActionBtn} border-2 border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-950/60 dark:text-amber-300 dark:hover:bg-amber-950`}
+				className={`${bigActionBtn} mdc-admin-action--warning`}
 				onClick={() =>
 					start(async () => {
 						await disapproveMovie(movie.id);
@@ -328,9 +318,11 @@ function ModerationOpenRightSlot({
 					})
 				}
 			>
-				<IconUnpublish className="size-7 text-amber-900 dark:text-amber-300" />
-			</Button>
-			<span className="text-xs font-semibold text-amber-900 dark:text-amber-400">Dis-approve</span>
+				<IconUnpublish className="size-7" />
+			</button>
+			<span className="mdc-admin-action-label mdc-admin-action-label--warning">
+				Dis-approve
+			</span>
 		</div>
 	);
 }
@@ -423,13 +415,12 @@ export function ModerationRow({
 			>
 				{mode === "pending" ? (
 					<>
-						<Button
+						<button
 							type="button"
-							variant="success"
 							disabled={pending}
 							title="Approve"
 							aria-label="Approve"
-							className={iconBtnClass}
+							className={`${iconBtnClass} mdc-admin-action--success`}
 							onClick={() =>
 								start(async () => {
 									await approveMovie(movie.id);
@@ -438,14 +429,13 @@ export function ModerationRow({
 							}
 						>
 							<IconCheck />
-						</Button>
-						<Button
+						</button>
+						<button
 							type="button"
-							variant="destructive"
 							disabled={pending}
 							title="Reject"
 							aria-label="Reject"
-							className={iconBtnClass}
+							className={`${iconBtnClass} mdc-admin-action--danger`}
 							onClick={() =>
 								start(async () => {
 									await rejectMovie(movie.id);
@@ -454,16 +444,15 @@ export function ModerationRow({
 							}
 						>
 							<IconX />
-						</Button>
+						</button>
 					</>
 				) : mode === "rejected" ? (
-					<Button
+					<button
 						type="button"
-						variant="secondary"
 						disabled={pending}
 						title="Return to pending queue"
 						aria-label="Return to pending"
-						className={iconBtnClass}
+						className={`${iconBtnClass} mdc-admin-action--neutral`}
 						onClick={() =>
 							start(async () => {
 								await returnRejectedToPending(movie.id);
@@ -472,15 +461,14 @@ export function ModerationRow({
 						}
 					>
 						<IconUndo />
-					</Button>
+					</button>
 				) : (
-					<Button
+					<button
 						type="button"
-						variant="secondary"
 						disabled={pending}
 						title="Dis-approve — return to pending queue"
 						aria-label="Dis-approve"
-						className={`${iconBtnClass} border-amber-300 bg-amber-50 text-amber-950 hover:bg-amber-100`}
+						className={`${iconBtnClass} mdc-admin-action--warning`}
 						onClick={() =>
 							start(async () => {
 								await disapproveMovie(movie.id);
@@ -489,7 +477,7 @@ export function ModerationRow({
 						}
 					>
 						<IconUnpublish />
-					</Button>
+					</button>
 				)}
 			</div>
 		</div>

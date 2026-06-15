@@ -84,7 +84,7 @@ export function MovieDetailAdminActions({
 						type="button"
 						disabled={pending}
 						onClick={() => act(() => approveMovie(movieId))}
-						className="flex w-full items-center gap-2.5 rounded-xl border border-emerald-300 bg-emerald-50 px-3 py-2.5 text-left text-sm font-medium text-emerald-800 transition hover:bg-emerald-100 disabled:opacity-50 dark:border-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 dark:hover:bg-emerald-950"
+						className="mdc-admin-action mdc-admin-action--row mdc-admin-action--success"
 					>
 						<IconCheck className="size-4 shrink-0" />
 						Approve
@@ -93,7 +93,7 @@ export function MovieDetailAdminActions({
 						type="button"
 						disabled={pending}
 						onClick={() => act(() => rejectMovie(movieId))}
-						className="flex w-full items-center gap-2.5 rounded-xl border border-red-300 bg-red-50 px-3 py-2.5 text-left text-sm font-medium text-red-700 transition hover:bg-red-100 disabled:opacity-50 dark:border-red-800 dark:bg-red-950/50 dark:text-red-400 dark:hover:bg-red-950"
+						className="mdc-admin-action mdc-admin-action--row mdc-admin-action--danger"
 					>
 						<IconX className="size-4 shrink-0" />
 						Reject
@@ -106,7 +106,7 @@ export function MovieDetailAdminActions({
 					type="button"
 					disabled={pending}
 					onClick={() => act(() => disapproveMovie(movieId))}
-					className="flex w-full items-center gap-2.5 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2.5 text-left text-sm font-medium text-amber-800 transition hover:bg-amber-100 disabled:opacity-50 dark:border-amber-700 dark:bg-amber-950/50 dark:text-amber-300 dark:hover:bg-amber-950"
+					className="mdc-admin-action mdc-admin-action--row mdc-admin-action--warning"
 				>
 					<IconEyeOff className="size-4 shrink-0" />
 					Dis-approve (back to pending)
@@ -118,7 +118,7 @@ export function MovieDetailAdminActions({
 					type="button"
 					disabled={pending}
 					onClick={() => act(() => returnRejectedToPending(movieId))}
-					className="flex w-full items-center gap-2.5 rounded-xl border border-[var(--md-border)] bg-[var(--app-surface)] px-3 py-2.5 text-left text-sm font-medium text-[var(--md-text)] transition hover:border-[var(--md-gold)] hover:text-[var(--md-gold)] disabled:opacity-50"
+					className="mdc-admin-action mdc-admin-action--row mdc-admin-action--neutral"
 				>
 					<IconUndo className="size-4 shrink-0" />
 					Return to pending

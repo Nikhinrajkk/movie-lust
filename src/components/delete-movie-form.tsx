@@ -30,7 +30,7 @@ export function DeleteMovieForm({ id }: { id: string }) {
         <AlertDialogTrigger asChild>
           <button
             type="button"
-            className="flex w-full items-center justify-between gap-2.5 rounded-xl border border-[var(--md-danger-border)] bg-[var(--md-danger-bg)] px-3 py-3 text-left text-sm font-medium text-[var(--md-danger)] transition hover:border-[var(--md-danger)] sm:gap-3 sm:px-4"
+            className="mdc-admin-action mdc-admin-action--row mdc-admin-action--danger py-3 sm:gap-3 sm:px-4"
           >
             <span className="flex items-center gap-2.5">
               <IconTrash className="size-4 shrink-0" />

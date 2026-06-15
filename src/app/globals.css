@@ -129,6 +129,12 @@ html[data-app-theme="light"] {
   --md-danger: #991b1b;
   --md-danger-border: rgba(185, 28, 28, 0.25);
   --md-danger-bg: rgba(254, 226, 226, 0.85);
+  --md-success: #047857;
+  --md-success-border: rgba(5, 150, 105, 0.25);
+  --md-success-bg: rgba(209, 250, 229, 0.85);
+  --md-warning: #92400e;
+  --md-warning-border: rgba(245, 158, 11, 0.45);
+  --md-warning-bg: rgba(254, 243, 199, 0.95);
   --md-link: #b45309;
   --md-link-hover: #92400e;
   --md-shadow: 0 22px 45px -20px rgba(15, 23, 42, 0.18);
@@ -183,6 +189,12 @@ html[data-app-theme="dark"] {
   --md-danger: #fecaca;
   --md-danger-border: rgba(248, 113, 113, 0.35);
   --md-danger-bg: rgba(248, 113, 113, 0.1);
+  --md-success: #6ee7b7;
+  --md-success-border: rgba(52, 211, 153, 0.35);
+  --md-success-bg: rgba(52, 211, 153, 0.1);
+  --md-warning: #fde68a;
+  --md-warning-border: rgba(251, 191, 36, 0.45);
+  --md-warning-bg: rgba(251, 191, 36, 0.1);
   --md-link: #f5b840;
   --md-link-hover: #fcd34d;
   --md-clear-link: #94a3b8;
@@ -522,6 +534,94 @@ html[data-app-theme] .mdc-moderation-rejected {
   border-color: var(--md-danger-border);
   background: var(--md-danger-bg);
   color: var(--md-danger);
+}
+
+/* Admin moderation actions — theme tokens (matches remove-movie row style) */
+html[data-app-theme] .mdc-admin-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  border: 1px solid;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+html[data-app-theme] .mdc-admin-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+html[data-app-theme] .mdc-admin-action--row {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+}
+html[data-app-theme] .mdc-admin-action--icon {
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+html[data-app-theme="dark"] .mdc-admin-action--icon {
+  box-shadow: none;
+}
+html[data-app-theme] .mdc-admin-action--lg {
+  justify-content: center;
+  border-radius: 1rem;
+  padding: 0;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+html[data-app-theme="dark"] .mdc-admin-action--lg {
+  box-shadow: none;
+}
+html[data-app-theme] .mdc-admin-action--success {
+  border-color: var(--md-success-border);
+  background: var(--md-success-bg);
+  color: var(--md-success);
+}
+html[data-app-theme] .mdc-admin-action--success:hover:not(:disabled) {
+  border-color: var(--md-success);
+}
+html[data-app-theme] .mdc-admin-action--danger {
+  border-color: var(--md-danger-border);
+  background: var(--md-danger-bg);
+  color: var(--md-danger);
+}
+html[data-app-theme] .mdc-admin-action--danger:hover:not(:disabled) {
+  border-color: var(--md-danger);
+}
+html[data-app-theme] .mdc-admin-action--warning {
+  border-color: var(--md-warning-border);
+  background: var(--md-warning-bg);
+  color: var(--md-warning);
+}
+html[data-app-theme] .mdc-admin-action--warning:hover:not(:disabled) {
+  border-color: var(--md-warning);
+}
+html[data-app-theme] .mdc-admin-action--neutral {
+  border-color: var(--md-border);
+  background: var(--md-card);
+  color: var(--md-text);
+}
+html[data-app-theme] .mdc-admin-action--neutral:hover:not(:disabled) {
+  border-color: var(--md-gold);
+  color: var(--md-gold);
+}
+html[data-app-theme] .mdc-admin-action-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--md-success);
+}
+html[data-app-theme] .mdc-admin-action-label--danger {
+  color: var(--md-danger);
+}
+html[data-app-theme] .mdc-admin-action-label--warning {
+  color: var(--md-warning);
+}
+html[data-app-theme] .mdc-admin-action-label--neutral {
+  color: var(--md-text-muted);
 }
 
 html[data-app-theme] .mdc-back-link {
