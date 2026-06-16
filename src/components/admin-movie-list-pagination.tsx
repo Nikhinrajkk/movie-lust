@@ -55,7 +55,7 @@ export function AdminMovieListPagination({
 				<Link
 					key={n}
 					href={href(tab, 1, n, search)}
-					scroll={false}
+					scroll
 					className={`shrink-0 rounded-md px-2 py-1 font-medium transition ${
 						pageSize === n
 							? "bg-[var(--md-gold-soft)] text-[var(--md-gold)]"

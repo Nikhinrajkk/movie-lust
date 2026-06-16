@@ -1,0 +1,72 @@
+{
+  "source": "https://graphql.imdb.com/",
+  "list_title": "User curated movie batch (animation / adventure)",
+  "parsed_from": "https://graphql.imdb.com/",
+  "fetched_at": "2026-06-11",
+  "movie_count": 4,
+  "skipped_count": 3,
+  "skipped": [
+    {
+      "requested_as": "Spirited Away (2001)",
+      "reason": "already in supabase/migrations/0002_data.sql"
+    },
+    {
+      "requested_as": "Big Fish (2003)",
+      "reason": "already in supabase/migrations/0002_data.sql"
+    },
+    {
+      "requested_as": "The Secret Life of Walter Mitty (2013)",
+      "reason": "already in data/imdb-curated-batch-2026-06-11.json"
+    }
+  ],
+  "movies": [
+    {
+      "imdb_id": "tt0133240",
+      "title": "Treasure Planet",
+      "release_year": 2002,
+      "rating": 7.2,
+      "vote_count": 148686,
+      "runtime_minutes": 95,
+      "overview": "Jim Hawkins is a teenager who finds the map of a great treasure hidden by a space pirate. Together with some friends, he sets off in a large spaceship, shaped like a caravel, on his quest.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BN2VjNjk5MTAtNDE3Ni00NjczLWFhN2EtNGQ1ZmZmOWRjZjIyXkEyXkFqcGc@._V1_.jpg",
+      "director": "Ron Clements, John Musker",
+      "requested_as": "Treasure Planet (2002)"
+    },
+    {
+      "imdb_id": "tt0983193",
+      "title": "The Adventures of Tintin",
+      "release_year": 2011,
+      "rating": 7.3,
+      "vote_count": 255637,
+      "runtime_minutes": 107,
+      "overview": "Intrepid reporter Tintin and Captain Haddock set off on a treasure hunt for a sunken ship commanded by Haddock's ancestor.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNDE5MDExNTQ1OF5BMl5BanBnXkFtZTcwMDIxMTM5Ng@@._V1_.jpg",
+      "director": "Steven Spielberg",
+      "requested_as": "The Adventures of Tintin (2011)"
+    },
+    {
+      "imdb_id": "tt3915174",
+      "title": "Puss in Boots: The Last Wish",
+      "release_year": 2022,
+      "rating": 7.9,
+      "vote_count": 226408,
+      "runtime_minutes": 102,
+      "overview": "When Puss in Boots discovers that his passion for adventure has taken its toll and he has burned through eight of his nine lives, he launches an epic journey to restore them by finding the mythical Last Wish.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMzg0MWUzMjctYjVlOS00NzVjLWIwZDMtNzg1YzNkYzdjNTMwXkEyXkFqcGc@._V1_.jpg",
+      "director": "Joel Crawford, Januel Mercado",
+      "requested_as": "Puss in Boots The Last Wish (2022)"
+    },
+    {
+      "imdb_id": "tt19500164",
+      "title": "Nimona",
+      "release_year": 2023,
+      "rating": 7.5,
+      "vote_count": 62437,
+      "runtime_minutes": 101,
+      "overview": "When a knight in a futuristic medieval world is framed for a crime he didn't commit, the only one who can help him prove his innocence is Nimona -- a mischievous teen who happens to be a shapeshifting creature he's sworn to destroy.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjIyMmY0MWYtZGRkMC00MjhhLTgwNGUtYWVjZmQ4YjhjZWRmXkEyXkFqcGc@._V1_.jpg",
+      "director": "Nick Bruno, Troy Quane",
+      "requested_as": "Nimona (2023)"
+    }
+  ]
+}

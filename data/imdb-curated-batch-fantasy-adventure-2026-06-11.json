@@ -1,0 +1,105 @@
+{
+  "source": "https://graphql.imdb.com/",
+  "list_title": "User curated movie batch (fantasy / adventure)",
+  "parsed_from": "https://graphql.imdb.com/",
+  "fetched_at": "2026-06-11",
+  "movie_count": 8,
+  "movies": [
+    {
+      "imdb_id": "tt0338526",
+      "title": "Van Helsing",
+      "release_year": 2004,
+      "rating": 6.1,
+      "vote_count": 307668,
+      "runtime_minutes": 131,
+      "overview": "The famed monster hunter is sent to Transylvania to stop Count Dracula, who is using Dr. Frankenstein's research and a werewolf for nefarious purposes.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNDk3NTdlYzQtMjhiMy00MWJkLWFjNDctMzE4ZGEwZWExNGViXkEyXkFqcGc@._V1_.jpg",
+      "director": "Stephen Sommers",
+      "requested_as": "Van Helsing (2004)"
+    },
+    {
+      "imdb_id": "tt2906216",
+      "title": "Dungeons & Dragons: Honor Among Thieves",
+      "release_year": 2023,
+      "rating": 7.2,
+      "vote_count": 274688,
+      "runtime_minutes": 134,
+      "overview": "A charming thief and a band of unlikely adventurers embark on an epic quest to retrieve a lost relic, but things go dangerously awry when they run afoul of the wrong people.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BOGRjMjQ0ZDAtODc0OS00MGY1LTkxMTMtODhhNjY5NTM4N2IwXkEyXkFqcGc@._V1_.jpg",
+      "director": "John Francis Daley, Jonathan Goldstein",
+      "requested_as": "Dungeons & Dragons Honor Among Thieves (2023)"
+    },
+    {
+      "imdb_id": "tt1935859",
+      "title": "Miss Peregrine's Home for Peculiar Children",
+      "release_year": 2016,
+      "rating": 6.7,
+      "vote_count": 209070,
+      "runtime_minutes": 127,
+      "overview": "When Jacob discovers clues to a mystery that stretches across time, he finds Miss Peregrine's Home for Peculiar Children. But the danger deepens after he gets to know the residents and learns about their special powers.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTU0Nzc5NzI5NV5BMl5BanBnXkFtZTgwNTk1MDE4MDI@._V1_.jpg",
+      "director": "Tim Burton",
+      "requested_as": "Miss Peregrine's Home for Peculiar Children (2016)"
+    },
+    {
+      "imdb_id": "tt4978420",
+      "title": "Borderlands",
+      "release_year": 2024,
+      "rating": 4.7,
+      "vote_count": 58590,
+      "runtime_minutes": 101,
+      "overview": "An infamous bounty hunter returns to her childhood home, the chaotic planet Pandora, and forms an unlikely alliance with a team of misfits to find the missing daughter of the most powerful man in the universe.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMDhkMzQzZmQtOGQ1NS00Y2FhLTkzYjAtNWE1MmRiOWM1MjUzXkEyXkFqcGc@._V1_.jpg",
+      "director": "Eli Roth",
+      "requested_as": "Borderlands (2024)"
+    },
+    {
+      "imdb_id": "tt0117998",
+      "title": "Twister",
+      "release_year": 1996,
+      "rating": 6.6,
+      "vote_count": 251734,
+      "runtime_minutes": 113,
+      "overview": "Two storm chasers on the brink of divorce must work together to create an advanced weather alert system by putting themselves in the cross-hairs of extremely violent tornadoes.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNGVhY2JjYzgtYjAyOC00ODg0LTliYWEtMzliZWYzMjA2NjYyXkEyXkFqcGc@._V1_.jpg",
+      "director": "Jan de Bont",
+      "requested_as": "Twister (1996)"
+    },
+    {
+      "imdb_id": "tt0091059",
+      "title": "Flight of the Navigator",
+      "release_year": 1986,
+      "rating": 6.9,
+      "vote_count": 55511,
+      "runtime_minutes": 90,
+      "overview": "In 1978, a boy travels eight years into the future and has an adventure with an intelligent, wisecracking alien ship.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZTJhYTMyNDMtMjAyYy00YTRkLWJmZGMtMDZlODc0NWZmZDRhXkEyXkFqcGc@._V1_.jpg",
+      "director": "Randal Kleiser",
+      "requested_as": "Flight of the Navigator (1986)"
+    },
+    {
+      "imdb_id": "tt0091369",
+      "title": "Labyrinth",
+      "release_year": 1986,
+      "rating": 7.3,
+      "vote_count": 165109,
+      "runtime_minutes": 101,
+      "overview": "Teenage Sarah journeys through a maze to save her baby brother from the Goblin King.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjM2MDE4OTQwOV5BMl5BanBnXkFtZTgwNjgxMTg2NzE@._V1_.jpg",
+      "director": "Jim Henson",
+      "requested_as": "Labyrinth (1986)"
+    },
+    {
+      "imdb_id": "tt0486655",
+      "title": "Stardust",
+      "release_year": 2007,
+      "rating": 7.6,
+      "vote_count": 299142,
+      "runtime_minutes": 127,
+      "overview": "In a countryside town bordering on a magical land, a young man makes a promise to his beloved that he'll retrieve a fallen star by venturing into the magical realm.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjkyMTE1OTYwNF5BMl5BanBnXkFtZTcwMDIxODYzMw@@._V1_.jpg",
+      "director": "Matthew Vaughn",
+      "requested_as": "Stardust (2007)"
+    }
+  ]
+}

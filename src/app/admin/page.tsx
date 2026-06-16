@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 import {
   listApprovedMoviesPaged,
   listPendingMoviesPaged,
@@ -7,6 +9,7 @@ import {
 } from "@/app/actions/admin-movies";
 import { listProfilesForAdmin } from "@/app/actions/admin-users";
 import { AdminMovieListPagination } from "@/components/admin-movie-list-pagination";
+import { AdminScrollToTop } from "@/components/admin-scroll-to-top";
 import { AdminSearch } from "@/components/admin-search";
 import { AdminTabs } from "@/components/admin-tabs";
 import { AdminUsersList } from "@/components/admin-users-list";
@@ -118,7 +121,7 @@ export default async function AdminPage({
           : "Approve new titles to publish them to the public catalogue, or reject duplicates and spam.";
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+    <div id="admin-page-top" className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-[var(--md-gold)]">
@@ -153,6 +156,10 @@ export default async function AdminPage({
 
       {!ready && <SetupCallout />}
 
+      <Suspense fallback={null}>
+        <AdminScrollToTop />
+      </Suspense>
+
       {ready && tab === "pending" && pendingResult && pendingResult.total === 0 && (
         <div className="app-panel px-6 py-12 text-center text-sm text-[var(--md-text-muted)]">
           {listSearch.trim()
@@ -163,7 +170,10 @@ export default async function AdminPage({
 
       {ready && tab === "pending" && pendingResult && pendingResult.total > 0 && (
         <>
-          <ul className="space-y-3">
+          <ul
+            key={`pending-${pendingResult.page}-${pendingResult.pageSize}-${listSearch}`}
+            className="space-y-3"
+          >
             {pendingResult.movies.map((m) => (
               <li key={m.id}>
                 <ModerationRow movie={m} mode="pending" />
@@ -191,7 +201,10 @@ export default async function AdminPage({
 
       {ready && tab === "approved" && approvedResult && approvedResult.total > 0 && (
         <>
-          <ul className="space-y-3">
+          <ul
+            key={`approved-${approvedResult.page}-${approvedResult.pageSize}-${listSearch}`}
+            className="space-y-3"
+          >
             {approvedResult.movies.map((m) => (
               <li key={m.id}>
                 <ModerationRow movie={m} mode="approved" />
@@ -219,7 +232,10 @@ export default async function AdminPage({
 
       {ready && tab === "rejected" && rejectedResult && rejectedResult.total > 0 && (
         <>
-          <ul className="space-y-3">
+          <ul
+            key={`rejected-${rejectedResult.page}-${rejectedResult.pageSize}-${listSearch}`}
+            className="space-y-3"
+          >
             {rejectedResult.movies.map((m) => (
               <li key={m.id}>
                 <ModerationRow movie={m} mode="rejected" />

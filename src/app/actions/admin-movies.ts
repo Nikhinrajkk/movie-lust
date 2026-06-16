@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { sanitizeSupabaseErrorMessage } from "@/lib/supabase/errors";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
@@ -27,6 +27,7 @@ async function listMoviesByStatusPaged(
   status: "pending" | "approved" | "rejected",
   input: { page?: number; pageSize?: number; search?: string },
 ): Promise<AdminMoviesPageResult> {
+  unstable_noStore();
   const { isAdmin } = await getSessionUserWithProfile();
   if (!isAdmin) throw new Error("Admin access required.");
 
@@ -68,6 +69,7 @@ async function listMoviesByStatusPaged(
 
   const { data, error } = await dataQuery
     .order(order.column, { ascending: order.ascending })
+    .order("id", { ascending: false })
     .range(from, to);
 
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));

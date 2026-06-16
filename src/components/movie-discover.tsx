@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { listMovies } from "@/app/actions/movies";
 import type { MovieListInitialQuery } from "@/lib/movie-search-params";
 import { searchQueryStringsEqual } from "@/lib/url-search-compare";
+import { useScrollToTopAfterLoad } from "@/lib/use-scroll-to-top-on-change";
 import { useMovieFilters } from "@/stores/movie-filters";
 import type { MovieListResult } from "@/types/movie";
 import { CinemaLoadingLayer } from "./cinema-loader";
@@ -78,6 +79,8 @@ export function MovieDiscover({
     }),
     [search, genre, sort, page, pageSize],
   );
+
+  useScrollToTopAfterLoad(listLoading, `${page}-${pageSize}`);
 
   useLayoutEffect(() => {
     justHydratedRef.current = true;
@@ -157,7 +160,7 @@ export function MovieDiscover({
   }, [genre, page, pageSize, pathname, router, search, sort]);
 
   return (
-    <div className="space-y-6">
+    <div id="catalogue-top" className="space-y-6">
       {!supabaseReady && <SetupCallout />}
 
       <div className="space-y-4">
@@ -193,6 +196,7 @@ export function MovieDiscover({
       <CinemaLoadingLayer active={listLoading && supabaseReady}>
         <>
           <div
+            key={`catalogue-page-${data.page}-${pageSize}-${search}-${genre}-${sort}`}
             className={`grid min-w-0 grid-cols-2 gap-2 transition-opacity duration-200 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
           >
             {data.movies.map((m) => {

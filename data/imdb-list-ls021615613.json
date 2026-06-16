@@ -1,0 +1,237 @@
+{
+  "source": "https://www.imdb.com/list/ls021615613/",
+  "list_title": "Best Feel-Good Movies",
+  "parsed_from": "https://graphql.imdb.com/",
+  "movies": [
+    {
+      "imdb_id": "tt0109830",
+      "title": "Forrest Gump",
+      "release_year": 1994
+    },
+    {
+      "imdb_id": "tt6966692",
+      "title": "Green Book",
+      "release_year": 2018
+    },
+    {
+      "imdb_id": "tt1675434",
+      "title": "The Intouchables",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0021749",
+      "title": "City Lights",
+      "release_year": 1931
+    },
+    {
+      "imdb_id": "tt0166896",
+      "title": "The Straight Story",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt3553976",
+      "title": "Captain Fantastic",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt0088847",
+      "title": "The Breakfast Club",
+      "release_year": 1985
+    },
+    {
+      "imdb_id": "tt2194499",
+      "title": "About Time",
+      "release_year": 2013
+    },
+    {
+      "imdb_id": "tt0362227",
+      "title": "The Terminal",
+      "release_year": 2004
+    },
+    {
+      "imdb_id": "tt0061735",
+      "title": "Guess Who's Coming to Dinner",
+      "release_year": 1967
+    },
+    {
+      "imdb_id": "tt0038650",
+      "title": "It's a Wonderful Life",
+      "release_year": 1946
+    },
+    {
+      "imdb_id": "tt0091042",
+      "title": "Ferris Bueller's Day Off",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt0067185",
+      "title": "Harold and Maude",
+      "release_year": 1971
+    },
+    {
+      "imdb_id": "tt3742378",
+      "title": "The Second Mother",
+      "release_year": 2015
+    },
+    {
+      "imdb_id": "tt0132477",
+      "title": "October Sky",
+      "release_year": 1999
+    },
+    {
+      "imdb_id": "tt3783958",
+      "title": "La La Land",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt1278469",
+      "title": "Temple Grandin",
+      "release_year": 2010
+    },
+    {
+      "imdb_id": "tt0118799",
+      "title": "Life Is Beautiful",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0119217",
+      "title": "Good Will Hunting",
+      "release_year": 1997
+    },
+    {
+      "imdb_id": "tt0105265",
+      "title": "A River Runs Through It",
+      "release_year": 1992
+    },
+    {
+      "imdb_id": "tt0878804",
+      "title": "The Blind Side",
+      "release_year": 2009
+    },
+    {
+      "imdb_id": "tt0063374",
+      "title": "The Odd Couple",
+      "release_year": 1968
+    },
+    {
+      "imdb_id": "tt0094737",
+      "title": "Big",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt0114478",
+      "title": "Smoke",
+      "release_year": 1995
+    },
+    {
+      "imdb_id": "tt0427309",
+      "title": "The Great Debaters",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt0095765",
+      "title": "Cinema Paradiso",
+      "release_year": 1988
+    },
+    {
+      "imdb_id": "tt0090967",
+      "title": "Down by Law",
+      "release_year": 1986
+    },
+    {
+      "imdb_id": "tt0412080",
+      "title": "The World's Fastest Indian",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt14849194",
+      "title": "The Holdovers",
+      "release_year": 2023
+    },
+    {
+      "imdb_id": "tt0426931",
+      "title": "August Rush",
+      "release_year": 2007
+    },
+    {
+      "imdb_id": "tt1454029",
+      "title": "The Help",
+      "release_year": 2011
+    },
+    {
+      "imdb_id": "tt0097165",
+      "title": "Dead Poets Society",
+      "release_year": 1989
+    },
+    {
+      "imdb_id": "tt0449059",
+      "title": "Little Miss Sunshine",
+      "release_year": 2006
+    },
+    {
+      "imdb_id": "tt0098635",
+      "title": "When Harry Met Sally...",
+      "release_year": 1989
+    },
+    {
+      "imdb_id": "tt0050706",
+      "title": "My Uncle",
+      "release_year": 1958
+    },
+    {
+      "imdb_id": "tt0120789",
+      "title": "Pleasantville",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt0107048",
+      "title": "Groundhog Day",
+      "release_year": 1993
+    },
+    {
+      "imdb_id": "tt0045152",
+      "title": "Singin' in the Rain",
+      "release_year": 1952
+    },
+    {
+      "imdb_id": "tt0393162",
+      "title": "Coach Carter",
+      "release_year": 2005
+    },
+    {
+      "imdb_id": "tt0314331",
+      "title": "Love Actually",
+      "release_year": 2003
+    },
+    {
+      "imdb_id": "tt0093779",
+      "title": "The Princess Bride",
+      "release_year": 1987
+    },
+    {
+      "imdb_id": "tt3544112",
+      "title": "Sing Street",
+      "release_year": 2016
+    },
+    {
+      "imdb_id": "tt0211915",
+      "title": "Amélie",
+      "release_year": 2001
+    },
+    {
+      "imdb_id": "tt0128853",
+      "title": "You've Got Mail",
+      "release_year": 1998
+    },
+    {
+      "imdb_id": "tt1068680",
+      "title": "Yes Man",
+      "release_year": 2008
+    },
+    {
+      "imdb_id": "tt4468740",
+      "title": "Paddington 2",
+      "release_year": 2017
+    }
+  ]
+}
