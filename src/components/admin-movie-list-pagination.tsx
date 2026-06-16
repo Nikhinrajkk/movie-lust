@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { MovieListPaginationBar } from "@/components/movie-list-pagination-bar";
+import {
+	MovieListPaginationBar,
+	PaginationPageNavLinks,
+} from "@/components/movie-list-pagination-bar";
 
 function href(
 	tab: "pending" | "approved" | "rejected",
@@ -70,31 +72,14 @@ export function AdminMovieListPagination({
 
 	const end =
 		totalPages > 1 ? (
-			<>
-				<Button
-					variant="secondary"
-					className="px-3 py-1.5 text-xs"
-					disabled={page <= 1}
-					asChild
-				>
-					<Link href={href(tab, Math.max(1, page - 1), pageSize, search)} scroll>
-						Previous
-					</Link>
-				</Button>
-				<span className="whitespace-nowrap px-1 text-xs font-medium text-[var(--md-text-muted)]">
-					Page {page} / {totalPages}
-				</span>
-				<Button
-					variant="secondary"
-					className="px-3 py-1.5 text-xs"
-					disabled={page >= totalPages}
-					asChild
-				>
-					<Link href={href(tab, Math.min(totalPages, page + 1), pageSize, search)} scroll>
-						Next
-					</Link>
-				</Button>
-			</>
+			<PaginationPageNavLinks
+				page={page}
+				totalPages={totalPages}
+				prevHref={href(tab, Math.max(1, page - 1), pageSize, search)}
+				nextHref={href(tab, Math.min(totalPages, page + 1), pageSize, search)}
+				prevDisabled={page <= 1}
+				nextDisabled={page >= totalPages}
+			/>
 		) : null;
 
 	return <MovieListPaginationBar start={start} middle={middle} end={end} />;

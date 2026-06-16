@@ -2,8 +2,10 @@
 
 import { useMemo } from "react";
 import { useMovieFilters } from "@/stores/movie-filters";
-import { Button } from "@/components/ui/button";
-import { MovieListPaginationBar } from "@/components/movie-list-pagination-bar";
+import {
+	MovieListPaginationBar,
+	PaginationPageNavButtons,
+} from "@/components/movie-list-pagination-bar";
 
 const perPagePillClass = (active: boolean) =>
 	`shrink-0 rounded-md px-2 py-1 font-medium transition ${
@@ -70,29 +72,14 @@ export function MoviePagination({
 
 	const end =
 		totalPages > 1 ? (
-			<>
-				<Button
-					type="button"
-					variant="secondary"
-					className="px-3 py-1.5 text-xs"
-					disabled={disabled || page <= 1}
-					onClick={() => setPage(Math.max(1, page - 1))}
-				>
-					Previous
-				</Button>
-				<span className="whitespace-nowrap px-1 text-xs font-medium text-gray-600">
-					Page {page} / {totalPages}
-				</span>
-				<Button
-					type="button"
-					variant="secondary"
-					className="px-3 py-1.5 text-xs"
-					disabled={disabled || page >= totalPages}
-					onClick={() => setPage(Math.min(totalPages, page + 1))}
-				>
-					Next
-				</Button>
-			</>
+			<PaginationPageNavButtons
+				page={page}
+				totalPages={totalPages}
+				prevDisabled={Boolean(disabled) || page <= 1}
+				nextDisabled={Boolean(disabled) || page >= totalPages}
+				onPrev={() => setPage(Math.max(1, page - 1))}
+				onNext={() => setPage(Math.min(totalPages, page + 1))}
+			/>
 		) : null;
 
 	return (
