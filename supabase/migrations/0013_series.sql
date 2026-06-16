@@ -18,9 +18,7 @@ create table if not exists public.series (
   category text not null default 'trending',
   rating numeric(3, 1) check (rating is null or (rating >= 0 and rating <= 10)),
   review_text text default '',
-  runtime_minutes int check (runtime_minutes is null or runtime_minutes > 0),
   season_count int check (season_count is null or season_count >= 0),
-  episode_count int check (episode_count is null or episode_count >= 0),
   director text not null default '',
   creator text not null default '',
   language text not null default '',
@@ -46,8 +44,6 @@ comment on column public.series.end_date is 'Last episode air date; null if ongo
 comment on column public.series.start_year is 'First air year (browse/filter convenience).';
 comment on column public.series.end_year is 'Final air year; null if ongoing.';
 comment on column public.series.season_count is 'Total seasons produced.';
-comment on column public.series.episode_count is 'Total episodes across all seasons.';
-comment on column public.series.runtime_minutes is 'Average episode runtime in minutes.';
 comment on column public.series.creator is 'Show creator / showrunner.';
 comment on column public.series.network is 'Original network or platform, e.g. HBO, Netflix.';
 comment on column public.series.watch_provider is 'Streaming slug (netflix, disneyplus, …); null if unset.';

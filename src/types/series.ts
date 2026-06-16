@@ -15,10 +15,7 @@ export type SeriesRow = {
   category: string;
   rating: number | null;
   review_text: string | null;
-  /** Average episode length in minutes. */
-  runtime_minutes: number | null;
   season_count: number | null;
-  episode_count: number | null;
   director: string | null;
   creator: string | null;
   language: string | null;

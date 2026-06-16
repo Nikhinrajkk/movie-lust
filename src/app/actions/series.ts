@@ -144,9 +144,7 @@ export type SeriesPayload = {
   category: MovieCategory;
   rating?: number | null;
   review_text?: string;
-  runtime_minutes?: number | null;
   season_count?: number | null;
-  episode_count?: number | null;
   director?: string;
   creator?: string;
   language?: string;
@@ -207,13 +205,7 @@ function parseSeriesFormData(formData: FormData): SeriesPayload {
     end_date: parseOptionalDate(String(formData.get("end_date") ?? "")),
     start_year: parseOptionalInt(String(formData.get("start_year") ?? "")),
     end_year: parseOptionalInt(String(formData.get("end_year") ?? "")),
-    runtime_minutes: parseOptionalInt(
-      String(formData.get("runtime_minutes") ?? ""),
-    ),
     season_count: parseOptionalInt(String(formData.get("season_count") ?? "")),
-    episode_count: parseOptionalInt(
-      String(formData.get("episode_count") ?? ""),
-    ),
     rating:
       rating != null && Number.isFinite(rating)
         ? Math.min(10, Math.max(0, rating))
@@ -251,9 +243,7 @@ export async function createSeries(payload: SeriesPayload): Promise<string> {
       category: payload.category,
       rating: payload.rating ?? null,
       review_text: payload.review_text ?? "",
-      runtime_minutes: payload.runtime_minutes ?? null,
       season_count: payload.season_count ?? null,
-      episode_count: payload.episode_count ?? null,
       director: payload.director ?? "",
       creator: payload.creator ?? "",
       language: payload.language?.trim() ?? "",

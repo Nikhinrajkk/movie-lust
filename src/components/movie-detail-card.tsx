@@ -202,13 +202,8 @@ export function MovieDetailStatsRow({
 	catalogueKind?: "movie" | "series";
 }) {
 	const isSeries = catalogueKind === "series" && series != null;
-	const runtime = isSeries
-		? series.runtime_minutes != null
-			? `${series.runtime_minutes} min / ep`
-			: "—"
-		: movie.runtime_minutes != null
-			? `${movie.runtime_minutes} min`
-			: "—";
+	const runtime =
+		movie.runtime_minutes != null ? `${movie.runtime_minutes} min` : "—";
 	const catalogueRating =
 		movie.rating != null ? `${movie.rating.toFixed(1)}/10` : "—";
 
@@ -225,8 +220,6 @@ export function MovieDetailStatsRow({
 	if (isSeries) {
 		const seasons =
 			series.season_count != null ? String(series.season_count) : "—";
-		const episodes =
-			series.episode_count != null ? String(series.episode_count) : "—";
 
 		return (
 			<div className={gridClass}>
@@ -240,24 +233,6 @@ export function MovieDetailStatsRow({
 					<div className="mdc-stat-label mt-1.5">Seasons</div>
 				</div>
 				<div className="mdc-stat-card px-4 py-3">
-					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-runtime)]">
-						<IconUsers className="size-4 shrink-0" />
-						<span className="mdc-section-title truncate text-sm font-semibold">
-							{episodes}
-						</span>
-					</div>
-					<div className="mdc-stat-label mt-1.5">Episodes</div>
-				</div>
-				<div className="mdc-stat-card px-4 py-3">
-					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-catalogue)]">
-						<IconClock className="size-4 shrink-0" />
-						<span className="mdc-section-title truncate text-sm font-semibold">
-							{runtime}
-						</span>
-					</div>
-					<div className="mdc-stat-label mt-1.5">Episode runtime</div>
-				</div>
-				<div className="mdc-stat-card px-4 py-3">
 					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-catalogue)]">
 						<IconStar className="size-4 shrink-0" />
 						<span className="mdc-section-title truncate text-sm font-semibold">
@@ -266,6 +241,19 @@ export function MovieDetailStatsRow({
 					</div>
 					<div className="mdc-stat-label mt-1.5">Catalogue</div>
 				</div>
+				{hasUserAgg ? (
+					<div className="mdc-stat-card px-4 py-3">
+						<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-users)]">
+							<IconUsers className="size-4 shrink-0" />
+							<span className="mdc-section-title truncate text-sm font-semibold">
+								{userScoreText}
+							</span>
+						</div>
+						<div className="mdc-stat-label mt-1.5">
+							Users{userCount > 0 ? ` (${userCount})` : ""}
+						</div>
+					</div>
+				) : null}
 			</div>
 		);
 	}

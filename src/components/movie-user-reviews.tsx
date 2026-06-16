@@ -6,11 +6,25 @@ import {
 	deleteMovieUserReview,
 	upsertMovieUserReview,
 } from "@/app/actions/movie-user-reviews";
+import {
+	deleteSeriesUserReview,
+	upsertSeriesUserReview,
+} from "@/app/actions/series-user-reviews";
 import { StarMeter, StarMeterSlot } from "@/components/star-meter";
 import { ratingAfterStarClick, starFillFraction } from "@/lib/user-star-rating";
 import type { MovieUserReviewRow } from "@/types/movie-user-review";
+import type { SeriesUserReviewRow } from "@/types/series-user-review";
 
 const NOTE_MAX = 500;
+
+type ReviewRow = {
+	id: string;
+	user_id: string;
+	stars: number | null;
+	comment: string;
+	author_display_name: string;
+	created_at: string;
+};
 
 function StarPicker({
 	value,
@@ -60,20 +74,28 @@ function StarPicker({
 	);
 }
 
-export function MovieUserReviewsClient({
-	movieId,
+function CatalogueUserReviewsClient({
+	entityId,
 	reviews,
 	currentUserId,
 	isAdmin,
 	initialStars,
 	initialComment,
+	upsertReview,
+	deleteReview,
+	commentFieldId,
 }: {
-	movieId: string;
-	reviews: MovieUserReviewRow[];
+	entityId: string;
+	reviews: ReviewRow[];
 	currentUserId: string | null;
 	isAdmin: boolean;
 	initialStars: number | null;
 	initialComment: string;
+	upsertReview: (
+		input: { stars: number | null; comment: string },
+	) => Promise<void>;
+	deleteReview: (reviewId: string) => Promise<void>;
+	commentFieldId: string;
 }) {
 	const router = useRouter();
 	const [pending, start] = useTransition();
@@ -108,10 +130,7 @@ export function MovieUserReviewsClient({
 						start(async () => {
 							setError(null);
 							try {
-								await upsertMovieUserReview(movieId, {
-									stars,
-									comment,
-								});
+								await upsertReview({ stars, comment });
 								router.refresh();
 							} catch (err) {
 								setError(
@@ -129,14 +148,14 @@ export function MovieUserReviewsClient({
 					</div>
 					<div className="space-y-2">
 						<label
-							htmlFor="movie-user-review-comment"
+							htmlFor={commentFieldId}
 							className="mdc-label text-xs font-semibold uppercase tracking-wider"
 						>
 							Your note
 						</label>
 						<div className="relative">
 							<textarea
-								id="movie-user-review-comment"
+								id={commentFieldId}
 								name="comment"
 								rows={4}
 								maxLength={NOTE_MAX}
@@ -186,12 +205,12 @@ export function MovieUserReviewsClient({
 											<p className="mdc-section-title text-sm font-semibold">
 												{r.author_display_name || "Member"}
 											</p>
-										<p className="mdc-label text-xs">
-											{new Date(r.created_at).toLocaleString("en-US", {
-												dateStyle: "medium",
-												timeStyle: "short",
-											})}
-										</p>
+											<p className="mdc-label text-xs">
+												{new Date(r.created_at).toLocaleString("en-US", {
+													dateStyle: "medium",
+													timeStyle: "short",
+												})}
+											</p>
 										</div>
 										{canRemove ? (
 											<button
@@ -202,7 +221,7 @@ export function MovieUserReviewsClient({
 													start(async () => {
 														setError(null);
 														try {
-															await deleteMovieUserReview(r.id, movieId);
+															await deleteReview(r.id);
 															router.refresh();
 														} catch (err) {
 															setError(
@@ -239,5 +258,65 @@ export function MovieUserReviewsClient({
 				)}
 			</div>
 		</div>
+	);
+}
+
+export function MovieUserReviewsClient({
+	movieId,
+	reviews,
+	currentUserId,
+	isAdmin,
+	initialStars,
+	initialComment,
+}: {
+	movieId: string;
+	reviews: MovieUserReviewRow[];
+	currentUserId: string | null;
+	isAdmin: boolean;
+	initialStars: number | null;
+	initialComment: string;
+}) {
+	return (
+		<CatalogueUserReviewsClient
+			entityId={movieId}
+			reviews={reviews}
+			currentUserId={currentUserId}
+			isAdmin={isAdmin}
+			initialStars={initialStars}
+			initialComment={initialComment}
+			commentFieldId="movie-user-review-comment"
+			upsertReview={(input) => upsertMovieUserReview(movieId, input)}
+			deleteReview={(reviewId) => deleteMovieUserReview(reviewId, movieId)}
+		/>
+	);
+}
+
+export function SeriesUserReviewsClient({
+	seriesId,
+	reviews,
+	currentUserId,
+	isAdmin,
+	initialStars,
+	initialComment,
+}: {
+	seriesId: string;
+	reviews: SeriesUserReviewRow[];
+	currentUserId: string | null;
+	isAdmin: boolean;
+	initialStars: number | null;
+	initialComment: string;
+}) {
+	return (
+		<CatalogueUserReviewsClient
+			entityId={seriesId}
+			reviews={reviews}
+			currentUserId={currentUserId}
+			isAdmin={isAdmin}
+			initialStars={initialStars}
+			initialComment={initialComment}
+			commentFieldId="series-user-review-comment"
+			upsertReview={(input) => upsertSeriesUserReview(seriesId, input)}
+			deleteReview={(reviewId) => deleteSeriesUserReview(reviewId, seriesId)}
+		/>
 	);
 }

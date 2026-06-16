@@ -17,7 +17,7 @@ export function HeaderNav({
 }) {
   return (
     <nav className="flex min-w-0 shrink-0 flex-wrap items-center justify-end gap-1.5 self-center sm:gap-2">
-      <AppThemeToggle />
+      {!user && <AppThemeToggle />}
 
       {isAdmin && (
         <Link

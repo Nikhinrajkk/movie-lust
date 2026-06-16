@@ -4,6 +4,7 @@ import * as Avatar from "@radix-ui/react-avatar";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import { signOut } from "@/app/actions/auth";
+import { AppThemeIcon, useAppTheme } from "@/components/app-theme-toggle";
 import { clearAllBrowserStorage } from "@/lib/clear-browser-storage";
 import { resetSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,7 @@ export function HeaderUserMenu({
   isAdmin: boolean;
 }) {
   const initials = initialsFrom(displayLabel, email);
+  const { theme, toggle, label } = useAppTheme();
 
   return (
     <DropdownMenu.Root>
@@ -91,6 +93,22 @@ export function HeaderUserMenu({
               </Link>
             </DropdownMenu.Item>
           ) : null}
+
+          <DropdownMenu.Separator className="app-menu-separator my-1 h-px" />
+
+          <DropdownMenu.Item
+            className={itemClass}
+            aria-label={label}
+            onSelect={(event) => {
+              event.preventDefault();
+              toggle();
+            }}
+          >
+            <span className="flex w-full items-center gap-2">
+              <AppThemeIcon theme={theme} />
+              {theme === "dark" ? "Light mode" : "Dark mode"}
+            </span>
+          </DropdownMenu.Item>
 
           <DropdownMenu.Separator className="app-menu-separator my-1 h-px" />
 

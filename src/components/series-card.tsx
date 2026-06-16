@@ -13,18 +13,9 @@ function posterSrc(url: string | null) {
   return "https://placehold.co/400x600/e5e5e5/737373?text=No+poster";
 }
 
-function formatSeasonEpisode(
-  seasonCount: number | null,
-  episodeCount: number | null,
-): string | null {
-  const parts: string[] = [];
-  if (seasonCount != null && seasonCount > 0) {
-    parts.push(`${seasonCount} season${seasonCount === 1 ? "" : "s"}`);
-  }
-  if (episodeCount != null && episodeCount > 0) {
-    parts.push(`${episodeCount} ep${episodeCount === 1 ? "" : "s"}`);
-  }
-  return parts.length > 0 ? parts.join(" · ") : null;
+function formatSeasonCount(seasonCount: number | null): string | null {
+  if (seasonCount == null || seasonCount <= 0) return null;
+  return `${seasonCount} season${seasonCount === 1 ? "" : "s"}`;
 }
 
 function statusLabel(status: SeriesRow["status"]) {
@@ -36,11 +27,8 @@ export function SeriesCard({ series }: { series: SeriesRow }) {
   if (series.start_year != null) metaBits.push(String(series.start_year));
   const creator = series.creator?.trim() || series.director?.trim();
   if (creator) metaBits.push(creator);
-  const seasonEp = formatSeasonEpisode(
-    series.season_count,
-    series.episode_count,
-  );
-  if (seasonEp) metaBits.push(seasonEp);
+  const seasons = formatSeasonCount(series.season_count);
+  if (seasons) metaBits.push(seasons);
   if (series.language?.trim()) metaBits.push(series.language.trim());
 
   const watch = getWatchProviderBySlug(series.watch_provider ?? null);

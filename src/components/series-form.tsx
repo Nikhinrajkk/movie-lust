@@ -195,30 +195,6 @@ export function SeriesForm({
         </div>
 
         <div className="space-y-2">
-          <FieldLabel htmlFor="series-episodes">Episodes</FieldLabel>
-          <input
-            id="series-episodes"
-            name="episode_count"
-            type="number"
-            min={0}
-            defaultValue={series?.episode_count ?? ""}
-            className={inputClass}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <FieldLabel htmlFor="series-runtime">Episode runtime (min)</FieldLabel>
-          <input
-            id="series-runtime"
-            name="runtime_minutes"
-            type="number"
-            min={1}
-            defaultValue={series?.runtime_minutes ?? ""}
-            className={inputClass}
-          />
-        </div>
-
-        <div className="space-y-2">
           <FieldLabel htmlFor="series-status">Status</FieldLabel>
           <select
             id="series-status"

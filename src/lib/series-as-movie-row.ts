@@ -20,7 +20,7 @@ export function seriesAsMovieRow(series: SeriesRow): MovieRow {
     category: series.category,
     rating: series.rating,
     review_text: series.review_text,
-    runtime_minutes: series.runtime_minutes,
+    runtime_minutes: null,
     director: directorLine,
     language: series.language,
     watch_provider: series.watch_provider,

@@ -1,4 +1,8 @@
 import { notFound } from "next/navigation";
+import {
+	getSeriesUserReviewAggregate,
+	listSeriesUserReviews,
+} from "@/app/actions/series-user-reviews";
 import { getSeriesById } from "@/app/actions/series";
 import { DeleteSeriesForm } from "@/components/delete-series-form";
 import {
@@ -7,6 +11,7 @@ import {
 } from "@/components/movie-detail-card";
 import { NavLinkButton } from "@/components/nav-link-button";
 import { SeriesDetailAdminActions } from "@/components/series-detail-admin-actions";
+import { SeriesUserReviewsClient } from "@/components/movie-user-reviews";
 import { SetupCallout } from "@/components/setup-callout";
 import { getSessionUserWithProfile } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/config";
@@ -65,6 +70,16 @@ export default async function SeriesDetailPage({
 	const p = series ? posterSrc(series.poster_url) : "";
 	const movie = series ? seriesAsMovieRow(series) : null;
 
+	const userReviews = ready && series ? await listSeriesUserReviews(series.id) : [];
+	const userReviewAggregate =
+		ready && series ? await getSeriesUserReviewAggregate(series.id) : undefined;
+	const myUserReview = user
+		? (userReviews.find((r) => r.user_id === user.id) ?? null)
+		: null;
+	const reviewsListKey = userReviews
+		.map((r) => `${r.id}:${r.updated_at}`)
+		.join("|");
+
 	return (
 		<div className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
 			{!ready && <SetupCallout />}
@@ -92,8 +107,20 @@ export default async function SeriesDetailPage({
 						posterSrc={p}
 						posterSizes="(max-width: 1023px) 100vw, 320px"
 						posterUnoptimized={p.includes("placehold.co")}
+						userReviewAggregate={userReviewAggregate}
 						shareTitle={series.title}
 						bodyFooterLine={publicFooterLine(series, status, approverLabel)}
+						reviewsSlot={
+							<SeriesUserReviewsClient
+								key={reviewsListKey}
+								seriesId={series.id}
+								reviews={userReviews}
+								currentUserId={user?.id ?? null}
+								isAdmin={isAdmin}
+								initialStars={myUserReview?.stars ?? null}
+								initialComment={myUserReview?.comment ?? ""}
+							/>
+						}
 						posterFooter={
 							<div className="flex flex-col gap-2.5">
 								{isAdmin && (
