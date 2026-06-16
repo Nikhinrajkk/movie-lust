@@ -197,9 +197,9 @@ export function MovieDiscover({
         <>
           <div
             key={`catalogue-page-${data.page}-${pageSize}-${search}-${genre}-${sort}`}
-            className={`grid min-w-0 grid-cols-2 gap-2 transition-opacity duration-200 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 ${listLoading && supabaseReady ? "opacity-50" : ""}`}
+            className={`paginated-list-enter grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 ${listLoading && supabaseReady ? "opacity-50 transition-opacity duration-200" : ""}`}
           >
-            {data.movies.map((m) => {
+            {data.movies.map((m, index) => {
               const approved =
                 (m.approval_status ?? "approved") === "approved";
               const actions =
@@ -212,7 +212,13 @@ export function MovieDiscover({
                     }
                   : undefined;
               return (
-                <MovieCard key={m.id} movie={m} actions={actions} />
+                <div
+                  key={m.id}
+                  className="paginated-item-enter min-w-0"
+                  style={{ animationDelay: `${Math.min(index, 14) * 35}ms` }}
+                >
+                  <MovieCard movie={m} actions={actions} />
+                </div>
               );
             })}
           </div>

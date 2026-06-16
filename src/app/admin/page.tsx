@@ -172,10 +172,14 @@ export default async function AdminPage({
         <>
           <ul
             key={`pending-${pendingResult.page}-${pendingResult.pageSize}-${listSearch}`}
-            className="space-y-3"
+            className="paginated-list-enter space-y-3"
           >
-            {pendingResult.movies.map((m) => (
-              <li key={m.id}>
+            {pendingResult.movies.map((m, index) => (
+              <li
+                key={m.id}
+                className="paginated-item-enter"
+                style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
+              >
                 <ModerationRow movie={m} mode="pending" />
               </li>
             ))}
@@ -203,10 +207,14 @@ export default async function AdminPage({
         <>
           <ul
             key={`approved-${approvedResult.page}-${approvedResult.pageSize}-${listSearch}`}
-            className="space-y-3"
+            className="paginated-list-enter space-y-3"
           >
-            {approvedResult.movies.map((m) => (
-              <li key={m.id}>
+            {approvedResult.movies.map((m, index) => (
+              <li
+                key={m.id}
+                className="paginated-item-enter"
+                style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
+              >
                 <ModerationRow movie={m} mode="approved" />
               </li>
             ))}
@@ -234,10 +242,14 @@ export default async function AdminPage({
         <>
           <ul
             key={`rejected-${rejectedResult.page}-${rejectedResult.pageSize}-${listSearch}`}
-            className="space-y-3"
+            className="paginated-list-enter space-y-3"
           >
-            {rejectedResult.movies.map((m) => (
-              <li key={m.id}>
+            {rejectedResult.movies.map((m, index) => (
+              <li
+                key={m.id}
+                className="paginated-item-enter"
+                style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
+              >
                 <ModerationRow movie={m} mode="rejected" />
               </li>
             ))}
