@@ -17,12 +17,16 @@ export function MoviePagination({
 	totalPages,
 	total,
 	disabled,
+	itemSingular = "film",
+	itemPlural = "films",
 }: {
 	page: number;
 	totalPages: number;
 	/** Total catalogue count for “Showing … of …”. */
 	total: number;
 	disabled?: boolean;
+	itemSingular?: string;
+	itemPlural?: string;
 }) {
 	const setPage = useMovieFilters((s) => s.setPage);
 	const pageSize = useMovieFilters((s) => s.pageSize);
@@ -41,7 +45,7 @@ export function MoviePagination({
 			</p>
 		) : (
 			<p className="text-xs text-gray-600">
-				{total} film{total === 1 ? "" : "s"}
+				{total} {total === 1 ? itemSingular : itemPlural}
 			</p>
 		);
 

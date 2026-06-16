@@ -189,7 +189,7 @@ export function MovieForm({
         disabled={pending}
         className="w-full sm:w-auto sm:px-10"
       >
-        {pending ? "Saving…" : movie ? "Update movie" : "Add movie"}
+        {pending ? "Saving…" : movie ? "Update movie" : "Add"}
       </Button>
     </form>
   );

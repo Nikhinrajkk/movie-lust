@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 import {
-  listApprovedMoviesPaged,
-  listPendingMoviesPaged,
-  listRejectedMoviesPaged,
+  listApprovedCataloguePaged,
+  listPendingCataloguePaged,
+  listRejectedCataloguePaged,
 } from "@/app/actions/admin-movies";
 import { listProfilesForAdmin } from "@/app/actions/admin-users";
 import { AdminMovieListPagination } from "@/components/admin-movie-list-pagination";
@@ -74,7 +74,7 @@ export default async function AdminPage({
 
   const pendingResult =
     ready && isAdmin && tab === "pending"
-      ? await listPendingMoviesPaged({
+      ? await listPendingCataloguePaged({
           page: listPage,
           pageSize: listPageSize,
           search: listSearch,
@@ -83,7 +83,7 @@ export default async function AdminPage({
 
   const approvedResult =
     ready && isAdmin && tab === "approved"
-      ? await listApprovedMoviesPaged({
+      ? await listApprovedCataloguePaged({
           page: listPage,
           pageSize: listPageSize,
           search: listSearch,
@@ -92,7 +92,7 @@ export default async function AdminPage({
 
   const rejectedResult =
     ready && isAdmin && tab === "rejected"
-      ? await listRejectedMoviesPaged({
+      ? await listRejectedCataloguePaged({
           page: listPage,
           pageSize: listPageSize,
           search: listSearch,
@@ -115,10 +115,10 @@ export default async function AdminPage({
     tab === "users"
       ? "Everyone who has signed up — profile id matches Auth user id."
       : tab === "approved"
-        ? "Titles visible on the public browse page. Dis-approve to pull a title back into the pending queue for re-review."
+        ? "Movies and series visible on the public browse pages. Dis-approve to pull a title back into the pending queue for re-review."
         : tab === "rejected"
-          ? "Titles you rejected from the pending queue. Return one to pending if you want to review it again."
-          : "Approve new titles to publish them to the public catalogue, or reject duplicates and spam.";
+          ? "Movies and series you rejected from the pending queue. Return one to pending if you want to review it again."
+          : "Approve new movies and series to publish them to the public catalogue, or reject duplicates and spam.";
 
   return (
     <div id="admin-page-top" className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
@@ -174,13 +174,13 @@ export default async function AdminPage({
             key={`pending-${pendingResult.page}-${pendingResult.pageSize}-${listSearch}`}
             className="paginated-list-enter space-y-3"
           >
-            {pendingResult.movies.map((m, index) => (
+            {pendingResult.items.map((entry, index) => (
               <li
-                key={m.id}
+                key={`${entry.kind}-${entry.row.id}`}
                 className="paginated-item-enter"
                 style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
               >
-                <ModerationRow movie={m} mode="pending" />
+                <ModerationRow item={entry} mode="pending" />
               </li>
             ))}
           </ul>
@@ -209,13 +209,13 @@ export default async function AdminPage({
             key={`approved-${approvedResult.page}-${approvedResult.pageSize}-${listSearch}`}
             className="paginated-list-enter space-y-3"
           >
-            {approvedResult.movies.map((m, index) => (
+            {approvedResult.items.map((entry, index) => (
               <li
-                key={m.id}
+                key={`${entry.kind}-${entry.row.id}`}
                 className="paginated-item-enter"
                 style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
               >
-                <ModerationRow movie={m} mode="approved" />
+                <ModerationRow item={entry} mode="approved" />
               </li>
             ))}
           </ul>
@@ -244,13 +244,13 @@ export default async function AdminPage({
             key={`rejected-${rejectedResult.page}-${rejectedResult.pageSize}-${listSearch}`}
             className="paginated-list-enter space-y-3"
           >
-            {rejectedResult.movies.map((m, index) => (
+            {rejectedResult.items.map((entry, index) => (
               <li
-                key={m.id}
+                key={`${entry.kind}-${entry.row.id}`}
                 className="paginated-item-enter"
                 style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
               >
-                <ModerationRow movie={m} mode="rejected" />
+                <ModerationRow item={entry} mode="rejected" />
               </li>
             ))}
           </ul>

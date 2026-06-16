@@ -5,14 +5,21 @@ import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import {
 	approveMovie,
+	approveSeries,
 	disapproveMovie,
+	disapproveSeries,
 	rejectMovie,
+	rejectSeries,
+	returnRejectedSeriesToPending,
 	returnRejectedToPending,
 } from "@/app/actions/admin-movies";
+import { CatalogueKindBadge } from "@/components/catalogue-kind-badge";
 import {
 	MovieDetailPosterLinkRows,
 	MovieDetailThreeColumn,
 } from "@/components/movie-detail-card";
+import { seriesAsMovieRow } from "@/lib/series-as-movie-row";
+import type { AdminCatalogueItem } from "@/types/admin-catalogue";
 import type { MovieRow } from "@/types/movie";
 
 function posterSrc(url: string | null) {
@@ -104,13 +111,11 @@ function IconUnpublish({ className }: { className?: string }) {
 	);
 }
 
-const actionRailClass =
-	"relative z-10 flex shrink-0 flex-row items-center justify-center gap-1 self-stretch border-l border-[var(--md-border)] bg-[var(--app-surface)]/95 px-1.5 py-2 sm:gap-1.5 sm:px-2 " +
-	"opacity-0 transition-opacity duration-200 " +
+const summaryActionsClass =
+	"flex shrink-0 flex-row items-center gap-1 opacity-0 transition-opacity duration-200 group-open/details:hidden " +
 	"group-hover/moderation:opacity-100 group-focus-within/moderation:opacity-100";
 
-const iconBtnClass =
-	"pointer-events-none group-hover/moderation:pointer-events-auto group-focus-within/moderation:pointer-events-auto " +
+const summaryIconBtnClass =
 	"mdc-admin-action mdc-admin-action--icon size-10 shrink-0 [&_svg]:size-6 [&_svg]:shrink-0";
 
 const bigActionBtn =
@@ -121,38 +126,179 @@ const headerActionBtn =
 	"mdc-admin-action mdc-admin-action--icon size-10 shrink-0 [&_svg]:size-6 [&_svg]:shrink-0";
 
 function moderationFooterLine(
-	movie: MovieRow,
+	item: AdminCatalogueItem,
 	mode: "pending" | "approved" | "rejected",
 ) {
+	const row = item.row;
 	const fmt = (iso: string) =>
 		new Date(iso).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
 
 	if (mode === "approved") {
-		const added = `Added ${fmt(movie.created_at)}`;
-		if (movie.updated_at && movie.updated_at !== movie.created_at) {
-			return `${added} · Updated ${fmt(movie.updated_at)}`;
+		const added = `Added ${fmt(row.created_at)}`;
+		if (row.updated_at && row.updated_at !== row.created_at) {
+			return `${added} · Updated ${fmt(row.updated_at)}`;
 		}
 		return added;
 	}
 	if (mode === "rejected") {
-		const sub = `Submitted ${fmt(movie.created_at)}`;
-		if (movie.updated_at) {
-			return `${sub} · Rejected ${fmt(movie.updated_at)}`;
+		const sub = `Submitted ${fmt(row.created_at)}`;
+		if (row.updated_at) {
+			return `${sub} · Rejected ${fmt(row.updated_at)}`;
 		}
 		return sub;
 	}
-	return `Submitted ${fmt(movie.created_at)}`;
+	return `Submitted ${fmt(row.created_at)}`;
+}
+
+function collapsedSubtitle(item: AdminCatalogueItem): string {
+	if (item.kind === "movie") {
+		const movie = item.row;
+		return `${movie.release_year != null ? `${movie.release_year}` : "Year TBD"}${movie.director?.trim() ? ` · ${movie.director}` : ""}`;
+	}
+	const series = item.row;
+	const parts: string[] = [
+		series.start_year != null ? String(series.start_year) : "Year TBD",
+	];
+	const creator = series.creator?.trim() || series.director?.trim();
+	if (creator) parts.push(creator);
+	if (series.season_count != null && series.season_count > 0) {
+		parts.push(`${series.season_count} season${series.season_count === 1 ? "" : "s"}`);
+	}
+	return parts.join(" · ");
+}
+
+async function approveCatalogueItem(item: AdminCatalogueItem) {
+	if (item.kind === "movie") await approveMovie(item.row.id);
+	else await approveSeries(item.row.id);
+}
+
+async function rejectCatalogueItem(item: AdminCatalogueItem) {
+	if (item.kind === "movie") await rejectMovie(item.row.id);
+	else await rejectSeries(item.row.id);
+}
+
+async function disapproveCatalogueItem(item: AdminCatalogueItem) {
+	if (item.kind === "movie") await disapproveMovie(item.row.id);
+	else await disapproveSeries(item.row.id);
+}
+
+async function returnRejectedCatalogueItem(item: AdminCatalogueItem) {
+	if (item.kind === "movie") await returnRejectedToPending(item.row.id);
+	else await returnRejectedSeriesToPending(item.row.id);
+}
+
+function displayMovieForItem(item: AdminCatalogueItem): MovieRow {
+	return item.kind === "movie" ? item.row : seriesAsMovieRow(item.row);
+}
+
+function ModerationSummaryActions({
+	item,
+	mode,
+	pending,
+	start,
+	router,
+}: {
+	item: AdminCatalogueItem;
+	mode: "pending" | "approved" | "rejected";
+	pending: boolean;
+	start: (fn: () => void | Promise<void>) => void;
+	router: ReturnType<typeof useRouter>;
+}) {
+	const stop = (e: React.MouseEvent) => e.stopPropagation();
+
+	if (mode === "pending") {
+		return (
+			<div className={summaryActionsClass}>
+				<button
+					type="button"
+					disabled={pending}
+					title="Approve"
+					aria-label="Approve"
+					className={`${summaryIconBtnClass} mdc-admin-action--success`}
+					onClick={(e) => {
+						stop(e);
+						start(async () => {
+							await approveCatalogueItem(item);
+							router.refresh();
+						});
+					}}
+				>
+					<IconCheck />
+				</button>
+				<button
+					type="button"
+					disabled={pending}
+					title="Reject"
+					aria-label="Reject"
+					className={`${summaryIconBtnClass} mdc-admin-action--danger`}
+					onClick={(e) => {
+						stop(e);
+						start(async () => {
+							await rejectCatalogueItem(item);
+							router.refresh();
+						});
+					}}
+				>
+					<IconX />
+				</button>
+			</div>
+		);
+	}
+
+	if (mode === "rejected") {
+		return (
+			<div className={summaryActionsClass}>
+				<button
+					type="button"
+					disabled={pending}
+					title="Return to pending queue"
+					aria-label="Return to pending"
+					className={`${summaryIconBtnClass} mdc-admin-action--neutral`}
+					onClick={(e) => {
+						stop(e);
+						start(async () => {
+							await returnRejectedCatalogueItem(item);
+							router.refresh();
+						});
+					}}
+				>
+					<IconUndo />
+				</button>
+			</div>
+		);
+	}
+
+	return (
+		<div className={summaryActionsClass}>
+			<button
+				type="button"
+				disabled={pending}
+				title="Dis-approve — return to pending queue"
+				aria-label="Dis-approve"
+				className={`${summaryIconBtnClass} mdc-admin-action--warning`}
+				onClick={(e) => {
+					stop(e);
+					start(async () => {
+						await disapproveCatalogueItem(item);
+						router.refresh();
+					});
+				}}
+			>
+				<IconUnpublish />
+			</button>
+		</div>
+	);
 }
 
 function ModerationOpenRightSlot({
-	movie,
+	item,
 	mode,
 	pending,
 	start,
 	router,
 	layout = "panel",
 }: {
-	movie: MovieRow;
+	item: AdminCatalogueItem;
 	mode: "pending" | "approved" | "rejected";
 	pending: boolean;
 	start: (fn: () => void | Promise<void>) => void;
@@ -173,7 +319,7 @@ function ModerationOpenRightSlot({
 						className={`${headerActionBtn} mdc-admin-action--success`}
 						onClick={() =>
 							start(async () => {
-								await approveMovie(movie.id);
+								await approveCatalogueItem(item);
 								router.refresh();
 							})
 						}
@@ -188,7 +334,7 @@ function ModerationOpenRightSlot({
 						className={`${headerActionBtn} mdc-admin-action--danger`}
 						onClick={() =>
 							start(async () => {
-								await rejectMovie(movie.id);
+								await rejectCatalogueItem(item);
 								router.refresh();
 							})
 						}
@@ -209,7 +355,7 @@ function ModerationOpenRightSlot({
 						className={`${bigActionBtn} mdc-admin-action--success`}
 						onClick={() =>
 							start(async () => {
-								await approveMovie(movie.id);
+								await approveCatalogueItem(item);
 								router.refresh();
 							})
 						}
@@ -227,7 +373,7 @@ function ModerationOpenRightSlot({
 						className={`${bigActionBtn} mdc-admin-action--danger`}
 						onClick={() =>
 							start(async () => {
-								await rejectMovie(movie.id);
+								await rejectCatalogueItem(item);
 								router.refresh();
 							})
 						}
@@ -252,7 +398,7 @@ function ModerationOpenRightSlot({
 					className={`${headerActionBtn} mdc-admin-action--neutral`}
 					onClick={() =>
 						start(async () => {
-							await returnRejectedToPending(movie.id);
+							await returnRejectedCatalogueItem(item);
 							router.refresh();
 						})
 					}
@@ -271,7 +417,7 @@ function ModerationOpenRightSlot({
 					className={`${bigActionBtn} mdc-admin-action--neutral`}
 					onClick={() =>
 						start(async () => {
-							await returnRejectedToPending(movie.id);
+							await returnRejectedCatalogueItem(item);
 							router.refresh();
 						})
 					}
@@ -294,7 +440,7 @@ function ModerationOpenRightSlot({
 				className={`${headerActionBtn} mdc-admin-action--warning`}
 				onClick={() =>
 					start(async () => {
-						await disapproveMovie(movie.id);
+						await disapproveCatalogueItem(item);
 						router.refresh();
 					})
 				}
@@ -313,7 +459,7 @@ function ModerationOpenRightSlot({
 				className={`${bigActionBtn} mdc-admin-action--warning`}
 				onClick={() =>
 					start(async () => {
-						await disapproveMovie(movie.id);
+						await disapproveCatalogueItem(item);
 						router.refresh();
 					})
 				}
@@ -328,19 +474,20 @@ function ModerationOpenRightSlot({
 }
 
 export function ModerationRow({
-	movie,
+	item,
 	mode = "pending",
 }: {
-	movie: MovieRow;
+	item: AdminCatalogueItem;
 	mode?: "pending" | "approved" | "rejected";
 }) {
 	const router = useRouter();
 	const [pending, start] = useTransition();
+	const movie = displayMovieForItem(item);
 	const poster = posterSrc(movie.poster_url);
 
 	return (
 		<div className="group/moderation relative flex items-stretch overflow-hidden rounded-2xl border border-[var(--md-border)] bg-[var(--app-surface)] shadow-sm">
-			<details className="peer group/details min-w-0 flex-1 list-none">
+			<details className="group/details min-w-0 flex-1 list-none">
 				<summary className="flex cursor-pointer list-none items-center gap-3 p-3 marker:content-none group-open/details:justify-end sm:gap-4 sm:p-4 [&::-webkit-details-marker]:hidden">
 					<div className="relative h-16 w-11 shrink-0 overflow-hidden rounded-lg bg-[var(--app-surface-muted)] group-open/details:hidden sm:h-20 sm:w-14">
 						<Image
@@ -353,44 +500,55 @@ export function ModerationRow({
 						/>
 					</div>
 					<div className="min-w-0 flex-1 space-y-0.5 pr-1 group-open/details:hidden">
-						<p className="truncate text-sm font-bold text-[var(--md-title)] sm:text-base">
-							{movie.title}
-						</p>
+						<div className="flex min-w-0 items-center gap-2">
+							<p className="truncate text-sm font-bold text-[var(--md-title)] sm:text-base">
+								{movie.title}
+							</p>
+							<CatalogueKindBadge kind={item.kind} />
+						</div>
 						<p className="text-xs text-[var(--md-text-muted)]">
-							{movie.release_year != null
-								? `${movie.release_year}`
-								: "Year TBD"}
-							{movie.director?.trim() ? ` · ${movie.director}` : ""}
+							{collapsedSubtitle(item)}
 						</p>
 					</div>
-					<svg
-						className="size-5 shrink-0 text-[var(--md-text-muted)] transition-transform duration-300 group-open/details:rotate-180"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						role="presentation"
-						aria-hidden
-					>
-						<title>Toggle row details</title>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth={2}
-							d="M19 9l-7 7-7-7"
+					<div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+						<ModerationSummaryActions
+							item={item}
+							mode={mode}
+							pending={pending}
+							start={start}
+							router={router}
 						/>
-					</svg>
+						<svg
+							className="size-5 shrink-0 text-[var(--md-text-muted)] transition-transform duration-300 group-open/details:rotate-180"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							role="presentation"
+							aria-hidden
+						>
+							<title>Toggle row details</title>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M19 9l-7 7-7-7"
+							/>
+						</svg>
+					</div>
 				</summary>
 
 				<div className="border-t border-[var(--md-border)] px-3 py-5 sm:px-5 sm:py-6">
 					<MovieDetailThreeColumn
 						movie={movie}
+						catalogueKind={item.kind}
+						series={item.kind === "series" ? item.row : undefined}
 						posterSrc={poster}
 						posterSizes="(max-width: 1023px) 100vw, 220px"
 						posterUnoptimized={poster.includes("placehold.co")}
 						showMetadataAside={false}
 						headerActions={
 							<ModerationOpenRightSlot
-								movie={movie}
+								item={item}
 								mode={mode}
 								pending={pending}
 								start={start}
@@ -400,86 +558,16 @@ export function ModerationRow({
 						}
 						posterFooter={
 							<MovieDetailPosterLinkRows
-								movieId={movie.id}
+								movieId={item.row.id}
+								catalogueKind={item.kind}
 								mode="admin"
 								showEdit
 							/>
 						}
-						bodyFooterLine={moderationFooterLine(movie, mode)}
+						bodyFooterLine={moderationFooterLine(item, mode)}
 					/>
 				</div>
 			</details>
-
-			<div
-				className={`${actionRailClass} peer-open:hidden peer-open:pointer-events-none`}
-			>
-				{mode === "pending" ? (
-					<>
-						<button
-							type="button"
-							disabled={pending}
-							title="Approve"
-							aria-label="Approve"
-							className={`${iconBtnClass} mdc-admin-action--success`}
-							onClick={() =>
-								start(async () => {
-									await approveMovie(movie.id);
-									router.refresh();
-								})
-							}
-						>
-							<IconCheck />
-						</button>
-						<button
-							type="button"
-							disabled={pending}
-							title="Reject"
-							aria-label="Reject"
-							className={`${iconBtnClass} mdc-admin-action--danger`}
-							onClick={() =>
-								start(async () => {
-									await rejectMovie(movie.id);
-									router.refresh();
-								})
-							}
-						>
-							<IconX />
-						</button>
-					</>
-				) : mode === "rejected" ? (
-					<button
-						type="button"
-						disabled={pending}
-						title="Return to pending queue"
-						aria-label="Return to pending"
-						className={`${iconBtnClass} mdc-admin-action--neutral`}
-						onClick={() =>
-							start(async () => {
-								await returnRejectedToPending(movie.id);
-								router.refresh();
-							})
-						}
-					>
-						<IconUndo />
-					</button>
-				) : (
-					<button
-						type="button"
-						disabled={pending}
-						title="Dis-approve — return to pending queue"
-						aria-label="Dis-approve"
-						className={`${iconBtnClass} mdc-admin-action--warning`}
-						onClick={() =>
-							start(async () => {
-								await disapproveMovie(movie.id);
-								router.refresh();
-							})
-						}
-					>
-						<IconUnpublish />
-					</button>
-				)}
-			</div>
 		</div>
 	);
 }

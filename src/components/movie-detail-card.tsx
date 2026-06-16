@@ -12,6 +12,19 @@ import {
 	getWatchProviderBySlug,
 	MOVIE_CATEGORIES,
 } from "@/types/movie";
+import type { SeriesRow } from "@/types/series";
+import { SERIES_STATUSES } from "@/types/series";
+
+function formatSeriesDate(value: string | null | undefined) {
+	if (!value) return null;
+	const d = new Date(value);
+	if (Number.isNaN(d.getTime())) return value;
+	return d.toLocaleDateString(undefined, { dateStyle: "medium" });
+}
+
+function seriesStatusLabel(status: SeriesRow["status"]) {
+	return SERIES_STATUSES.find((s) => s.value === status)?.label ?? status;
+}
 
 function categoryLabel(slug: string) {
 	return MOVIE_CATEGORIES.find((c) => c.value === slug)?.label ?? slug;
@@ -180,14 +193,22 @@ function IconEye({ className }: { className?: string }) {
 export function MovieDetailStatsRow({
 	movie,
 	userReviewAggregate,
+	series,
+	catalogueKind,
 }: {
 	movie: MovieRow;
 	userReviewAggregate?: MovieUserReviewAggregate;
+	series?: SeriesRow;
+	catalogueKind?: "movie" | "series";
 }) {
-	const cat = movie.category;
-	const isTrending = cat === "trending";
-	const runtime =
-		movie.runtime_minutes != null ? `${movie.runtime_minutes} min` : "—";
+	const isSeries = catalogueKind === "series" && series != null;
+	const runtime = isSeries
+		? series.runtime_minutes != null
+			? `${series.runtime_minutes} min / ep`
+			: "—"
+		: movie.runtime_minutes != null
+			? `${movie.runtime_minutes} min`
+			: "—";
 	const catalogueRating =
 		movie.rating != null ? `${movie.rating.toFixed(1)}/10` : "—";
 
@@ -200,6 +221,54 @@ export function MovieDetailStatsRow({
 	const gridClass = hasUserAgg
 		? "grid w-full grid-cols-2 gap-4 sm:grid-cols-3"
 		: "grid w-full grid-cols-2 gap-4 sm:grid-cols-2";
+
+	if (isSeries) {
+		const seasons =
+			series.season_count != null ? String(series.season_count) : "—";
+		const episodes =
+			series.episode_count != null ? String(series.episode_count) : "—";
+
+		return (
+			<div className={gridClass}>
+				<div className="mdc-stat-card px-4 py-3">
+					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-runtime)]">
+						<IconTrend className="size-4 shrink-0" />
+						<span className="mdc-section-title truncate text-sm font-semibold">
+							{seasons}
+						</span>
+					</div>
+					<div className="mdc-stat-label mt-1.5">Seasons</div>
+				</div>
+				<div className="mdc-stat-card px-4 py-3">
+					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-runtime)]">
+						<IconUsers className="size-4 shrink-0" />
+						<span className="mdc-section-title truncate text-sm font-semibold">
+							{episodes}
+						</span>
+					</div>
+					<div className="mdc-stat-label mt-1.5">Episodes</div>
+				</div>
+				<div className="mdc-stat-card px-4 py-3">
+					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-catalogue)]">
+						<IconClock className="size-4 shrink-0" />
+						<span className="mdc-section-title truncate text-sm font-semibold">
+							{runtime}
+						</span>
+					</div>
+					<div className="mdc-stat-label mt-1.5">Episode runtime</div>
+				</div>
+				<div className="mdc-stat-card px-4 py-3">
+					<div className="flex min-w-0 items-center gap-2 text-[color:var(--md-stat-catalogue)]">
+						<IconStar className="size-4 shrink-0" />
+						<span className="mdc-section-title truncate text-sm font-semibold">
+							{catalogueRating}
+						</span>
+					</div>
+					<div className="mdc-stat-label mt-1.5">Catalogue</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className={gridClass}>
@@ -233,19 +302,62 @@ export function MovieDetailStatsRow({
 	);
 }
 
-export function MovieDetailMetadataAside({ movie }: { movie: MovieRow }) {
+export function SeriesDetailExtraSection({ series }: { series: SeriesRow }) {
+	const facts: { label: string; value: string }[] = [];
+
+	if (series.creator?.trim()) {
+		facts.push({ label: "Creator", value: series.creator.trim() });
+	}
+	if (series.director?.trim()) {
+		facts.push({ label: "Director", value: series.director.trim() });
+	}
+	if (series.network?.trim()) {
+		facts.push({ label: "Network", value: series.network.trim() });
+	}
+
+	const startDate = formatSeriesDate(series.start_date);
+	const endDate = formatSeriesDate(series.end_date);
+	if (startDate) facts.push({ label: "First aired", value: startDate });
+	if (endDate) facts.push({ label: "Last aired", value: endDate });
+
+	if (facts.length === 0) return null;
+
+	return (
+		<section className="mdc-content-card">
+			<h3 className="mb-3 text-lg font-semibold">Series details</h3>
+			<dl className="grid gap-4 sm:grid-cols-2">
+				{facts.map(({ label, value }) => (
+					<div key={label}>
+						<dt className="mdc-aside-row-label text-xs">{label}</dt>
+						<dd className="mdc-aside-row-value mt-1 text-base font-medium leading-snug">
+							{value}
+						</dd>
+					</div>
+				))}
+			</dl>
+		</section>
+	);
+}
+
+export function MovieDetailMetadataAside({
+	movie,
+	catalogueKind,
+}: {
+	movie: MovieRow;
+	catalogueKind?: "movie" | "series";
+}) {
 	const watch = getWatchProviderBySlug(movie.watch_provider ?? null);
 	const rows: { icon: ReactNode; label: string; value: ReactNode }[] = [];
-	if (movie.director?.trim()) {
+	if (movie.director?.trim() && catalogueKind !== "series") {
 		rows.push({ icon: <IconUser className="size-4" />, label: "Director", value: movie.director.trim() });
 	}
-	if (movie.release_year != null) {
+	if (movie.release_year != null && catalogueKind !== "series") {
 		rows.push({ icon: <IconCalendarSm className="size-4" />, label: "Release", value: String(movie.release_year) });
 	}
 	if (movie.language?.trim()) {
 		rows.push({ icon: <IconGlobe className="size-4" />, label: "Language", value: movie.language.trim() });
 	}
-	if (watch) {
+	if (watch && catalogueKind !== "series") {
 		rows.push({
 			icon: (
 				<WatchProviderIcon slug={watch.slug} className="h-4 w-auto max-w-[3rem] object-contain opacity-80" title={watch.label} />
@@ -301,16 +413,19 @@ export function MovieDetailPosterLinkRows({
 	movieId,
 	mode,
 	showEdit,
+	catalogueKind = "movie",
 }: {
 	movieId: string;
 	mode: "admin" | "public";
 	showEdit: boolean;
+	catalogueKind?: "movie" | "series";
 }) {
+	const basePath = catalogueKind === "series" ? "/series" : "/movies";
 	return (
 		<div className="flex w-full flex-col gap-2">
 		{mode === "admin" ? (
 			<NavLinkButton
-				href={`/movies/${movieId}`}
+				href={`${basePath}/${movieId}`}
 				variant="outline"
 				className={posterLinkRowClass}
 			>
@@ -322,18 +437,18 @@ export function MovieDetailPosterLinkRows({
 			</NavLinkButton>
 		) : (
 			<NavLinkButton
-				href="/"
+				href={catalogueKind === "series" ? "/series" : "/"}
 				variant="outline"
 				className={posterLinkRowClass}
 			>
 				<span className="flex items-center gap-2.5">
 					<IconHome className="size-4 shrink-0 text-[var(--md-gold)]" />
-					Browse catalogue
+					{catalogueKind === "series" ? "Browse series" : "Browse catalogue"}
 				</span>
 				<IconChevronRight className="size-4 shrink-0 text-[var(--md-text-muted)]" />
 			</NavLinkButton>
 		)}
-		{showEdit && (
+		{showEdit && catalogueKind === "movie" && (
 			<NavLinkButton
 				href={`/movies/${movieId}/edit`}
 				variant="outline"
@@ -356,6 +471,8 @@ export function MovieDetailBody({
 	headerActions,
 	userReviewAggregate,
 	reviewsSlot,
+	catalogueKind,
+	series,
 }: {
 	movie: MovieRow;
 	footerLine?: string;
@@ -364,6 +481,8 @@ export function MovieDetailBody({
 	userReviewAggregate?: MovieUserReviewAggregate;
 	/** User ratings & comments (same layout as former catalogue Review block). */
 	reviewsSlot?: ReactNode;
+	catalogueKind?: "movie" | "series";
+	series?: SeriesRow;
 }) {
 	const submitted =
 		footerLine ??
@@ -381,14 +500,30 @@ export function MovieDetailBody({
 							{movie.title}
 						</h1>
 						<div className="mt-3 flex flex-wrap items-center gap-2">
-							{movie.release_year != null && (
+							{catalogueKind === "series" && series ? (
 								<span className="mdc-muted text-base font-medium">
-									{movie.release_year}
+									{series.start_year != null
+										? series.end_year != null &&
+												series.end_year !== series.start_year
+											? `${series.start_year}–${series.end_year}`
+											: String(series.start_year)
+										: "Year TBD"}
 								</span>
+							) : (
+								movie.release_year != null && (
+									<span className="mdc-muted text-base font-medium">
+										{movie.release_year}
+									</span>
+								)
 							)}
 							<span className="mdc-badge rounded-full px-3 py-1.5 text-sm font-medium">
-								Catalogue
+								{catalogueKind === "series" ? "Series" : "Movie"}
 							</span>
+							{catalogueKind === "series" && series ? (
+								<span className="mdc-badge rounded-full px-3 py-1.5 text-sm font-medium">
+									{seriesStatusLabel(series.status)}
+								</span>
+							) : null}
 						</div>
 					</div>
 					{headerActions ? (
@@ -402,7 +537,13 @@ export function MovieDetailBody({
 			<MovieDetailStatsRow
 				movie={movie}
 				userReviewAggregate={userReviewAggregate}
+				series={series}
+				catalogueKind={catalogueKind}
 			/>
+
+			{catalogueKind === "series" && series ? (
+				<SeriesDetailExtraSection series={series} />
+			) : null}
 
 			{movie.genres?.length > 0 && (
 				<section className="space-y-3">
@@ -425,7 +566,9 @@ export function MovieDetailBody({
 			<section className="mdc-content-card">
 				<h3 className="mb-3 text-lg font-semibold">📖 Synopsis</h3>
 				<p className="mdc-prose text-sm leading-[1.8]">
-					{movie.overview?.trim() ? movie.overview : "No synopsis added yet."}
+					{movie.overview?.trim()
+						? movie.overview
+						: movie.review_text?.trim() || "No synopsis added yet."}
 				</p>
 			</section>
 
@@ -458,6 +601,8 @@ export function MovieDetailThreeColumn({
 	userReviewAggregate,
 	reviewsSlot,
 	shareTitle,
+	catalogueKind,
+	series,
 }: {
 	movie: MovieRow;
 	posterSrc: string;
@@ -478,6 +623,8 @@ export function MovieDetailThreeColumn({
 	reviewsSlot?: ReactNode;
 	/** When set with a right column, shows Share in the sidebar (uses current page URL on the client). */
 	shareTitle?: string;
+	catalogueKind?: "movie" | "series";
+	series?: SeriesRow;
 }) {
 	const hasRightCol =
 		showMetadataAside !== false || Boolean(rightBottomSlot);
@@ -517,6 +664,8 @@ export function MovieDetailThreeColumn({
 						headerActions={headerActions}
 						userReviewAggregate={userReviewAggregate}
 						reviewsSlot={reviewsSlot}
+						catalogueKind={catalogueKind}
+						series={series}
 					/>
 				</main>
 
@@ -524,9 +673,14 @@ export function MovieDetailThreeColumn({
 				{hasRightCol ? (
 					<aside className="flex min-w-0 flex-col gap-5 lg:col-start-3 lg:row-start-1 lg:sticky lg:top-8 lg:self-start">
 						{showMetadataAside !== false ? (
-							<MovieDetailMetadataAside movie={movie} />
+							<MovieDetailMetadataAside
+								movie={movie}
+								catalogueKind={catalogueKind}
+							/>
 						) : null}
-						<MovieDetailWhereToWatch movie={movie} />
+						{catalogueKind !== "series" ? (
+							<MovieDetailWhereToWatch movie={movie} />
+						) : null}
 						{posterFooterInAside ? (
 							<div className="flex flex-col gap-3">{posterFooter}</div>
 						) : null}

@@ -16,7 +16,7 @@ export function HeaderNav({
   isAdmin: boolean;
 }) {
   return (
-    <nav className="flex min-w-0 flex-1 flex-wrap items-center justify-end gap-1.5 sm:gap-2">
+    <nav className="flex min-w-0 shrink-0 flex-wrap items-center justify-end gap-1.5 self-center sm:gap-2">
       <AppThemeToggle />
 
       {isAdmin && (
@@ -31,13 +31,6 @@ export function HeaderNav({
           <span className="hidden sm:inline">Admin</span>
         </Link>
       )}
-
-      <Link
-        href="/movies/new"
-        className="inline-flex items-center gap-1 rounded-lg border border-[var(--md-gold)] bg-transparent px-2.5 py-1.5 text-sm font-semibold text-[var(--md-gold)] transition hover:bg-[var(--md-gold-soft)] sm:px-3"
-      >
-        + <span className="hidden min-[380px]:inline">Add movie</span><span className="min-[380px]:hidden">Add</span>
-      </Link>
 
       {user ? (
         <div className="flex shrink-0 items-center pl-1">

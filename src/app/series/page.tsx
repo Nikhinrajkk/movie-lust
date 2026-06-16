@@ -1,0 +1,67 @@
+import { Suspense } from "react";
+import { listSeries } from "@/app/actions/series";
+import { SeriesDiscover } from "@/components/series-discover";
+import { isSupabaseConfigured } from "@/lib/config";
+import { buildInitialQueryFromSearchParams } from "@/lib/movie-search-params";
+
+function DiscoverFallback() {
+  return (
+    <div className="app-panel p-10 text-center text-sm text-[var(--md-text-muted)]">
+      Loading filters and catalogue…
+    </div>
+  );
+}
+
+export default async function SeriesPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const sp = await searchParams;
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(sp)) {
+    if (value == null) continue;
+    if (Array.isArray(value)) {
+      if (key === "genre") {
+        for (const v of value) {
+          if (v != null && v !== "") params.append(key, v);
+        }
+      } else if (value[0] != null) {
+        params.set(key, value[0]);
+      }
+    } else {
+      params.set(key, value);
+    }
+  }
+
+  const initialQuery = buildInitialQueryFromSearchParams(params);
+  const supabaseReady = isSupabaseConfigured();
+
+  const initial = supabaseReady
+    ? await listSeries({
+        search: initialQuery.search,
+        genre: initialQuery.genre,
+        sort: initialQuery.sort,
+        page: initialQuery.page,
+        pageSize: initialQuery.pageSize,
+      })
+    : {
+        series: [],
+        total: 0,
+        page: 1,
+        pageSize: initialQuery.pageSize,
+        totalPages: 1,
+      };
+
+  return (
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+      <Suspense fallback={<DiscoverFallback />}>
+        <SeriesDiscover
+          initial={initial}
+          initialQuery={initialQuery}
+          supabaseReady={supabaseReady}
+        />
+      </Suspense>
+    </div>
+  );
+}

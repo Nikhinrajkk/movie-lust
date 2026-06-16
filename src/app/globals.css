@@ -251,6 +251,52 @@ html[data-app-theme="dark"] .app-header {
   box-shadow: none;
 }
 
+html[data-app-theme] .header-catalogue-tabs {
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  margin-left: 0.25rem;
+}
+
+html[data-app-theme] .header-catalogue-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.75rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-transform: none;
+  color: var(--md-text-muted);
+  transition: color 0.2s ease;
+}
+
+html[data-app-theme] .header-catalogue-tab::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--md-gold);
+  transform: scaleX(0);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-app-theme] .header-catalogue-tab:hover {
+  color: var(--md-title);
+}
+
+html[data-app-theme] .header-catalogue-tab--active {
+  color: var(--md-gold);
+}
+
+html[data-app-theme] .header-catalogue-tab--active::after {
+  transform: scaleX(1);
+}
+
 /* ── Select / filter controls ───────────────────────────────────────── */
 html[data-app-theme] .app-select-trigger {
   border-color: var(--md-input-border);
