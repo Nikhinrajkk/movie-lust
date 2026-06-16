@@ -436,9 +436,9 @@ export function MovieDetailPosterLinkRows({
 				<IconChevronRight className="size-4 shrink-0 text-[var(--md-text-muted)]" />
 			</NavLinkButton>
 		)}
-		{showEdit && catalogueKind === "movie" && (
+		{showEdit && (
 			<NavLinkButton
-				href={`/movies/${movieId}/edit`}
+				href={`${basePath}/${movieId}/edit`}
 				variant="outline"
 				className={posterLinkRowClass}
 			>

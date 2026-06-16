@@ -2,7 +2,7 @@
   "source": "https://www.imdb.com/",
   "list_title": "User curated series batch",
   "fetched_at": "2026-06-11",
-  "series_count": 3,
+  "series_count": 4,
   "series": [
     {
       "imdb_id": "tt0944947",
@@ -63,6 +63,26 @@
       "status": "ended",
       "category": "trending",
       "genres": ["crime", "drama", "neo-noir"]
+    },
+    {
+      "imdb_id": "tt0108778",
+      "title": "Friends",
+      "start_date": "1994-09-22",
+      "end_date": "2004-05-06",
+      "start_year": 1994,
+      "end_year": 2004,
+      "season_count": 10,
+      "rating": 8.8,
+      "overview": "Six young people from New York City, on their own and struggling to survive in the real world, find the companionship, comfort and support they get from each other to be the perfect antidote to the pressures of life.",
+      "poster_url": "https://image.tmdb.org/t/p/w500/f496cm9enu0Dm8qG12MtDOS6B3.jpg",
+      "creator": "David Crane, Marta Kauffman",
+      "director": "",
+      "language": "English",
+      "network": "NBC",
+      "watch_provider": "max",
+      "status": "ended",
+      "category": "classic",
+      "genres": ["comedy", "feelgood", "romance"]
     }
   ]
 }

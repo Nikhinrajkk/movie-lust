@@ -1,6 +1,5 @@
--- Catalogue seed: user curated series batch (2026-06-11).
--- Source: data/series-curated-batch-2026-06-11.json
--- Idempotent inserts (skip when title already exists). Run after 0013_series.sql.
+-- Deprecated: use 0018_series_curated_batch_backfill.sql (full batch).
+-- Kept for migration history; re-runs are no-ops when titles already exist.
 
 insert into public.series (
   title, overview, poster_url, start_date, end_date, start_year, end_year,

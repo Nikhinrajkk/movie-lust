@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getSessionUserWithProfile } from "@/lib/auth/session";
 import {
   isLikelyHtmlOrTransportBody,
   logSupabaseTransportFailure,
@@ -281,6 +282,84 @@ export async function createSeriesFromForm(
   } catch (e: unknown) {
     return {
       error: e instanceof Error ? e.message : "Could not create series",
+    };
+  }
+
+  redirect(`/series/${id}`);
+}
+
+export async function updateSeries(id: string, payload: SeriesPayload) {
+  const supabase = await createSupabaseServer();
+  const { error } = await supabase
+    .from("series")
+    .update({
+      title: payload.title,
+      overview: payload.overview ?? "",
+      poster_url: payload.poster_url ?? "",
+      start_date: payload.start_date ?? null,
+      end_date: payload.end_date ?? null,
+      start_year: payload.start_year ?? null,
+      end_year: payload.end_year ?? null,
+      genres: payload.genres.map((g) => g.toLowerCase()),
+      category: payload.category,
+      rating: payload.rating ?? null,
+      review_text: payload.review_text ?? "",
+      season_count: payload.season_count ?? null,
+      director: payload.director ?? "",
+      creator: payload.creator ?? "",
+      language: payload.language?.trim() ?? "",
+      network: payload.network ?? "",
+      watch_provider: payload.watch_provider ?? null,
+      status: payload.status ?? "ended",
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+
+  if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
+  revalidatePath("/series");
+  revalidatePath(`/series/${id}`);
+  revalidatePath("/admin");
+}
+
+export async function updateSeriesFromForm(
+  _prev: SeriesFormState,
+  formData: FormData,
+): Promise<SeriesFormState> {
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id) return { error: "Missing series id" };
+
+  const { user, isAdmin } = await getSessionUserWithProfile();
+  if (!user) return { error: "Sign in to edit series." };
+
+  if (!isAdmin) {
+    const supabase = await createSupabaseServer();
+    const { data: existing } = await supabase
+      .from("series")
+      .select("created_by, approval_status")
+      .eq("id", id)
+      .maybeSingle();
+
+    const isOwner = existing?.created_by === user.id;
+    const isPending = existing?.approval_status === "pending";
+    if (!isOwner || !isPending) {
+      return { error: "You don't have permission to edit this series." };
+    }
+  }
+
+  let payload: SeriesPayload;
+  try {
+    payload = parseSeriesFormData(formData);
+  } catch (e: unknown) {
+    return {
+      error: e instanceof Error ? e.message : "Invalid form",
+    };
+  }
+
+  try {
+    await updateSeries(id, payload);
+  } catch (e: unknown) {
+    return {
+      error: e instanceof Error ? e.message : "Could not update series",
     };
   }
 

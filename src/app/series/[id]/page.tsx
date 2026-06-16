@@ -52,6 +52,7 @@ export default async function SeriesDetailPage({
 
 	const owner = Boolean(user && series?.created_by === user.id);
 	const status = series?.approval_status ?? "approved";
+	const canEdit = isAdmin || (owner && status === "pending");
 	const canDelete = isAdmin || (owner && status === "pending");
 	const showModeration = status === "pending" || status === "rejected";
 
@@ -133,7 +134,7 @@ export default async function SeriesDetailPage({
 									movieId={series.id}
 									catalogueKind="series"
 									mode="public"
-									showEdit={false}
+									showEdit={canEdit}
 								/>
 								{canDelete && (
 									<div className="pt-1">

@@ -1,6 +1,6 @@
--- Catalogue seed: user curated series batch (2026-06-11).
+-- Backfill curated series batch if 0016 was skipped or only 0017 (Friends) ran.
 -- Source: data/series-curated-batch-2026-06-11.json
--- Idempotent inserts (skip when title already exists). Run after 0013_series.sql.
+-- Idempotent: skips any title that already exists.
 
 insert into public.series (
   title, overview, poster_url, start_date, end_date, start_year, end_year,
