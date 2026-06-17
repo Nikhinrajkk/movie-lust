@@ -629,7 +629,7 @@ export function MovieDetailThreeColumn({
 				}
 			>
 				{/* Left: sticky poster + trailer button */}
-				<div className="lg:sticky lg:top-8 lg:col-start-1 lg:row-start-1 lg:self-start">
+				<div className="lg:sticky lg:top-[100px] lg:col-start-1 lg:row-start-1 lg:self-start">
 					<div className="mdc-poster-frame relative aspect-[2/3] w-full overflow-hidden rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,.45)]">
 						<Image
 							src={posterSrc}
@@ -659,7 +659,7 @@ export function MovieDetailThreeColumn({
 
 				{/* Right sidebar */}
 				{hasRightCol ? (
-					<aside className="flex min-w-0 flex-col gap-5 lg:col-start-3 lg:row-start-1 lg:sticky lg:top-8 lg:self-start">
+					<aside className="flex min-w-0 flex-col gap-5 lg:col-start-3 lg:row-start-1 lg:sticky lg:top-[100px] lg:self-start">
 						{showMetadataAside !== false ? (
 							<MovieDetailMetadataAside
 								movie={movie}
