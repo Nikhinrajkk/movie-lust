@@ -43,7 +43,7 @@ export function HeaderUserMenu({
         <Button
           type="button"
           variant="ghost"
-          className="h-auto rounded-full border-0 bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white/60"
+          className="h-auto rounded-full border-0 bg-transparent !p-0 shadow-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white/60"
           aria-label="Open account menu"
         >
           <Avatar.Root className="flex h-9 w-9 select-none items-center justify-center overflow-hidden rounded-full border-2 border-[var(--md-gold)]/70 bg-[var(--app-surface-muted)] shadow-md transition hover:ring-2 hover:ring-[var(--md-gold)]/40">
