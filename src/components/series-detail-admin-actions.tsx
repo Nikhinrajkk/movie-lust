@@ -109,7 +109,7 @@ export function SeriesDetailAdminActions({
 					className="mdc-admin-action mdc-admin-action--row mdc-admin-action--warning"
 				>
 					<IconEyeOff className="size-4 shrink-0" />
-					Dis-approve (back to pending)
+					Disapprove
 				</button>
 			)}
 
