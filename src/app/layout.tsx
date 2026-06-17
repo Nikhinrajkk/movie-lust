@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import { Header } from "@/components/header";
+import { APP_THEME_INIT_SCRIPT } from "@/lib/app-theme-init-script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,8 +39,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: APP_THEME_INIT_SCRIPT }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col bg-[var(--page-bg)] font-sans text-[var(--foreground)] antialiased">
-        <Script src="/app-theme-init.js" strategy="beforeInteractive" />
         <Header />
         <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
       </body>

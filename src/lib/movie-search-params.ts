@@ -1,23 +1,23 @@
 import {
   GENRE_OPTIONS,
 } from "@/types/movie";
+import {
+  type CatalogueSortOption,
+  isCatalogueSortOption,
+} from "@/types/catalogue-sort";
 
 export type MovieListInitialQuery = {
   search: string;
   genre: string;
-  sort: "title_asc" | "rating_desc" | "year_desc";
+  sort: CatalogueSortOption;
   page: number;
   pageSize: number;
 };
 
 const GENRE_SET = new Set<string>([...GENRE_OPTIONS]);
 
-function parseSort(
-  v: string | null,
-): "title_asc" | "rating_desc" | "year_desc" {
-  if (v === "title_asc" || v === "rating_desc" || v === "year_desc") {
-    return v;
-  }
+function parseSort(v: string | null): CatalogueSortOption {
+  if (isCatalogueSortOption(v)) return v;
   /* Legacy ?sort=newest bookmarks → default sort */
   return "title_asc";
 }

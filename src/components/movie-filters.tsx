@@ -136,7 +136,8 @@ export function MovieFilters({
         triggerClassName="w-full min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap rounded-lg px-3 text-sm"
       >
         <UiSelectItem value="title_asc">Sort: Title A–Z</UiSelectItem>
-        <UiSelectItem value="rating_desc">Sort: Rating</UiSelectItem>
+        <UiSelectItem value="rating_desc">Sort: IMDb rating</UiSelectItem>
+        <UiSelectItem value="user_rating_desc">Sort: User rating</UiSelectItem>
         <UiSelectItem value="year_desc">Sort: Year</UiSelectItem>
       </UiSelect>
 

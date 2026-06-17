@@ -239,7 +239,7 @@ export function MovieDetailStatsRow({
 							{catalogueRating}
 						</span>
 					</div>
-					<div className="mdc-stat-label mt-1.5">Catalogue</div>
+					<div className="mdc-stat-label mt-1.5">IMDb</div>
 				</div>
 				{hasUserAgg ? (
 					<div className="mdc-stat-card px-4 py-3">
@@ -273,7 +273,7 @@ export function MovieDetailStatsRow({
 					<IconStar className="size-4 shrink-0" />
 					<span className="mdc-section-title truncate text-sm font-semibold">{catalogueRating}</span>
 				</div>
-				<div className="mdc-stat-label mt-1.5">Catalogue</div>
+				<div className="mdc-stat-label mt-1.5">IMDb</div>
 			</div>
 			{hasUserAgg ? (
 				<div className="mdc-stat-card px-4 py-3">

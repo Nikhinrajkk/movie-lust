@@ -21,12 +21,13 @@ import {
   type MovieListResult,
   type MovieRow,
 } from "@/types/movie";
+import type { CatalogueSortOption } from "@/types/catalogue-sort";
 
 export type ListMoviesInput = {
   search?: string;
   genre?: string;
   category?: string;
-  sort?: "title_asc" | "rating_desc" | "year_desc";
+  sort?: CatalogueSortOption;
   page?: number;
   pageSize?: number;
 };
@@ -37,6 +38,8 @@ function mapSort(sort: ListMoviesInput["sort"]) {
       return { column: "title" as const, ascending: true };
     case "rating_desc":
       return { column: "rating" as const, ascending: false };
+    case "user_rating_desc":
+      return { column: "user_avg_stars" as const, ascending: false };
     case "year_desc":
       return { column: "release_year" as const, ascending: false };
     default:
@@ -58,7 +61,7 @@ export async function listMovies(
   }
 
   let query = supabase
-    .from("movies")
+    .from(input.sort === "user_rating_desc" ? "movies_with_user_rating" : "movies")
     .select("*", { count: "exact" })
     .eq("approval_status", "approved");
 
@@ -83,6 +86,11 @@ export async function listMovies(
 
   const { column, ascending } = mapSort(input.sort);
   query = query.order(column, { ascending, nullsFirst: false });
+  if (input.sort === "user_rating_desc") {
+    query = query
+      .order("user_rating_count", { ascending: false, nullsFirst: false })
+      .order("title", { ascending: true });
+  }
 
   const { data, error, count } = await query.range(from, to);
 

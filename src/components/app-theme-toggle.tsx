@@ -114,7 +114,7 @@ export function AppThemeIcon({ theme }: { theme: AppTheme }) {
 	);
 }
 
-/** Call once on the client after hydration if the inline script did not run. */
+/** Call once on the client after hydration if the head script did not run. */
 export function syncAppThemeFromStorage() {
 	const stored = readStoredTheme();
 	if (stored) applyAppTheme(stored);

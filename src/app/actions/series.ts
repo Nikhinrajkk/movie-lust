@@ -23,12 +23,13 @@ import type {
   SeriesRow,
   SeriesStatus,
 } from "@/types/series";
+import type { CatalogueSortOption } from "@/types/catalogue-sort";
 
 export type ListSeriesInput = {
   search?: string;
   genre?: string;
   category?: string;
-  sort?: "title_asc" | "rating_desc" | "year_desc";
+  sort?: CatalogueSortOption;
   page?: number;
   pageSize?: number;
 };
@@ -39,6 +40,8 @@ function mapSort(sort: ListSeriesInput["sort"]) {
       return { column: "title" as const, ascending: true };
     case "rating_desc":
       return { column: "rating" as const, ascending: false };
+    case "user_rating_desc":
+      return { column: "user_avg_stars" as const, ascending: false };
     case "year_desc":
       return { column: "start_year" as const, ascending: false };
     default:
@@ -60,7 +63,7 @@ export async function listSeries(
   }
 
   let query = supabase
-    .from("series")
+    .from(input.sort === "user_rating_desc" ? "series_with_user_rating" : "series")
     .select("*", { count: "exact" })
     .eq("approval_status", "approved");
 
@@ -84,9 +87,13 @@ export async function listSeries(
   }
 
   const { column, ascending } = mapSort(input.sort);
-  query = query
-    .order(column, { ascending, nullsFirst: false })
-    .order("id", { ascending: false });
+  query = query.order(column, { ascending, nullsFirst: false });
+  if (input.sort === "user_rating_desc") {
+    query = query
+      .order("user_rating_count", { ascending: false, nullsFirst: false })
+      .order("title", { ascending: true });
+  }
+  query = query.order("id", { ascending: false });
 
   const { data, error, count } = await query.range(from, to);
 

@@ -211,7 +211,7 @@ export function SeriesForm({
         </div>
 
         <div className="space-y-2 sm:col-span-2">
-          <FieldLabel htmlFor="series-rating">Your rating (0–10)</FieldLabel>
+          <FieldLabel htmlFor="series-rating">Rating (0–10)</FieldLabel>
           <input
             id="series-rating"
             name="rating"

@@ -127,7 +127,7 @@ export function MovieForm({
         </div>
 
         <div className="space-y-2 sm:col-span-2">
-          <FieldLabel htmlFor="movie-rating">Your rating (0–10)</FieldLabel>
+          <FieldLabel htmlFor="movie-rating">Rating (0–10)</FieldLabel>
           <input
             id="movie-rating"
             name="rating"

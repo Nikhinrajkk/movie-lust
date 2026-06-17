@@ -1,8 +1,9 @@
 "use client";
 
 import { create } from "zustand";
+import type { CatalogueSortOption } from "@/types/catalogue-sort";
 
-export type SortOption = "title_asc" | "rating_desc" | "year_desc";
+export type SortOption = CatalogueSortOption;
 
 export type MovieFiltersState = {
   search: string;
