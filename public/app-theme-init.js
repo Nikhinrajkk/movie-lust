@@ -1,10 +1,11 @@
 (function () {
+	var k = "appTheme";
+	var t = "dark";
 	try {
-		var k = "appTheme";
-		var t = localStorage.getItem(k);
+		t = localStorage.getItem(k);
 		if (t !== "light" && t !== "dark") t = "dark";
 		document.documentElement.setAttribute("data-app-theme", t);
-	} catch (e) {
+	} catch {
 		document.documentElement.setAttribute("data-app-theme", "dark");
 	}
 })();

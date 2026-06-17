@@ -45,9 +45,6 @@ export function MovieDiscover({
 
   const initialRef = useRef(initial);
   const initialQueryRef = useRef(initialQuery);
-  // Always keep refs up to date at render time (no effect needed).
-  initialRef.current = initial;
-  initialQueryRef.current = initialQuery;
 
   // Destructure to primitive values so useLayoutEffect deps use value equality,
   // not object-reference equality (initialQuery is a new object on every server render).
@@ -58,7 +55,6 @@ export function MovieDiscover({
   // including it in the deps array (which would re-trigger the effect after
   // every router.replace and cause a redirect feedback loop).
   const urlSearchSnapshotRef = useRef(urlSearchSnapshot);
-  urlSearchSnapshotRef.current = urlSearchSnapshot;
 
   // Guard against stale-closure redirects that happen when hydrateFromServer
   // changes the Zustand store asynchronously (the useEffect fires with the
@@ -82,6 +78,12 @@ export function MovieDiscover({
   );
 
   useScrollToTopAfterLoad(listLoading, `${page}-${pageSize}`);
+
+  useLayoutEffect(() => {
+    initialRef.current = initial;
+    initialQueryRef.current = initialQuery;
+    urlSearchSnapshotRef.current = urlSearchSnapshot;
+  });
 
   useLayoutEffect(() => {
     justHydratedRef.current = true;
@@ -157,7 +159,6 @@ export function MovieDiscover({
     if (searchQueryStringsEqual(next, cur)) return;
 
     router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [genre, page, pageSize, pathname, router, search, sort]);
 
   return (

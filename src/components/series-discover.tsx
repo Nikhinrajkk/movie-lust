@@ -41,8 +41,6 @@ export function SeriesDiscover({
 
   const initialRef = useRef(initial);
   const initialQueryRef = useRef(initialQuery);
-  initialRef.current = initial;
-  initialQueryRef.current = initialQuery;
 
   const {
     search: iqSearch,
@@ -54,7 +52,6 @@ export function SeriesDiscover({
 
   const urlSearchSnapshot = urlSearchParams.toString();
   const urlSearchSnapshotRef = useRef(urlSearchSnapshot);
-  urlSearchSnapshotRef.current = urlSearchSnapshot;
 
   const justHydratedRef = useRef(false);
 
@@ -70,6 +67,12 @@ export function SeriesDiscover({
   );
 
   useScrollToTopAfterLoad(listLoading, `${page}-${pageSize}`);
+
+  useLayoutEffect(() => {
+    initialRef.current = initial;
+    initialQueryRef.current = initialQuery;
+    urlSearchSnapshotRef.current = urlSearchSnapshot;
+  });
 
   useLayoutEffect(() => {
     justHydratedRef.current = true;
@@ -139,7 +142,6 @@ export function SeriesDiscover({
     if (searchQueryStringsEqual(next, cur)) return;
 
     router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [genre, page, pageSize, pathname, router, search, sort]);
 
   return (

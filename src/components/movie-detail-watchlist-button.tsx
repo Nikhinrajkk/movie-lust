@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { addToWatchlist, removeFromWatchlist } from "@/app/actions/watchlist";
 import { markMovieWatched, unmarkMovieWatched } from "@/app/actions/watched";
@@ -19,12 +19,12 @@ export function MovieDetailWatchlistButton({
 	const [inList, setInList] = useState(initialInList);
 	const [pop, setPop] = useState(false);
 	const [ringToken, setRingToken] = useState(0);
-	const initialRef = useRef(initialInList);
 
-	useEffect(() => {
-		initialRef.current = initialInList;
+	const [prevInitialInList, setPrevInitialInList] = useState(initialInList);
+	if (initialInList !== prevInitialInList) {
+		setPrevInitialInList(initialInList);
 		setInList(initialInList);
-	}, [initialInList]);
+	}
 
 	const triggerPop = useCallback(() => {
 		setPop(true);
@@ -48,7 +48,7 @@ export function MovieDetailWatchlistButton({
 				else await addToWatchlist(movieId);
 				router.refresh();
 			} catch {
-				setInList(initialRef.current);
+				setInList(was);
 			}
 		});
 	}
@@ -113,12 +113,12 @@ export function MovieDetailWatchedButton({
 	const [pending, start] = useTransition();
 	const [watched, setWatched] = useState(initialWatched);
 	const [pop, setPop] = useState(false);
-	const initialRef = useRef(initialWatched);
 
-	useEffect(() => {
-		initialRef.current = initialWatched;
+	const [prevInitialWatched, setPrevInitialWatched] = useState(initialWatched);
+	if (initialWatched !== prevInitialWatched) {
+		setPrevInitialWatched(initialWatched);
 		setWatched(initialWatched);
-	}, [initialWatched]);
+	}
 
 	const triggerPop = useCallback(() => {
 		setPop(true);
@@ -136,7 +136,7 @@ export function MovieDetailWatchedButton({
 				else await markMovieWatched(movieId);
 				router.refresh();
 			} catch {
-				setWatched(initialRef.current);
+				setWatched(was);
 			}
 		});
 	}

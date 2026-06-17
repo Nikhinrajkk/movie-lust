@@ -75,7 +75,6 @@ function StarPicker({
 }
 
 function CatalogueUserReviewsClient({
-	entityId,
 	reviews,
 	currentUserId,
 	isAdmin,
@@ -85,7 +84,6 @@ function CatalogueUserReviewsClient({
 	deleteReview,
 	commentFieldId,
 }: {
-	entityId: string;
 	reviews: ReviewRow[];
 	currentUserId: string | null;
 	isAdmin: boolean;
@@ -278,7 +276,6 @@ export function MovieUserReviewsClient({
 }) {
 	return (
 		<CatalogueUserReviewsClient
-			entityId={movieId}
 			reviews={reviews}
 			currentUserId={currentUserId}
 			isAdmin={isAdmin}
@@ -308,7 +305,6 @@ export function SeriesUserReviewsClient({
 }) {
 	return (
 		<CatalogueUserReviewsClient
-			entityId={seriesId}
 			reviews={reviews}
 			currentUserId={currentUserId}
 			isAdmin={isAdmin}
