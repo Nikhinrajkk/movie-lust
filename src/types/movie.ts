@@ -28,6 +28,8 @@ export type MovieRow = {
   /** Set when an admin approves the submission (moderation). */
   approved_by?: string | null;
   created_by?: string | null;
+  /** Set when removed from catalogue (soft delete). */
+  deleted_at?: string | null;
 };
 
 /** Curated streaming options (slug stored in `movies.watch_provider`). Logos render in the UI. */

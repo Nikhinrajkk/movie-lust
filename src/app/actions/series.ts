@@ -65,7 +65,8 @@ export async function listSeries(
   let query = supabase
     .from(input.sort === "user_rating_desc" ? "series_with_user_rating" : "series")
     .select("*", { count: "exact" })
-    .eq("approval_status", "approved");
+    .eq("approval_status", "approved")
+    .is("deleted_at", null);
 
   const q = input.search?.trim();
   if (q) {
@@ -126,6 +127,7 @@ export async function getSeriesById(id: string): Promise<SeriesRow | null> {
     .from("series")
     .select("*")
     .eq("id", id)
+    .is("deleted_at", null)
     .maybeSingle();
 
   if (error) {
@@ -375,8 +377,16 @@ export async function updateSeriesFromForm(
 
 export async function deleteSeries(id: string) {
   const supabase = await createSupabaseServer();
-  const { error } = await supabase.from("series").delete().eq("id", id);
+  const now = new Date().toISOString();
+  const { data, error } = await supabase
+    .from("series")
+    .update({ deleted_at: now, updated_at: now })
+    .eq("id", id)
+    .is("deleted_at", null)
+    .select("id")
+    .maybeSingle();
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
+  if (!data) throw new Error("Series not found or already removed.");
   revalidatePath("/series");
   revalidatePath("/admin");
   revalidatePath(`/series/${id}`);

@@ -63,7 +63,8 @@ export async function listMovies(
   let query = supabase
     .from(input.sort === "user_rating_desc" ? "movies_with_user_rating" : "movies")
     .select("*", { count: "exact" })
-    .eq("approval_status", "approved");
+    .eq("approval_status", "approved")
+    .is("deleted_at", null);
 
   const q = input.search?.trim();
   if (q) {
@@ -129,6 +130,7 @@ export async function listMoviesCreatedByUser(): Promise<MovieRow[]> {
     .from("movies")
     .select("*")
     .eq("created_by", user.id)
+    .is("deleted_at", null)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -150,6 +152,7 @@ export async function getMovieById(id: string): Promise<MovieRow | null> {
     .from("movies")
     .select("*")
     .eq("id", id)
+    .is("deleted_at", null)
     .maybeSingle();
 
   if (error) {
@@ -243,13 +246,22 @@ export async function updateMovie(id: string, payload: MoviePayload) {
 
 export async function deleteMovie(id: string) {
   const supabase = await createSupabaseServer();
-  const { error } = await supabase.from("movies").delete().eq("id", id);
+  const now = new Date().toISOString();
+  const { data, error } = await supabase
+    .from("movies")
+    .update({ deleted_at: now, updated_at: now })
+    .eq("id", id)
+    .is("deleted_at", null)
+    .select("id")
+    .maybeSingle();
   if (error) throw new Error(sanitizeSupabaseErrorMessage(error));
+  if (!data) throw new Error("Movie not found or already removed.");
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath("/watchlist");
   revalidatePath("/watched");
   revalidatePath("/my-movies");
+  revalidatePath(`/movies/${id}`);
 }
 
 export type MovieFormState = {

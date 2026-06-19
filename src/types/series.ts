@@ -27,6 +27,8 @@ export type SeriesRow = {
   approval_status?: MovieApprovalStatus;
   approved_by?: string | null;
   created_by?: string | null;
+  /** Set when removed from catalogue (soft delete). */
+  deleted_at?: string | null;
 };
 
 export const SERIES_STATUSES: { value: SeriesStatus; label: string }[] = [

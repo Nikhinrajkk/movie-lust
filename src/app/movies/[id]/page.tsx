@@ -53,7 +53,7 @@ export default async function MovieDetailPage({
 	const owner = Boolean(user && movie?.created_by === user.id);
 	const status = movie?.approval_status ?? "approved";
 	const canEdit = isAdmin || (owner && status === "pending");
-	const canDelete = canEdit;
+	const canDelete = isAdmin || (owner && status === "pending");
 	const showModeration = status === "pending" || status === "rejected";
 
 	const watchlistIds = ready && user ? await getWatchlistMovieIdsForUser() : [];

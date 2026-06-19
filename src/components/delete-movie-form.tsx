@@ -1,8 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { deleteMovieFormAction } from "@/app/actions/movies";
 import {
-  AlertDialogAction,
   AlertDialogRoot,
   AlertDialogTrigger,
   AlertDialogPortal,
@@ -19,37 +20,41 @@ function IconTrash({ className }: { className?: string }) {
 }
 
 export function DeleteMovieForm({ id }: { id: string }) {
-  const formId = `delete-movie-${id}`;
+  const router = useRouter();
+  const [pending, start] = useTransition();
+
+  const onRemove = () => {
+    start(async () => {
+      const formData = new FormData();
+      formData.set("id", id);
+      await deleteMovieFormAction(formData);
+      router.refresh();
+    });
+  };
 
   return (
-    <>
-      <form id={formId} action={deleteMovieFormAction} className="hidden">
-        <input type="hidden" name="id" value={id} />
-      </form>
-      <AlertDialogRoot>
-        <AlertDialogTrigger asChild>
-          <button
-            type="button"
-            className="mdc-admin-action mdc-admin-action--row mdc-admin-action--danger py-3 sm:gap-3 sm:px-4"
-          >
-            <span className="flex items-center gap-2.5">
-              <IconTrash className="size-4 shrink-0" />
-              Remove movie
-            </span>
-          </button>
-        </AlertDialogTrigger>
-        <AlertDialogPortal
-          title="Remove this movie?"
-          description="This removes the listing from the library. You can add it again later if needed."
-          actionSlot={
-            <AlertDialogAction asChild>
-              <Button type="submit" variant="destructive" form={formId}>
-                Remove
-              </Button>
-            </AlertDialogAction>
-          }
-        />
-      </AlertDialogRoot>
-    </>
+    <AlertDialogRoot>
+      <AlertDialogTrigger asChild>
+        <button
+          type="button"
+          disabled={pending}
+          className="mdc-admin-action mdc-admin-action--row mdc-admin-action--danger py-3 sm:gap-3 sm:px-4"
+        >
+          <span className="flex items-center gap-2.5">
+            <IconTrash className="size-4 shrink-0" />
+            Remove movie
+          </span>
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogPortal
+        title="Remove this movie?"
+        description="This hides the listing from the library. The record is kept in the database."
+        actionSlot={
+          <Button type="button" variant="destructive" disabled={pending} onClick={onRemove}>
+            {pending ? "Removing…" : "Remove"}
+          </Button>
+        }
+      />
+    </AlertDialogRoot>
   );
 }

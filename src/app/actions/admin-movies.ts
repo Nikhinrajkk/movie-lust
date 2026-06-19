@@ -60,7 +60,8 @@ async function fetchMoviesByStatus(
   let query = supabase
     .from("movies")
     .select("*")
-    .eq("approval_status", status);
+    .eq("approval_status", status)
+    .is("deleted_at", null);
   if (searchFilter) query = query.or(searchFilter);
 
   const { data, error } = await query
@@ -85,7 +86,8 @@ async function fetchSeriesByStatus(
   let query = supabase
     .from("series")
     .select("*")
-    .eq("approval_status", status);
+    .eq("approval_status", status)
+    .is("deleted_at", null);
   if (searchFilter) query = query.or(searchFilter);
 
   const { data, error } = await query

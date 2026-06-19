@@ -23,6 +23,7 @@ export async function markMovieWatched(movieId: string) {
     .from("movies")
     .select("id, approval_status")
     .eq("id", movieId)
+    .is("deleted_at", null)
     .maybeSingle();
 
   if (movieErr) throw new Error(sanitizeSupabaseErrorMessage(movieErr));
