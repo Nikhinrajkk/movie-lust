@@ -1,0 +1,1951 @@
+{
+  "source": "https://www.imdb.com/list/ls000024621/",
+  "list_title": "Marvel Films",
+  "parsed_from": "https://graphql.imdb.com/",
+  "fetched_at": "2026-06-11",
+  "movie_count": 98,
+  "movies": [
+    {
+      "imdb_id": "tt0091225",
+      "title": "Howard the Duck",
+      "release_year": 1986,
+      "overview": "A sarcastic humanoid duck is pulled from his homeworld to Earth where he must stop an alien invasion with the help of a nerdy scientist and a struggling female rock singer.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZTA4ZjJkZjQtNzMwMy00YjJjLTkwYzgtZDY0YmNhZjYzMGExXkEyXkFqcGc@._V1_.jpg",
+      "rating": 4.8,
+      "runtime_minutes": 110,
+      "director": "Willard Huyck",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "romance",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Howard the Duck"
+    },
+    {
+      "imdb_id": "tt0098141",
+      "title": "The Punisher",
+      "release_year": 1989,
+      "overview": "When Frank Castle's family is murdered by criminals, he wages war on crime as a vigilante assassin known only as The Punisher.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BYTk4NDEwM2ItOWJmYi00YjgxLTk5MTQtYTNlNzc1MmQzMmU4XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.7,
+      "runtime_minutes": 89,
+      "director": "Mark Goldblatt",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "crime",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Punisher (1989)"
+    },
+    {
+      "imdb_id": "tt0103923",
+      "title": "Captain America",
+      "release_year": 1990,
+      "overview": "Frozen in the ice for decades, Captain America is freed to battle against archcriminal The Red Skull.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZjAwNGM0NWUtNmIwZC00OGEzLWFjZGEtMWE5ZjJjM2ZjZThhXkEyXkFqcGc@._V1_.jpg",
+      "rating": 3.3,
+      "runtime_minutes": 97,
+      "director": "Albert Pyun",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi",
+        "war"
+      ],
+      "category": "trending",
+      "catalogue_title": "Captain America (1990)"
+    },
+    {
+      "imdb_id": "tt0109770",
+      "title": "The Fantastic Four",
+      "release_year": 1994,
+      "overview": "When dosed with cosmic rays, four intrepid explorers are given incredible powers.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTk2ODU4MDUtYWNiNy00MjIzLWFhM2UtMDkzZDE1MTBhOGEyXkEyXkFqcGc@._V1_.jpg",
+      "rating": 3.8,
+      "runtime_minutes": 90,
+      "director": "Oley Sassone",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "family",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Fantastic Four"
+    },
+    {
+      "imdb_id": "tt0120611",
+      "title": "Blade",
+      "release_year": 1998,
+      "overview": "A half-vampire, half-mortal man becomes a protector of the mortal race, while slaying evil vampires.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNzAzMmY3OWMtNDgyMS00Y2U4LTlmM2UtY2YwMmM0MDI5ODJmXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.1,
+      "runtime_minutes": 120,
+      "director": "Stephen Norrington",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "horror",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Blade"
+    },
+    {
+      "imdb_id": "tt0120903",
+      "title": "X-Men",
+      "release_year": 2000,
+      "overview": "In a world where mutants (evolved super-powered humans) exist and are discriminated against, two groups form for an inevitable clash: the supremacist Brotherhood, and the pacifist X-Men.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNzNjZjQwOTAtNWQ3NC00MmJlLThlZDEtZmUyMWQ3NmE4Y2Y5XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.3,
+      "runtime_minutes": 104,
+      "director": "Bryan Singer",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "X-Men"
+    },
+    {
+      "imdb_id": "tt0187738",
+      "title": "Blade II",
+      "release_year": 2002,
+      "overview": "Blade forms an uneasy alliance with the vampire council in order to combat the Reapers, who are feeding on vampires.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMGE5ZmY2NzEtZTEyMi00MWIyLThmOWYtYzJkOTQ0Y2U3ZWU1XkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.7,
+      "runtime_minutes": 117,
+      "director": "Guillermo del Toro",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "horror",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Blade II"
+    },
+    {
+      "imdb_id": "tt0145487",
+      "title": "Spider-Man",
+      "release_year": 2002,
+      "overview": "A shy teenager is bitten by a genetically modified spider and uses his new spider-like abilities to fight injustice as a masked superhero.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZWM0OWVmNTEtNWVkOS00MzgyLTkyMzgtMmE2ZTZiNjY4MmFiXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.4,
+      "runtime_minutes": 121,
+      "director": "Sam Raimi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man (2002)"
+    },
+    {
+      "imdb_id": "tt0287978",
+      "title": "Daredevil",
+      "release_year": 2003,
+      "overview": "A man blinded by toxic waste which also enhanced his remaining senses fights crime as an acrobatic martial arts superhero.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZGVjZjU3MmEtNDFjZS00N2ExLTk4YzktYjYzM2MzYTJjYmE0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.3,
+      "runtime_minutes": 103,
+      "director": "Mark Steven Johnson",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "crime",
+        "drama",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Daredevil"
+    },
+    {
+      "imdb_id": "tt0290334",
+      "title": "X2: X-Men United",
+      "release_year": 2003,
+      "overview": "When anti-mutant Colonel William Stryker kidnaps Professor X and attacks his school, the X-Men must ally with their archenemy Magneto to stop him.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNDk0NjYxMzIzOF5BMl5BanBnXkFtZTYwMTc1MjU3._V1_.jpg",
+      "rating": 7.4,
+      "runtime_minutes": 134,
+      "director": "Bryan Singer",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "X2: X-Men United"
+    },
+    {
+      "imdb_id": "tt0286716",
+      "title": "Hulk",
+      "release_year": 2003,
+      "overview": "Bruce Banner, a genetics researcher with a tragic past, suffers a lab accident that makes him transform into a raging, giant green monster when angered, making him a target of forces seeking to abuse his power.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNTQxMmVlMTItMGFjYi00MTc2LWE5MzMtYjFhZWJmZGY0MTY5XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.7,
+      "runtime_minutes": 138,
+      "director": "Ang Lee",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Hulk"
+    },
+    {
+      "imdb_id": "tt0330793",
+      "title": "The Punisher",
+      "release_year": 2004,
+      "overview": "An undercover FBI agent becomes a vigilante and sets out to unleash his wrath upon the corrupt businessman who slaughtered his entire family at a reunion.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg",
+      "rating": 6.4,
+      "runtime_minutes": 124,
+      "director": "Jonathan Hensleigh",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "crime",
+        "drama",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Punisher (2004)"
+    },
+    {
+      "imdb_id": "tt0316654",
+      "title": "Spider-Man 2",
+      "release_year": 2004,
+      "overview": "Peter Parker is beset with troubles in his failing personal life as he battles a former brilliant scientist named Otto Octavius.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNGQ0YTQyYTgtNWI2YS00NTE2LWJmNDItNTFlMTUwNmFlZTM0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.5,
+      "runtime_minutes": 127,
+      "director": "Sam Raimi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man 2"
+    },
+    {
+      "imdb_id": "tt0359013",
+      "title": "Blade: Trinity",
+      "release_year": 2004,
+      "overview": "Blade, now a wanted man by the FBI, must join forces with the Nightstalkers to face his most challenging enemy yet: Dracula.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjE0Nzg2MzI3MF5BMl5BanBnXkFtZTYwMjExODQ3._V1_.jpg",
+      "rating": 5.8,
+      "runtime_minutes": 113,
+      "director": "David S. Goyer",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "horror",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Blade: Trinity"
+    },
+    {
+      "imdb_id": "tt0357277",
+      "title": "Elektra",
+      "release_year": 2005,
+      "overview": "An assassin's change of heart leads her into a war against an evil crime syndicate.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTI3MTUwNzM5MV5BMl5BanBnXkFtZTcwNzczMDIzMw@@._V1_.jpg",
+      "rating": 4.7,
+      "runtime_minutes": 97,
+      "director": "Rob Bowman",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "crime",
+        "fantasy"
+      ],
+      "category": "trending",
+      "catalogue_title": "Elektra"
+    },
+    {
+      "imdb_id": "tt0290747",
+      "title": "Man-Thing",
+      "release_year": 2005,
+      "overview": "Agents of an oil tycoon vanish while exploring a swamp marked for drilling. The local sheriff investigates and faces a Seminole legend come to life: Man-Thing, a shambling swamp-monster whose touch burns those who feel fear.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMDI0YTYxMDMtYmFjOS00ZmQ1LTgwZDUtOGQwMGIzMDhkNTVkXkEyXkFqcGc@._V1_.jpg",
+      "rating": 4.1,
+      "runtime_minutes": 97,
+      "director": "Brett Leonard",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "horror",
+        "romance",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Man-Thing"
+    },
+    {
+      "imdb_id": "tt0120667",
+      "title": "Fantastic Four",
+      "release_year": 2005,
+      "overview": "A group of astronauts gain superpowers after a cosmic radiation exposure and must use them to oppose the plans of their enemy, Doctor Victor Von Doom.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNjY2YmZmMzUtZWY5Mi00MzI3LTljOTgtYTMwMWY1ODI5ZWY5XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.7,
+      "runtime_minutes": 106,
+      "director": "Tim Story",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Fantastic Four (2005)"
+    },
+    {
+      "imdb_id": "tt0376994",
+      "title": "X-Men: The Last Stand",
+      "release_year": 2006,
+      "overview": "The human government develops a cure for mutations, and Jean Grey becomes a darker uncontrollable persona called the Phoenix who allies with Magneto, causing escalation into an all-out battle for the X-Men.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMThmOWE3OWEtODJmNC00ZDEzLTk4MWUtNzEzM2RiNmJiZmU3XkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.6,
+      "runtime_minutes": 104,
+      "director": "Brett Ratner",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "X-Men: The Last Stand"
+    },
+    {
+      "imdb_id": "tt0259324",
+      "title": "Ghost Rider",
+      "release_year": 2007,
+      "overview": "A motorcycle stuntman who sold his soul becomes a supernatural agent of vengeance.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMzIyNDE5ODI1OV5BMl5BanBnXkFtZTcwNTIyNDE0MQ@@._V1_.jpg",
+      "rating": 5.3,
+      "runtime_minutes": 110,
+      "director": "Mark Steven Johnson",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "fantasy",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Ghost Rider"
+    },
+    {
+      "imdb_id": "tt0413300",
+      "title": "Spider-Man 3",
+      "release_year": 2007,
+      "overview": "A strange black entity from another world bonds with Peter Parker and causes inner turmoil as he contends with new villains, temptations, and revenge.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BODE2NzNhMDctYjUzMC00Y2M5LWI2Y2EtODJkZTFjN2Y5ODlmXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.3,
+      "runtime_minutes": 139,
+      "director": "Sam Raimi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man 3"
+    },
+    {
+      "imdb_id": "tt0486576",
+      "title": "Fantastic Four: Rise of the Silver Surfer",
+      "release_year": 2007,
+      "overview": "The Fantastic Four learn that they aren't the only super-powered beings in the universe when they square off against the powerful Silver Surfer and the planet-eating Galactus.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNmZmMTU0OGQtOWRmNS00ZjA1LWJkM2EtYmUwNGEzMjIyZDM1XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.6,
+      "runtime_minutes": 92,
+      "director": "Tim Story",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Fantastic Four: Rise of the Silver Surfer"
+    },
+    {
+      "imdb_id": "tt0371746",
+      "title": "Iron Man",
+      "release_year": 2008,
+      "overview": "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_.jpg",
+      "rating": 7.9,
+      "runtime_minutes": 126,
+      "director": "Jon Favreau",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Iron Man"
+    },
+    {
+      "imdb_id": "tt0800080",
+      "title": "The Incredible Hulk",
+      "release_year": 2008,
+      "overview": "Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTUyNzk3MjA1OF5BMl5BanBnXkFtZTcwMTE1Njg2MQ@@._V1_.jpg",
+      "rating": 6.6,
+      "runtime_minutes": 112,
+      "director": "Louis Leterrier",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Incredible Hulk"
+    },
+    {
+      "imdb_id": "tt0450314",
+      "title": "Punisher: War Zone",
+      "release_year": 2008,
+      "overview": "Frank Castle, known as the Punisher, ruthlessly demolishes organized crime, but it starts an even bigger war.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZTdlOTkyZjUtODE4NC00ODZmLTg5OGYtMjkwZDY0MTZhMTQ0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.9,
+      "runtime_minutes": 103,
+      "director": "Lexi Alexander",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "crime",
+        "drama",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Punisher: War Zone"
+    },
+    {
+      "imdb_id": "tt0458525",
+      "title": "X-Men Origins: Wolverine",
+      "release_year": 2009,
+      "overview": "The early years of James Logan, featuring his rivalry with his brother Victor Creed, his service in the special forces team Weapon X, and his experimentation into the metal-lined mutant Wolverine.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZjQwOGEzNjUtNDgwYS00NzUzLWJhZjAtNmFlNzY2YTQyOTllXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.5,
+      "runtime_minutes": 107,
+      "director": "Gavin Hood",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "X-Men Origins: Wolverine"
+    },
+    {
+      "imdb_id": "tt1228705",
+      "title": "Iron Man 2",
+      "release_year": 2010,
+      "overview": "With the world now aware of his identity as Iron Man, Tony Stark must contend with both his declining health and a vengeful madman with ties to his father's legacy.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BYWYyOGQzOGYtMGQ1My00ZWYxLTgzZjktZWYzN2IwYjkxYzM0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.9,
+      "runtime_minutes": 124,
+      "director": "Jon Favreau",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Iron Man 2"
+    },
+    {
+      "imdb_id": "tt0800369",
+      "title": "Thor",
+      "release_year": 2011,
+      "overview": "The powerful but arrogant god Thor is cast out of Asgard to live amongst humans in Midgard (Earth), where he soon becomes one of their finest defenders.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNjRhNGZjZjEtYTQzYS00OWUxLThjNGEtMTIwMTE2ZDFlZTZkXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.0,
+      "runtime_minutes": 115,
+      "director": "Kenneth Branagh",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "fantasy"
+      ],
+      "category": "trending",
+      "catalogue_title": "Thor"
+    },
+    {
+      "imdb_id": "tt1270798",
+      "title": "X-Men: First Class",
+      "release_year": 2011,
+      "overview": "In the 1960s, superpowered humans Charles Xavier and Erik Lensherr work together to find others like them, but Erik's vengeful pursuit of an ambitious mutant who ruined his life causes a schism to divide them.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTg5OTMxNzk4Nl5BMl5BanBnXkFtZTcwOTk1MjAwNQ@@._V1_.jpg",
+      "rating": 7.7,
+      "runtime_minutes": 131,
+      "director": "Matthew Vaughn",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "X-Men: First Class"
+    },
+    {
+      "imdb_id": "tt0458339",
+      "title": "Captain America: The First Avenger",
+      "release_year": 2011,
+      "overview": "Steve Rogers, a rejected military soldier, transforms into Captain America after taking a dose of a \"Super-Soldier serum\". But being Captain America comes at a price as he attempts to take down a warmonger and a terrorist organization.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNzUyM2YyY2MtNzNlMS00MWU5LTgxNjAtNzZlNmI2NjU2NDZlXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.9,
+      "runtime_minutes": 124,
+      "director": "Joe Johnston",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Captain America: The First Avenger"
+    },
+    {
+      "imdb_id": "tt1071875",
+      "title": "Ghost Rider: Spirit of Vengeance",
+      "release_year": 2011,
+      "overview": "Johnny Blaze, tortured by the Ghost Rider's curse, gets a chance of redemption through protecting the Devil's son, whose father is pursuing him.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BN2FmZGVlNTgtYTllNC00YmUzLTk5YmUtNWNhMzk3ZmE2NmQ0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 4.4,
+      "runtime_minutes": 96,
+      "director": "Mark Neveldine, Brian Taylor",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Ghost Rider: Spirit of Vengeance"
+    },
+    {
+      "imdb_id": "tt0848228",
+      "title": "The Avengers",
+      "release_year": 2012,
+      "overview": "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNGE0YTVjNzUtNzJjOS00NGNlLTgxMzctZTY4YTE1Y2Y1ZTU4XkEyXkFqcGc@._V1_.jpg",
+      "rating": 8.0,
+      "runtime_minutes": 143,
+      "director": "Joss Whedon",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Avengers"
+    },
+    {
+      "imdb_id": "tt0948470",
+      "title": "The Amazing Spider-Man",
+      "release_year": 2012,
+      "overview": "After Peter Parker is bitten by a genetically altered spider, he gains newfound, spider-like powers and ventures out to save the city from the machinations of a mysterious reptilian foe.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjMyOTM4MDMxNV5BMl5BanBnXkFtZTcwNjIyNzExOA@@._V1_.jpg",
+      "rating": 6.9,
+      "runtime_minutes": 136,
+      "director": "Marc Webb",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Amazing Spider-Man"
+    },
+    {
+      "imdb_id": "tt1300854",
+      "title": "Iron Man 3",
+      "release_year": 2013,
+      "overview": "When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjIzMzAzMjQyM15BMl5BanBnXkFtZTcwNzM2NjcyOQ@@._V1_.jpg",
+      "rating": 7.1,
+      "runtime_minutes": 130,
+      "director": "Shane Black",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Iron Man 3"
+    },
+    {
+      "imdb_id": "tt1430132",
+      "title": "The Wolverine",
+      "release_year": 2013,
+      "overview": "Wolverine comes to Japan to meet an old friend whose life he saved years ago, and gets embroiled in a conspiracy involving yakuza and mutants.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNGU0MzRhMWEtYTBkNS00NzliLWJkMmUtMDFlMjkyOTkyYmZlXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.7,
+      "runtime_minutes": 126,
+      "director": "James Mangold",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Wolverine"
+    },
+    {
+      "imdb_id": "tt1981115",
+      "title": "Thor: The Dark World",
+      "release_year": 2013,
+      "overview": "When the Dark Elves attempt to plunge the universe into darkness, Thor must embark on a perilous and personal journey that will reunite him with doctor Jane Foster.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTQyNzAwOTUxOF5BMl5BanBnXkFtZTcwMTE0OTc5OQ@@._V1_.jpg",
+      "rating": 6.7,
+      "runtime_minutes": 112,
+      "director": "Alan Taylor",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Thor: The Dark World"
+    },
+    {
+      "imdb_id": "tt1843866",
+      "title": "Captain America: The Winter Soldier",
+      "release_year": 2014,
+      "overview": "As Steve Rogers struggles to embrace his role in the modern world, he teams up with a fellow Avenger and S.H.I.E.L.D agent, Black Widow, to battle a new threat from history: an assassin known as the Winter Soldier.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNWY1NjFmNDItZDhmOC00NjI1LWE0ZDItMTM0MjBjZThiOTQ2XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.7,
+      "runtime_minutes": 136,
+      "director": "Anthony Russo, Joe Russo",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Captain America: The Winter Soldier"
+    },
+    {
+      "imdb_id": "tt1872181",
+      "title": "The Amazing Spider-Man 2",
+      "release_year": 2014,
+      "overview": "When New York is put under siege by Oscorp, it is up to Spider-Man to save the city he swore to protect as well as his loved ones.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BOTA5NDYxNTg0OV5BMl5BanBnXkFtZTgwODE5NzU1MTE@._V1_.jpg",
+      "rating": 6.6,
+      "runtime_minutes": 142,
+      "director": "Marc Webb",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Amazing Spider-Man 2"
+    },
+    {
+      "imdb_id": "tt1877832",
+      "title": "X-Men: Days of Future Past",
+      "release_year": 2014,
+      "overview": "The X-Men send Wolverine to the past in a desperate effort to change history and prevent an event that results in doom for both humans and mutants.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNzNiYWE4NjMtMTU4OS00NmM4LWE4ZjAtYmE5OTA5NjkzODExXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.9,
+      "runtime_minutes": 132,
+      "director": "Bryan Singer",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "X-Men: Days of Future Past"
+    },
+    {
+      "imdb_id": "tt2015381",
+      "title": "Guardians of the Galaxy",
+      "release_year": 2014,
+      "overview": "A group of intergalactic criminals must pull together to stop a fanatical warrior with plans to purge the universe.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BM2ZmNjQ2MzAtNDlhNi00MmQyLWJhZDMtNmJiMjFlOWY4MzcxXkEyXkFqcGc@._V1_.jpg",
+      "rating": 8.0,
+      "runtime_minutes": 121,
+      "director": "James Gunn",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Guardians of the Galaxy"
+    },
+    {
+      "imdb_id": "tt2245084",
+      "title": "Big Hero 6",
+      "release_year": 2014,
+      "overview": "A special bond develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who together team up with a group of friends to form a band of high-tech heroes.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BYjQ3YzUyOGQtNjdlYS00YmRhLWIyOWYtMGQ3YjkwMjJiYzRjXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.8,
+      "runtime_minutes": 102,
+      "director": "Don Hall, Chris Williams",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "comedy",
+        "crime",
+        "family",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Big Hero 6"
+    },
+    {
+      "imdb_id": "tt2395427",
+      "title": "Avengers: Age of Ultron",
+      "release_year": 2015,
+      "overview": "When Tony Stark and Bruce Banner try to jump-start a dormant peacekeeping program called Ultron, things go horribly wrong and it's up to Earth's mightiest heroes to stop the villainous Ultron from enacting his terrible plan.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BODBhYTg1NGQtNGVmNS00ZTdiLThjYTYtZDFkNzRiNTZmNDZjXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.3,
+      "runtime_minutes": 141,
+      "director": "Joss Whedon",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Avengers: Age of Ultron"
+    },
+    {
+      "imdb_id": "tt0478970",
+      "title": "Ant-Man",
+      "release_year": 2015,
+      "overview": "Armed with a super-suit with the astonishing ability to shrink in scale but increase in strength, cat burglar Scott Lang must embrace his inner hero and help his mentor, Dr. Hank Pym, pull off a plan that will save the world.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjM2NTQ5Mzc2M15BMl5BanBnXkFtZTgwNTcxMDI2NTE@._V1_.jpg",
+      "rating": 7.2,
+      "runtime_minutes": 117,
+      "director": "Peyton Reed",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "comedy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Ant-Man"
+    },
+    {
+      "imdb_id": "tt1502712",
+      "title": "Fantastic Four",
+      "release_year": 2015,
+      "overview": "Four young outsiders teleport to an alternate and dangerous universe which alters their physical form in shocking ways. The four must learn to harness their new abilities and work together to save Earth from a former friend turned enemy.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTk0OTMyMDA0OF5BMl5BanBnXkFtZTgwMzY5NTkzNTE@._V1_.jpg",
+      "rating": 4.3,
+      "runtime_minutes": 100,
+      "director": "Josh Trank",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Fantastic Four (2015)"
+    },
+    {
+      "imdb_id": "tt1431045",
+      "title": "Deadpool",
+      "release_year": 2016,
+      "overview": "A wisecracking mercenary gets experimented on and becomes immortal yet hideously scarred, and sets out to track down the man who ruined his looks.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNzY3ZWU5NGQtOTViNC00ZWVmLTliNjAtNzViNzlkZWQ4YzQ4XkEyXkFqcGc@._V1_.jpg",
+      "rating": 8.0,
+      "runtime_minutes": 108,
+      "director": "Tim Miller",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "comedy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Deadpool"
+    },
+    {
+      "imdb_id": "tt3498820",
+      "title": "Captain America: Civil War",
+      "release_year": 2016,
+      "overview": "Political involvement in the Avengers' affairs causes a rift between Captain America and Iron Man.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_.jpg",
+      "rating": 7.8,
+      "runtime_minutes": 147,
+      "director": "Anthony Russo, Joe Russo",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Captain America: Civil War"
+    },
+    {
+      "imdb_id": "tt3385516",
+      "title": "X-Men: Apocalypse",
+      "release_year": 2016,
+      "overview": "In the 1980s, the X-Men must defeat an ancient all-powerful mutant, En Sabah Nur, who intends to thrive by bringing destruction to the world.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNjVhNWY3NjItNmZjOS00NTU3LWFiZTctNzdjNGM5Y2Y0MDUwXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.8,
+      "runtime_minutes": 144,
+      "director": "Bryan Singer",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "X-Men: Apocalypse"
+    },
+    {
+      "imdb_id": "tt1211837",
+      "title": "Doctor Strange",
+      "release_year": 2016,
+      "overview": "While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_.jpg",
+      "rating": 7.5,
+      "runtime_minutes": 115,
+      "director": "Scott Derrickson",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Doctor Strange"
+    },
+    {
+      "imdb_id": "tt3315342",
+      "title": "Logan",
+      "release_year": 2017,
+      "overview": "In a future where mutants are nearly extinct, an elderly and weary Logan leads a quiet life. But when Laura, a mutant child pursued by scientists, comes to him for help, he must get her to safety.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BM2JjODdkMGMtNmY2YS00OGM2LThiY2YtZGYyNzE4Nzc2ODA0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 8.1,
+      "runtime_minutes": 137,
+      "director": "James Mangold",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "drama",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Logan"
+    },
+    {
+      "imdb_id": "tt3896198",
+      "title": "Guardians of the Galaxy: Vol. 2",
+      "release_year": 2017,
+      "overview": "The Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord's encounter with his father, the ambitious celestial being Ego.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNWE5MGI3MDctMmU5Ni00YzI2LWEzMTQtZGIyZDA5MzQzNDBhXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.6,
+      "runtime_minutes": 136,
+      "director": "James Gunn",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "fantasy",
+        "music",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Guardians of the Galaxy: Vol. 2"
+    },
+    {
+      "imdb_id": "tt2250912",
+      "title": "Spider-Man: Homecoming",
+      "release_year": 2017,
+      "overview": "Peter Parker tries to stop Adrian 'The Vulture' Toomes from selling weapons made with advanced Chitauri technology while trying to balance his life as an ordinary high school student.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BODY2MTAzOTQ4M15BMl5BanBnXkFtZTgwNzg5MTE0MjI@._V1_.jpg",
+      "rating": 7.4,
+      "runtime_minutes": 133,
+      "director": "Jon Watts",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man: Homecoming"
+    },
+    {
+      "imdb_id": "tt3501632",
+      "title": "Thor: Ragnarok",
+      "release_year": 2017,
+      "overview": "Imprisoned on the planet Sakaar, Thor must race against time to return to Asgard and stop Ragnar\u00f6k, the destruction of his world, at the hands of the powerful and ruthless villain Hela.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjMyNDkzMzI1OF5BMl5BanBnXkFtZTgwODcxODg5MjI@._V1_.jpg",
+      "rating": 7.9,
+      "runtime_minutes": 130,
+      "director": "Taika Waititi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Thor: Ragnarok"
+    },
+    {
+      "imdb_id": "tt1825683",
+      "title": "Black Panther",
+      "release_year": 2018,
+      "overview": "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
+      "rating": 7.3,
+      "runtime_minutes": 134,
+      "director": "Ryan Coogler",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Black Panther"
+    },
+    {
+      "imdb_id": "tt4154756",
+      "title": "Avengers: Infinity War",
+      "release_year": 2018,
+      "overview": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg",
+      "rating": 8.4,
+      "runtime_minutes": 149,
+      "director": "Anthony Russo, Joe Russo",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Avengers: Infinity War"
+    },
+    {
+      "imdb_id": "tt5463162",
+      "title": "Deadpool 2",
+      "release_year": 2018,
+      "overview": "Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool) assembles a team of fellow mutant rogues to protect a young boy with abilities from the brutal, time-traveling cyborg Cable.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNGY3N2ZhYmMtYTlmYi00ZWIzLWJiZWMtMjgxMjljYTk3MDAwXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.6,
+      "runtime_minutes": 119,
+      "director": "David Leitch",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Deadpool 2"
+    },
+    {
+      "imdb_id": "tt5095030",
+      "title": "Ant-Man and the Wasp",
+      "release_year": 2018,
+      "overview": "As Scott Lang balances being both a superhero and a father, Hope van Dyne and Dr. Hank Pym present an urgent new mission that finds the Ant-Man fighting alongside The Wasp to uncover secrets from their past.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BODVkY2ZmZTAtYzFhMi00YzZlLWE2YWMtMDBiYjY2OTU4ZWM0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.0,
+      "runtime_minutes": 118,
+      "director": "Peyton Reed",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Ant-Man and the Wasp"
+    },
+    {
+      "imdb_id": "tt1270797",
+      "title": "Venom",
+      "release_year": 2018,
+      "overview": "A failed reporter is bonded to an alien entity, one of many symbiotes who have invaded Earth. But the being takes a liking to Earth and decides to protect it.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNTYwMDg5MDItNjhmZi00NmVmLThjNWItMmNkMjVkMWRhNzI2XkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.6,
+      "runtime_minutes": 112,
+      "director": "Ruben Fleischer",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Venom"
+    },
+    {
+      "imdb_id": "tt4633694",
+      "title": "Spider-Man: Into the Spider-Verse",
+      "release_year": 2018,
+      "overview": "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_.jpg",
+      "rating": 8.4,
+      "runtime_minutes": 117,
+      "director": "Bob Persichetti, Peter Ramsey, Rodney Rothman",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "family",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man: Into the Spider-Verse"
+    },
+    {
+      "imdb_id": "tt4154664",
+      "title": "Captain Marvel",
+      "release_year": 2019,
+      "overview": "Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZDI1NGU2ODAtNzBiNy00MWY5LWIyMGEtZjUxZjUwZmZiNjBlXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.7,
+      "runtime_minutes": 123,
+      "director": "Anna Boden, Ryan Fleck",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Captain Marvel"
+    },
+    {
+      "imdb_id": "tt4154796",
+      "title": "Avengers: Endgame",
+      "release_year": 2019,
+      "overview": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg",
+      "rating": 8.4,
+      "runtime_minutes": 181,
+      "director": "Anthony Russo, Joe Russo",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Avengers: Endgame"
+    },
+    {
+      "imdb_id": "tt6565702",
+      "title": "X-Men: Dark Phoenix",
+      "release_year": 2019,
+      "overview": "Jean Grey begins to develop incredible powers that corrupt and turn her into a Dark Phoenix, causing the X-Men to have to decide if her life is worth more than all of humanity.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZjcwMDIyNjctMDVmNS00MzkyLTgxMDMtNTFmNTk0NDkyNzdjXkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.7,
+      "runtime_minutes": 113,
+      "director": "Simon Kinberg",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "X-Men: Dark Phoenix"
+    },
+    {
+      "imdb_id": "tt6320628",
+      "title": "Spider-Man: Far from Home",
+      "release_year": 2019,
+      "overview": "Peter Parker, the beloved superhero Spider-Man, faces four destructive elemental monsters while on holiday in Europe. Soon, he receives help from Mysterio, a fellow hero with mysterious origins.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMzNhNTE0NWQtN2E1Ny00NjcwLTg1YTctMGY1NmMwODJmY2NmXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.3,
+      "runtime_minutes": 129,
+      "director": "Jon Watts",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man: Far from Home"
+    },
+    {
+      "imdb_id": "tt7097896",
+      "title": "Venom: Let There Be Carnage",
+      "release_year": 2021,
+      "overview": "Eddie Brock attempts to reignite his career by interviewing serial killer Cletus Kasady, who becomes the host of the symbiote Carnage and escapes prison after a failed execution.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZGIxMTU1MjItM2FmMi00YmFiLTgwNDMtMTczYmVjYTBhNGZhXkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.9,
+      "runtime_minutes": 97,
+      "director": "Andy Serkis",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "crime",
+        "fantasy",
+        "horror",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Venom: Let There Be Carnage"
+    },
+    {
+      "imdb_id": "tt3480822",
+      "title": "Black Widow",
+      "release_year": 2021,
+      "overview": "Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZTMyZTA0ZTItYjY3Yi00ODNjLWExYTgtYzgxZTk0NTg0Y2FlXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.6,
+      "runtime_minutes": 134,
+      "director": "Cate Shortland",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Black Widow"
+    },
+    {
+      "imdb_id": "tt9032400",
+      "title": "Eternals",
+      "release_year": 2021,
+      "overview": "The saga of the Eternals, a race of immortal beings who lived on Earth and shaped its history and civilizations.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZTBiZjI2M2UtZTNiNy00NmU4LWJiMjYtZjk4MDIzMzhlMjFlXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.2,
+      "runtime_minutes": 156,
+      "director": "Chlo\u00e9 Zhao",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Eternals"
+    },
+    {
+      "imdb_id": "tt5108870",
+      "title": "Morbius",
+      "release_year": 2022,
+      "overview": "Biochemist Michael Morbius tries to cure himself of a rare blood disease, but he inadvertently infects himself with a form of vampirism instead.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BY2UzYzFiZWUtOGU5ZC00YTIxLWFlNGUtMGU1YmI4OWUzN2FmXkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.1,
+      "runtime_minutes": 104,
+      "director": "Daniel Espinosa",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "horror",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Morbius"
+    },
+    {
+      "imdb_id": "tt9376612",
+      "title": "Shang-Chi and the Legend of the Ten Rings",
+      "release_year": 2021,
+      "overview": "Shang-Chi, the master of weaponry-based Kung Fu, is forced to confront his past after being drawn into the Ten Rings organization.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZmY5MDcyNzAtYzg3MC00MGNlLTg3OGItNmRjYThkZGVlNzAyXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.3,
+      "runtime_minutes": 132,
+      "director": "Destin Daniel Cretton",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Shang-Chi and the Legend of the Ten Rings"
+    },
+    {
+      "imdb_id": "tt4682266",
+      "title": "The New Mutants",
+      "release_year": 2020,
+      "overview": "Five young mutants, just discovering their abilities while held in a secret facility against their will, fight to escape their past sins and save themselves.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZGVlMjBkYmMtZDhmYS00N2QyLWI2YTgtMDU2N2UwOWYzM2MxXkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.3,
+      "runtime_minutes": 94,
+      "director": "Josh Boone",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "horror",
+        "mystery",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The New Mutants"
+    },
+    {
+      "imdb_id": "tt10872600",
+      "title": "Spider-Man: No Way Home",
+      "release_year": 2021,
+      "overview": "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMmFiZGZjMmEtMTA0Ni00MzA2LTljMTYtZGI2MGJmZWYzZTQ2XkEyXkFqcGc@._V1_.jpg",
+      "rating": 8.1,
+      "runtime_minutes": 148,
+      "director": "Jon Watts",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man: No Way Home"
+    },
+    {
+      "imdb_id": "tt9419884",
+      "title": "Doctor Strange in the Multiverse of Madness",
+      "release_year": 2022,
+      "overview": "Doctor Strange teams up with a mysterious teenage girl who can travel across multiverses, to battle other-universe versions of himself which threaten to wipe out the multiverse. They seek help from the Scarlet Witch, Wong and others.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BN2YxZGRjMzYtZjE1ZC00MDI0LThjZmQtZTZmMzVmMmQ2NzBmXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.8,
+      "runtime_minutes": 126,
+      "director": "Sam Raimi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Doctor Strange in the Multiverse of Madness"
+    },
+    {
+      "imdb_id": "tt10648342",
+      "title": "Thor: Love and Thunder",
+      "release_year": 2022,
+      "overview": "Thor enlists the help of Valkyrie, Korg and ex-girlfriend Jane Foster to fight Gorr the God Butcher, who intends to make the gods extinct.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZjRiMDhiZjQtNjk5Yi00ZDcwLTkyYTEtMDc1NjdmNjFhNGIzXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.1,
+      "runtime_minutes": 118,
+      "director": "Taika Waititi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "romance",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Thor: Love and Thunder"
+    },
+    {
+      "imdb_id": "tt9114286",
+      "title": "Black Panther: Wakanda Forever",
+      "release_year": 2022,
+      "overview": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BYWY5NDY1ZjItZDQxMy00MTAzLTgyOGQtNTQxYjFiMzZjMjUyXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.6,
+      "runtime_minutes": 161,
+      "director": "Ryan Coogler",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "drama",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Black Panther: Wakanda Forever"
+    },
+    {
+      "imdb_id": "tt10676048",
+      "title": "The Marvels",
+      "release_year": 2023,
+      "overview": "Carol Danvers gets her powers entangled with those of Kamala Khan and Monica Rambeau, forcing them to work together to save the universe.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BYzczOWM4MzItMWMyOS00ZDczLWIxMzctNzBmYTgzOTI1MzI3XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.4,
+      "runtime_minutes": 105,
+      "director": "Nia DaCosta",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Marvels"
+    },
+    {
+      "imdb_id": "tt6791350",
+      "title": "Guardians of the Galaxy Vol. 3",
+      "release_year": 2023,
+      "overview": "Still reeling from the loss of Gamora, Peter Quill rallies his team to defend the universe and one of their own - a mission that could mean the end of the Guardians if not successful.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BOTJhOTMxMmItZmE0Ny00MDc3LWEzOGEtOGFkMzY4MWYyZDQ0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.9,
+      "runtime_minutes": 150,
+      "director": "James Gunn",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Guardians of the Galaxy Vol. 3"
+    },
+    {
+      "imdb_id": "tt10676052",
+      "title": "The Fantastic Four: First Steps",
+      "release_year": 2025,
+      "overview": "Forced to balance their roles as heroes with the strength of their family bond, the Fantastic Four must defend Earth from a ravenous space god called Galactus and his enigmatic herald, the Silver Surfer.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BOGM5MzA3MDAtYmEwMi00ZDNiLTg4MDgtMTZjOTc0ZGMyNTIwXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.8,
+      "runtime_minutes": 115,
+      "director": "Matt Shakman",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "The Fantastic Four: First Steps"
+    },
+    {
+      "imdb_id": "tt10954600",
+      "title": "Ant-Man and the Wasp: Quantumania",
+      "release_year": 2023,
+      "overview": "Scott Lang and Hope Van Dyne are dragged into the Quantum Realm, along with Hope's parents and Scott's daughter Cassie. Together they must find a way to escape, but what secrets is Hope's mother hiding? And who is the mysterious Kang?",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMThkYWY5ZjQtYjJlMS00MDFmLWFkYzEtODEzZjg5YWFmMGY4XkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.0,
+      "runtime_minutes": 124,
+      "director": "Peyton Reed",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "comedy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Ant-Man and the Wasp: Quantumania"
+    },
+    {
+      "imdb_id": "tt6263850",
+      "title": "Deadpool & Wolverine",
+      "release_year": 2024,
+      "overview": "Deadpool is offered a place in the Marvel Cinematic Universe by the Time Variance Authority, but instead recruits a variant of Wolverine to save his universe from extinction.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZTk5ODY0MmQtMzA3Ni00NGY1LThiYzItZThiNjFiNDM4MTM3XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.5,
+      "runtime_minutes": 128,
+      "director": "Shawn Levy",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "comedy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Deadpool & Wolverine"
+    },
+    {
+      "imdb_id": "tt9362722",
+      "title": "Spider-Man: Across the Spider-Verse",
+      "release_year": 2023,
+      "overview": "Traveling across the multiverse, Miles Morales meets a new team of Spider-People, made up of heroes from different dimensions. But when the heroes clash over how to deal with a new threat, Miles finds himself at a crossroads.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNThiZjA3MjItZGY5Ni00ZmJhLWEwN2EtOTBlYTA4Y2E0M2ZmXkEyXkFqcGc@._V1_.jpg",
+      "rating": 8.5,
+      "runtime_minutes": 140,
+      "director": "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "animation",
+        "action",
+        "adventure",
+        "family",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man: Across the Spider-Verse"
+    },
+    {
+      "imdb_id": "tt8790086",
+      "title": "Kraven the Hunter",
+      "release_year": 2024,
+      "overview": "Kraven's complex relationship with his ruthless father, Nikolai Kravinoff, starts him down a path of vengeance with brutal consequences, motivating him to become not only the greatest hunter in the world, but also one of its most feared.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZDU0YTI5ODAtN2NmMS00YTg3LTgyNDItN2RmOWEzOTkzZjcyXkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.5,
+      "runtime_minutes": 127,
+      "director": "J.C. Chandor",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Kraven the Hunter"
+    },
+    {
+      "imdb_id": "tt11057302",
+      "title": "Madame Web",
+      "release_year": 2024,
+      "overview": "Forced to confront her past, Cassandra Webb, a Manhattan paramedic that may have clairvoyant abilities, forms a relationship with three young women destined for powerful futures, if they can survive their threatening present.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BODViOTZiOTQtOTc4ZC00ZjUxLWEzMjItY2ExMmNlNDliNjE4XkEyXkFqcGc@._V1_.jpg",
+      "rating": 4.1,
+      "runtime_minutes": 116,
+      "director": "S.J. Clarkson",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Madame Web"
+    },
+    {
+      "imdb_id": "tt0036697",
+      "title": "Captain America",
+      "release_year": 1944,
+      "overview": "Superhero Captain America battles the evil forces of the archvillain called The Scarab, who poisons his enemies and steals a secret device capable of destroying buildings by sound vibrations.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNTQzYTE1OGMtNmExYy00M2YzLWJjNWUtODY4MTI2OTMxNzVkXkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.1,
+      "runtime_minutes": 244,
+      "director": "Elmer Clifton, John English",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Captain America (1944)"
+    },
+    {
+      "imdb_id": "tt2011109",
+      "title": "Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer",
+      "release_year": 2011,
+      "overview": "Agent Coulson stops at a convenience store and deals with a coincidental robbery during his visit.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNGQ4MmMxOTAtZDY5Yi00YjBmLThiMGEtYzc0MDA1YzI2NzI5XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.1,
+      "runtime_minutes": 4,
+      "director": "Leythum",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "action",
+        "adventure",
+        "comedy"
+      ],
+      "category": "trending",
+      "catalogue_title": "Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer"
+    },
+    {
+      "imdb_id": "tt2011118",
+      "title": "Marvel One-Shot: The Consultant",
+      "release_year": 2011,
+      "overview": "Agents Coulson and Sitwell plan to derail General Thaddeus \"Thunderbolt\" Ross from interfering with S.H.I.E.L.D. affairs with a very special person.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZGMxYzBkMTEtZDljYi00YjM2LTgxMTMtNjFiOWQwMTg0NjhmXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.3,
+      "runtime_minutes": 4,
+      "director": "Leythum",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "comedy",
+        "drama",
+        "sci-fi",
+        "action"
+      ],
+      "category": "trending",
+      "catalogue_title": "Marvel One-Shot: The Consultant"
+    },
+    {
+      "imdb_id": "tt2247732",
+      "title": "Marvel One-Shot: Item 47",
+      "release_year": 2012,
+      "overview": "S.H.I.E.L.D. agent Sitwell is assigned to recover an abandoned Chitauri weapon being used by a young couple robbing a bank.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTI2NDI2MzgtNTMzNi00MmEyLWE0ZDYtZmQ2NjJjMjUyYzMzXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.6,
+      "runtime_minutes": 12,
+      "director": "Louis D'Esposito",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "action",
+        "adventure",
+        "crime",
+        "drama",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Marvel One-Shot: Item 47"
+    },
+    {
+      "imdb_id": "tt3067038",
+      "title": "Marvel One-Shot: Agent Carter",
+      "release_year": 2013,
+      "overview": "Agent Carter seeks the enigmatic \"Zodiac\" and also battles her misogynistic, bureaucratic boss. Frustrated at being marginalized at work, Peggy Carter goes on an unauthorized solo field mission.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNzVmNmUyZTctM2VlNy00M2QzLWIwZmUtMTcxYjRhYjYzMGYxXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.4,
+      "runtime_minutes": 15,
+      "director": "Louis D'Esposito",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "action",
+        "adventure",
+        "comedy",
+        "drama",
+        "sci-fi",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Marvel One-Shot: Agent Carter"
+    },
+    {
+      "imdb_id": "tt3438640",
+      "title": "Marvel One-Shot: All Hail the King",
+      "release_year": 2014,
+      "overview": "A documentary filmmaker interviews the now-famous Trevor Slattery from behind bars.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNDBiYzBhMTktMTM1Mi00NGE1LTg3NTUtZTNhYzNmYmJkOGJkXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.2,
+      "runtime_minutes": 14,
+      "director": "Drew Pearce",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "comedy",
+        "drama",
+        "thriller",
+        "action"
+      ],
+      "category": "trending",
+      "catalogue_title": "Marvel One-Shot: All Hail the King"
+    },
+    {
+      "imdb_id": "tt6016776",
+      "title": "Team Thor",
+      "release_year": 2016,
+      "overview": "The story of what the hammer-wielding Nordic god Thor was up to while the rest of the Avengers were battling each other in \"Captain America: Civil War\". He moves into a flat with office worker Darryl Jacobson in Australia.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNDZiNWVjZDMtOTNkOS00NzdiLTljMTEtOGM0NWExNGJjZjYzXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.7,
+      "runtime_minutes": 4,
+      "director": "Taika Waititi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "comedy",
+        "fantasy",
+        "sci-fi",
+        "action"
+      ],
+      "category": "trending",
+      "catalogue_title": "Team Thor"
+    },
+    {
+      "imdb_id": "tt6599818",
+      "title": "Team Thor: Part 2",
+      "release_year": 2017,
+      "overview": "Thor enjoys some time away from battle.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZDVlZDNjNGUtOWI0ZS00YmJhLTg1YzEtOTE5MTk3YWJmYmRiXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.3,
+      "runtime_minutes": 5,
+      "director": "Taika Waititi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "comedy",
+        "sci-fi",
+        "action"
+      ],
+      "category": "trending",
+      "catalogue_title": "Team Thor: Part 2"
+    },
+    {
+      "imdb_id": "tt14513804",
+      "title": "Captain America: Brave New World",
+      "release_year": 2025,
+      "overview": "Sam Wilson, the new Captain America, finds himself in the middle of an international incident and must discover the motive behind a nefarious global plan.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNDRjY2E0ZmEtN2QwNi00NTEwLWI3MWItODNkMGYwYWFjNGE0XkEyXkFqcGc@._V1_.jpg",
+      "rating": 5.6,
+      "runtime_minutes": 118,
+      "director": "Julius Onah",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Captain America: Brave New World"
+    },
+    {
+      "imdb_id": "tt20969586",
+      "title": "Thunderbolts*",
+      "release_year": 2025,
+      "overview": "After finding themselves ensnared in a death trap, an unconventional team of antiheroes must go on a dangerous mission that will force them to confront the darkest corners of their pasts.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNDIzNGUwZmYtODM0Yy00NjA3LTgxOGUtOTY0ZGM5MjBkM2I3XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.1,
+      "runtime_minutes": 127,
+      "director": "Jake Schreier",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "crime",
+        "drama",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Thunderbolts*"
+    },
+    {
+      "imdb_id": "tt21357150",
+      "title": "Avengers: Doomsday",
+      "release_year": 2026,
+      "overview": "Plot under wraps.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BM2E1ZTJiZTgtZGI2Zi00MzAxLThhZjktMmU3M2E3Yzk3NjUxXkEyXkFqcGc@._V1_.jpg",
+      "rating": null,
+      "runtime_minutes": null,
+      "director": "Anthony Russo, Joe Russo",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Avengers: Doomsday"
+    },
+    {
+      "imdb_id": "tt21361444",
+      "title": "Avengers: Secret Wars",
+      "release_year": 2027,
+      "overview": "Plot Under Wraps",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BYTQyZTQ5MWQtN2M4NC00YWQwLTg3ZTctM2JiZDE4NDBkZDJkXkEyXkFqcGc@._V1_.jpg",
+      "rating": null,
+      "runtime_minutes": null,
+      "director": "Anthony Russo, Joe Russo",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Avengers: Secret Wars"
+    },
+    {
+      "imdb_id": "tt15318872",
+      "title": "Werewolf by Night",
+      "release_year": 2022,
+      "overview": "Follows a lycanthrope superhero who fights evil using the abilities given to him by a curse brought on by his bloodline.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BODUzMGFkYzgtYzhjNC00ZmFjLTg3ZTYtYWJkMWRjMzJmYTQ2XkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.1,
+      "runtime_minutes": 52,
+      "director": "Michael Giacchino",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "drama",
+        "fantasy",
+        "horror",
+        "mystery",
+        "thriller"
+      ],
+      "category": "trending",
+      "catalogue_title": "Werewolf by Night"
+    },
+    {
+      "imdb_id": "tt1841843",
+      "title": "Spider-Man",
+      "release_year": 1978,
+      "overview": "Spider-Man teams up with an agent from Interpol to battle against the evil forces of the Iron Cross Army.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNzZmNzdjMDMtNDVkMC00OWUwLTg5MTMtNTdkYzBkNjhmMDViXkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.3,
+      "runtime_minutes": 24,
+      "director": "K\u00f4ichi Takemoto",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "action",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man (1978)"
+    },
+    {
+      "imdb_id": "tt6612630",
+      "title": "Deadpool: No Good Deed",
+      "release_year": 2017,
+      "overview": "Deadpool sees an opportunity to save the day, but it doesn't go entirely as planned.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BM2IzODI5YTQtNTQ0NS00Y2U5LTk4ZWMtOTI0ZDI4OWUxZjdhXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.9,
+      "runtime_minutes": 4,
+      "director": "David Leitch",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "comedy",
+        "crime",
+        "action"
+      ],
+      "category": "trending",
+      "catalogue_title": "Deadpool: No Good Deed"
+    },
+    {
+      "imdb_id": "tt8023090",
+      "title": "Team Darryl",
+      "release_year": 2018,
+      "overview": "With Thor gone, Darryl searches for a new roommate, but only the Grandmaster responds to his ad.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMmI4MTgxYjEtZWNmMC00OWM2LTk3MzEtN2MzNmM1ODljODQ1XkEyXkFqcGc@._V1_.jpg",
+      "rating": 6.5,
+      "runtime_minutes": 6,
+      "director": "Taika Waititi",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "comedy",
+        "sci-fi",
+        "action"
+      ],
+      "category": "trending",
+      "catalogue_title": "Team Darryl"
+    },
+    {
+      "imdb_id": "tt11107678",
+      "title": "Peter's To-Do List",
+      "release_year": 2019,
+      "overview": "On the eve of his departure to Europe, Peter Parker tells Ned Leeds that he has several things to do before they leave.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BY2MyMzFlYmMtYWEyZC00MjExLTk2ODItODEzZmQ1ZGUyNGQwXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.0,
+      "runtime_minutes": 3,
+      "director": "Jon Watts",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "action",
+        "adventure",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Peter's To-Do List"
+    },
+    {
+      "imdb_id": "tt15041304",
+      "title": "Deadpool's Maximum Reactions: Deadpool and Korg",
+      "release_year": 2021,
+      "overview": "Deadpool and Korg react to the trailer for Free Guy.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BNmI3MDFhMGQtOGRhOS00ZGFhLWJlN2UtMjMxYjBmNThkM2NjXkEyXkFqcGc@._V1_.jpg",
+      "rating": 7.6,
+      "runtime_minutes": 5,
+      "director": "",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "tv-movie",
+        "comedy",
+        "action"
+      ],
+      "category": "trending",
+      "catalogue_title": "Deadpool's Maximum Reactions: Deadpool and Korg"
+    },
+    {
+      "imdb_id": "tt22084616",
+      "title": "Spider-Man: Brand New Day",
+      "release_year": 2026,
+      "overview": "A forgotten Peter Parker lives alone as a full-time Spider-Man until mounting pressure triggers a dangerous change and a powerful new enemy emerges.",
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_.jpg",
+      "rating": null,
+      "runtime_minutes": 150,
+      "director": "Destin Daniel Cretton",
+      "language": "English",
+      "genres": [
+        "superhero",
+        "action",
+        "adventure",
+        "fantasy",
+        "sci-fi"
+      ],
+      "category": "trending",
+      "catalogue_title": "Spider-Man: Brand New Day"
+    }
+  ]
+}
